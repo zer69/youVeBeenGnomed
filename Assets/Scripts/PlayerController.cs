@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
         playerCamera = GameObject.Find("Main Camera");
         playerRb.mass = 70;
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-        isGround = LayerMask.GetMask("isGround");
+        isGround = LayerMask.GetMask("jumpingSurface");
+        Cursor.lockState = CursorLockMode.Locked;
     }
     // Gain inputs
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
@@ -55,13 +56,7 @@ public class PlayerController : MonoBehaviour
         // Camera control
         if (lookCommand != Vector2.zero)
         {
-            float xMouse = lookCommand.x * mouseSensetivity * Time.deltaTime;
-            float yMouse = lookCommand.y * mouseSensetivity * Time.deltaTime;
-
-            xRotation -= yMouse;
-            xRotation = Mathf.Clamp(xRotation, -90, 90);
-            playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            transform.Rotate(Vector3.up * xMouse);
+            Look();
         } 
     }
     // Updating physic movement
@@ -100,6 +95,17 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         jumping = false;
+    }
+
+    private void Look()
+    {
+        float xMouse = lookCommand.x * mouseSensetivity * Time.deltaTime;
+        float yMouse = lookCommand.y * mouseSensetivity * Time.deltaTime;
+
+        xRotation -= yMouse;
+        xRotation = Mathf.Clamp(xRotation, -90, 90);
+        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        transform.Rotate(Vector3.up * xMouse);
     }
 
     // Limit body's velocity to not allow permanent acceleration
