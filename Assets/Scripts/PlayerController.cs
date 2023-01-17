@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookCommand = Vector2.zero;
     private Vector2 moveCommand = Vector2.zero;
     private bool jumping = false;
-    // Start is called before the first frame update
+    // Initializing variables on awake
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         isGround = LayerMask.GetMask("isGround");
     }
-
+    // Gain inputs
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
         switch (context.action.name)
@@ -52,9 +52,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Camera control
         if (lookCommand != Vector2.zero)
         {
-            Debug.Log(transform.position);
             float xMouse = lookCommand.x * mouseSensetivity * Time.deltaTime;
             float yMouse = lookCommand.y * mouseSensetivity * Time.deltaTime;
 
@@ -64,9 +64,10 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.up * xMouse);
         } 
     }
-
+    // Updating physic movement
     private void FixedUpdate()
     {
+        // Check player is on ground with raycast
         onGround = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.2f, isGround);
         if (moveCommand != Vector2.zero)
         {
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        Vector3 direction = new Vector3(moveCommand.x, 0, moveCommand.y);
+        Vector3 direction = transform.forward * moveCommand.y + transform.right * moveCommand.x;
     
         SpeedControl();
 
@@ -101,6 +102,7 @@ public class PlayerController : MonoBehaviour
         jumping = false;
     }
 
+    // Limit body's velocity to not allow permanent acceleration
     private void SpeedControl()
     {
         Vector3 moveVelocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
