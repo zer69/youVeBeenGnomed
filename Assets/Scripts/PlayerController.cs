@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         // Check player is on ground with raycast
-        onGround = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.2f, isGround);
+        onGround = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.02f, isGround);
         if (moveCommand != Vector2.zero)
         {
             Move();
