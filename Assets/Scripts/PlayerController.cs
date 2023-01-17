@@ -42,7 +42,14 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case "Jump":
-                jumping = true;
+                if (context.phase == InputActionPhase.Started)
+                {
+                    jumping = true;
+                } else if (context.phase == InputActionPhase.Canceled)
+                {
+                    jumping = false;
+                }
+                
                 break;
 
             case "Look":
@@ -93,8 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumping = false;
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);     
     }
 
     private void Look()
