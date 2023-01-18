@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = GameObject.Find("Main Camera");
         playerRb.mass = 70;
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-        isGround = LayerMask.GetMask("jumpingSurface");
+        isGround = LayerMask.GetMask("jumpingSurface", "Pickable");
         Cursor.lockState = CursorLockMode.Locked;
     }
     // Gain inputs
