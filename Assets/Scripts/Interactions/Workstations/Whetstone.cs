@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,24 +20,32 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private float mouseSensetivity;
 
     [SerializeField] private Transform ingot;
+    [SerializeField] private Collider sharpeningCollider;
+
+    [SerializeField] private float sharpeningSpeed;
+
 
 
     private bool isTired = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
-
+    private bool increasing = true;
+    //private bool interacting = false;
 
     public string InteractionPrompt => _prompt;
 
     void Start()
     {
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-       
+  
             
     }
 
     private void Update()
     {
+        
+        
         currentAngleVelocity = whetStoneWheel.angularVelocity.magnitude;
+        sharpeningSpeed = currentAngleVelocity / 10.0f;
         if (moveWeaponCommand != Vector2.zero)
         {
             MoveWeapon();
@@ -90,24 +99,53 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     void MoveWeapon()
     {
-        float xMouse = moveWeaponCommand.x * mouseSensetivity * Time.deltaTime;
-        float yMouse = moveWeaponCommand.y * mouseSensetivity * Time.deltaTime;
+        float xMouse = moveWeaponCommand.x  * Time.deltaTime;
+        float yMouse = moveWeaponCommand.y  * Time.deltaTime;
 
         Vector3 weaponVector = new Vector3(xMouse, yMouse, 0);
 
         ingot.position += weaponVector;
+        //Debug.Log(ingot.position);
 
     }
 
-    void SharpenWeapon()
+    void SharpenWeapon(Collision ingot)
     {
         if (currentAngleVelocity >= sharpeningAngleVelocity)
         {
+            float ingotFragility = ingot.gameObject.GetComponent<Ingot>().fragility;
+            float sharpnessIncrement = ChangeSharpness(ingotFragility);
+            if (ingot.gameObject.GetComponent<Ingot>().sharpness > 100f)
+                increasing = false;
+            if (increasing)
+                ingot.gameObject.GetComponent<Ingot>().sharpness += sharpnessIncrement;
+            else
+                ingot.gameObject.GetComponent<Ingot>().sharpness -= sharpnessIncrement;
+            if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
+                ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
 
         }
         else
         {
             //not enough angular velocity
+        }
+    }
+
+    private float ChangeSharpness(float ingotFragility)
+    {
+        return sharpeningSpeed * ingotFragility * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ingot")
+        {
+            SharpenWeapon(collision);
         }
     }
 }
