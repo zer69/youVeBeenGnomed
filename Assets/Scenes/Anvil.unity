@@ -594,6 +594,7 @@ GameObject:
   - component: {fileID: 1027272896}
   - component: {fileID: 1027272895}
   - component: {fileID: 1027272894}
+  - component: {fileID: 1027272898}
   m_Layer: 0
   m_Name: Anvil
   m_TagString: Untagged
@@ -679,6 +680,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1027272898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027272893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f92379ea80ef43478090e0f2b74e063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingotWidth: 1.6
+  anvilHeight: 1
+  ingotHeight: 0.4
+  ingotSectionPrefab: {fileID: 3662050256835462987, guid: 075da90ce8fbe3e4da698d8a27cd4f55,
+    type: 3}
 --- !u!1 &1293616638
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +709,6 @@ GameObject:
   - component: {fileID: 1293616640}
   - component: {fileID: 1293616639}
   - component: {fileID: 1293616643}
-  - component: {fileID: 1293616642}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -765,22 +782,6 @@ Transform:
   m_Father: {fileID: 857749839}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1293616642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293616638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94ddcba01cbee4541acf5f76163dfec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  crosshair: {fileID: 0}
-  playerInput: {fileID: 857749841}
-  playerTransform: {fileID: 857749839}
 --- !u!114 &1293616643
 MonoBehaviour:
   m_ObjectHideFlags: 0
