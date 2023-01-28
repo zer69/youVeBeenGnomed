@@ -20,7 +20,6 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private float mouseSensetivity;
 
     [SerializeField] private Transform ingot;
-    [SerializeField] private Collider sharpeningCollider;
 
     [SerializeField] private float sharpeningSpeed;
 
@@ -29,6 +28,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     private bool isTired = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
     private bool increasing = true;
+    private bool canControlIngot = false;
     //private bool interacting = false;
 
     public string InteractionPrompt => _prompt;
@@ -56,6 +56,8 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         cam.gameObject.SetActive(false);
         cam2.gameObject.SetActive(true);
+        this.GetComponent<CapsuleCollider>().enabled = false;
+        canControlIngot = true;
         //Debug.Log("Whetstone is used");
         return true;
     }
@@ -67,12 +69,15 @@ public class Whetstone : MonoBehaviour, IInteractable
             case "Abort":
                 cam.gameObject.SetActive(true);
                 cam2.gameObject.SetActive(false);
+                this.GetComponent<CapsuleCollider>().enabled = true;
+                canControlIngot = false;
                 break;
             case "RotateWhetStone":
                 RotateWhetStone();
                 break;
             case "MoveToSharpen":
-                moveWeaponCommand = context.action.ReadValue<Vector2>();
+                if (canControlIngot)
+                    moveWeaponCommand = context.action.ReadValue<Vector2>();
                 break;
         }
     }
@@ -138,13 +143,15 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        //Debug.Log(collision.collider.tag);
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag == "Ingot")
+        //Debug.Log(collision.collider.tag);
+        if (collision.collider.tag == "Ingot")
         {
+            //Debug.Log("sharpening now");
             SharpenWeapon(collision);
         }
     }

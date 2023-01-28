@@ -70,7 +70,7 @@ public class Ingot : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(sharpness);
+        Debug.Log(sharpness);
     }
 
 }

@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3990782596054808379}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1144172588326300467
 GameObject:
@@ -115,51 +115,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2664997904485568694
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2666280739879722506}
-  - component: {fileID: 1745334140876451654}
-  m_Layer: 0
-  m_Name: Sharpening zone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2666280739879722506
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2664997904485568694}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.387, y: 0, z: -0.22}
-  m_LocalScale: {x: 0.43, y: 1, z: 0.25}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3990782596054808379}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!65 &1745334140876451654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2664997904485568694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3573791712267180130
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,6 +226,7 @@ GameObject:
   - component: {fileID: 3990782596054808379}
   - component: {fileID: 3990782596054808378}
   - component: {fileID: 3990782596054808358}
+  - component: {fileID: 5021353063738331536}
   m_Layer: 13
   m_Name: Whetstone
   m_TagString: Untagged
@@ -292,7 +248,6 @@ Transform:
   m_Children:
   - {fileID: 3990782596560418295}
   - {fileID: 336426663759704457}
-  - {fileID: 2666280739879722506}
   - {fileID: 7063797053390641352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -319,6 +274,8 @@ MonoBehaviour:
   sharpeningAngleVelocity: 12
   mouseSensetivity: 10
   ingot: {fileID: 0}
+  sharpeningCollider: {fileID: 0}
+  sharpeningSpeed: 0
 --- !u!136 &3990782596054808358
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -333,6 +290,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &5021353063738331536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990782596054808359}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26, y: 1, z: 0.42}
+  m_Center: {x: 0.39, y: 0, z: -0.24}
 --- !u!1 &3990782596560418288
 GameObject:
   m_ObjectHideFlags: 0

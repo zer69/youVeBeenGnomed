@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour
         switch (context.action.name)
         {
             case "Move":
-                moveCommand = context.action.ReadValue<Vector2>();
+                if (onGround)
+                    moveCommand = context.action.ReadValue<Vector2>();
                 break;
 
             case "Jump":
@@ -64,7 +65,8 @@ public class PlayerController : MonoBehaviour
         if (lookCommand != Vector2.zero)
         {
             Look();
-        } 
+        }
+        //Debug.Log(onGround);
     }
     // Updating physic movement
     private void FixedUpdate()
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         if (jumping && onGround)
         {
             Jump();
+            onGround = false;
         }
     }
 
