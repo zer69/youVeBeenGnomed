@@ -159,6 +159,10 @@ MonoBehaviour:
   cam: {fileID: 190261521}
   cam2: {fileID: 1936130907}
   playerInput: {fileID: 1955815456}
+  CoolingRate: 0
+  StrengthRate: 0
+  FragilityRate: 0
+  ingot: {fileID: 0}
 --- !u!136 &30396125
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -804,6 +808,7 @@ MonoBehaviour:
   playerInput: {fileID: 1955815456}
   smeltingSpeed: 1
   furnaceTemperature: 0
+  furnaceInitialTemperature: 200
 --- !u!1 &513316917
 GameObject:
   m_ObjectHideFlags: 0

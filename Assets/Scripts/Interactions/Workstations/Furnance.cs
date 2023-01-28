@@ -7,13 +7,18 @@ public class Furnance : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private float smeltingSpeed;
+    [SerializeField] private PlayerInput playerInput;    
 
     private bool fuelIsFilled = false;
     private bool fireIsKindled = false;
 
+    [BackgroundColor(4f, 0f, 0f, 1f)]
     public float furnaceTemperature = 0f;
+
+    [BackgroundColor(0f, 4f, 0f, 1f)]
+    [SerializeField] private float furnaceInitialTemperature;
+    [SerializeField] private float smeltingSpeed;
+    [BackgroundColor()]
     private float minFireTemperature = 0f;
 
     public string InteractionPrompt => _prompt;
@@ -69,7 +74,7 @@ public class Furnance : MonoBehaviour, IInteractable
     IEnumerator Burning()
     {
         fireIsKindled = true;
-        furnaceTemperature = 200f;
+        furnaceTemperature = furnaceInitialTemperature;
         Debug.Log("Fire Is Kindled");
 
         while(furnaceTemperature > minFireTemperature)

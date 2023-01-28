@@ -9,7 +9,9 @@ public class Forge : MonoBehaviour, IInteractable
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Furnance furnace;
+    [BackgroundColor(0f, 4f, 0f, 1f)]
     [SerializeField] private float temperatureIncrement;
+    [BackgroundColor()]
 
     private bool canInflateForge = true;
 
