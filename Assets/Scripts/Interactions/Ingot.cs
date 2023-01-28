@@ -53,11 +53,20 @@ public class Ingot : MonoBehaviour
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;
-    [SerializeField] private float thermalConductivity;
-    public float currentTemperature;
+    [SerializeField] private float currentTemperature;
+
+    [SerializeField] private float minTemperatureValue = 0;
 
     [SerializeField] private float strength;
+
+    [SerializeField] private float minStrengthValue = 0;
+    [SerializeField] private float maxStrengthValue = 100;
+
+
     public float fragility;
+
+    [SerializeField] private float minFragilityValue = 0;
+    [SerializeField] private float maxFragilityValue = 100;
 
     public float sharpness;
 
@@ -71,34 +80,40 @@ public class Ingot : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(sharpness);
-        Cooling();
-        Melting();
+        //Debug.Log("sharpness: " + sharpness);
+        
     }
 
-    void Cooling()
+    //method for ingot temperature reduction, rate - how much does the temperature change
+    public bool Cooling(float rate)
+    {        
+        if (currentTemperature - rate >= minTemperatureValue)
+        {
+            currentTemperature -= rate;
+            Debug.Log("currentTemperature: " + currentTemperature);
+            return true;
+        }
+        return false;
+    }
+
+    
+    public void StrengthModification(float rate)
     {
-        if(currentTemperature > 0)
+        //to decrease the value, a negative value must be passed
+        if (strength + rate > minStrengthValue && strength + rate < maxStrengthValue)
         {
-            currentTemperature -= thermalConductivity * Time.deltaTime;
-        }
-
-        else
-        {
-            currentTemperature = 0;
+            strength += rate;
         }
     }
 
-    void Melting()
+   
+    public void FragilityModification(float rate)
     {
-        if(currentTemperature >= MeltingPoint)
+        //to decrease the value, a negative value must be passed
+        if (fragility + rate > minFragilityValue && strength + rate < maxFragilityValue)
         {
-            status = CompletionStatus.Melted;
-        }
-
-        else
-        {
-            status = CompletionStatus.Raw;
+            fragility += rate;
         }
     }
+
 }
