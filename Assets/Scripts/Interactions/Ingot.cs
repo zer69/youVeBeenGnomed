@@ -53,7 +53,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;
-    [SerializeField] private float currentTemperature;
+    public float currentTemperature;
 
     [SerializeField] private float minTemperatureValue = 0;
 

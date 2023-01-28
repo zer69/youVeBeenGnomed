@@ -91,6 +91,7 @@ public class Furnance : MonoBehaviour, IInteractable
         if(ingotTemperature < furnaceTemperature)
         {
             ingot.gameObject.GetComponent<Ingot>().currentTemperature += smeltingSpeed * Time.deltaTime;
+            //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
         }
     }
 

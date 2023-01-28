@@ -39,6 +39,8 @@ public class Barrel : MonoBehaviour, IInteractable
          
         cam.gameObject.SetActive(false);
         cam2.gameObject.SetActive(true);
+        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        playerInput.transform.localRotation = Quaternion.identity;
         canControlIngot = true;
         //Debug.Log("Barrel is used");
         return true;
@@ -51,6 +53,7 @@ public class Barrel : MonoBehaviour, IInteractable
             case "Abort":
                 cam.gameObject.SetActive(true);
                 cam2.gameObject.SetActive(false);
+                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 canControlIngot = false;
                 break;
 
