@@ -56,6 +56,8 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         cam.gameObject.SetActive(false);
         cam2.gameObject.SetActive(true);
+        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        playerInput.transform.localRotation = Quaternion.identity;
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
         //Debug.Log("Whetstone is used");
@@ -69,6 +71,7 @@ public class Whetstone : MonoBehaviour, IInteractable
             case "Abort":
                 cam.gameObject.SetActive(true);
                 cam2.gameObject.SetActive(false);
+                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 this.GetComponent<CapsuleCollider>().enabled = true;
                 canControlIngot = false;
                 break;

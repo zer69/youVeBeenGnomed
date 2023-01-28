@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &76299469
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -355,6 +355,13 @@ MonoBehaviour:
   cam: {fileID: 190261521}
   cam2: {fileID: 586104351}
   playerInput: {fileID: 1955815456}
+  whetStoneWheel: {fileID: 0}
+  rotationForce: {x: 0, y: 0, z: 0}
+  currentAngleVelocity: 0
+  sharpeningAngleVelocity: 12
+  mouseSensetivity: 0
+  ingot: {fileID: 0}
+  sharpeningSpeed: 0
 --- !u!1 &103888636
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +551,7 @@ MonoBehaviour:
   _prompt: 
   playerInput: {fileID: 1955815456}
   furnace: {fileID: 407079569}
+  temperatureIncrement: 100
 --- !u!1 &190261519
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,9 +801,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: 
-  cam: {fileID: 190261521}
-  cam2: {fileID: 2089189942}
   playerInput: {fileID: 1955815456}
+  smeltingSpeed: 1
   furnaceTemperature: 0
 --- !u!1 &513316917
 GameObject:
@@ -1058,17 +1065,17 @@ PrefabInstance:
     - target: {fileID: 3945654302473152140, guid: d98aa6c3bc04ec249b91b472aee6e24d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02764833
+      value: 4.34
       objectReference: {fileID: 0}
     - target: {fileID: 3945654302473152140, guid: d98aa6c3bc04ec249b91b472aee6e24d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19172585
+      value: 2.72
       objectReference: {fileID: 0}
     - target: {fileID: 3945654302473152140, guid: d98aa6c3bc04ec249b91b472aee6e24d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.294113
+      value: 4.46
       objectReference: {fileID: 0}
     - target: {fileID: 3945654302473152140, guid: d98aa6c3bc04ec249b91b472aee6e24d,
         type: 3}
@@ -1104,6 +1111,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804067942642319756, guid: d98aa6c3bc04ec249b91b472aee6e24d,
+        type: 3}
+      propertyPath: coolingSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804067942642319756, guid: d98aa6c3bc04ec249b91b472aee6e24d,
+        type: 3}
+      propertyPath: thermalConductivity
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98aa6c3bc04ec249b91b472aee6e24d, type: 3}

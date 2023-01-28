@@ -9,6 +9,9 @@ public class Forge : MonoBehaviour, IInteractable
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Furnance furnace;
+    [SerializeField] private float temperatureIncrement;
+
+    private bool canInflateForge = true;
 
     public string InteractionPrompt => _prompt;
 
@@ -19,8 +22,26 @@ public class Forge : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        furnace.furnaceTemperature += 5f;
-        Debug.Log("lol");
+        useForge();
         return true;
+    }
+
+    void useForge()
+    {
+        if (canInflateForge)
+        {
+            StartCoroutine(InflateForge());
+        }
+    }
+
+    IEnumerator InflateForge()
+    {
+        canInflateForge = false;
+
+        furnace.furnaceTemperature += temperatureIncrement;
+        Debug.Log("Forge inflated");
+        yield return new WaitForSeconds(1f);
+
+        canInflateForge = true;
     }
 }

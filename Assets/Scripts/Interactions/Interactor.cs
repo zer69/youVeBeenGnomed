@@ -54,13 +54,6 @@ public class Interactor : MonoBehaviour
         {
             interactable.Interact(this);
             usingStation = false;
-            //playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //playerInput.transform.localRotation = Quaternion.identity;
-        }
-        else
-        {
-            currentCam = cam;
-            //playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 

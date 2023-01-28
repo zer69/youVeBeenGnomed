@@ -7,9 +7,9 @@ public class Furnance : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
-    [SerializeField] private Camera cam;
-    [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private float smeltingSpeed;
+
     private bool fuelIsFilled = false;
     private bool fireIsKindled = false;
 
@@ -20,22 +20,22 @@ public class Furnance : MonoBehaviour, IInteractable
 
     void Start()
     {
-        playerInput.onActionTriggered += OnPlayerInputActionTriggered;
+        
     }
 
     public bool Interact(Interactor interactor)
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        //if(inventory == null) return false;
+        if (fireIsKindled && !inventory.hasIngot)
+        {            
+            Debug.Log("No ingot");
+            return true;
+        }
 
-        if (fireIsKindled)
+        else if(fireIsKindled && inventory.hasIngot)
         {
-            cam.gameObject.SetActive(false);
-            cam2.gameObject.SetActive(true);
-            playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            playerInput.transform.localRotation = Quaternion.identity;
-            Debug.Log("Furnance is used");
+            Debug.Log("Ingot placed in the furnace");
             return true;
         }
 
@@ -44,8 +44,6 @@ public class Furnance : MonoBehaviour, IInteractable
             if (fuelIsFilled)
             {
                 StartCoroutine(Burning());
-                //fireIsKindled = true;
-                //Debug.Log("Fire Is Kindled");
                 return true;
             }
 
@@ -64,42 +62,14 @@ public class Furnance : MonoBehaviour, IInteractable
                     Debug.Log("No fuel for furnace");
                     return true;
                 }
-                fuelIsFilled = inventory.hasCoal;
-                Debug.Log("Fuel Is Filled");
-                return true;
             }
-        }
-
-        //Debug.Log("No fuel for furnace");
-        //return false;
-    }
-
-    private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
-    {
-        switch (context.action.name)
-        {
-            case "Abort":
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
-
-                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-
-                break;
-
-            case "Kindle":
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
-
-                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-
-                break;
         }
     }
 
     IEnumerator Burning()
     {
         fireIsKindled = true;
-        furnaceTemperature = 10f;
+        furnaceTemperature = 200f;
         Debug.Log("Fire Is Kindled");
 
         while(furnaceTemperature > minFireTemperature)
@@ -112,5 +82,23 @@ public class Furnance : MonoBehaviour, IInteractable
         fireIsKindled = false;
         fuelIsFilled = false;
         Debug.Log("Fire went out");
+    }
+
+    void smeltingIngot(Collision ingot)
+    {
+        float ingotTemperature = ingot.gameObject.GetComponent<Ingot>().currentTemperature;
+
+        if(ingotTemperature < furnaceTemperature)
+        {
+            ingot.gameObject.GetComponent<Ingot>().currentTemperature += smeltingSpeed * Time.deltaTime;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            smeltingIngot(collision);
+        }
     }
 }

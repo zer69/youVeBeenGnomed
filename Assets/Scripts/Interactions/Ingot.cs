@@ -53,7 +53,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;
-    [SerializeField] private float currentTemperature;
+    [SerializeField] private float thermalConductivity;
+    public float currentTemperature;
 
     [SerializeField] private float strength;
     public float fragility;
@@ -70,7 +71,34 @@ public class Ingot : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(sharpness);
+        //Debug.Log(sharpness);
+        Cooling();
+        Melting();
     }
 
+    void Cooling()
+    {
+        if(currentTemperature > 0)
+        {
+            currentTemperature -= thermalConductivity * Time.deltaTime;
+        }
+
+        else
+        {
+            currentTemperature = 0;
+        }
+    }
+
+    void Melting()
+    {
+        if(currentTemperature >= MeltingPoint)
+        {
+            status = CompletionStatus.Melted;
+        }
+
+        else
+        {
+            status = CompletionStatus.Raw;
+        }
+    }
 }
