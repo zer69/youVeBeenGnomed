@@ -20,8 +20,9 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private float mouseSensetivity;
 
     [SerializeField] private Transform ingot;
-
+    [BackgroundColor(0f, 4f, 0f, 1f)]
     [SerializeField] private float sharpeningSpeed;
+    [BackgroundColor()]
 
 
 
