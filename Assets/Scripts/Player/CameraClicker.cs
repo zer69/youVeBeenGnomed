@@ -51,7 +51,7 @@ public class CameraClicker : MonoBehaviour
         if (interacting)
             InteractWithBox();
 
-        //Debug.Log(targeted);
+       // Debug.Log(targeted);
 
     }
 

@@ -56,15 +56,21 @@ public class Ingot : MonoBehaviour
     [SerializeField] private float currentTemperature;
 
     [SerializeField] private float strength;
-    [SerializeField] private float fragility;
+    public float fragility;
 
-    [SerializeField] private float sharpness;
+    public float sharpness;
 
     [SerializeField] bool isEnchanted;
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
 
+   
+
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
 
+    private void Update()
+    {
+        Debug.Log(sharpness);
+    }
 
 }
