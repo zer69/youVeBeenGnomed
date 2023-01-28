@@ -8,9 +8,15 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float anvilHeight = 1;
     [SerializeField] private float ingotHeight = 0.4f;
     [SerializeField] private float ingotSectionWidth;
-    private GameObject ingot;
-    private bool sectionIsVisible = false;
+    [SerializeField] private int numberOfSectionsInRound = 4;
+    private bool sequenceStartAvailable = true;
+    private float anvilRange = 3;
     private int sectionCounter = 0;
+    private List<float> sectionList;
+    private GameObject ingot;
+    private GameObject player;
+    private Rigidbody playerRb;
+    private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
 
@@ -18,23 +24,38 @@ public class AnvilAct : MonoBehaviour
     private void Awake()
     {
         ingotSectionWidth = ingotWidth / 10;
+        sectionList = new List<float>();
     }
 
     void Start()
     {
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-
-        showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
+        player = GameObject.Find("Player");
+        playerRb = player.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!sectionIsVisible)
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         {
-            showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
+            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound)
+            {
+                showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
+                sectionCounter++;
+                foreach (var el in sectionList)
+                {
+                    Debug.Log(el);
+                }
+                
+            }
+            //Debug.Log(sectionCounter);
+            
         }
-        Debug.Log(sectionCounter);
+        else
+        {
+            
+        }
     }
     
     IEnumerator IngotSectionRoutine(float seconds)
@@ -62,8 +83,8 @@ public class AnvilAct : MonoBehaviour
     private void showSection(Vector3 position, float seconds)
     {
         Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
-        StartCoroutine(IngotSectionRoutine(seconds));
+        sectionList.Add(position[0]);
         sectionIsVisible = true;
-        sectionCounter++;
+        StartCoroutine(IngotSectionRoutine(seconds));
     }
 }
