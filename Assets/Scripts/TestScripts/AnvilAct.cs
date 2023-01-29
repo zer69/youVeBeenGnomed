@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnvilAct : MonoBehaviour
 {
@@ -9,20 +10,25 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float ingotHeight = 0.4f;
     [SerializeField] private float ingotSectionWidth;
     [SerializeField] private int numberOfSectionsInRound = 4;
+    Camera camera;
     private bool sequenceStartAvailable = true;
+    [SerializeField] private bool hitMode = false;
     private float anvilRange = 3;
     private int sectionCounter = 0;
+    private int mouseClickCounter = 0;
     private List<float> sectionList;
     private GameObject ingot;
     private GameObject player;
     private Rigidbody playerRb;
     private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
+    [SerializeField] private float secondToLeave = 2;
     [SerializeField] private GameObject ingotSectionPrefab;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        camera = Camera.main;
         ingotSectionWidth = ingotWidth / 10;
         sectionList = new List<float>();
     }
@@ -39,16 +45,41 @@ public class AnvilAct : MonoBehaviour
     {
         if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         {
-            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound)
+            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound && !hitMode)
             {
                 showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
                 sectionCounter++;
                 foreach (var el in sectionList)
                 {
-                    Debug.Log(el);
+                    Debug.Log("Section" + el);
                 }
                 
             }
+            if (!hitMode && sectionCounter >= numberOfSectionsInRound)
+            {
+                hitMode = true;
+                sectionCounter = 0;
+            }
+            if (hitMode && mouseClickCounter < numberOfSectionsInRound)
+            {
+                Mouse mouse = Mouse.current;
+                if (mouse.leftButton.wasPressedThisFrame)
+                {
+                    Vector3 mousePosition = mouse.position.ReadValue();
+                    Ray ray = camera.ScreenPointToRay(mousePosition);
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        Debug.Log(hit.point.x + "Click"+ hit.point.z);
+                        mouseClickCounter++;
+                    }
+                }
+            }
+            if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
+            {
+                mouseClickCounter = 0;
+                StartCoroutine(LeaveAnvil(secondToLeave));
+            }
+
             //Debug.Log(sectionCounter);
             
         }
@@ -66,6 +97,11 @@ public class AnvilAct : MonoBehaviour
         sectionIsVisible = false;
     }
 
+    IEnumerator LeaveAnvil(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        hitMode = false;
+    }
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
         float leftBound = ingot.transform.position.x - ingotWidth / 2 + ingotSectionWidth / 2;
