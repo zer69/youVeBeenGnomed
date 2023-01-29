@@ -9,6 +9,10 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float anvilHeight = 1;
     [SerializeField] private float ingotHeight = 0.4f;
     [SerializeField] private float ingotSectionWidth;
+    [SerializeField] private float zMax = 0.3f;
+    [SerializeField] private float zMin = -0.3f;
+    [SerializeField] private float xMax = 0.8f;
+    [SerializeField] private float xMin = -0.8f;
     [SerializeField] private int numberOfSectionsInRound = 4;
     Camera camera;
     private bool sequenceStartAvailable = true;
@@ -17,6 +21,7 @@ public class AnvilAct : MonoBehaviour
     private int sectionCounter = 0;
     private int mouseClickCounter = 0;
     private List<float> sectionList;
+    private List<bool> sectionResult;
     private GameObject ingot;
     private GameObject player;
     private Rigidbody playerRb;
@@ -31,6 +36,7 @@ public class AnvilAct : MonoBehaviour
         camera = Camera.main;
         ingotSectionWidth = ingotWidth / 10;
         sectionList = new List<float>();
+        sectionResult = new List<bool>();
     }
 
     void Start()
@@ -69,14 +75,30 @@ public class AnvilAct : MonoBehaviour
                     Ray ray = camera.ScreenPointToRay(mousePosition);
                     if (Physics.Raycast(ray, out RaycastHit hit))
                     {
-                        Debug.Log(hit.point.x + "Click"+ hit.point.z);
-                        mouseClickCounter++;
+                        float zClick = hit.point.z;
+                        float xClick = hit.point.x;
+                        if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
+                        {
+                            Debug.Log(xClick + "Click" + zClick);
+                            if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
+                            {
+                                sectionResult.Add(true);
+                            } else
+                            {
+                                sectionResult.Add(false);
+                            }
+                            mouseClickCounter++;
+                        }     
                     }
                 }
             }
             if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
             {
                 mouseClickCounter = 0;
+                foreach (var el in sectionResult)
+                {
+                    Debug.Log("Result" + el);
+                }
                 StartCoroutine(LeaveAnvil(secondToLeave));
             }
 
