@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
                 } else if (context.phase == InputActionPhase.Canceled)
                 {
                     jumping = false;
+                    moveCommand = Vector2.zero;
                 }
                 
                 break;
