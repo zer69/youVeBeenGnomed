@@ -19,10 +19,9 @@ public class CameraClicker : MonoBehaviour
     private LayerMask interactiveMask;
 
     private bool targeted;
+    private bool inHands;
     private bool canClick = true;
     private bool interacting = false;
-    private bool leftHand = true;
-    private bool rightHand = true;
 
     private int defaultLayer;
     private int pickableLayer;
@@ -40,54 +39,57 @@ public class CameraClicker : MonoBehaviour
 
         defaultLayer = LayerMask.NameToLayer("Ignore Raycast");
         pickableLayer = LayerMask.NameToLayer("Pickable");
+        interacting = false;
+        inHands = false;
     }
 
         // Update is called once per frame
     void Update()
     {
+        Debug.Log(pickableObject == null);
+
         CheckForTargets();
-        
+        //if (!interacting)
+            //pickableObject = null;
 
-        if (interacting)
-            InteractWithBox();
+        InteractWithBox(interacting);
 
-       // Debug.Log(targeted);
 
     }
 
-    private void InteractWithBox()
+    private void InteractWithBox(bool state)
     {
-        if (targeted)
+        if (pickableObject != null)
         {
-            
-            pickableObject.SetParent(playerTransform);
-            
-            pickableObject.transform.localRotation = Quaternion.identity;
-            
-            interacting = false;
-            rightHand = false;
-            leftHand = false;
+            if (state)
+            {
+                inHands = true;
+                pickableObject.SetParent(playerTransform);
 
-            pickableObject.gameObject.layer = defaultLayer;
+                pickableObject.transform.localRotation = Quaternion.identity;
 
-            pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            ResizeCrossHair();
+                //interacting = false;
+
+                pickableObject.gameObject.layer = defaultLayer;
+
+                pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                ResizeCrossHair();
 
 
+            }
+            else
+            {
+                inHands = false;
+                playerTransform.DetachChildren();
+                //pickableObject.localPosition = pickableObject.position;
+                //interacting = false;
+
+                pickableObject.gameObject.layer = pickableLayer;
+
+                pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            }
         }
-        else
-        {
-
-            playerTransform.DetachChildren();
-            //pickableObject.localPosition = pickableObject.position;
-            interacting = false;
-            rightHand = true;
-            leftHand = true;
-
-            pickableObject.gameObject.layer = pickableLayer;
-
-            pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        }
+        
     }
     IEnumerator MoveBoxToHands()
     {
@@ -119,8 +121,9 @@ public class CameraClicker : MonoBehaviour
     {
         switch (context.action.name)
         {
-            case "Interact":
-                interacting = true;
+            case "GrabBox":
+                if (targeted || inHands)
+                interacting = !interacting;
                 
                 break;
         }

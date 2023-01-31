@@ -142,7 +142,7 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     private float ChangeSharpness(float ingotFragility)
     {
-        return sharpeningSpeed * ingotFragility * Time.deltaTime;
+        return sharpeningSpeed * Time.deltaTime * ingotFragility;
     }
 
     private void OnCollisionEnter(Collision collision)
