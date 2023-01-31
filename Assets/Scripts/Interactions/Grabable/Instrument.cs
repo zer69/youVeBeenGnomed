@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Instrument : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum Type
     {
-        
-    }
+        Hammer,
+        Thongs
+    };
+    
+    public Type type;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -8,17 +8,20 @@ public class Whetstone : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(1.5f,0f,0f,1f)]
     [SerializeField] private Camera cam;
     [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
 
     [SerializeField] private Rigidbody whetStoneWheel;
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] private Vector3 rotationForce;
 
-    [SerializeField] private float currentAngleVelocity;
+    private float currentAngleVelocity;
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float sharpeningAngleVelocity = 12f;
     [SerializeField] private float mouseSensetivity;
-
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] private Transform ingot;
     [BackgroundColor(0f, 4f, 0f, 1f)]
     [SerializeField] private float sharpeningSpeed;
