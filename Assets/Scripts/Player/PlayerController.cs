@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookCommand = Vector2.zero;
     private Vector2 moveCommand = Vector2.zero;
     private bool jumping = false;
-    public Vector3 velocity;
     // Initializing variables on awake
     private void Awake()
     {
@@ -49,7 +48,6 @@ public class PlayerController : MonoBehaviour
                     jumping = true;
                 } else if (context.phase == InputActionPhase.Canceled)
                 {
-                    moveCommand = Vector2.zero;
                     jumping = false;
                 }
                 
@@ -75,7 +73,6 @@ public class PlayerController : MonoBehaviour
     {
         // Check player is on ground with raycast
         onGround = Physics.Raycast(transform.position, Vector3.down, playerHeight + 0.02f, isGround);
-        velocity = playerRb.velocity;
         if (moveCommand != Vector2.zero)
         {
             Move();
@@ -92,7 +89,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = transform.forward * moveCommand.y + transform.right * moveCommand.x;
     
         SpeedControl();
-        
+
         if (onGround)
         {
             playerRb.drag = groundDrag;
@@ -129,8 +126,6 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 limitedVelocity = moveVelocity.normalized * maxVelocity;
             playerRb.velocity = new Vector3(limitedVelocity.x, playerRb.velocity.y, limitedVelocity.z);
-            // playerRb.velocity = Vector3.ClampMagnitude(playerRb.velocity, maxVelocity);
         }
     }
-
 }
