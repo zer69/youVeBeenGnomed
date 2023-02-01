@@ -32,6 +32,7 @@ public class AnvilAct : MonoBehaviour
     private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
     [SerializeField] private float secondToLeave = 2;
+    [SerializeField] private float sectionDisappearTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
 
     // Start is called before the first frame update
@@ -67,10 +68,30 @@ public class AnvilAct : MonoBehaviour
     
     IEnumerator IngotSectionRoutine(float seconds)
     {
+
         yield return new WaitForSeconds(seconds);
         GameObject section = GameObject.FindGameObjectWithTag("IngotSection");
-        Destroy(section);
+        Vector3 currentScale = section.transform.localScale;
+        Vector3 targetScale = new Vector3(0, currentScale.y, currentScale.z);
+        StartCoroutine(IngotSectionDisappearRoutine(section, targetScale, sectionDisappearTime));
+        
+        
+        
         sectionIsVisible = false;
+    }
+
+    IEnumerator IngotSectionDisappearRoutine(GameObject section, Vector3 targetScale, float seconds)
+    {
+        float time = 0;
+        Vector3 currentScale = section.transform.localScale;
+        while (time < seconds)
+        {
+            section.transform.localScale = Vector3.Lerp(currentScale, targetScale, time / seconds);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        section.transform.localScale = targetScale;
+        Destroy(section);
     }
 
     IEnumerator RoundBreak(float seconds)
