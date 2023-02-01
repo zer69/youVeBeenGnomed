@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class AnvilAct : MonoBehaviour
 {
@@ -14,11 +15,14 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float xMax = 0.8f;
     [SerializeField] private float xMin = -0.8f;
     [SerializeField] private int numberOfSectionsInRound = 4;
+    [SerializeField] private int numberOfRounds = 3;
     Camera camera;
-    private bool sequenceStartAvailable = true;
+    [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
+    [SerializeField] private bool hasWorkOnAnvil = true;
     private float anvilRange = 3;
     private int sectionCounter = 0;
+    private int roundCounter = 0;
     private int mouseClickCounter = 0;
     private List<float> sectionList;
     private List<bool> sectionResult;
@@ -35,8 +39,7 @@ public class AnvilAct : MonoBehaviour
     {
         camera = Camera.main;
         ingotSectionWidth = ingotWidth / 10;
-        sectionList = new List<float>();
-        sectionResult = new List<bool>();
+        createEmptyListsForRoundHandler();
     }
 
     void Start()
@@ -51,41 +54,14 @@ public class AnvilAct : MonoBehaviour
     {
         if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         {
-            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound && !hitMode)
+            anvilMode = true;
+            if (anvilMode && hasWorkOnAnvil)
             {
-                showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
-                sectionCounter++;
-                foreach (var el in sectionList)
-                {
-                    Debug.Log("Section" + el);
-                }
-                
-            }
-            if (!hitMode && sectionCounter >= numberOfSectionsInRound)
-            {
-                hitMode = true;
-                sectionCounter = 0;
-            }
-            if (hitMode && mouseClickCounter < numberOfSectionsInRound)
-            {
-                mouseLeftButtonClickInHitModeHandler();
-            }
-            if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
-            {
-                mouseClickCounter = 0;
-                foreach (var el in sectionResult)
-                {
-                    Debug.Log("Result" + el);
-                }
-                StartCoroutine(LeaveAnvil(secondToLeave));
-            }
-
-            //Debug.Log(sectionCounter);
-            
-        }
-        else
+                anvilActive();
+            }   
+        } else
         {
-            
+            anvilMode = false;
         }
     }
     
@@ -97,10 +73,12 @@ public class AnvilAct : MonoBehaviour
         sectionIsVisible = false;
     }
 
-    IEnumerator LeaveAnvil(float seconds)
+    IEnumerator RoundBreak(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         hitMode = false;
+        roundCounter++;
+        createEmptyListsForRoundHandler();
     }
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
@@ -129,8 +107,7 @@ public class AnvilAct : MonoBehaviour
         float zClick = hit.point.z;
         float xClick = hit.point.x;
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
-        {
-            Debug.Log(xClick + "Click" + zClick);
+        { 
             if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
             {
                 sectionResult.Add(true);
@@ -155,5 +132,51 @@ public class AnvilAct : MonoBehaviour
                 ingotClickHandler(hit);
             }
         }
+    }
+
+    private void anvilActive()
+    {
+        if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound && !hitMode && roundCounter < numberOfRounds)
+        {
+            showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
+            sectionCounter++;
+        }
+        if (!hitMode && sectionCounter >= numberOfSectionsInRound)
+        {
+            hitMode = true;
+            sectionCounter = 0;
+        }
+        if (hitMode && mouseClickCounter < numberOfSectionsInRound)
+        {
+            mouseLeftButtonClickInHitModeHandler();
+        }
+        if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
+        {
+            mouseClickCounter = 0;
+            resultHandler(sectionResult);
+            StartCoroutine(RoundBreak(secondToLeave));
+        }
+        if (roundCounter >= numberOfRounds)
+        {
+            hasWorkOnAnvil = false;
+            Debug.Log("Done");
+        }
+
+    }
+    private void resultHandler(List<bool> results)
+    {
+        //foreach (bool result in results)
+        //{
+        //Debug.Log("Result" + result);
+
+        //}
+        int successfulClicks = results.Count(x => x == true);
+        Debug.Log(successfulClicks);
+    }
+
+    private void createEmptyListsForRoundHandler()
+    {
+        sectionList = new List<float>();
+        sectionResult = new List<bool>();
     }
 }
