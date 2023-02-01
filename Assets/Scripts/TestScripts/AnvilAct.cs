@@ -14,7 +14,7 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float zMin = -0.3f;
     [SerializeField] private float xMax = 0.8f;
     [SerializeField] private float xMin = -0.8f;
-    [SerializeField] private int numberOfSectionsInRound = 4;
+    [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
     [SerializeField] private bool anvilMode = false;
@@ -22,7 +22,7 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private bool hasWorkOnAnvil = true;
     private float anvilRange = 3;
     private int sectionCounter = 0;
-    private int roundCounter = 0;
+    [SerializeField] private int roundCounter = 0;
     private int mouseClickCounter = 0;
     private List<float> sectionList;
     private List<bool> sectionResult;
@@ -136,32 +136,32 @@ public class AnvilAct : MonoBehaviour
 
     private void anvilActive()
     {
-        if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound && !hitMode && roundCounter < numberOfRounds)
+        if (roundCounter >= numberOfRounds)
+        {
+            hasWorkOnAnvil = false;
+            Debug.Log("Done");
+            return;
+        }
+        if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound[roundCounter] && !hitMode && roundCounter < numberOfRounds)
         {
             showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
             sectionCounter++;
         }
-        if (!hitMode && sectionCounter >= numberOfSectionsInRound)
+        if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
         {
             hitMode = true;
             sectionCounter = 0;
         }
-        if (hitMode && mouseClickCounter < numberOfSectionsInRound)
+        if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
         {
             mouseLeftButtonClickInHitModeHandler();
         }
-        if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
+        if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
         {
             mouseClickCounter = 0;
             resultHandler(sectionResult);
             StartCoroutine(RoundBreak(secondToLeave));
         }
-        if (roundCounter >= numberOfRounds)
-        {
-            hasWorkOnAnvil = false;
-            Debug.Log("Done");
-        }
-
     }
     private void resultHandler(List<bool> results)
     {
