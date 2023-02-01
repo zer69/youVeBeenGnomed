@@ -11,6 +11,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] Transform playerTransform;
+    [SerializeField] Transform thongs;
 
     private Transform pickableObject;
     
@@ -25,6 +26,7 @@ public class CameraClicker : MonoBehaviour
 
     private int defaultLayer;
     private int pickableLayer;
+    private int toolLayer;
 
     private bool leftHand = true;
     private bool rightHand = true;
@@ -40,13 +42,17 @@ public class CameraClicker : MonoBehaviour
     void Start()
     {
         cam = gameObject.GetComponent<Camera>();
+        defaultLayer = LayerMask.NameToLayer("Ignore Raycast");
+        pickableLayer = LayerMask.NameToLayer("Pickable");
+        toolLayer = LayerMask.NameToLayer("Tool");
         pickableMask = LayerMask.GetMask("Pickable");
+        pickableMask |= (1 << toolLayer);
         //interactiveMask = LayerMask.GetMask("Interactive");
 
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
 
-        defaultLayer = LayerMask.NameToLayer("Ignore Raycast");
-        pickableLayer = LayerMask.NameToLayer("Pickable");
+        
+        
         interacting = false;
         inHands = false;
     }
@@ -54,7 +60,7 @@ public class CameraClicker : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-       
+        
 
         CheckForTargets();
         //if (!interacting)
@@ -64,7 +70,7 @@ public class CameraClicker : MonoBehaviour
             PickInteraction();
         }
         interacting = false;
-        //Debug.Log(leftHand);
+        //Debug.Log(pickableObject.gameObject.tag);
        // Debug.LogWarning(rightHand);
 
     }
@@ -99,8 +105,29 @@ public class CameraClicker : MonoBehaviour
         }
     }
     
-    private void PickUpTool(bool hand) //if false then check for left, if hammer then check for left
+    private void PickUpTool(bool hand) //if false then check for left, if hammer then check for right
     {
+        if (hand)
+        {
+            if (rightHand)
+            {
+                pickableObject.transform.position = rightHandPosition.position;
+                pickableObject.transform.rotation = rightHandPosition.rotation;
+                pickableObject.SetParent(playerTransform);
+                rightHand = false;
+            }
+            else
+                return;
+        }
+        else
+        {
+            pickableObject.transform.position = lefttHandPosition.position;
+            pickableObject.transform.rotation = lefttHandPosition.rotation;
+            pickableObject.SetParent(playerTransform);
+            leftHand = false;
+        }
+        Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
 
     }
 
@@ -122,6 +149,8 @@ public class CameraClicker : MonoBehaviour
             if (rightHand)
             {
                 pickableObject.transform.position = rightHandPosition.position;
+                pickableObject.transform.rotation = rightHandPosition.rotation;
+                pickableObject.SetParent(playerTransform);
                 rightHand = false;
             }
                 
@@ -130,20 +159,17 @@ public class CameraClicker : MonoBehaviour
         }
         else
         {
-            if (leftHand)
-            {
-                pickableObject.transform.position = thongsPosition.position;
-                leftHand = false;
-            }
-                
-            else
-                return;
+            pickableObject.transform.position = thongsPosition.position;
+            pickableObject.transform.rotation = thongsPosition.rotation;
+            pickableObject.SetParent(thongs);
+            leftHand = false;
+            pickableObject.GetComponent<Rigidbody>().isKinematic = true;
         }
 
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        pickableObject.transform.localRotation = Quaternion.identity;
-        pickableObject.SetParent(playerTransform);
+        
+        
         
         
         
@@ -191,7 +217,8 @@ public class CameraClicker : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             if (Physics.Raycast(ray, out mousehit, 3.0f, pickableMask))
             {
-                pickableObject = mousehit.transform.gameObject.transform;
+                if (interacting)
+                    pickableObject = mousehit.transform.gameObject.transform;
                 targeted = true;
             }
             else
@@ -217,6 +244,7 @@ public class CameraClicker : MonoBehaviour
 
     private void DropHands()
     {
+
         
         foreach (Transform child in playerTransform)
         {
@@ -235,7 +263,7 @@ public class CameraClicker : MonoBehaviour
         playerTransform.DetachChildren();
         rightHand = true;
         leftHand = true;
-
+        pickableObject = null;
     }
 
     private void ResizeCrossHair()

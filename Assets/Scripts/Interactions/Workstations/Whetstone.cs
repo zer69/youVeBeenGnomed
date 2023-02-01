@@ -22,8 +22,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private float sharpeningAngleVelocity = 12f;
     [SerializeField] private float mouseSensetivity;
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
-    [SerializeField] private Transform ingot;
-    [BackgroundColor(0f, 4f, 0f, 1f)]
+    private Transform ingot;
     [SerializeField] private float sharpeningSpeed;
     [BackgroundColor()]
 
@@ -33,6 +32,8 @@ public class Whetstone : MonoBehaviour, IInteractable
     private Vector2 moveWeaponCommand = Vector2.zero;
     private bool increasing = true;
     private bool canControlIngot = false;
+    private Transform weaponStartingPosition;
+    private Transform playerTransform;
     //private bool interacting = false;
 
     public string InteractionPrompt => _prompt;
@@ -40,8 +41,10 @@ public class Whetstone : MonoBehaviour, IInteractable
     void Start()
     {
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-  
-            
+        weaponStartingPosition = GameObject.Find("Weapon Starting Position").transform;
+        playerTransform = GameObject.Find("Player Transform").transform;
+
+
     }
 
     private void Update()
@@ -58,12 +61,22 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
+        Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
+        //ingotRB.constraints = RigidbodyConstraints.FreezeAll;
+        ingotRB.transform.rotation = Quaternion.identity;
+        ingotRB.transform.position = weaponStartingPosition.position;
+        ingotRB.transform.SetParent(this.transform);
+        ingot = ingotRB.transform;
+
         cam.gameObject.SetActive(false);
         cam2.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
+
+        
+
         //Debug.Log("Whetstone is used");
         return true;
     }
@@ -73,11 +86,22 @@ public class Whetstone : MonoBehaviour, IInteractable
         switch (context.action.name)
         {
             case "Abort":
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
-                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                this.GetComponent<CapsuleCollider>().enabled = true;
-                canControlIngot = false;
+                if (canControlIngot)
+                {
+                    cam.gameObject.SetActive(true);
+                    cam2.gameObject.SetActive(false);
+                    playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                    this.GetComponent<CapsuleCollider>().enabled = true;
+                    canControlIngot = false;
+
+                    Rigidbody ingotRB = ingot.GetComponent<Rigidbody>();
+                    ingotRB.transform.position = cam.transform.Find("Right Hand").position;
+                    ingotRB.transform.SetParent(playerTransform);
+                    ingot = null;
+                }
+                
+
+
                 break;
             case "RotateWhetStone":
                 RotateWhetStone();
