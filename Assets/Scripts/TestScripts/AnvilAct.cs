@@ -68,29 +68,7 @@ public class AnvilAct : MonoBehaviour
             }
             if (hitMode && mouseClickCounter < numberOfSectionsInRound)
             {
-                Mouse mouse = Mouse.current;
-                if (mouse.leftButton.wasPressedThisFrame)
-                {
-                    Vector3 mousePosition = mouse.position.ReadValue();
-                    Ray ray = camera.ScreenPointToRay(mousePosition);
-                    if (Physics.Raycast(ray, out RaycastHit hit))
-                    {
-                        float zClick = hit.point.z;
-                        float xClick = hit.point.x;
-                        if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
-                        {
-                            Debug.Log(xClick + "Click" + zClick);
-                            if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
-                            {
-                                sectionResult.Add(true);
-                            } else
-                            {
-                                sectionResult.Add(false);
-                            }
-                            mouseClickCounter++;
-                        }     
-                    }
-                }
+                mouseLeftButtonClickInHitModeHandler();
             }
             if (hitMode && mouseClickCounter >= numberOfSectionsInRound)
             {
@@ -144,5 +122,38 @@ public class AnvilAct : MonoBehaviour
         sectionList.Add(position[0]);
         sectionIsVisible = true;
         StartCoroutine(IngotSectionRoutine(seconds));
+    }
+
+    private void ingotClickHandler(RaycastHit hit)
+    {
+        float zClick = hit.point.z;
+        float xClick = hit.point.x;
+        if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
+        {
+            Debug.Log(xClick + "Click" + zClick);
+            if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
+            {
+                sectionResult.Add(true);
+            }
+            else
+            {
+                sectionResult.Add(false);
+            }
+            mouseClickCounter++;
+        }
+    }
+
+    private void mouseLeftButtonClickInHitModeHandler()
+    {
+        Mouse mouse = Mouse.current;
+        if (mouse.leftButton.wasPressedThisFrame)
+        {
+            Vector3 mousePosition = mouse.position.ReadValue();
+            Ray ray = camera.ScreenPointToRay(mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                ingotClickHandler(hit);
+            }
+        }
     }
 }
