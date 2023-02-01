@@ -8,11 +8,6 @@ public class Barrel : MonoBehaviour, IInteractable
     [SerializeField] private Camera cam;
     [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
-    // Cooling Rate per Time.deltaTime
-    [SerializeField] private float CoolingRate;
-    [SerializeField] private float StrengthRate;
-    [SerializeField] private float FragilityRate;
-
     [SerializeField] private Transform ingot;
 
     private bool canControlIngot = false;
@@ -67,19 +62,6 @@ public class Barrel : MonoBehaviour, IInteractable
         }
     }
 
-    private void CoolingWeapon()
-    {
-        //check that the change of fragility and strength values ??occurs only when the ingot is cooling 
-        if (ingot.gameObject.GetComponent<Ingot>().Cooling(CoolingRate))
-        {
-            ingot.gameObject.GetComponent<Ingot>().Cooling(CoolingRate);
-            ingot.gameObject.GetComponent<Ingot>().FragilityModification(FragilityRate);
-            ingot.gameObject.GetComponent<Ingot>().StrengthModification(StrengthRate);
-        }
-        
-    }
-
-
     void MoveWeapon()
     {
         float yMouse = moveWeaponCommand.y * Time.deltaTime;
@@ -91,14 +73,6 @@ public class Barrel : MonoBehaviour, IInteractable
     }
 
 
-    void OnTriggerStay(Collider collider)
-    {
-        if (collider.tag == "Ingot")
-        {
-            Debug.Log("Stay");
-            CoolingWeapon();
-        }
-    }
 
 
 }
