@@ -30,6 +30,7 @@ public class CameraClicker : MonoBehaviour
 
     private bool leftHand = true;
     private bool rightHand = true;
+    private bool leftWithIngot = false;
 
     [SerializeField] private Transform lefttHandPosition;
     [SerializeField] private Transform rightHandPosition;
@@ -134,6 +135,7 @@ public class CameraClicker : MonoBehaviour
     private void InteractWithIngot()
     {
         
+        
         bool targetHand;
         if (leftHand)// hands are true when free, false when full
         {
@@ -143,6 +145,8 @@ public class CameraClicker : MonoBehaviour
         {
             targetHand = false; // targets left with thongs
         }
+
+
 
         if (targetHand)
         {
@@ -159,11 +163,18 @@ public class CameraClicker : MonoBehaviour
         }
         else
         {
+            if (leftWithIngot)
+            {
+                //showhint
+                return;
+            }
             pickableObject.transform.position = thongsPosition.position;
             pickableObject.transform.rotation = thongsPosition.rotation;
             pickableObject.SetParent(thongs);
             leftHand = false;
             pickableObject.GetComponent<Rigidbody>().isKinematic = true;
+            pickableObject.GetComponent<BoxCollider>().enabled = false;
+            leftWithIngot = true;
         }
 
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
