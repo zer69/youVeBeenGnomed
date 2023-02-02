@@ -145,7 +145,7 @@ public class CameraClicker : MonoBehaviour
         pickableObject.transform.localRotation = Quaternion.identity;
         pickableObject.SetParent(playerTransform);
         
-        
+        playerInput.GetComponent<Inventory>().IngotIsPicked(true);
         
 
 
@@ -229,6 +229,7 @@ public class CameraClicker : MonoBehaviour
             {
                 child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
+                playerInput.GetComponent<Inventory>().IngotIsPicked(false);
             }
             
         }

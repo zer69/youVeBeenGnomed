@@ -21,6 +21,8 @@ public class Furnance : MonoBehaviour, IInteractable
     [BackgroundColor()]
     private float minFireTemperature = 0f;
 
+    private GameObject ingot;
+
     public string InteractionPrompt => _prompt;
 
     void Start()
@@ -40,6 +42,10 @@ public class Furnance : MonoBehaviour, IInteractable
 
         else if(fireIsKindled && inventory.hasIngot)
         {
+            ingot = inventory.ingot;
+            inventory.IngotIsPicked(false);
+            ingot.transform.position = transform.position;
+            ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             Debug.Log("Ingot placed in the furnace");
             return true;
         }
