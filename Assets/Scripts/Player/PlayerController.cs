@@ -38,8 +38,15 @@ public class PlayerController : MonoBehaviour
         switch (context.action.name)
         {
             case "Move":
-                if (onGround)
+                if (onGround && context.phase == InputActionPhase.Started)
+                {
                     moveCommand = context.action.ReadValue<Vector2>();
+                }
+                if (context.phase == InputActionPhase.Canceled)
+                {
+                    moveCommand = Vector2.zero;
+                }
+                    
                 break;
 
             case "Jump":
@@ -49,7 +56,7 @@ public class PlayerController : MonoBehaviour
                 } else if (context.phase == InputActionPhase.Canceled)
                 {
                     jumping = false;
-                    moveCommand = Vector2.zero;
+                    // moveCommand = Vector2.zero;
                 }
                 
                 break;
