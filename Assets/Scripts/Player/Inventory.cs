@@ -30,21 +30,21 @@ public class Inventory : MonoBehaviour
             ingot = thongs.transform.GetChild(1).gameObject;
 
             hasIngot = true;
-            Debug.Log(hasIngot);
+            //Debug.Log(hasIngot);
         }
 
         else if (ingotPicked)
         {
             ingot = playerTransform.transform.GetChild(0).gameObject;
             hasIngot = true;
-            Debug.Log(hasIngot);
+            //Debug.Log(hasIngot);
         }
 
         else
         {
             ingot = null;
             hasIngot = false;
-            Debug.Log(hasIngot);
+            //Debug.Log(hasIngot);
         }
 
         return true;
@@ -56,14 +56,14 @@ public class Inventory : MonoBehaviour
         {
             thongs = playerTransform.transform.GetChild(0).gameObject;
             hasThongs = true;
-            Debug.Log(hasThongs);
+            //Debug.Log(hasThongs);
         }
 
         else
         {
             thongs = null;
             hasThongs = false;
-            Debug.Log(hasThongs);
+            //Debug.Log(hasThongs);
         }
 
         return true;

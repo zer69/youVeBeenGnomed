@@ -7,32 +7,35 @@ public class Furnance : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
+
     [SerializeField] private PlayerInput playerInput;    
 
     private bool fuelIsFilled = false;
     private bool fireIsKindled = false;
     private bool ingotInFurnace = false;
 
-    [BackgroundColor(4f, 0f, 0f, 1f)]
     public float furnaceTemperature = 0f;
 
-    [BackgroundColor(0f, 4f, 0f, 1f)]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Furnace burning parameters")]
+
     [SerializeField] private float furnaceInitialTemperature;
     [SerializeField] private float smeltingSpeed;
+    [SerializeField] private float minFireTemperature = 0f;
+
     [BackgroundColor()]
-    private float minFireTemperature = 0f;
 
     private GameObject ingot;
     private GameObject thongs;
 
-    private Transform playerTransform;
-
+    
     public string InteractionPrompt => _prompt;
 
     void Start()
     {
         thongs = GameObject.Find("Thongs");
-        playerTransform = GameObject.Find("Player Transform").transform;
     }
 
     public bool Interact(Interactor interactor)
@@ -117,6 +120,10 @@ public class Furnance : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(1);
             furnaceTemperature -= 1;
             Debug.Log("Current temperature of furnace is " + furnaceTemperature + "*C");
+            if (ingotInFurnace)
+            {
+                Debug.Log("Current temperature of ingot is " + ingot.gameObject.GetComponent<Ingot>().currentTemperature + "*C");
+            }
         }
 
         fireIsKindled = false;
