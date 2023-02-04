@@ -126,6 +126,8 @@ public class CameraClicker : MonoBehaviour
             pickableObject.transform.rotation = lefttHandPosition.rotation;
             pickableObject.SetParent(playerTransform);
             leftHand = false;
+
+            playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
         }
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -268,6 +270,7 @@ public class CameraClicker : MonoBehaviour
             {
                 child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
+                playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
             }
             
