@@ -40,7 +40,7 @@ public class Interactor : MonoBehaviour
         {
             isWorkstationTargeted = true;
             interactable = hit.collider.GetComponent<IInteractable>();
-            currentCam = hit.collider.gameObject.GetComponentInChildren<Camera>(true);
+            //currentCam = hit.collider.gameObject.GetComponentInChildren<Camera>(true);
         }
         else
         {
@@ -53,13 +53,7 @@ public class Interactor : MonoBehaviour
         if (isWorkstationTargeted == true && usingStation == true)
         {
             interactable.Interact(this);
-            playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            playerInput.transform.localRotation = Quaternion.identity;
-        }
-        else
-        {
-            currentCam = cam;
-            playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            usingStation = false;
         }
     }
 
@@ -70,7 +64,14 @@ public class Interactor : MonoBehaviour
             case "Use":
                 if (isWorkstationTargeted)
                 {
-                    usingStation = true;
+                    if (context.phase == InputActionPhase.Started)
+                    {
+                        usingStation = true;
+                    }
+                    else if (context.phase == InputActionPhase.Canceled)
+                    {
+                        usingStation = false;
+                    }
                 }
 
                 break;

@@ -7,34 +7,146 @@ public class Furnance : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
-    [SerializeField] private Camera cam;
-    [SerializeField] private Camera cam2;
-    [SerializeField] private PlayerInput playerInput;
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
 
+    [SerializeField] private PlayerInput playerInput;    
+
+    private bool fuelIsFilled = false;
+    private bool fireIsKindled = false;
+    private bool ingotInFurnace = false;
+
+    public float furnaceTemperature = 0f;
+
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Furnace burning parameters")]
+
+    [SerializeField] private float furnaceInitialTemperature;
+    [SerializeField] private float smeltingSpeed;
+    [SerializeField] private float minFireTemperature = 0f;
+
+    [BackgroundColor()]
+
+    private GameObject ingot;
+    private GameObject thongs;
+
+    
     public string InteractionPrompt => _prompt;
 
     void Start()
     {
-        playerInput.onActionTriggered += OnPlayerInputActionTriggered;
+        thongs = GameObject.Find("Thongs");
     }
 
     public bool Interact(Interactor interactor)
     {
-        cam.gameObject.SetActive(false);
-        cam2.gameObject.SetActive(true);
-        Debug.Log("Furnance is used");
-        return true;
+        var inventory = interactor.GetComponent<Inventory>();
+
+        if (ingotInFurnace && inventory.hasThongs)
+        {
+            ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
+            ingot.transform.SetParent(thongs.transform);
+            ingot.GetComponent<BoxCollider>().enabled = false;
+            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            inventory.IngotIsPicked(true);
+            ingotInFurnace = false;
+            Debug.Log("Ingot taken");
+            return true;
+        }
+
+        if (ingotInFurnace)
+        {            
+            Debug.Log("You need thongs to get an ingot from the furnace");
+            return true;
+        }
+
+        else if (fireIsKindled && !inventory.hasIngot)
+        {            
+            Debug.Log("No ingot");
+            return true;
+        }
+
+        else if(fireIsKindled && inventory.hasIngot && !ingotInFurnace)
+        {
+            ingot = inventory.ingot;
+            inventory.IngotIsPicked(false);
+            ingot.transform.position = transform.position;
+            ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            ingot.GetComponent<Rigidbody>().isKinematic = false;
+            ingot.GetComponent<BoxCollider>().enabled = true;
+            ingot.transform.parent = null;
+
+            ingotInFurnace = true;
+
+            Debug.Log("Ingot placed in the furnace");
+            return true;
+        }
+
+        else
+        {
+            if (fuelIsFilled)
+            {
+                StartCoroutine(Burning());
+                return true;
+            }
+
+            else
+            {
+                if (inventory.hasCoal)
+                {
+                    fuelIsFilled = inventory.hasCoal;
+                    inventory.hasCoal = false;
+                    Debug.Log("Fuel Is Filled");
+                    return true;
+                }
+
+                else
+                {
+                    Debug.Log("No fuel for furnace");
+                    return true;
+                }
+            }
+        }
     }
 
-    private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
+    IEnumerator Burning()
     {
-        switch (context.action.name)
-        {
-            case "Abort":
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
+        fireIsKindled = true;
+        furnaceTemperature = furnaceInitialTemperature;
+        Debug.Log("Fire Is Kindled");
 
-                break;
+        while(furnaceTemperature > minFireTemperature)
+        {
+            yield return new WaitForSeconds(1);
+            furnaceTemperature -= 1;
+            Debug.Log("Current temperature of furnace is " + furnaceTemperature + "*C");
+            if (ingotInFurnace)
+            {
+                Debug.Log("Current temperature of ingot is " + ingot.gameObject.GetComponent<Ingot>().currentTemperature + "*C");
+            }
+        }
+
+        fireIsKindled = false;
+        fuelIsFilled = false;
+        Debug.Log("Fire went out");
+    }
+
+    void smeltingIngot(Collision ingot)
+    {
+        float ingotTemperature = ingot.gameObject.GetComponent<Ingot>().currentTemperature;
+
+        if(ingotTemperature < furnaceTemperature)
+        {
+            ingot.gameObject.GetComponent<Ingot>().currentTemperature += smeltingSpeed * Time.deltaTime;
+            //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            smeltingIngot(collision);
         }
     }
 }

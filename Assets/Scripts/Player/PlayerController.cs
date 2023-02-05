@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         isGround = LayerMask.GetMask("jumpingSurface", "Pickable");
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
     // Gain inputs
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
@@ -39,7 +40,10 @@ public class PlayerController : MonoBehaviour
         {
             case "Move":
                 if (onGround)
+                {
                     moveCommand = context.action.ReadValue<Vector2>();
+                }
+                    
                 break;
 
             case "Jump":
@@ -81,6 +85,10 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
             onGround = false;
+        }
+        if (!playerInput.actions["Move"].IsPressed())
+        {
+            moveCommand = Vector2.zero;
         }
     }
 
