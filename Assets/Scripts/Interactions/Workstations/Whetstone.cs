@@ -53,7 +53,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         
         currentAngleVelocity = whetStoneWheel.angularVelocity.magnitude;
         sharpeningSpeed = currentAngleVelocity / 10.0f;
-        if (moveWeaponCommand != Vector2.zero)
+        if (canControlIngot && (moveWeaponCommand != Vector2.zero))
         {
             MoveWeapon();
         }
@@ -117,13 +117,14 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         if (isTired)
         {
-            //hint maybe
+           
         }
         else
         {
             whetStoneWheel.AddTorque(rotationForce);
             isTired = true;
             StartCoroutine(LegCooldown());
+            Debug.LogWarning("Rotation added");
         }
     }
 
@@ -159,17 +160,18 @@ public class Whetstone : MonoBehaviour, IInteractable
                 ingot.gameObject.GetComponent<Ingot>().sharpness -= sharpnessIncrement;
             if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
+            Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
 
         }
         else
         {
-            //not enough angular velocity
+            Debug.Log("Not Enough speed to sharpen");
         }
     }
 
     private float ChangeSharpness(float ingotFragility)
     {
-        return sharpeningSpeed * Time.deltaTime * ingotFragility;
+        return sharpeningSpeed * ingotFragility;
     }
 
     private void OnCollisionEnter(Collision collision)
