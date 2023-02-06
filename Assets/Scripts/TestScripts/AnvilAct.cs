@@ -73,11 +73,10 @@ public class AnvilAct : MonoBehaviour
         }
     }
     
-    IEnumerator IngotSectionRoutine(float seconds)
+    IEnumerator IngotSectionRoutine(GameObject section, float seconds)
     {
 
         yield return new WaitForSeconds(seconds);
-        GameObject section = GameObject.FindGameObjectWithTag("IngotSection");
         Vector3 currentScale = section.transform.localScale;
         Vector3 targetScale = new Vector3(0, currentScale.y, currentScale.z);
         StartCoroutine(IngotSectionDisappearRoutine(section, targetScale, sectionDisappearTime));
@@ -139,10 +138,10 @@ public class AnvilAct : MonoBehaviour
 
     private void showSection(Vector3 position, float seconds)
     {
-        Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
+        GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
         sectionList.Add(position[0]);
         sectionIsVisible = true;
-        StartCoroutine(IngotSectionRoutine(seconds));
+        StartCoroutine(IngotSectionRoutine(section, seconds));
     }
 
     private void ingotClickHandler(RaycastHit hit)
