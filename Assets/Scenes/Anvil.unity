@@ -700,14 +700,23 @@ MonoBehaviour:
   zMin: -0.3
   xMax: 0.8
   xMin: -0.8
-  numberOfSectionsInRound: 040000000300000006000000
+  numberOfSectionsInRound: 040000000300000003000000
   numberOfRounds: 3
   anvilMode: 0
   hitMode: 0
   hasWorkOnAnvil: 1
+  common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
+  uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
+  rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
+  supremacy: {fileID: 2100000, guid: 5a52ecbe77b0e224baf9d82f20d24c3a, type: 2}
+  legendary: {fileID: 2100000, guid: 739a224e7d18b02449962684e1ce025b, type: 2}
+  roundCounter: 0
   sectionLiveTime: 1
   secondToLeave: 2
+  sectionDisappearTime: 1
   ingotSectionPrefab: {fileID: 3662050256835462987, guid: 075da90ce8fbe3e4da698d8a27cd4f55,
+    type: 3}
+  ingotPrefab: {fileID: 3004497291772079903, guid: d98aa6c3bc04ec249b91b472aee6e24d,
     type: 3}
 --- !u!1 &1293616638
 GameObject:
