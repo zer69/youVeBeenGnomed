@@ -35,7 +35,7 @@ public class Ingot : MonoBehaviour
         Dark
     };
 
-    enum CompletionStatus
+    public enum CompletionStatus
     {
         Raw,
         Melted,
@@ -46,7 +46,7 @@ public class Ingot : MonoBehaviour
 
     };
 
-    [SerializeField] private CompletionStatus status;
+    [SerializeField] public CompletionStatus status;
 
     [SerializeField] private Rarity rarity;
     [SerializeField] private OreType type;

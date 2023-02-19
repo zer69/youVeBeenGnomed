@@ -62,7 +62,12 @@ public class Whetstone : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
-        //ingotRB.constraints = RigidbodyConstraints.FreezeAll;
+        if (!((ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Sharpened) || (ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Cooled)))
+        {
+            Debug.Log("Cannot sharpen an ingot in such condition");
+            return false;
+        }
+            
         ingotRB.transform.rotation = Quaternion.identity;
         ingotRB.transform.position = weaponStartingPosition.position;
         ingotRB.transform.SetParent(this.transform);
