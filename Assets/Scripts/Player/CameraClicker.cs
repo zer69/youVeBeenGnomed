@@ -66,6 +66,7 @@ public class CameraClicker : MonoBehaviour
         CheckForTargets();
         //if (!interacting)
             //pickableObject = null;
+
         if (interacting && (pickableObject != null))
         {
             PickInteraction();
@@ -116,6 +117,8 @@ public class CameraClicker : MonoBehaviour
                 pickableObject.transform.rotation = rightHandPosition.rotation;
                 pickableObject.SetParent(playerTransform);
                 rightHand = false;
+
+                playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
             }
             else
                 return;
