@@ -36,6 +36,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private Transform rightHandPosition;
     [SerializeField] private Transform thongsPosition;
     [SerializeField] private float dropPower;
+    [SerializeField] private float interactRange = 3.0f;
 
 
 
@@ -86,10 +87,6 @@ public class CameraClicker : MonoBehaviour
                 break;
             case "Tool":
                 InteractWithTool();
-                break;
-            case "Box":
-                if (leftHand && rightHand)
-                    InteractWithBox();
                 break;
         }
     }
@@ -193,45 +190,13 @@ public class CameraClicker : MonoBehaviour
 
     }
 
-    private void InteractWithBox()
-    {
-    
-        leftHand = false;
-        rightHand = false;
-        pickableObject.SetParent(playerTransform);
-        pickableObject.transform.localRotation = Quaternion.identity;
-        pickableObject.gameObject.layer = defaultLayer;
-        pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        ResizeCrossHair();
-    }
-
-    private void DropBox()
-    {
-        
-        leftHand = true;
-        rightHand = true;
-        playerTransform.DetachChildren();
-        //pickableObject.localPosition = pickableObject.position;
-        //interacting = false;
-
-        pickableObject.gameObject.layer = pickableLayer;
-
-        pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-    }
-    IEnumerator MoveBoxToHands()
-    {
-        
-
-        yield return null;
-    }
-
     private void CheckForTargets()
     {
         if (canClick)
         {
             RaycastHit mousehit;
             Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            if (Physics.Raycast(ray, out mousehit, 3.0f, pickableMask))
+            if (Physics.Raycast(ray, out mousehit, interactRange, pickableMask))
             {
                 if (interacting)
                     pickableObject = mousehit.transform.gameObject.transform;
@@ -264,18 +229,11 @@ public class CameraClicker : MonoBehaviour
         
         foreach (Transform child in playerTransform)
         {
-            if (child.gameObject.tag == "Box")
-            {
-                DropBox();
-                break;
-            }
-            else
-            {
+            
                 child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
                 playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
-            }
             
         }
         playerTransform.DetachChildren();
