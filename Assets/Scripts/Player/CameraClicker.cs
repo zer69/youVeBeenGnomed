@@ -13,7 +13,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform thongs;
 
-    private Transform pickableObject;
+    public Transform pickableObject;
     
 
     private LayerMask pickableMask;
@@ -28,9 +28,9 @@ public class CameraClicker : MonoBehaviour
     private int pickableLayer;
     private int toolLayer;
 
-    private bool leftHand = true;
-    private bool rightHand = true;
-    private bool leftWithIngot = false;
+    [SerializeField] private bool leftHand = true;
+    public bool rightHand = true;
+    public bool leftWithIngot = false;
 
     [SerializeField] private Transform lefttHandPosition;
     [SerializeField] private Transform rightHandPosition;
@@ -91,6 +91,9 @@ public class CameraClicker : MonoBehaviour
                 if (leftHand && rightHand)
                     InteractWithBox();
                 break;
+            case "Coal":
+                InteractWithCoal();
+                break;
         }
     }
 
@@ -123,7 +126,7 @@ public class CameraClicker : MonoBehaviour
             else
                 return;
         }
-        else
+        else if (leftHand)
         {
             pickableObject.transform.position = lefttHandPosition.position;
             pickableObject.transform.rotation = lefttHandPosition.rotation;
@@ -135,11 +138,11 @@ public class CameraClicker : MonoBehaviour
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
+        pickableObject = null;
     }
 
     private void InteractWithIngot()
     {
-        
         
         bool targetHand;
         if (leftHand)// hands are true when free, false when full
@@ -184,13 +187,34 @@ public class CameraClicker : MonoBehaviour
 
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        
-        
-        
+
         playerInput.GetComponent<Inventory>().IngotIsPicked(true);
-        
 
+        pickableObject = null;
+    }
 
+    private void InteractWithCoal()
+    {
+        if (rightHand)
+        {
+            pickableObject.transform.position = rightHandPosition.position;
+            pickableObject.transform.rotation = rightHandPosition.rotation;
+            pickableObject.SetParent(playerTransform);
+
+            rightHand = false;
+
+            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
+            playerInput.GetComponent<Inventory>().CoalIsPicked(true);
+
+            pickableObject = null;
+        }
+
+        else
+        {
+            Debug.Log("Your right hand is busy");
+        }
     }
 
     private void InteractWithBox()
@@ -275,12 +299,14 @@ public class CameraClicker : MonoBehaviour
                 child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
                 playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
+                playerInput.GetComponent<Inventory>().CoalIsPicked(false);
             }
             
         }
         playerTransform.DetachChildren();
         rightHand = true;
         leftHand = true;
+        leftWithIngot = false;
         pickableObject = null;
     }
 

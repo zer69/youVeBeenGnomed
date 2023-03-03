@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject playerTransform;
     public GameObject ingot;
     public GameObject thongs;
+    public GameObject coal;
+
+    [SerializeField] private int childNumber = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,19 +32,31 @@ public class Inventory : MonoBehaviour
         {
             ingot = thongs.transform.GetChild(1).gameObject;
 
+            ingot.GetComponent<BoxCollider>().enabled = false;
+            ingot.GetComponent<Rigidbody>().isKinematic = true;
+
             hasIngot = true;
-            //Debug.Log(hasIngot);
         }
 
         else if (ingotPicked)
         {
             ingot = playerTransform.transform.GetChild(0).gameObject;
+
+            ingot.GetComponent<BoxCollider>().enabled = false;
+            ingot.GetComponent<Rigidbody>().isKinematic = true;
+
             hasIngot = true;
             //Debug.Log(hasIngot);
         }
 
-        else
+        else if (ingot != null)
         {
+            ingot.GetComponent<BoxCollider>().enabled = true;
+            ingot.GetComponent<Rigidbody>().isKinematic = false;
+
+            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
+            playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = false;
+
             ingot = null;
             hasIngot = false;
             //Debug.Log(hasIngot);
@@ -54,16 +69,58 @@ public class Inventory : MonoBehaviour
     {
         if (thongsPicked)
         {
-            thongs = playerTransform.transform.GetChild(0).gameObject;
+            thongs = playerTransform.transform.GetChild(childNumber).gameObject;
             hasThongs = true;
+
+            childNumber += 1;
+        }
+
+        else if (thongs != null)
+        {
+            if (hasIngot)
+            {
+                ingot.GetComponent<BoxCollider>().enabled = true;
+                ingot.GetComponent<Rigidbody>().isKinematic = false;
+                ingot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+                thongs.transform.GetChild(1).SetParent(null);
+            }
+            thongs = null;
+            hasThongs = false;
+
+            childNumber -= 1;
             //Debug.Log(hasThongs);
         }
 
-        else
+        return true;
+    }
+
+    public bool CoalIsPicked(bool coalPicked)
+    {
+        if (coalPicked)
         {
-            thongs = null;
-            hasThongs = false;
-            //Debug.Log(hasThongs);
+            coal = playerTransform.transform.GetChild(childNumber).gameObject;
+            coal.GetComponent<BoxCollider>().enabled = false;
+            coal.GetComponent<Rigidbody>().isKinematic = true;
+
+            //playerTransform.GetComponent<CameraClicker>().rightHand = false;
+            hasCoal = true;
+
+            childNumber += 1;
+            Debug.Log("Coal Picked");
+        }
+
+        else if (coal != null)
+        {
+            coal.GetComponent<BoxCollider>().enabled = true;
+            coal.GetComponent<Rigidbody>().isKinematic = false;
+
+            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
+
+            coal = null;
+            hasCoal = false;
+
+            childNumber -= 1;
         }
 
         return true;
