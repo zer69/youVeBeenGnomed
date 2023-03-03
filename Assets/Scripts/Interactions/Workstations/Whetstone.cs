@@ -68,7 +68,7 @@ public class Whetstone : MonoBehaviour, IInteractable
             return false;
         }
             
-        ingotRB.transform.rotation = Quaternion.identity;
+        ingotRB.transform.localRotation = Quaternion.Euler(-90f,90f,0f);
         ingotRB.transform.position = weaponStartingPosition.position;
         ingotRB.transform.SetParent(this.transform);
         ingot = ingotRB.transform;
@@ -144,10 +144,10 @@ public class Whetstone : MonoBehaviour, IInteractable
         float xMouse = moveWeaponCommand.x  * Time.deltaTime;
         float yMouse = moveWeaponCommand.y  * Time.deltaTime;
 
-        Vector3 weaponVector = new Vector3(xMouse, yMouse, 0);
+        Vector3 weaponVector = new Vector3(0f, xMouse, -yMouse);
 
-        ingot.position += weaponVector;
-        //Debug.Log(ingot.position);
+        ingot.localPosition += weaponVector;
+        //Debug.Log(ingot.position);ew
 
     }
 
