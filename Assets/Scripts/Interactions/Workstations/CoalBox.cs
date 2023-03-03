@@ -21,7 +21,7 @@ public class CoalBox : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if(inventory.hasCoal == false)
+        if(!inventory.hasCoal && (!inventory.hasIngot || inventory.hasThongs))
         {
             GiveCoal();
             inventory.CoalIsPicked(true);

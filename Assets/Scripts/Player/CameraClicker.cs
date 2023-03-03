@@ -88,10 +88,6 @@ public class CameraClicker : MonoBehaviour
             case "Tool":
                 InteractWithTool();
                 break;
-            case "Box":
-                if (leftHand && rightHand)
-                    InteractWithBox();
-                break;
             case "Coal":
                 InteractWithCoal();
                 break;
@@ -127,7 +123,7 @@ public class CameraClicker : MonoBehaviour
             else
                 return;
         }
-        else if (leftHand)
+        else
         {
             pickableObject.transform.position = lefttHandPosition.position;
             pickableObject.transform.rotation = lefttHandPosition.rotation;
@@ -263,7 +259,6 @@ public class CameraClicker : MonoBehaviour
                 playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
                 playerInput.GetComponent<Inventory>().CoalIsPicked(false);
-            }
             
         }
         playerTransform.DetachChildren();

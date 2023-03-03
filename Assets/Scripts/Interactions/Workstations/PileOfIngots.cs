@@ -39,7 +39,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             Debug.Log("Ingot taken");
         }
 
-        else if (!inventory.hasThongs && !inventory.hasIngot)
+        else if (!inventory.hasThongs && !inventory.hasIngot && !inventory.coal)
         {
             GameObject newIngot = Instantiate(ingot);
             newIngot.transform.position = rightHand.position;
