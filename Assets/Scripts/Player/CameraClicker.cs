@@ -13,7 +13,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform thongs;
 
-    private Transform pickableObject;
+    public Transform pickableObject;
     
 
     private LayerMask pickableMask;
@@ -28,14 +28,17 @@ public class CameraClicker : MonoBehaviour
     private int pickableLayer;
     private int toolLayer;
 
-    private bool leftHand = true;
-    private bool rightHand = true;
-    private bool leftWithIngot = false;
+    [SerializeField] private bool leftHand = true;
+    public bool rightHand = true;
+    public bool leftWithIngot = false;
 
     [SerializeField] private Transform lefttHandPosition;
     [SerializeField] private Transform rightHandPosition;
     [SerializeField] private Transform thongsPosition;
     [SerializeField] private float dropPower;
+    [SerializeField] private float interactRange = 3.0f;
+
+    [SerializeField] private t_GameEvent typeChoice;
 
 
 
@@ -66,6 +69,7 @@ public class CameraClicker : MonoBehaviour
         CheckForTargets();
         //if (!interacting)
             //pickableObject = null;
+
         if (interacting && (pickableObject != null))
         {
             PickInteraction();
@@ -86,9 +90,8 @@ public class CameraClicker : MonoBehaviour
             case "Tool":
                 InteractWithTool();
                 break;
-            case "Box":
-                if (leftHand && rightHand)
-                    InteractWithBox();
+            case "Coal":
+                InteractWithCoal();
                 break;
         }
     }
@@ -116,6 +119,8 @@ public class CameraClicker : MonoBehaviour
                 pickableObject.transform.rotation = rightHandPosition.rotation;
                 pickableObject.SetParent(playerTransform);
                 rightHand = false;
+
+                playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
             }
             else
                 return;
@@ -126,15 +131,17 @@ public class CameraClicker : MonoBehaviour
             pickableObject.transform.rotation = lefttHandPosition.rotation;
             pickableObject.SetParent(playerTransform);
             leftHand = false;
+
+            playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
         }
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
+        pickableObject = null;
     }
 
     private void InteractWithIngot()
     {
-        
         
         bool targetHand;
         if (leftHand)// hands are true when free, false when full
@@ -179,45 +186,38 @@ public class CameraClicker : MonoBehaviour
 
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
-        
-        
-        
-        
-        
+        if (pickableObject.GetComponent<Ingot>().weaponType == Ingot.WeaponType.None)
+        {
+            typeChoice.Raise(pickableObject);
+        }
 
+        playerInput.GetComponent<Inventory>().IngotIsPicked(true);
 
+        pickableObject = null;
     }
 
-    private void InteractWithBox()
+    private void InteractWithCoal()
     {
-    
-        leftHand = false;
-        rightHand = false;
-        pickableObject.SetParent(playerTransform);
-        pickableObject.transform.localRotation = Quaternion.identity;
-        pickableObject.gameObject.layer = defaultLayer;
-        pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        ResizeCrossHair();
-    }
+        if (rightHand)
+        {
+            pickableObject.transform.position = rightHandPosition.position;
+            pickableObject.transform.rotation = rightHandPosition.rotation;
+            pickableObject.SetParent(playerTransform);
 
-    private void DropBox()
-    {
-        
-        leftHand = true;
-        rightHand = true;
-        playerTransform.DetachChildren();
-        //pickableObject.localPosition = pickableObject.position;
-        //interacting = false;
+            rightHand = false;
 
-        pickableObject.gameObject.layer = pickableLayer;
+            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezeAll;
 
-        pickableObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-    }
-    IEnumerator MoveBoxToHands()
-    {
-        
+            playerInput.GetComponent<Inventory>().CoalIsPicked(true);
 
-        yield return null;
+            pickableObject = null;
+        }
+
+        else
+        {
+            Debug.Log("Your right hand is busy");
+        }
     }
 
     private void CheckForTargets()
@@ -226,7 +226,7 @@ public class CameraClicker : MonoBehaviour
         {
             RaycastHit mousehit;
             Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            if (Physics.Raycast(ray, out mousehit, 3.0f, pickableMask))
+            if (Physics.Raycast(ray, out mousehit, interactRange, pickableMask))
             {
                 if (interacting)
                     pickableObject = mousehit.transform.gameObject.transform;
@@ -259,21 +259,18 @@ public class CameraClicker : MonoBehaviour
         
         foreach (Transform child in playerTransform)
         {
-            if (child.gameObject.tag == "Box")
-            {
-                DropBox();
-                break;
-            }
-            else
-            {
+            
                 child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
-            }
+                playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
+                playerInput.GetComponent<Inventory>().IngotIsPicked(false);
+                playerInput.GetComponent<Inventory>().CoalIsPicked(false);
             
         }
         playerTransform.DetachChildren();
         rightHand = true;
         leftHand = true;
+        leftWithIngot = false;
         pickableObject = null;
     }
 

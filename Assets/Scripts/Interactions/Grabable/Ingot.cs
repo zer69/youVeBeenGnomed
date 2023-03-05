@@ -35,7 +35,7 @@ public class Ingot : MonoBehaviour
         Dark
     };
 
-    enum CompletionStatus
+    public enum CompletionStatus
     {
         Raw,
         Melted,
@@ -46,10 +46,20 @@ public class Ingot : MonoBehaviour
 
     };
 
-    [SerializeField] private CompletionStatus status;
+    public enum WeaponType
+    {
+        None,
+        Axe,
+        Sword,
+        Spear
+    }
+
+    [SerializeField] public CompletionStatus status;
+    [SerializeField] public WeaponType weaponType;
 
     [SerializeField] private Rarity rarity;
     [SerializeField] private OreType type;
+    
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;
@@ -80,7 +90,7 @@ public class Ingot : MonoBehaviour
 
     private void Update()
     {
-        //  Debug.Log("sharpness: " + sharpness);
+        //Debug.Log("sharpness: " + sharpness);
         
     }
 

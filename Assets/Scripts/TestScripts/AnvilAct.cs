@@ -20,6 +20,11 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
     [SerializeField] private bool hasWorkOnAnvil = true;
+    [SerializeField] private Material common;
+    [SerializeField] private Material uncommon;
+    [SerializeField] private Material rare;
+    [SerializeField] private Material supremacy;
+    [SerializeField] private Material legendary;
     private float anvilRange = 3;
     private int sectionCounter = 0;
     [SerializeField] private int roundCounter = 0;
@@ -34,6 +39,8 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private float secondToLeave = 2;
     [SerializeField] private float sectionDisappearTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
+    [SerializeField] private GameObject ingotPrefab;
+    private int successfulHits = 0;
 
     // Start is called before the first frame update
     private void Awake()
@@ -66,11 +73,10 @@ public class AnvilAct : MonoBehaviour
         }
     }
     
-    IEnumerator IngotSectionRoutine(float seconds)
+    IEnumerator IngotSectionRoutine(GameObject section, float seconds)
     {
 
         yield return new WaitForSeconds(seconds);
-        GameObject section = GameObject.FindGameObjectWithTag("IngotSection");
         Vector3 currentScale = section.transform.localScale;
         Vector3 targetScale = new Vector3(0, currentScale.y, currentScale.z);
         StartCoroutine(IngotSectionDisappearRoutine(section, targetScale, sectionDisappearTime));
@@ -90,8 +96,12 @@ public class AnvilAct : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-        section.transform.localScale = targetScale;
-        Destroy(section);
+        // section.transform.localScale = targetScale;
+        if (section is not null)
+        {
+            Destroy(section);
+        }
+        
     }
 
     IEnumerator RoundBreak(float seconds)
@@ -100,6 +110,17 @@ public class AnvilAct : MonoBehaviour
         hitMode = false;
         roundCounter++;
         createEmptyListsForRoundHandler();
+    }
+
+
+    IEnumerator FinishWork(float seconds)
+    {
+        Debug.Log("Finish Work!");
+        WorkHandler();
+        yield return new WaitForSeconds(seconds);
+        hasWorkOnAnvil = true;
+        successfulHits = 0;
+
     }
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
@@ -117,10 +138,10 @@ public class AnvilAct : MonoBehaviour
 
     private void showSection(Vector3 position, float seconds)
     {
-        Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
+        GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
         sectionList.Add(position[0]);
         sectionIsVisible = true;
-        StartCoroutine(IngotSectionRoutine(seconds));
+        StartCoroutine(IngotSectionRoutine(section, seconds));
     }
 
     private void ingotClickHandler(RaycastHit hit)
@@ -160,28 +181,32 @@ public class AnvilAct : MonoBehaviour
         if (roundCounter >= numberOfRounds)
         {
             hasWorkOnAnvil = false;
+            roundCounter = 0;
             Debug.Log("Done");
-            return;
+            StartCoroutine(FinishWork(5));
         }
-        if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound[roundCounter] && !hitMode && roundCounter < numberOfRounds)
+        else
         {
-            showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
-            sectionCounter++;
-        }
-        if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
-        {
-            hitMode = true;
-            sectionCounter = 0;
-        }
-        if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
-        {
-            mouseLeftButtonClickInHitModeHandler();
-        }
-        if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
-        {
-            mouseClickCounter = 0;
-            resultHandler(sectionResult);
-            StartCoroutine(RoundBreak(secondToLeave));
+            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound[roundCounter] && !hitMode && roundCounter < numberOfRounds)
+            {
+                showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
+                sectionCounter++;
+            }
+            if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
+            {
+                hitMode = true;
+                sectionCounter = 0;
+            }
+            if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
+            {
+                mouseLeftButtonClickInHitModeHandler();
+            }
+            if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
+            {
+                mouseClickCounter = 0;
+                resultHandler(sectionResult);
+                StartCoroutine(RoundBreak(secondToLeave));
+            }
         }
     }
     private void resultHandler(List<bool> results)
@@ -191,8 +216,44 @@ public class AnvilAct : MonoBehaviour
         //Debug.Log("Result" + result);
 
         //}
+        
         int successfulClicks = results.Count(x => x == true);
+        successfulHits += successfulClicks;
+        
         Debug.Log(successfulClicks);
+    }
+
+    private void WorkHandler()
+    {
+        Debug.Log("Work Handler!");
+        float zMax = -3;
+        float zMin = -9;
+        float xMax = 9;
+        float xMin = -9;
+        float height = 2;
+        Vector3 location = new Vector3(Random.Range(xMin, xMax), height, Random.Range(zMin, zMax));
+        GameObject createdObject = Instantiate(ingotPrefab, location, ingotPrefab.transform.rotation);
+        int perfection = numberOfSectionsInRound.Sum();
+        if (successfulHits == perfection)
+        {
+            createdObject.GetComponent<Renderer>().material = legendary;
+        }
+        else if (successfulHits >= perfection * 0.9)
+        {
+            createdObject.GetComponent<Renderer>().material = supremacy;
+        }
+        else if (successfulHits >= perfection * 0.7)
+        {
+            createdObject.GetComponent<Renderer>().material = rare;
+        }
+        else if (successfulHits >= perfection * 0.4)
+        {
+            createdObject.GetComponent<Renderer>().material = uncommon;
+        }
+        else
+        {
+            createdObject.GetComponent<Renderer>().material = common;
+        }
     }
 
     private void createEmptyListsForRoundHandler()

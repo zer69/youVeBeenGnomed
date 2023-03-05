@@ -7,10 +7,18 @@ public class Forge : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
+
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Furnance furnace;
-    [BackgroundColor(0f, 4f, 0f, 1f)]
+
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Inflation parameters")]
+
     [SerializeField] private float temperatureIncrement;
+    [SerializeField] private float forgeCooldown = 1f;
+
     [BackgroundColor()]
 
     private bool canInflateForge = true;
@@ -42,7 +50,7 @@ public class Forge : MonoBehaviour, IInteractable
 
         furnace.furnaceTemperature += temperatureIncrement;
         Debug.Log("Forge inflated");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(forgeCooldown);
 
         canInflateForge = true;
     }

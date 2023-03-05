@@ -53,7 +53,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         
         currentAngleVelocity = whetStoneWheel.angularVelocity.magnitude;
         sharpeningSpeed = currentAngleVelocity / 10.0f;
-        if (moveWeaponCommand != Vector2.zero)
+        if (canControlIngot && (moveWeaponCommand != Vector2.zero))
         {
             MoveWeapon();
         }
@@ -62,8 +62,13 @@ public class Whetstone : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
-        //ingotRB.constraints = RigidbodyConstraints.FreezeAll;
-        ingotRB.transform.rotation = Quaternion.identity;
+        if (!((ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Sharpened) || (ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Cooled)))
+        {
+            Debug.Log("Cannot sharpen an ingot in such condition");
+            return false;
+        }
+            
+        ingotRB.transform.localRotation = Quaternion.Euler(-90f,90f,0f);
         ingotRB.transform.position = weaponStartingPosition.position;
         ingotRB.transform.SetParent(this.transform);
         ingot = ingotRB.transform;
@@ -117,13 +122,14 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         if (isTired)
         {
-            //hint maybe
+           
         }
         else
         {
             whetStoneWheel.AddTorque(rotationForce);
             isTired = true;
             StartCoroutine(LegCooldown());
+            Debug.LogWarning("Rotation added");
         }
     }
 
@@ -138,10 +144,10 @@ public class Whetstone : MonoBehaviour, IInteractable
         float xMouse = moveWeaponCommand.x  * Time.deltaTime;
         float yMouse = moveWeaponCommand.y  * Time.deltaTime;
 
-        Vector3 weaponVector = new Vector3(xMouse, yMouse, 0);
+        Vector3 weaponVector = new Vector3(0f, xMouse, -yMouse);
 
-        ingot.position += weaponVector;
-        //Debug.Log(ingot.position);
+        ingot.localPosition += weaponVector;
+        //Debug.Log(ingot.position);ew
 
     }
 
@@ -159,17 +165,18 @@ public class Whetstone : MonoBehaviour, IInteractable
                 ingot.gameObject.GetComponent<Ingot>().sharpness -= sharpnessIncrement;
             if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
+            Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
 
         }
         else
         {
-            //not enough angular velocity
+            Debug.Log("Not Enough speed to sharpen");
         }
     }
 
     private float ChangeSharpness(float ingotFragility)
     {
-        return sharpeningSpeed * Time.deltaTime * ingotFragility;
+        return sharpeningSpeed * ingotFragility;
     }
 
     private void OnCollisionEnter(Collision collision)

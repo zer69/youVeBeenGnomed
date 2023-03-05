@@ -9,8 +9,6 @@ public class Liquid : MonoBehaviour
     [SerializeField] private float StrengthRate;
     [SerializeField] private float FragilityRate;
 
-    [SerializeField] private Ingot ingot;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +21,7 @@ public class Liquid : MonoBehaviour
         
     }
 
-    private void CoolingWeapon()
+    private void CoolingWeapon(GameObject ingot)
     {
         //check that the change of fragility and strength values occurs only when the ingot is cooling 
         if (ingot.gameObject.GetComponent<Ingot>().Cooling(CoolingRate))
@@ -41,7 +39,7 @@ public class Liquid : MonoBehaviour
         if (collider.tag == "Ingot")
         {
             Debug.Log("Stay");
-            CoolingWeapon();
+            CoolingWeapon(collider.gameObject);
         }
     }
 }
