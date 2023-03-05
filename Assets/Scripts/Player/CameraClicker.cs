@@ -38,6 +38,8 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private float dropPower;
     [SerializeField] private float interactRange = 3.0f;
 
+    [SerializeField] private t_GameEvent typeChoice;
+
 
 
     // Start is called before the first frame update
@@ -184,6 +186,10 @@ public class CameraClicker : MonoBehaviour
 
         Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        if (pickableObject.GetComponent<Ingot>().weaponType == Ingot.WeaponType.None)
+        {
+            typeChoice.Raise(pickableObject);
+        }
 
         playerInput.GetComponent<Inventory>().IngotIsPicked(true);
 
