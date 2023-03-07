@@ -99,7 +99,7 @@ public class Ingot : MonoBehaviour
     {        
         if (currentTemperature - rate >= minTemperatureValue)
         {
-            currentTemperature -= rate;
+            currentTemperature -= rate * Time.deltaTime;
             Debug.Log("currentTemperature: " + currentTemperature);
             return true;
         }
@@ -112,7 +112,7 @@ public class Ingot : MonoBehaviour
         //to decrease the value, a negative value must be passed
         if (strength + rate > minStrengthValue && strength + rate < maxStrengthValue)
         {
-            strength += rate;
+            strength += rate * Time.deltaTime;
         }
     }
 
@@ -122,7 +122,7 @@ public class Ingot : MonoBehaviour
         //to decrease the value, a negative value must be passed
         if (fragility + rate > minFragilityValue && strength + rate < maxFragilityValue)
         {
-            fragility += rate;
+            fragility += rate * Time.deltaTime;
         }
     }
 
