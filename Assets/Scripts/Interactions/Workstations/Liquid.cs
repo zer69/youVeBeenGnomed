@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Liquid : MonoBehaviour
 {
-
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float CoolingRate;
     [SerializeField] private float StrengthRate;
     [SerializeField] private float FragilityRate;
@@ -36,10 +36,10 @@ public class Liquid : MonoBehaviour
 
     void OnTriggerStay(Collider collider)
     {
-        if (collider.tag == "Ingot")
-        {
-            Debug.Log("Stay");
-            CoolingWeapon(collider.gameObject);
+        if(collider.tag == "Tool")
+        {            
+            //Debug.Log("Tool Stay");
+            CoolingWeapon(collider.gameObject.transform.GetChild(1).gameObject);
         }
     }
 }
