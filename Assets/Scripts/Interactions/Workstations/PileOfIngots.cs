@@ -6,13 +6,21 @@ public class PileOfIngots : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Pile parameters")]
+
     [SerializeField] private GameObject ingot;
 
     [SerializeField] private int ingotsInPile = 5;
 
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
+
     [SerializeField] private Transform playerTransform;
 
     [SerializeField] private Transform rightHand;
+
+    [SerializeField] private t_GameEvent typeChoice;
 
     private GameObject thongs;
 
@@ -35,6 +43,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             newIngot.GetComponent<BoxCollider>().enabled = false;
             newIngot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
+            typeChoice.Raise(newIngot.transform);
             ChangePileSize(ingotsInPile);
             Debug.Log("Ingot taken");
         }
@@ -48,6 +57,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             newIngot.GetComponent<BoxCollider>().enabled = false;
             newIngot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
+            typeChoice.Raise(newIngot.transform);
             ChangePileSize(ingotsInPile);
             Debug.Log("Ingot taken");
         }
