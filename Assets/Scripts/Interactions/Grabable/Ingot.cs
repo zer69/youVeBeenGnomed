@@ -46,10 +46,20 @@ public class Ingot : MonoBehaviour
 
     };
 
+    public enum WeaponType
+    {
+        None,
+        Axe,
+        Sword,
+        Spear
+    }
+
     [SerializeField] public CompletionStatus status;
+    [SerializeField] public WeaponType weaponType;
 
     [SerializeField] private Rarity rarity;
     [SerializeField] private OreType type;
+    
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;

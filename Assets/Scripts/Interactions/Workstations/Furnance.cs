@@ -95,7 +95,8 @@ public class Furnance : MonoBehaviour, IInteractable
                 if (inventory.hasCoal)
                 {
                     fuelIsFilled = inventory.hasCoal;
-                    inventory.hasCoal = false;
+                    Destroy(inventory.coal);
+                    inventory.CoalIsPicked(false);
                     Debug.Log("Fuel Is Filled");
                     return true;
                 }
