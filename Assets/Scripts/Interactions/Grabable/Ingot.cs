@@ -54,32 +54,44 @@ public class Ingot : MonoBehaviour
         Spear
     }
 
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public CompletionStatus status;
     [SerializeField] public WeaponType weaponType;
 
     [SerializeField] private Rarity rarity;
     [SerializeField] private OreType type;
     
+
+
+    [Header("Air temperature")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [SerializeField] public float airTemperature = 24;
+    [SerializeField] public float airCoolingRate = 0.09f;
+
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Ignot properties")]
     [SerializeField] private float quality;
 
     [SerializeField] private float MeltingPoint;
-    public float currentTemperature;
 
-    [SerializeField] private float minTemperatureValue = 0;
+    [SerializeField] public float coolingRate;
+    [SerializeField] public float currentTemperature;
+    //minTemperatureValue = airTemperature
+    [SerializeField] private float maxTemperatureValue = 1200;
 
     [SerializeField] private float strength;
 
     [SerializeField] private float minStrengthValue = 0;
     [SerializeField] private float maxStrengthValue = 100;
 
-
-    public float fragility;
+    [SerializeField] public float fragility;
 
     [SerializeField] private float minFragilityValue = 0;
     [SerializeField] private float maxFragilityValue = 100;
 
-    public float sharpness;
+    [SerializeField] public float sharpness;
 
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] bool isEnchanted;
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
@@ -90,17 +102,16 @@ public class Ingot : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("sharpness: " + sharpness);
-        
+        Cooling();
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change
-    public bool Cooling(float rate)
+    public bool Cooling()
     {        
-        if (currentTemperature - rate >= minTemperatureValue)
+        if (currentTemperature - coolingRate >= airTemperature)
         {
-            currentTemperature -= rate;
-            Debug.Log("currentTemperature: " + currentTemperature);
+            currentTemperature -= coolingRate;
+            //Debug.Log("currentTemperature: " + currentTemperature);
             return true;
         }
         return false;
@@ -126,4 +137,15 @@ public class Ingot : MonoBehaviour
         }
     }
 
+    public void setNormalCoolingRate()
+    {
+        coolingRate = airCoolingRate;
+        Debug.Log("coolingRate: " + airCoolingRate);
+    }
+
+    public void setSpecificCoolingRate(float rate)
+    {
+        coolingRate = rate;
+        Debug.Log("coolingRate: " + rate);
+    }
 }

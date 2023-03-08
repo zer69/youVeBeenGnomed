@@ -6,9 +6,15 @@ public class CoalBox : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Box parameters")]
+
     [SerializeField] private GameObject coal;
 
     [SerializeField] private int coalInPile = 5;
+
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
 
     [SerializeField] private Transform playerTransform;
 
