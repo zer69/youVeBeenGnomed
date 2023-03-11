@@ -8,6 +8,7 @@ public class Interactor : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private LayerMask interactableLayerMask;
+    [SerializeField] private RectTransform crosshair;
 
     private Camera cam;
     private Camera currentCam;
@@ -28,8 +29,9 @@ public class Interactor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckForWorkstation();       
+        CheckForWorkstation();
         UseWorkstation();
+        ResizeCrosshair();
     }
 
     private void CheckForWorkstation()
@@ -45,6 +47,18 @@ public class Interactor : MonoBehaviour
         else
         {
             isWorkstationTargeted = false;
+        }
+    }
+
+    private void ResizeCrosshair()
+    {
+        if (isWorkstationTargeted)
+        {
+            crosshair.sizeDelta = new Vector2(16, 16);
+        }
+        else
+        {
+            crosshair.sizeDelta = new Vector2(4, 4);
         }
     }
 
