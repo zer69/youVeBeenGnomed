@@ -159,7 +159,9 @@ MonoBehaviour:
   cam: {fileID: 0}
   cam2: {fileID: 1936130907}
   playerInput: {fileID: 0}
-  ingot: {fileID: 0}
+  playerTransform: {fileID: 0}
+  weaponStartingPosition: {fileID: 0}
+  movementSensitivity: 0
 --- !u!136 &30396125
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1137,6 +1139,7 @@ GameObject:
   - component: {fileID: 980646449}
   - component: {fileID: 980646448}
   - component: {fileID: 980646447}
+  - component: {fileID: 980646456}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1180,6 +1183,7 @@ MonoBehaviour:
   interactableLayerMask:
     serializedVersion: 2
     m_Bits: 8192
+  crosshair: {fileID: 103888637}
 --- !u!114 &980646449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,6 +1340,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &980646456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980646446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf946eb4b2700645a69e70d96a2b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 980646450}
+  maxEnergy: 10
 --- !u!1001 &1079439645
 PrefabInstance:
   m_ObjectHideFlags: 0
