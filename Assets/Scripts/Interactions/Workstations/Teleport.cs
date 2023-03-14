@@ -11,7 +11,8 @@ public class Teleport : MonoBehaviour, IInteractable
     [SerializeField] private Camera cam;
     [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private GameEvent TeleportUsed; 
+    [SerializeField] private GameEvent TeleportUsed;
+    [SerializeField] private Transform detectionZone;
 
 
 
@@ -22,12 +23,13 @@ public class Teleport : MonoBehaviour, IInteractable
     void Start()
     {
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
+        detectionZone = transform.Find("TeleportStation").Find("Platform").Find("DetectionZone");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForWeapons();
     }
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
@@ -56,5 +58,27 @@ public class Teleport : MonoBehaviour, IInteractable
         return true;
     }
 
+    private void CheckForWeapons()
+    {
+        if (detectionZone.GetComponent<TeleportPlatform>().colliderList.Count > 0)
+        {
+            ActivateSender();
+        }
+        else
+        {
+            DeactivateSender();
+        }
+
+    }
+
+    void ActivateSender()
+    {
+        // activate button on ui
+    }
+
+    void DeactivateSender()
+    {
+        // deactivate button on ui
+    }
    
 }
