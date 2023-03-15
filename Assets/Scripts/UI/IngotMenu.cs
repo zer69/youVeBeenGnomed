@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class IngotMenu : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class IngotMenu : MonoBehaviour
     private Transform ingotToSet;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform ingotMenu;
+    [SerializeField] private Transform Buttons;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -39,8 +42,9 @@ public class IngotMenu : MonoBehaviour
         Debug.Log(ingotToSet.GetComponent<Ingot>().weaponType);
         playerInput.ActivateInput();
         Cursor.lockState = CursorLockMode.Locked;
+        
         ingotMenu.gameObject.SetActive(false);
-    }
+    } 
 
     public void SetAxe()
     {

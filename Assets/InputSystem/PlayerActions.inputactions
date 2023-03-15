@@ -96,18 +96,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MoveMagicStone",
-                    "type": "PassThrough",
-                    "id": "44b2a444-6357-4fe9-8410-959ede780aba",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DrawMagicRune",
+                    "name": "Glasses",
                     "type": "Button",
-                    "id": "86da751c-7303-4ebb-966f-56b492882877",
+                    "id": "713948bb-90d3-46c8-9269-23eaefef6847",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -271,23 +262,12 @@
                 },
                 {
                     "name": "",
-                    "id": "0ce212fc-5d6f-4cfe-b05f-e4e92f8e3ab1",
-                    "path": "<Mouse>/delta",
+                    "id": "6eb41e4d-f0e7-4f80-a232-0a0da4403da1",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveMagicStone",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "601f7ca7-ef53-466a-a496-6c037856ec5e",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DrawMagicRune",
+                    "action": "Glasses",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
