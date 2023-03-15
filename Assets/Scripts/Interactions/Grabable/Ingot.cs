@@ -99,7 +99,11 @@ public class Ingot : MonoBehaviour
    
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
-
+    private void Start()
+    {
+        coolingRate = airCoolingRate;
+        currentTemperature = airTemperature;
+    }
     private void Update()
     {
         Cooling();
