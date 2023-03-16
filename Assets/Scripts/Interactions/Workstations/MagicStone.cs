@@ -16,13 +16,15 @@ public class MagicStone : MonoBehaviour
 
     [Header("Borders")]
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
-    [SerializeField] private float xRange = 8.2f;
-    [SerializeField] private float zRange = 5.1f;
+    [SerializeField] private float xMax = 8.2f;
+    [SerializeField] private float xMin = 5.5f;
+    [SerializeField] private float zMax = 5f;
+    [SerializeField] private float zMin = 2.6f;
     //if canMove - stone moves down and player can draw
     //else stone flying under the table
 
 
-    
+
     public bool CanMove { get; set; }
 
     [SerializeField] private Transform magicStoneTransform;
@@ -51,8 +53,47 @@ public class MagicStone : MonoBehaviour
 
         Vector3 stoneVector = new Vector3(xMouse, 0, zMouse);
 
-        magicStoneTransform.position += stoneVector;
+        float xResult = magicStoneTransform.position.x + xMouse;
+        float zResult = magicStoneTransform.position.z + zMouse;
 
+        if ((xResult > xMin) && (xResult < xMax) && (zResult > zMin) && (zResult < zMax))
+        {            
+            magicStoneTransform.position += new Vector3(xMouse, 0, zMouse);
+        }
+
+
+
+        //if (zResult > -zRange && zResult < zRange)
+        //{
+        //    magicStoneTransform.position += new Vector3(0, 0, zMouse);
+        //}
+
+
+        //if (magicStoneTransform.position.x <= xMin)
+        //{
+        //    Debug.Log("Min");
+        //    Debug.Log(transform.position);
+        //    Debug.Log(transform.position.x);
+        //    transform.position = new Vector3(xMin, magicStoneTransform.position.y, magicStoneTransform.position.z);
+        //    Debug.Log(transform.position);
+        //}
+        //if (magicStoneTransform.position.x >= xMax)
+        //{
+        //    Debug.Log("Max");
+        //    Debug.Log(transform.position);
+        //    Debug.Log(transform.position.x);
+        //    transform.position = new Vector3(xMax, magicStoneTransform.position.y, magicStoneTransform.position.z);
+        //    Debug.Log(transform.position);
+        //}
+
+        //if (magicStoneTransform.position.z < -zRange)
+        //{
+        //    transform.position = new Vector3(magicStoneTransform.position.x, magicStoneTransform.position.y, -zRange);
+        //}
+        //if (magicStoneTransform.position.z > zRange)
+        //{
+        //    transform.position = new Vector3(magicStoneTransform.position.x, magicStoneTransform.position.y, zRange);
+        //}
     }
 
     public void setBlockMove()
