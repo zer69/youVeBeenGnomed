@@ -16,6 +16,12 @@ public class EnchantmentPattern : MonoBehaviour
     {
         
     }
+    public void turnOffPoints()
+    {
+        foreach(PatternPoint p in points){
+            p.turnOff();
+        }
+    }
 
 
 }

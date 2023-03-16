@@ -5,97 +5,78 @@ using UnityEngine.InputSystem;
 
 public class MagicStone : MonoBehaviour
 {
-    //[SerializeField] private string _prompt;
+    [Header("Materials")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [SerializeField] Material materialOn;
+    [SerializeField] Material materialOff;
+    Renderer rend;
 
-    [SerializeField] private Transform magicStoneTransform;
-    [SerializeField] private PlayerInput playerInput;
-
-    private Vector2 moveStoneCommand = Vector2.zero;
-
+    [Header("How hight stone must be")]
     [SerializeField] private float yRange = 0.3f;
 
+    [Header("Borders")]
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] private float xRange = 8.2f;
     [SerializeField] private float zRange = 5.1f;
     //if canMove - stone moves down and player can draw
     //else stone flying under the table
-    private bool canMove = false;
 
+
+    
+    public bool CanMove { get; set; }
+
+    [SerializeField] private Transform magicStoneTransform;
     //public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerInput.onActionTriggered += OnPlayerInputActionTriggered;
+        rend = GetComponent<Renderer>();
+
+        // At start, use the first material
+        rend.material = materialOff;
     }
 
     // Update is called once per frame
     void Update()
     {
+                   
 
-            
-        if (moveStoneCommand != Vector2.zero)
-        {
-            MoveStone();
-            //Debug.Log("move stone");
-        }
     }
 
-    void MoveStone()
+    public void MoveStone(Vector2 moveStoneCommand)
     {
         float zMouse = moveStoneCommand.y * Time.deltaTime;
         float xMouse = moveStoneCommand.x * Time.deltaTime;
 
         Vector3 stoneVector = new Vector3(xMouse, 0, zMouse);
-        
+
         magicStoneTransform.position += stoneVector;
 
     }
 
     public void setBlockMove()
     {
-        Vector3 stoneVector = new Vector3(0, yRange, 0);
-      
-        magicStoneTransform.position += stoneVector;
-        Debug.Log("stone is blocked");
-        canMove = false;      
+        magicStoneTransform.position += new Vector3(0, yRange, 0);
+        CanMove = false;
 
+        rend.material = materialOff;
+
+        Debug.Log("stone is blocked");
     }
 
-    private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
+    public void setCanMove()
     {
-        switch (context.action.name)
-        {
-            case "DrawMagicRune":
+        magicStoneTransform.position -= new Vector3(0, yRange, 0);
+        CanMove = true;
 
-                canMove = !canMove;
+        rend.material = materialOn;
 
-                Vector3 stoneVector = new Vector3(0, yRange, 0);
+        Debug.Log("can move stone");
+    }
 
-                if (canMove)
-                {                    
-                    magicStoneTransform.position -= stoneVector;
-                }
-                else
-                {
-                    magicStoneTransform.position += stoneVector;
-                }
-                break;
-
-            case "MoveMagicStone":
-
-                if (canMove)
-                {
-                    moveStoneCommand = context.action.ReadValue<Vector2>();
-                }
-                break;
-
-            case "Abort":
-
-                if (canMove)
-                {
-                    setBlockMove();
-                }
-                break;
-        }
+    public void moveToDefoultPosision(Transform stoneDefaultPosition)
+    {
+        magicStoneTransform.position = stoneDefaultPosition.position;
     }
 }

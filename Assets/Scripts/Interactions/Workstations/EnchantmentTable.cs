@@ -12,12 +12,16 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponStartingPosition;
-
+    [SerializeField] private Transform stoneDefaultPosition;
+    [SerializeField] private EnchantmentPattern enchantmentPattern;
 
     private Transform weapon;
 
     
     [SerializeField] private MagicStone magicStone;
+
+
+    private Vector2 moveStoneCommand = Vector2.zero;
 
     private bool canEnchante = false;
 
@@ -32,7 +36,11 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     
     void Update()
     {
-
+        if (moveStoneCommand != Vector2.zero)
+        {
+            magicStone.MoveStone(moveStoneCommand);
+            //Debug.Log("move stone");
+        }
     }
 
     public bool Interact(Interactor interactor)
@@ -57,6 +65,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
         return true;
     }
 
+
+
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
         switch (context.action.name)
@@ -73,6 +83,39 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                               
                 canEnchante = false;
 
+                enchantmentPattern.turnOffPoints();
+
+                //first, block movement 
+                magicStone.setBlockMove();
+                //second, move stone to default position 
+                magicStone.moveToDefoultPosision(stoneDefaultPosition);
+                
+
+                break;
+
+            case "DrawMagicRune":
+
+                if (canEnchante)
+                {
+                    magicStone.CanMove = !magicStone.CanMove;                                       
+
+                    if (magicStone.CanMove)
+                    {
+                        magicStone.setCanMove();
+                    }
+                    else
+                    {
+                        magicStone.setBlockMove();
+                    }
+                }
+                break;
+
+            case "MoveMagicStone":
+
+                if (magicStone.CanMove)
+                {
+                    moveStoneCommand = context.action.ReadValue<Vector2>();
+                }
                 break;
 
         }
