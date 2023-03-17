@@ -70,7 +70,8 @@ public class Furnance : MonoBehaviour, IInteractable
         {
             ingot = inventory.ingot;
             inventory.IngotIsPicked(false);
-            ingot.transform.position = transform.position;
+            ingot.transform.position = new Vector3(-2.5f, 3.6f, -2);
+            ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
             ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingot.GetComponent<Rigidbody>().isKinematic = false;
             ingot.GetComponent<BoxCollider>().enabled = true;

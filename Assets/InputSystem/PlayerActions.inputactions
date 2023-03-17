@@ -103,6 +103,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MoveMagicStone",
+                    "type": "PassThrough",
+                    "id": "cb3ee91a-c72d-4019-9b49-568f6041f920",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrawMagicRune",
+                    "type": "Button",
+                    "id": "3c443582-27bd-450d-bd00-192ddffd4cc8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -268,6 +286,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Glasses",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d61b85d-7e5b-4fda-b616-06b864457cb8",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveMagicStone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "785c6f53-c90e-40f8-9a26-dbcbe6c26cf4",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrawMagicRune",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
