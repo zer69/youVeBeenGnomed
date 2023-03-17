@@ -33,14 +33,31 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     {
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
     }
-    
+
     void Update()
     {
-        if (moveStoneCommand != Vector2.zero)
+        if (canEnchante)
         {
-            magicStone.MoveStone(moveStoneCommand);
-            //Debug.Log("move stone");
+            if (moveStoneCommand != Vector2.zero)
+            {
+                if (enchantmentPattern.checkEnchantment())
+                {
+                    enchantmentPattern.resetRunes();
+                    //first, block movement 
+                    magicStone.setBlockMove();
+                    //second, move stone to default position 
+                    magicStone.moveToDefoultPosision(stoneDefaultPosition);
+                    moveStoneCommand = Vector2.zero;
+                }
+                else
+                {
+                    magicStone.MoveStone(moveStoneCommand);
+                    //Debug.Log("move stone");
+                }
+                
+            }
         }
+        
     }
 
     public bool Interact(Interactor interactor)
@@ -66,7 +83,24 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     }
 
 
+    private void resetPattern()
+    {
+        //first, block movement 
+        magicStone.setBlockMove();
+        //second, move stone to default position 
+        magicStone.moveToDefoultPosision(stoneDefaultPosition);
 
+        enchantmentPattern.turnOffPoints();
+        enchantmentPattern.turnOffLines();
+        enchantmentPattern.resetRunes();
+        enchantmentPattern.resetLogic();
+
+    }
+
+    //private void makeEnchantment()
+    //{
+
+    //}
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
         switch (context.action.name)
@@ -83,13 +117,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                               
                 canEnchante = false;
 
-                enchantmentPattern.turnOffPoints();
 
-                //first, block movement 
-                magicStone.setBlockMove();
-                //second, move stone to default position 
-                magicStone.moveToDefoultPosision(stoneDefaultPosition);
-                
+                resetPattern();
 
                 break;
 
@@ -97,8 +126,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                 if (canEnchante)
                 {
-                    magicStone.CanMove = !magicStone.CanMove;                                       
-
+                    magicStone.CanMove = !magicStone.CanMove;
                     if (magicStone.CanMove)
                     {
                         magicStone.setCanMove();
@@ -112,12 +140,18 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
             case "MoveMagicStone":
 
-                if (magicStone.CanMove)
+                if (canEnchante && magicStone.CanMove)
                 {
                     moveStoneCommand = context.action.ReadValue<Vector2>();
                 }
                 break;
 
+
+            case "ResetDrawingRune":
+
+                resetPattern();
+
+                break;
         }
     }
 

@@ -23,7 +23,7 @@ public class MagicStone : MonoBehaviour
     //if canMove - stone moves down and player can draw
     //else stone flying under the table
 
-
+    public bool isActivatePoint = false;
 
     public bool CanMove { get; set; }
 
@@ -103,7 +103,7 @@ public class MagicStone : MonoBehaviour
 
         rend.material = materialOff;
 
-        Debug.Log("stone is blocked");
+        //Debug.Log("stone is blocked");
     }
 
     public void setCanMove()
@@ -113,11 +113,12 @@ public class MagicStone : MonoBehaviour
 
         rend.material = materialOn;
 
-        Debug.Log("can move stone");
+        //Debug.Log("can move stone");
     }
 
     public void moveToDefoultPosision(Transform stoneDefaultPosition)
     {
         magicStoneTransform.position = stoneDefaultPosition.position;
     }
+
 }
