@@ -87,6 +87,7 @@ public class CameraClicker : MonoBehaviour
         {
             case "Ingot":
                 InteractWithIngot();
+                pickableObject = null;
                 break;
             case "Tool":
                 InteractWithTool();
@@ -142,8 +143,7 @@ public class CameraClicker : MonoBehaviour
     }
 
     private void InteractWithIngot()
-    {
-        
+    {   
         bool targetHand;
         if (leftHand)// hands are true when free, false when full
         {
@@ -194,7 +194,7 @@ public class CameraClicker : MonoBehaviour
         playerInput.GetComponent<Inventory>().IngotIsPicked(true);
         weaponPicked.Raise(pickableObject.GetComponent<BoxCollider>());
 
-        pickableObject = null;
+        //pickableObject = null;
     }
 
     private void InteractWithCoal()

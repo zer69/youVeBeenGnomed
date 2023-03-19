@@ -46,7 +46,6 @@ public class Inventory : MonoBehaviour
             //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
             hasIngot = true;
-            //Debug.Log(hasIngot);
         }
 
         else if (ingot != null)
@@ -59,7 +58,6 @@ public class Inventory : MonoBehaviour
 
             ingot = null;
             hasIngot = false;
-            //Debug.Log(hasIngot);
         }
 
         return true;
@@ -101,7 +99,7 @@ public class Inventory : MonoBehaviour
         {
             coal = playerTransform.transform.GetChild(childNumber).gameObject;
             coal.GetComponent<BoxCollider>().enabled = false;
-            coal.GetComponent<Rigidbody>().isKinematic = true;
+            //coal.GetComponent<Rigidbody>().isKinematic = true;
 
             //playerTransform.GetComponent<CameraClicker>().rightHand = false;
             hasCoal = true;
@@ -113,7 +111,7 @@ public class Inventory : MonoBehaviour
         else if (coal != null)
         {
             coal.GetComponent<BoxCollider>().enabled = true;
-            coal.GetComponent<Rigidbody>().isKinematic = false;
+            //coal.GetComponent<Rigidbody>().isKinematic = false;
 
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 
