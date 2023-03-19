@@ -96,6 +96,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
 
+    [SerializeField] private col_GameEvent weaponLanded;
+
    
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
@@ -151,5 +153,11 @@ public class Ingot : MonoBehaviour
     {
         coolingRate = rate;
         Debug.Log("coolingRate: " + rate);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "TeleportPlatform")
+            weaponLanded.Raise(this.GetComponent<BoxCollider>());
     }
 }

@@ -6,21 +6,21 @@ public class TeleportPlatform : MonoBehaviour
 {
     public List<GameObject> colliderList = new List<GameObject>();
 
-    public void OnTriggerEnter(Collider collider)
+    public void AddToList(Collider weapon)
     {
-        if (!colliderList.Contains(collider.gameObject) && collider.gameObject.tag == "Ingot")
+        if (!colliderList.Contains(weapon.gameObject) && weapon.gameObject.tag == "Ingot")
         {
-            colliderList.Add(collider.gameObject);
+            colliderList.Add(weapon.gameObject);
             Debug.Log("Added " + gameObject.name);
             Debug.Log("GameObjects in list: " + colliderList.Count);
         }
     }
 
-    public void OnTriggerExit(Collider collider)
+    public void RemoveFromList(Collider weapon)
     {
-        if (colliderList.Contains(collider.gameObject))
+        if (colliderList.Contains(weapon.gameObject))
         {
-            colliderList.Remove(collider.gameObject);
+            colliderList.Remove(weapon.gameObject);
             Debug.Log("Removed " + gameObject.name);
             Debug.Log("GameObjects in list: " + colliderList.Count);
         }

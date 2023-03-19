@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
             ingot = thongs.transform.GetChild(1).gameObject;
 
             ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
             hasIngot = true;
         }
@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
             ingot = playerTransform.transform.GetChild(0).gameObject;
 
             ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
             hasIngot = true;
             //Debug.Log(hasIngot);
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
         else if (ingot != null)
         {
             ingot.GetComponent<BoxCollider>().enabled = true;
-            ingot.GetComponent<Rigidbody>().isKinematic = false;
+            //ingot.GetComponent<Rigidbody>().isKinematic = false;
 
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = false;
