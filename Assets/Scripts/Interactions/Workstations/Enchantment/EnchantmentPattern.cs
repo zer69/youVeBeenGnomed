@@ -54,4 +54,9 @@ public class EnchantmentPattern : MonoBehaviour
         }
         return false;
     }
+
+    public Rune getRune()
+    {
+        return logic.enchantmentRune;
+    }
 }

@@ -6,6 +6,7 @@ public class Rune
 {
     
     public string runeName;
+    public int enchantmentId;
     public List<PatternLine> lines = new List<PatternLine>();
     public int drawnLines = 0;
 

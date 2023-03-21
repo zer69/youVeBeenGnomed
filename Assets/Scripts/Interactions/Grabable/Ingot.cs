@@ -29,10 +29,10 @@ public class Ingot : MonoBehaviour
         Water,
         Earth,
         Air,
+        Light,
+        Dark,
         Poison,
         Lightning,
-        Light,
-        Dark
     };
 
     public enum CompletionStatus
@@ -105,6 +105,9 @@ public class Ingot : MonoBehaviour
     {
         coolingRate = airCoolingRate;
         currentTemperature = airTemperature;
+
+        enchantment = Enchantment.None;
+        enchantmentQuality = 1f;
     }
     private void Update()
     {
@@ -159,5 +162,11 @@ public class Ingot : MonoBehaviour
     {
         if (other.gameObject.tag == "TeleportPlatform")
             weaponLanded.Raise(this.GetComponent<BoxCollider>());
+    }
+
+    public void setEnchantment(int enchantmentId, float quality)
+    {
+        enchantment = (Enchantment)Enum.GetValues(typeof(Enchantment)).GetValue(enchantmentId); ;
+        enchantmentQuality = quality;
     }
 }

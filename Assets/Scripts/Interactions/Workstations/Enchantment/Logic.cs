@@ -38,6 +38,7 @@ public class Logic : MonoBehaviour
         //rune fire
         Rune fireRune = new Rune();
         fireRune.runeName = "fire";
+        fireRune.enchantmentId = 1;
         fireRune.lines.Add(lines[1]);
         fireRune.lines.Add(lines[13]);
         fireRune.lines.Add(lines[17]);
@@ -47,6 +48,7 @@ public class Logic : MonoBehaviour
         //rune light
         Rune lightRune = new Rune();
         lightRune.runeName = "light";
+        lightRune.enchantmentId = 5;
         lightRune.lines.Add(lines[5]);
         lightRune.lines.Add(lines[17]);
         lightRune.lines.Add(lines[14]);
@@ -59,6 +61,7 @@ public class Logic : MonoBehaviour
         //rune dark
         Rune darkRune = new Rune();
         darkRune.runeName = "dark";
+        darkRune.enchantmentId = 6;
         darkRune.lines.Add(lines[5]);
         darkRune.lines.Add(lines[0]);
         darkRune.lines.Add(lines[13]);

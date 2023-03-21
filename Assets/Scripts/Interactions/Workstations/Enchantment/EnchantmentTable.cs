@@ -20,6 +20,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     
     [SerializeField] private MagicStone magicStone;
 
+    private float enchantmentQuality = 0.5f;
 
     private Vector2 moveStoneCommand = Vector2.zero;
 
@@ -44,6 +45,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
             {
                 if (enchantmentPattern.checkEnchantment())
                 {
+                    makeEnchantment(enchantmentPattern.getRune());
+
                     enchantmentPattern.resetRunes();
                     magicStone.setBlockMove();
                     magicStone.startAutoMove(stoneDefaultPosition.position, speedHoriz);
@@ -59,6 +62,12 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
             }
         }
         
+    }
+
+    private void makeEnchantment(Rune rune)
+    {
+        
+        weapon.GetComponent<Ingot>().setEnchantment(rune.enchantmentId, enchantmentQuality);
     }
 
     public bool Interact(Interactor interactor)
@@ -98,12 +107,10 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
         enchantmentPattern.resetRunes();
         enchantmentPattern.resetLogic();
 
+        enchantmentQuality = 1f;
+
     }
 
-    //private void makeEnchantment()
-    //{
-
-    //}
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
         switch (context.action.name)
