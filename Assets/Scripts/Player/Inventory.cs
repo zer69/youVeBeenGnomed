@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
             ingot = thongs.transform.GetChild(1).gameObject;
 
             ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
             hasIngot = true;
         }
@@ -43,23 +43,21 @@ public class Inventory : MonoBehaviour
             ingot = playerTransform.transform.GetChild(0).gameObject;
 
             ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
             hasIngot = true;
-            //Debug.Log(hasIngot);
         }
 
         else if (ingot != null)
         {
             ingot.GetComponent<BoxCollider>().enabled = true;
-            ingot.GetComponent<Rigidbody>().isKinematic = false;
+            //ingot.GetComponent<Rigidbody>().isKinematic = false;
 
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = false;
 
             ingot = null;
             hasIngot = false;
-            //Debug.Log(hasIngot);
         }
 
         return true;
@@ -101,7 +99,7 @@ public class Inventory : MonoBehaviour
         {
             coal = playerTransform.transform.GetChild(childNumber).gameObject;
             coal.GetComponent<BoxCollider>().enabled = false;
-            coal.GetComponent<Rigidbody>().isKinematic = true;
+            //coal.GetComponent<Rigidbody>().isKinematic = true;
 
             //playerTransform.GetComponent<CameraClicker>().rightHand = false;
             hasCoal = true;
@@ -113,7 +111,7 @@ public class Inventory : MonoBehaviour
         else if (coal != null)
         {
             coal.GetComponent<BoxCollider>().enabled = true;
-            coal.GetComponent<Rigidbody>().isKinematic = false;
+            //coal.GetComponent<Rigidbody>().isKinematic = false;
 
             playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 

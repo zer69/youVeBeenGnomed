@@ -6,10 +6,11 @@ using System.Linq;
 
 public class AnvilAct : MonoBehaviour
 {
-    [SerializeField] private float ingotWidth = 1.6f;
-    [SerializeField] private float anvilHeight = 1;
-    [SerializeField] private float ingotHeight = 0.4f;
-    [SerializeField] private float ingotSectionWidth;
+    private float ingotWidth;
+    private float anvilHeight;
+    private float ingotLength;
+    private float ingotHeight;
+    private float ingotSectionWidth;
     [SerializeField] private float zMax = 0.3f;
     [SerializeField] private float zMin = -0.3f;
     [SerializeField] private float xMax = 0.8f;
@@ -41,20 +42,29 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private GameObject ingotSectionPrefab;
     [SerializeField] private GameObject ingotPrefab;
     private int successfulHits = 0;
+    public FloatVariable quality, initialQuality;
 
     // Start is called before the first frame update
     private void Awake()
     {
         camera = Camera.main;
-        ingotSectionWidth = ingotWidth / 10;
+        anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
+        
         createEmptyListsForRoundHandler();
     }
 
     void Start()
     {
+        
         ingot = GameObject.FindGameObjectWithTag("Ingot");
+        ingotWidth = ingot.GetComponent<BoxCollider>().bounds.size[0];
+        ingotLength = ingot.GetComponent<BoxCollider>().bounds.size[2];
+        ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
         player = GameObject.Find("Player");
         playerRb = player.GetComponent<Rigidbody>();
+        ingotSectionWidth = ingotWidth / 10;
+        Debug.Log(ingotSectionWidth);
+        Debug.Log(ingotLength);
     }
 
     // Update is called once per frame
@@ -132,13 +142,20 @@ public class AnvilAct : MonoBehaviour
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.01f, ingot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, ingot.transform.position.z);
         return location;
     }
 
     private void showSection(Vector3 position, float seconds)
     {
+        //Debug.Log(position);
         GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
+        Vector3 scale = new Vector3(ingotSectionWidth / 10, 1, ingotLength / 10);
+        section.transform.localScale = scale;
+        //scale.z = ingotSectionWidth;
+        //scale.x = ingotLength;
+        //section.transform.localScale = scale;
+        //section.transform.SetParent(ingot.transform, false);
         sectionList.Add(position[0]);
         sectionIsVisible = true;
         StartCoroutine(IngotSectionRoutine(section, seconds));
@@ -153,10 +170,12 @@ public class AnvilAct : MonoBehaviour
             if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
             {
                 sectionResult.Add(true);
+                //quality.value += 0.1f;
             }
             else
             {
                 sectionResult.Add(false);
+                //quality.value -= 0.1f;
             }
             mouseClickCounter++;
         }
@@ -254,6 +273,7 @@ public class AnvilAct : MonoBehaviour
         {
             createdObject.GetComponent<Renderer>().material = common;
         }
+        
     }
 
     private void createEmptyListsForRoundHandler()
