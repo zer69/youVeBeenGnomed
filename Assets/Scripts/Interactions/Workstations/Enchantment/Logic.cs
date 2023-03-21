@@ -82,12 +82,16 @@ public class Logic : MonoBehaviour
             firstPoint = point;
             Debug.Log("firstPoint" + point);
         }
-        else {
+        else
+        {
 
             secondPoint = point;
             Debug.Log("secondPoint" + point);
 
-            activateLine();
+            if (firstPoint != secondPoint)
+            {
+                activateLine();
+            }
         }
     }
 
@@ -100,12 +104,15 @@ public class Logic : MonoBehaviour
         {
             Debug.Log("find line");
             int lineId = pointsInLine.IndexOf(line);
-            Debug.Log("line: " + lineId + " - on");
-            lines[lineId].turnOn();
-            linesCount++;
+            if (!lines[lineId].isDrawn)
+            {
+                Debug.Log("line: " + lineId + " - on");
+                lines[lineId].turnOn();
+                linesCount++;
 
-            runeHasLine(lineId);
-            checkRunes();
+                runeHasLine(lineId);
+                checkRunes();
+            }
 
             firstPoint = secondPoint;
             secondPoint = -1;

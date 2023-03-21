@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnchantmentPattern : MonoBehaviour
 {
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] public PatternPoint[] points = new PatternPoint[7];
     //[SerializeField] public PatternLine[] lines = new PatternLine[18];
     [SerializeField] private Logic logic;

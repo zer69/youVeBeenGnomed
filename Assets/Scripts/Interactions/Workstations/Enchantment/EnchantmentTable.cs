@@ -7,14 +7,14 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
     [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponStartingPosition;
-    [SerializeField] private Transform stoneDefaultPosition;
     [SerializeField] private EnchantmentPattern enchantmentPattern;
-
+    [SerializeField] private Transform stoneDefaultPosition;
     private Transform weapon;
 
     
@@ -25,7 +25,9 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
     private bool canEnchante = false;
 
-    
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("stone returning speed")]
+    [SerializeField] private float speedHoriz;
 
     public string InteractionPrompt => _prompt;
 
@@ -43,10 +45,9 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 if (enchantmentPattern.checkEnchantment())
                 {
                     enchantmentPattern.resetRunes();
-                    //first, block movement 
                     magicStone.setBlockMove();
-                    //second, move stone to default position 
-                    magicStone.moveToDefoultPosision(stoneDefaultPosition);
+                    magicStone.startAutoMove(stoneDefaultPosition.position, speedHoriz);
+
                     moveStoneCommand = Vector2.zero;
                 }
                 else
@@ -85,10 +86,12 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
     private void resetPattern()
     {
-        //first, block movement 
-        magicStone.setBlockMove();
-        //second, move stone to default position 
-        magicStone.moveToDefoultPosision(stoneDefaultPosition);
+        //Debug.Log("reset: canMove: " + magicStone.CanMove);
+        if (magicStone.CanMove) { 
+            magicStone.setBlockMove();
+        }
+        
+        magicStone.startAutoMove(stoneDefaultPosition.position, speedHoriz);
 
         enchantmentPattern.turnOffPoints();
         enchantmentPattern.turnOffLines();
@@ -124,23 +127,27 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
             case "DrawMagicRune":
 
-                if (canEnchante)
+                if (canEnchante && !magicStone.IsAutoMoving)
                 {
                     magicStone.CanMove = !magicStone.CanMove;
                     if (magicStone.CanMove)
                     {
                         magicStone.setCanMove();
+                        magicStone.stoneDown();
+                        break;
                     }
                     else
                     {
                         magicStone.setBlockMove();
+                        magicStone.stoneUp();
+                        
                     }
                 }
                 break;
 
             case "MoveMagicStone":
 
-                if (canEnchante && magicStone.CanMove)
+                if (magicStone.CanMove && !magicStone.IsAutoMoving)
                 {
                     moveStoneCommand = context.action.ReadValue<Vector2>();
                 }

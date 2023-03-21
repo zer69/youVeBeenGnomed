@@ -339,8 +339,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1100846063}
-  - {fileID: 1348704657}
   - {fileID: 1613656460}
+  - {fileID: 1348704657}
   - {fileID: 1983810573}
   - {fileID: 2001046511}
   m_Father: {fileID: 0}
@@ -364,9 +364,10 @@ MonoBehaviour:
   playerInput: {fileID: 2010908999}
   playerTransform: {fileID: 1255651227}
   weaponStartingPosition: {fileID: 1613656460}
-  stoneDefaultPosition: {fileID: 1983810573}
   enchantmentPattern: {fileID: 2001046512}
+  stoneDefaultPosition: {fileID: 1983810573}
   magicStone: {fileID: 1348704663}
+  speedHoriz: 0.05
 --- !u!1 &170505973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +1758,7 @@ MonoBehaviour:
   dropPower: 100
   interactRange: 3
   typeChoice: {fileID: 0}
+  weaponPicked: {fileID: 0}
 --- !u!114 &964505841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,12 +2998,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348704656}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2316, y: 1.0595243, z: 0.172}
+  m_LocalPosition: {x: 0.23160002, y: 1.0595243, z: 0.17199995}
   m_LocalScale: {x: 0.028402774, y: 0.25864056, z: 0.06176516}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 152597305}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1348704659
 BoxCollider:
@@ -3101,7 +3103,7 @@ MonoBehaviour:
   xMin: 5.5
   zMax: 5
   zMin: 2.6
-  isActivatePoint: 0
+  speedVertic: 0.05
   magicStoneTransform: {fileID: 1348704657}
 --- !u!1 &1358179068
 GameObject:
@@ -3918,7 +3920,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 152597305}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799449561
 GameObject:
@@ -4058,7 +4060,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983810572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23160002, y: 1.0595243, z: 0.17199993}
+  m_LocalPosition: {x: 0.23160002, y: 1.0595243, z: 0.17199995}
   m_LocalScale: {x: 0.028402774, y: 0.25864056, z: 0.06176516}
   m_ConstrainProportionsScale: 1
   m_Children: []

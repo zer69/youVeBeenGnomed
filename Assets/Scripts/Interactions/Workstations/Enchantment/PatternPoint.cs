@@ -66,7 +66,7 @@ public class PatternPoint : MonoBehaviour
 
     public void turnOff()
     {
-        Debug.Log("point: " + pointId + " - off");
+       // Debug.Log("point: " + pointId + " - off");
         IsUsed = false;
     }
     private void OnTriggerEnter(Collider other)
@@ -74,10 +74,14 @@ public class PatternPoint : MonoBehaviour
         //when magic stone touches points it switch point status (is used or not)
         if (other.gameObject.tag == "MagicStone") {
 
-            //IsUsed = !IsUsed;
-            turnOn();
+            if (!isUsed)
+            {
+                turnOn();
+                
+            }
 
             logic.activatePoint(pointId);
+            
         }
     }
 

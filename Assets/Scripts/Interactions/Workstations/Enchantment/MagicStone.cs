@@ -20,30 +20,52 @@ public class MagicStone : MonoBehaviour
     [SerializeField] private float xMin = 5.5f;
     [SerializeField] private float zMax = 5f;
     [SerializeField] private float zMin = 2.6f;
+
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("speed")]
+    [SerializeField] private float speedVertic;
+    //actual speed
+    private float speed;
+
+    private float startTime;
+    private float journeyLength;
+
+    private Vector3 startPosition = Vector3.zero;
+    private Vector3 endPosition = Vector3.zero;
+    public bool IsAutoMoving { get; set; }
+
+
     //if canMove - stone moves down and player can draw
-    //else stone flying under the table
-
-    public bool isActivatePoint = false;
-
+    //else stone flying under the table      
     public bool CanMove { get; set; }
 
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("Transform")]
     [SerializeField] private Transform magicStoneTransform;
-    //public string InteractionPrompt => _prompt;
 
-    // Start is called before the first frame update
     void Start()
     {
+        IsAutoMoving = false;
         rend = GetComponent<Renderer>();
 
         // At start, use the first material
         rend.material = materialOff;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-                   
+        if (IsAutoMoving)
+        {            
+            float distCovered = (Time.time - startTime) * speed;
+            float fractionOfJourney = distCovered / journeyLength;
 
+            magicStoneTransform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+
+            if (magicStoneTransform.position == endPosition) {
+                IsAutoMoving = false;         
+            }
+        }
     }
 
     public void MoveStone(Vector2 moveStoneCommand)
@@ -61,64 +83,51 @@ public class MagicStone : MonoBehaviour
             magicStoneTransform.position += new Vector3(xMouse, 0, zMouse);
         }
 
-
-
-        //if (zResult > -zRange && zResult < zRange)
-        //{
-        //    magicStoneTransform.position += new Vector3(0, 0, zMouse);
-        //}
-
-
-        //if (magicStoneTransform.position.x <= xMin)
-        //{
-        //    Debug.Log("Min");
-        //    Debug.Log(transform.position);
-        //    Debug.Log(transform.position.x);
-        //    transform.position = new Vector3(xMin, magicStoneTransform.position.y, magicStoneTransform.position.z);
-        //    Debug.Log(transform.position);
-        //}
-        //if (magicStoneTransform.position.x >= xMax)
-        //{
-        //    Debug.Log("Max");
-        //    Debug.Log(transform.position);
-        //    Debug.Log(transform.position.x);
-        //    transform.position = new Vector3(xMax, magicStoneTransform.position.y, magicStoneTransform.position.z);
-        //    Debug.Log(transform.position);
-        //}
-
-        //if (magicStoneTransform.position.z < -zRange)
-        //{
-        //    transform.position = new Vector3(magicStoneTransform.position.x, magicStoneTransform.position.y, -zRange);
-        //}
-        //if (magicStoneTransform.position.z > zRange)
-        //{
-        //    transform.position = new Vector3(magicStoneTransform.position.x, magicStoneTransform.position.y, zRange);
-        //}
     }
 
     public void setBlockMove()
-    {
-        magicStoneTransform.position += new Vector3(0, yRange, 0);
+    {      
+        
         CanMove = false;
-
         rend.material = materialOff;
 
         //Debug.Log("stone is blocked");
     }
 
-    public void setCanMove()
-    {
-        magicStoneTransform.position -= new Vector3(0, yRange, 0);
-        CanMove = true;
+    public void stoneUp()
+    {        
+        startAutoMove(new Vector3(magicStoneTransform.position.x, (magicStoneTransform.position.y + yRange), magicStoneTransform.position.z), speedVertic);
+        //magicStoneTransform.position += new Vector3(0, yRange, 0);
+    }
 
+    public void stoneDown()
+    {        
+        startAutoMove(new Vector3(magicStoneTransform.position.x, (magicStoneTransform.position.y - yRange), magicStoneTransform.position.z), speedVertic);
+        //magicStoneTransform.position -= new Vector3(0, yRange, 0);
+    }
+    public void setCanMove()
+    {        
+        CanMove = true;
         rend.material = materialOn;
 
         //Debug.Log("can move stone");
     }
 
-    public void moveToDefoultPosision(Transform stoneDefaultPosition)
+    public void startAutoMove(Vector3 endPosition, float speed)
     {
-        magicStoneTransform.position = stoneDefaultPosition.position;
+        IsAutoMoving = true;
+        this.speed = speed;
+
+        startTime = Time.time;
+
+
+        startPosition = new Vector3(magicStoneTransform.position.x, magicStoneTransform.position.y, magicStoneTransform.position.z);
+        this.endPosition = endPosition;
+
+        journeyLength = Vector3.Distance(startPosition, endPosition);
+
+        
+
     }
 
 }

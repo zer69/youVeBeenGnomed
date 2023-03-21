@@ -55,7 +55,7 @@ public class PatternLine : MonoBehaviour
 
     public void turnOff()
     {
-        Debug.Log("line off");
+       // Debug.Log("line off");
         IsDrawn = false;
     }
 }
