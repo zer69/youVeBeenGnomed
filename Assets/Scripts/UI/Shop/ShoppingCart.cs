@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShoppingCart : MonoBehaviour
 {
 
-    [SerializeField] private List<ShopItem> shoppingCart;
+    [SerializeField] private List<ShopItem.ShopItemType> shoppingCart;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,6 @@ public class ShoppingCart : MonoBehaviour
 
     public void AddToShoppingCart(ShopItem shopItem)
     {
-        shoppingCart.Add(shopItem);
+        shoppingCart.Add(shopItem.shopItemType);
     }
 }
