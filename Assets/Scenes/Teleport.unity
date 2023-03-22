@@ -1221,9 +1221,10 @@ MonoBehaviour:
   lefttHandPosition: {fileID: 64592827}
   rightHandPosition: {fileID: 1153290313}
   thongsPosition: {fileID: 685193595}
-  dropPower: 100
+  dropPower: 200
   interactRange: 4
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
+  weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
 --- !u!1 &193239146
 GameObject:
   m_ObjectHideFlags: 0
@@ -3730,6 +3731,7 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
+  weaponLanded: {fileID: 0}
 --- !u!65 &758312960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3927,6 +3929,11 @@ MonoBehaviour:
   cam: {fileID: 190261521}
   cam2: {fileID: 513316921}
   playerInput: {fileID: 1955815456}
+  playerTransform: {fileID: 0}
+  weaponStartingPosition: {fileID: 0}
+  stoneDefaultPosition: {fileID: 0}
+  enchantmentPattern: {fileID: 0}
+  magicStone: {fileID: 0}
 --- !u!65 &777103280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4384,9 +4391,11 @@ GameObject:
   - component: {fileID: 832574290}
   - component: {fileID: 832574291}
   - component: {fileID: 832574292}
+  - component: {fileID: 832574294}
+  - component: {fileID: 832574293}
   m_Layer: 9
   m_Name: DetectionZone
-  m_TagString: Untagged
+  m_TagString: TeleportPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4399,7 +4408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832574289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.0000000011920929, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4417,7 +4426,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.05}
+  m_Size: {x: 0.1, y: 0.1, z: 0.03}
   m_Center: {x: 0, y: 0, z: 0.028}
 --- !u!114 &832574292
 MonoBehaviour:
@@ -4432,6 +4441,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderList: []
+--- !u!114 &832574293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832574289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f226f75d44557428545d4d3ad32300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 832574292}
+        m_TargetAssemblyTypeName: TeleportPlatform, Assembly-CSharp
+        m_MethodName: RemoveFromList
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &832574294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832574289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f226f75d44557428545d4d3ad32300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 832574292}
+        m_TargetAssemblyTypeName: TeleportPlatform, Assembly-CSharp
+        m_MethodName: AddToList
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &864815838
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,11 @@ public class PatternPoint : MonoBehaviour
     [SerializeField] Material materialOff;
     //[SerializeField] float duration = 1.0f;
     Renderer rend;
+    [SerializeField] private Logic logic;
+
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [SerializeField] private int pointId;
+    public int PointId { get => pointId; set { pointId = value; } }
 
     public bool isUsed = false;
     public bool IsUsed
@@ -25,11 +30,14 @@ public class PatternPoint : MonoBehaviour
                 
                 if (value)
                 {
-                    turnOn();
+                    rend.material = materialOn;
+
+                    //int id = gameObject.GetComponent<PatternPoint>().PointId;
+                    //logic.activatePoint(pointId) ;
                 }
                 else
                 {
-                    turnOff();
+                    rend.material = materialOff;
                 }
             }
         }
@@ -51,24 +59,29 @@ public class PatternPoint : MonoBehaviour
 
     public void turnOn()
     {
-        Debug.Log("on");
-        rend.material = materialOn;
-        //rend.material.Lerp(materialOff, materialOn, lerp);
+        IsUsed = true;
+        Debug.Log("point: " + pointId + " - on");        
+
     }
 
     public void turnOff()
     {
-        Debug.Log("off");
-        //rend.material.Lerp(materialOn, materialOff, lerp);
-        rend.material = materialOff;
+       // Debug.Log("point: " + pointId + " - off");
+        IsUsed = false;
     }
     private void OnTriggerEnter(Collider other)
     {
         //when magic stone touches points it switch point status (is used or not)
         if (other.gameObject.tag == "MagicStone") {
 
-            IsUsed = !IsUsed;
+            if (!isUsed)
+            {
+                turnOn();
+                
+            }
 
+            logic.activatePoint(pointId);
+            
         }
     }
 

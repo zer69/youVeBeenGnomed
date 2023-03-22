@@ -38,7 +38,7 @@ public class Interactor : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(currentCam.transform.position, currentCam.transform.forward, out hit, 2, interactableLayerMask))
+        if(Physics.Raycast(currentCam.transform.position, currentCam.transform.forward, out hit, 3, interactableLayerMask))
         {
             isWorkstationTargeted = true;
             interactable = hit.collider.GetComponent<IInteractable>();

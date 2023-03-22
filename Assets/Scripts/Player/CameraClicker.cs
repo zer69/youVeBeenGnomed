@@ -20,7 +20,7 @@ public class CameraClicker : MonoBehaviour
     private LayerMask interactiveMask;
 
     private bool targeted;
-    private bool inHands;
+    //private bool inHands;
     private bool canClick = true;
     private bool interacting = false;
 
@@ -39,6 +39,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private float interactRange = 3.0f;
 
     [SerializeField] private t_GameEvent typeChoice;
+    [SerializeField] private col_GameEvent weaponPicked;
 
 
 
@@ -58,7 +59,7 @@ public class CameraClicker : MonoBehaviour
         
         
         interacting = false;
-        inHands = false;
+        //inHands = false;
     }
 
         // Update is called once per frame
@@ -86,6 +87,7 @@ public class CameraClicker : MonoBehaviour
         {
             case "Ingot":
                 InteractWithIngot();
+                pickableObject = null;
                 break;
             case "Tool":
                 InteractWithTool();
@@ -141,8 +143,7 @@ public class CameraClicker : MonoBehaviour
     }
 
     private void InteractWithIngot()
-    {
-        
+    {   
         bool targetHand;
         if (leftHand)// hands are true when free, false when full
         {
@@ -179,7 +180,6 @@ public class CameraClicker : MonoBehaviour
             pickableObject.transform.rotation = thongsPosition.rotation;
             pickableObject.SetParent(thongs);
             leftHand = false;
-            pickableObject.GetComponent<Rigidbody>().isKinematic = true;
             pickableObject.GetComponent<BoxCollider>().enabled = false;
             leftWithIngot = true;
         }
@@ -192,8 +192,9 @@ public class CameraClicker : MonoBehaviour
         }
 
         playerInput.GetComponent<Inventory>().IngotIsPicked(true);
+        weaponPicked.Raise(pickableObject.GetComponent<BoxCollider>());
 
-        pickableObject = null;
+        //pickableObject = null;
     }
 
     private void InteractWithCoal()
@@ -255,13 +256,15 @@ public class CameraClicker : MonoBehaviour
 
     private void DropHands()
     {
-
+        Quaternion cameraRotation = this.transform.rotation;
+        Debug.Log(cameraRotation.eulerAngles);
+        Debug.Log(cameraRotation * Vector3.forward);
         
         foreach (Transform child in playerTransform)
         {
-            
+                
                 child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                child.GetComponent<Rigidbody>().AddForce(transform.forward * dropPower);
+                child.GetComponent<Rigidbody>().AddForce(cameraRotation* Vector3.forward * dropPower);
                 playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
                 playerInput.GetComponent<Inventory>().CoalIsPicked(false);

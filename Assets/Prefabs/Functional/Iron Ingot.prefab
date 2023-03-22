@@ -112,12 +112,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
+  weaponType: 0
   rarity: 0
   type: 0
+  airTemperature: 24
+  airCoolingRate: 0.09
   quality: 0.2
   MeltingPoint: 1000
+  coolingRate: 0
   currentTemperature: 0
-  minTemperatureValue: 0
+  maxTemperatureValue: 1200
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -128,6 +132,7 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
+  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
 --- !u!54 &6365213482536727987
 Rigidbody:
   m_ObjectHideFlags: 0
