@@ -22,4 +22,17 @@ public class ShoppingCart : MonoBehaviour
     {
         shoppingCart.Add(shopItem.shopItemType);
     }
+
+    public void RemoveFromShoppingCart(ShopItem shopItem)
+    {
+        foreach (ShopItem.ShopItemType item in shoppingCart)
+        {
+            if (item == shopItem.shopItemType)
+            {
+                shoppingCart.Remove(item);
+                break;
+            }
+                
+        }
+    }
 }

@@ -24,6 +24,8 @@ public class ShopItem : MonoBehaviour
     public i_GameEvent itemAddedToTotal;
     public si_GameEvent itemAddedToShoppingCart;
 
+    public si_GameEvent itemRemovedFromShoppingList;
+
     void RefreshStock()
     {
 
@@ -48,13 +50,26 @@ public class ShopItem : MonoBehaviour
         TMPAmount.text = currentAmount.ToString() + "/" + amount.ToString();
     }
 
-    public void SendItemInfo()
+    public void SendItemInfo(bool state)
     {
-        if (currentAmount == 0)
-            return;
-        currentAmount--;
+        if (state)
+        {
+            if (currentAmount == 0)
+                return;
+            currentAmount--;
+            itemAddedToShoppingCart.Raise(this.GetComponent<ShopItem>());
+            itemAddedToTotal.Raise(price);
+        }
+        else
+        {
+            if (currentAmount == amount)
+                return;
+            currentAmount++;
+            itemRemovedFromShoppingList.Raise(this.GetComponent<ShopItem>());
+            itemAddedToTotal.Raise(price * (-1));
+        }
+
         RefreshItem();
-        itemAddedToShoppingCart.Raise(this.GetComponent<ShopItem>());
-        itemAddedToTotal.Raise(price);
     }
 }
+

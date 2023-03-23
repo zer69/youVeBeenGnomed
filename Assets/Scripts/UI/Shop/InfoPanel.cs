@@ -24,10 +24,23 @@ public class InfoPanel : MonoBehaviour
         {
             if (item.gameObject.tag == "ShopItem" && item.gameObject.active)
             {
-                item.GetComponent<ShopItem>().SendItemInfo();
+                item.GetComponent<ShopItem>().SendItemInfo(true);
                 break;
             }
                 
+        }
+    }
+
+    public void SubtractItem()
+    {
+        foreach (Transform item in this.transform)
+        {
+            if (item.gameObject.tag == "ShopItem" && item.gameObject.active)
+            {
+                item.GetComponent<ShopItem>().SendItemInfo(false);
+                break;
+            }
+
         }
     }
 }
