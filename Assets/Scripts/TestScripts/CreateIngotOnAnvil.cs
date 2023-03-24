@@ -14,6 +14,7 @@ public class CreateIngotOnAnvil : MonoBehaviour
         Vector3 position = new Vector3(0, anvilHeight, 0);
         GameObject ingot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
         ingot.transform.Rotate(Vector3.forward, 180);
+        Instantiate(ingotPrefab, new Vector3(20, 2, 20), ingotPrefab.transform.rotation);
     }
     void Start()
     {
