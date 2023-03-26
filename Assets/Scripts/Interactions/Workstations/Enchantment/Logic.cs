@@ -9,7 +9,8 @@ public class Logic : MonoBehaviour
     private int linesCount = 0;
     private int firstPoint;
     private int secondPoint;
-    public Rune enchantmentRune;
+    public int enchantmentRune;
+
     public List<Rune> runes = new List<Rune>(); 
 
     [SerializeField] public List<PatternLine> lines = new List<PatternLine>();
@@ -27,6 +28,7 @@ public class Logic : MonoBehaviour
 
     void Start()
     {
+        enchantmentRune = -1;
         for(int i = 0; i < 18; i++){
             List<int> temp = new List<int>();
             temp.Add(points[i, 0]);
@@ -44,6 +46,42 @@ public class Logic : MonoBehaviour
         fireRune.lines.Add(lines[17]);
         fireRune.lines.Add(lines[4]);
         runes.Add(fireRune);
+
+        //rune water
+        Rune waterRune = new Rune();
+        waterRune.runeName = "water";
+        waterRune.enchantmentId = 2;
+        waterRune.lines.Add(lines[5]);
+        waterRune.lines.Add(lines[0]);
+        waterRune.lines.Add(lines[13]);
+        waterRune.lines.Add(lines[16]);
+        waterRune.lines.Add(lines[3]);
+        waterRune.lines.Add(lines[2]);
+        runes.Add(waterRune);
+
+        //rune earth
+        Rune earthRune = new Rune();
+        earthRune.runeName = "earth";
+        earthRune.enchantmentId = 3;
+        earthRune.lines.Add(lines[6]);
+        earthRune.lines.Add(lines[13]);
+        earthRune.lines.Add(lines[16]);
+        earthRune.lines.Add(lines[11]);
+        earthRune.lines.Add(lines[14]);
+        earthRune.lines.Add(lines[17]);
+        runes.Add(earthRune);
+
+        //rune air
+        Rune airRune = new Rune();
+        airRune.runeName = "air";
+        airRune.enchantmentId = 4;
+        airRune.lines.Add(lines[0]);
+        airRune.lines.Add(lines[12]);
+        airRune.lines.Add(lines[14]);
+        airRune.lines.Add(lines[2]);
+        airRune.lines.Add(lines[3]);
+        airRune.lines.Add(lines[4]);
+        runes.Add(airRune);
 
         //rune light
         Rune lightRune = new Rune();
@@ -102,14 +140,14 @@ public class Logic : MonoBehaviour
     {
         //need checks
         List<int> line = pointsInLine.FindAll(x => x.Contains(firstPoint)).Find(x => x.Contains(secondPoint));
-        Debug.Log("activateLine ");
+        //Debug.Log("activateLine ");
         if (pointsInLine.Contains(line))
         {
-            Debug.Log("find line");
+            //Debug.Log("find line");
             int lineId = pointsInLine.IndexOf(line);
             if (!lines[lineId].isDrawn)
             {
-                Debug.Log("line: " + lineId + " - on");
+                //Debug.Log("line: " + lineId + " - on");
                 lines[lineId].turnOn();
                 linesCount++;
 
@@ -144,8 +182,8 @@ public class Logic : MonoBehaviour
         {
             if (runes[i].drawnCheck() && runes[i].lines.Count == linesCount)
             {
-                Debug.Log("rune " + runes[i].runeName + " completed");
-                enchantmentRune = runes[i];
+                //Debug.Log("rune " + runes[i].runeName + " completed");
+                enchantmentRune = runes[i].enchantmentId;
                 return true;
 
             }
@@ -160,7 +198,7 @@ public class Logic : MonoBehaviour
         linesCount = 0;
         firstPoint = -1;
         secondPoint = -1;
-        enchantmentRune = null;
+        enchantmentRune = -1;
     }
 }
 

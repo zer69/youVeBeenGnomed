@@ -48,14 +48,14 @@ public class EnchantmentPattern : MonoBehaviour
     }
     public bool checkEnchantment()
     {
-        if(logic.enchantmentRune is not null)
+        if(logic.enchantmentRune != -1)
         {
             return true;
         }
         return false;
     }
 
-    public Rune getRune()
+    public int getRuneId()
     {
         return logic.enchantmentRune;
     }
