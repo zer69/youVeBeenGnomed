@@ -41,7 +41,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     void Start()
     {
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-        weaponStartingPosition = GameObject.Find("Weapon Starting Position").transform;
+        weaponStartingPosition = transform.Find("Weapon Starting Position");
         playerTransform = GameObject.Find("Player Transform").transform;
 
 
