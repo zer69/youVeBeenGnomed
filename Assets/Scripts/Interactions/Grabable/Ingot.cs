@@ -22,7 +22,7 @@ public class Ingot : MonoBehaviour
         Bronze
     };
 
-    enum Enchantment
+    public enum Enchantment
     {
         None,
         Fire,
@@ -32,7 +32,7 @@ public class Ingot : MonoBehaviour
         Light,
         Dark,
         Poison,
-        Lightning,
+        Lightning
     };
 
     public enum CompletionStatus
@@ -106,6 +106,7 @@ public class Ingot : MonoBehaviour
         coolingRate = airCoolingRate;
         currentTemperature = airTemperature;
 
+        isEnchanted = false;
         enchantment = Enchantment.None;
         enchantmentQuality = 1f;
     }
@@ -165,8 +166,21 @@ public class Ingot : MonoBehaviour
     }
 
     public void setEnchantment(int enchantmentId, float quality)
-    {
+    {        
+        isEnchanted = true;
         enchantment = (Enchantment)Enum.GetValues(typeof(Enchantment)).GetValue(enchantmentId); ;
         enchantmentQuality = quality;
+    }
+
+    public void setEnchantment(Enchantment enchantment, float quality)
+    {
+        isEnchanted = true;
+        this.enchantment = enchantment;
+        enchantmentQuality = quality;
+    }
+
+    public Enchantment getEnchantment()
+    {
+        return enchantment;
     }
 }

@@ -59,11 +59,15 @@ public class MagicStone : MonoBehaviour
         {            
             float distCovered = (Time.time - startTime) * speed;
             float fractionOfJourney = distCovered / journeyLength;
-
-            magicStoneTransform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+            if (journeyLength != 0)
+            {
+                //Debug.Log("AutoMoving from: " + startPosition + " to: " + endPosition);
+                magicStoneTransform.position = Vector3.Lerp(startPosition, endPosition, fractionOfJourney);
+            }
 
             if (magicStoneTransform.position == endPosition) {
-                IsAutoMoving = false;         
+                IsAutoMoving = false;
+                //Debug.Log("AutoMoving: " + IsAutoMoving);
             }
         }
     }
@@ -101,7 +105,7 @@ public class MagicStone : MonoBehaviour
     }
 
     public void stoneDown()
-    {        
+    {
         startAutoMove(new Vector3(magicStoneTransform.position.x, (magicStoneTransform.position.y - yRange), magicStoneTransform.position.z), speedVertic);
         //magicStoneTransform.position -= new Vector3(0, yRange, 0);
     }
