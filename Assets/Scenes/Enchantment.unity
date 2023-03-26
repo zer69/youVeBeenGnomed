@@ -363,11 +363,11 @@ MonoBehaviour:
   cam2: {fileID: 1100846066}
   playerInput: {fileID: 2010908999}
   playerTransform: {fileID: 1255651227}
-  weaponStartingPosition: {fileID: 1613656460}
+  enchantmentStartingPosition: {fileID: 1613656460}
   enchantmentPattern: {fileID: 2001046512}
   stoneDefaultPosition: {fileID: 1983810573}
   magicStone: {fileID: 1348704663}
-  speedHoriz: 0.05
+  speedHoriz: 1
 --- !u!1 &170505973
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,7 +3103,7 @@ MonoBehaviour:
   xMin: 5.5
   zMax: 5
   zMin: 2.6
-  speedVertic: 0.05
+  speedVertic: 1
   magicStoneTransform: {fileID: 1348704657}
 --- !u!1 &1358179068
 GameObject:
@@ -3901,7 +3901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613656460}
   m_Layer: 0
-  m_Name: Weapon Starting Position
+  m_Name: Enchantment Starting Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4225,6 +4225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbc0b82719d56d48a4aa6291dca6460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enchantmentRune: 0
   lines:
   - {fileID: 1020432769}
   - {fileID: 1135627175}

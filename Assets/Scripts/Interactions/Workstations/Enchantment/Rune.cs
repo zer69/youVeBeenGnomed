@@ -13,11 +13,11 @@ public class Rune
 
     public bool drawnCheck()
     {
-        Debug.Log("check rune " + runeName);
+        //Debug.Log("check rune " + runeName);
 
 
 
-        Debug.Log(drawnLines + " == " + lines.Count);
+        //Debug.Log(drawnLines + " == " + lines.Count);
         if (drawnLines == lines.Count)
         {
             return true;
