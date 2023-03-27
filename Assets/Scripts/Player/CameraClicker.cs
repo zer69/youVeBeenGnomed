@@ -268,7 +268,8 @@ public class CameraClicker : MonoBehaviour
                 playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
                 playerInput.GetComponent<Inventory>().CoalIsPicked(false);
-            
+                playerInput.GetComponent<Inventory>().BatteryIsPicked(false);
+
         }
         playerTransform.DetachChildren();
         rightHand = true;
