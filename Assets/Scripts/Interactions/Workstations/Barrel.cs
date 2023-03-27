@@ -39,55 +39,63 @@ public class Barrel : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {    
         Debug.Log("Interact");
-        Rigidbody thongsRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
-        thongsRB.transform.rotation = Quaternion.identity;
-        thongsRB.transform.position = weaponStartingPosition.position;
-        thongsRB.transform.SetParent(weaponStartingPosition);
+        Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
 
-        thongsRB.transform.Rotate(180, 0, 0);
+        if (inventory.hasIngot && inventory.hasThongs)
+        {
+            Debug.Log("Interact ok");
+            Rigidbody thongsRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
-        thongs = thongsRB.transform;
+            thongsRB.transform.rotation = Quaternion.identity;
+            thongsRB.transform.position = weaponStartingPosition.position;
+            thongsRB.transform.SetParent(weaponStartingPosition);
 
-        cam.gameObject.SetActive(false);
-        cam2.gameObject.SetActive(true);
-        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        playerInput.transform.localRotation = Quaternion.identity;
+            thongsRB.transform.Rotate(180, 0, 0);
 
-      
+            thongs = thongsRB.transform;
 
+            cam.gameObject.SetActive(false);
+            cam2.gameObject.SetActive(true);
+            playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            playerInput.transform.localRotation = Quaternion.identity;
 
-        canControlThongs = true;
-        //Debug.Log("Barrel is used");
-        return true;
+            canControlThongs = true;
+            //Debug.Log("Barrel is used");
+            return true;
+        }
+        Debug.Log("No thongs and ingot");
+        return false;
     }
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        switch (context.action.name)
+        if (canControlThongs)
         {
-            case "Abort":
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
-                playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            switch (context.action.name)
+            {
+                case "Abort":
 
-                Rigidbody thongsRB = thongs.GetComponent<Rigidbody>();
-                thongsRB.transform.rotation = Quaternion.identity;
-                thongsRB.transform.position = cam.transform.Find("Left Hand").position;
-                thongsRB.transform.SetParent(playerTransform);
-                
-                //thongs = null;
+                    cam.gameObject.SetActive(true);
+                    cam2.gameObject.SetActive(false);
+                    playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
-                canControlThongs = false;
-                break;
+                    Rigidbody thongsRB = thongs.GetComponent<Rigidbody>();
+                    thongsRB.transform.rotation = Quaternion.identity;
+                    thongsRB.transform.position = cam.transform.Find("Left Hand").position;
+                    thongsRB.transform.SetParent(playerTransform);
 
-            case "MoveIntoBarrel":
+                    //thongs = null;
 
-                if (canControlThongs)
-                {
+                    canControlThongs = false;
+                    
+                    break;
+
+                case "MoveIntoBarrel":
+                    
                     moveWeaponCommand = context.action.ReadValue<Vector2>();
-                }
-                break;
+                    break;
+            }
         }
     }
 
