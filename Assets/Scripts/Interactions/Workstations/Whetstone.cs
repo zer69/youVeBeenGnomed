@@ -26,7 +26,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private float sharpeningSpeed;
     [BackgroundColor()]
 
-
+    [SerializeField] private s_GameEvent hint;
 
     private bool isTired = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
@@ -63,19 +63,21 @@ public class Whetstone : MonoBehaviour, IInteractable
         Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
         if (ingotRB == null)
         {
-            Debug.Log("No ingot detected");
+            hint.Raise("Cannot sharpen your nails, sorry");
+            //Debug.Log("No ingot detected");
             return false;
         }
 
         if (!((ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Sharpened) || (ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Cooled)))
         {
-            Debug.Log("Cannot sharpen an ingot in such condition");
+            hint.Raise("Cannot sharpen an ingot in such condition");
             return false;
         }
 
         ingotRB.transform.rotation = weaponStartingPosition.rotation;
         ingotRB.transform.position = weaponStartingPosition.position;
         ingotRB.transform.SetParent(this.transform);
+        ingotRB.GetComponent<BoxCollider>().enabled = true;
         ingot = ingotRB.transform;
 
         cam.gameObject.SetActive(false);
@@ -108,6 +110,7 @@ public class Whetstone : MonoBehaviour, IInteractable
                     ingotRB.transform.position = cam.transform.Find("Right Hand").position;
                     ingotRB.transform.rotation = cam.transform.Find("Right Hand").rotation;
                     ingotRB.transform.SetParent(playerTransform);
+                    ingotRB.GetComponent<BoxCollider>().enabled = false;
                     ingot = null;
                 }
                 
@@ -135,7 +138,7 @@ public class Whetstone : MonoBehaviour, IInteractable
             whetStoneWheel.AddTorque(rotationForce);
             isTired = true;
             StartCoroutine(LegCooldown());
-            Debug.LogWarning("Rotation added");
+            //Debug.LogWarning("Rotation added");
         }
     }
 
@@ -183,7 +186,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("Not Enough speed to sharpen");
+            hint.Raise("The wheel should spin faster");
         }
     }
 
@@ -192,17 +195,11 @@ public class Whetstone : MonoBehaviour, IInteractable
         return sharpeningSpeed * ingotFragility;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //Debug.Log(collision.collider.tag);
-    }
-
     private void OnCollisionStay(Collision collision)
     {
-        //Debug.Log(collision.collider.tag);
         if (collision.collider.tag == "Ingot")
         {
-            //Debug.Log("sharpening now");
+         
             SharpenWeapon(collision);
         }
     }
