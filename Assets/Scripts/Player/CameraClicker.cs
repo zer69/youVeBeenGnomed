@@ -40,6 +40,7 @@ public class CameraClicker : MonoBehaviour
 
     [SerializeField] private t_GameEvent typeChoice;
     [SerializeField] private col_GameEvent weaponPicked;
+    [SerializeField] private b_GameEvent crosshairResized;
 
 
 
@@ -232,12 +233,13 @@ public class CameraClicker : MonoBehaviour
                 if (interacting)
                     pickableObject = mousehit.transform.gameObject.transform;
                 targeted = true;
+                crosshairResized.Raise(true);
             }
             else
             {
                 targeted = false;
             }
-            ResizeCrossHair();
+            //ResizeCrossHair();
         }
     }
 
