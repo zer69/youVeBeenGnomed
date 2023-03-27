@@ -44,7 +44,6 @@ public class Whetstone : MonoBehaviour, IInteractable
         weaponStartingPosition = transform.Find("Weapon Starting Position");
         playerTransform = GameObject.Find("Player Transform").transform;
 
-
     }
 
     private void Update()
@@ -62,13 +61,19 @@ public class Whetstone : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
+        if (ingotRB == null)
+        {
+            Debug.Log("No ingot detected");
+            return false;
+        }
+
         if (!((ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Sharpened) || (ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Cooled)))
         {
             Debug.Log("Cannot sharpen an ingot in such condition");
             return false;
         }
-            
-        ingotRB.transform.localRotation = Quaternion.Euler(-90f,90f,0f);
+
+        ingotRB.transform.rotation = weaponStartingPosition.rotation;
         ingotRB.transform.position = weaponStartingPosition.position;
         ingotRB.transform.SetParent(this.transform);
         ingot = ingotRB.transform;
@@ -101,6 +106,7 @@ public class Whetstone : MonoBehaviour, IInteractable
 
                     Rigidbody ingotRB = ingot.GetComponent<Rigidbody>();
                     ingotRB.transform.position = cam.transform.Find("Right Hand").position;
+                    ingotRB.transform.rotation = cam.transform.Find("Right Hand").rotation;
                     ingotRB.transform.SetParent(playerTransform);
                     ingot = null;
                 }
@@ -147,6 +153,13 @@ public class Whetstone : MonoBehaviour, IInteractable
         Vector3 weaponVector = new Vector3(0f, xMouse, -yMouse);
 
         ingot.localPosition += weaponVector;
+        Vector3 tmppos = ingot.localPosition;
+
+        float newY = Mathf.Clamp(tmppos.y, -1f, 1f);
+        float newZ = Mathf.Clamp(tmppos.z, -1.5f, -1f);
+
+        ingot.localPosition = new Vector3(ingot.localPosition.x, newY, newZ);
+
         //Debug.Log(ingot.position);ew
 
     }

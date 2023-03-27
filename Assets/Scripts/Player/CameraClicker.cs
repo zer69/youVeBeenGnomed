@@ -259,8 +259,6 @@ public class CameraClicker : MonoBehaviour
     private void DropHands()
     {
         Quaternion cameraRotation = this.transform.rotation;
-        Debug.Log(cameraRotation.eulerAngles);
-        Debug.Log(cameraRotation * Vector3.forward);
         
         foreach (Transform child in playerTransform)
         {
