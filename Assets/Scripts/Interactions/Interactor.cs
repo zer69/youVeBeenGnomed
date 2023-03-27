@@ -17,6 +17,7 @@ public class Interactor : MonoBehaviour
     private bool usingStation = false;
 
     private IInteractable interactable;
+    [SerializeField] private b_GameEvent crosshairResized;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class Interactor : MonoBehaviour
     {
         CheckForWorkstation();
         UseWorkstation();
-        ResizeCrosshair();
+        //ResizeCrosshair();
     }
 
     private void CheckForWorkstation()
@@ -42,6 +43,7 @@ public class Interactor : MonoBehaviour
         {
             isWorkstationTargeted = true;
             interactable = hit.collider.GetComponent<IInteractable>();
+            crosshairResized.Raise(true);
             //currentCam = hit.collider.gameObject.GetComponentInChildren<Camera>(true);
         }
         else
