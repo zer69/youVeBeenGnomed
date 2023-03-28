@@ -11,6 +11,7 @@ public class DockStation : MonoBehaviour, IInteractable
 
     [SerializeField] private i_GameEvent increasedEnergy;
     [SerializeField] private b_GameEvent wearGlasses;
+    [SerializeField] private s_GameEvent hint;
     [SerializeField] private GameObject glasses;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
@@ -22,7 +23,8 @@ public class DockStation : MonoBehaviour, IInteractable
 
     private int currentEnergy;
     private int glassesMaxEnergy;
-    private bool isGlassesCharging = false;
+    [SerializeField] private bool isGlassesCharging = false;
+    [SerializeField] private bool glassesPutOn = false;
 
     public bool Interact(Interactor interactor)
     {
@@ -34,15 +36,17 @@ public class DockStation : MonoBehaviour, IInteractable
             Destroy(inventory.battery);
             inventory.BatteryIsPicked(false);
             Debug.Log("DockStation is fully charged again");
+            hint.Raise("Dock station is fully charged again");
             return true;
         }
 
         else
         {
-            wearGlasses.Raise(isGlassesCharging);
-            isGlassesCharging = !isGlassesCharging;
-            glasses.gameObject.SetActive(isGlassesCharging);
-            chargeGlasses(isGlassesCharging);
+            wearGlasses.Raise(glassesPutOn);
+            glassesPutOn = !glassesPutOn;
+            //isGlassesCharging = !isGlassesCharging;
+            glasses.gameObject.SetActive(glassesPutOn);
+            chargeGlasses(glassesPutOn);
         }
 
         return true;
@@ -70,17 +74,29 @@ public class DockStation : MonoBehaviour, IInteractable
 
     IEnumerator ChargingGlasses()
     {
+        isGlassesCharging = true;// !isGlassesCharging;
+
+        increasedEnergy.Raise(0);
+
         while (currentEnergy > 0 && isGlassesCharging == true)
         {
             yield return new WaitForSeconds(chargingSpeed);
             if (isGlassesCharging)
             {
-                currentEnergy -= 1;
                 increasedEnergy.Raise(energyIncrement);
+                currentEnergy -= 1;
                 Debug.Log("Current charge of DockStation is " + currentEnergy);
             }
         }
+
+        isGlassesCharging = false;
         Debug.Log("Charging is over");
+        hint.Raise("Charging is over");
+
+        if(currentEnergy == 0)
+        {
+            hint.Raise("Dock station discharged. Insert a mana-battery to recharge it");
+        }
     }
 
     public void chargingStatus(bool status)

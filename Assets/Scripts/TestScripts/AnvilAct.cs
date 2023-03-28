@@ -11,10 +11,10 @@ public class AnvilAct : MonoBehaviour
     private float ingotLength;
     private float ingotHeight;
     private float ingotSectionWidth;
-    [SerializeField] private float zMax;
-    [SerializeField] private float zMin;
-    [SerializeField] private float xMax;
-    [SerializeField] private float xMin;
+    private float zMax;
+    private float zMin;
+    private float xMax;
+    private float xMin;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
@@ -28,7 +28,7 @@ public class AnvilAct : MonoBehaviour
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
     private float anvilRange = 3;
-    private int sectionCounter = 0;
+    [SerializeField] private int sectionCounter = 0;
     [SerializeField] private int roundCounter = 0;
     private int mouseClickCounter = 0;
     private List<float> sectionList;
@@ -69,8 +69,8 @@ public class AnvilAct : MonoBehaviour
         zMin = ingotLength / -2;
         xMax = ingotWidth / 2;
         xMin = ingotWidth / -2;
-        Debug.Log(ingotSectionWidth);
-        Debug.Log(ingotLength);
+        //Debug.Log(ingotSectionWidth);
+        //Debug.Log(ingotLength);
     }
 
     // Update is called once per frame
@@ -78,6 +78,7 @@ public class AnvilAct : MonoBehaviour
     {
         if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         {
+
             camera.enabled = false;
             anvilCamera.enabled = true;
             anvilMode = true;
@@ -95,6 +96,7 @@ public class AnvilAct : MonoBehaviour
     
     IEnumerator IngotSectionRoutine(GameObject section, float seconds)
     {
+        //Debug.Log("IngotSectionRoutine");
 
         yield return new WaitForSeconds(seconds);
         Vector3 currentScale = section.transform.localScale;
@@ -108,6 +110,7 @@ public class AnvilAct : MonoBehaviour
 
     IEnumerator IngotSectionDisappearRoutine(GameObject section, Vector3 targetScale, float seconds)
     {
+        //Debug.Log("IngotSectionDisappearRoutine");
         float time = 0;
         Vector3 currentScale = section.transform.localScale;
         while (time < seconds)
@@ -121,14 +124,21 @@ public class AnvilAct : MonoBehaviour
         {
             Destroy(section);
         }
+        if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
+        {
+            hitMode = true;
+        }
         
     }
 
     IEnumerator RoundBreak(float seconds)
     {
+        //hitMode = false;
+        //Debug.Log("RoundBreak");
         yield return new WaitForSeconds(seconds);
-        hitMode = false;
+        
         roundCounter++;
+        sectionCounter = 0;
         createEmptyListsForRoundHandler();
     }
 
@@ -159,6 +169,7 @@ public class AnvilAct : MonoBehaviour
     private void showSection(Vector3 position, float seconds)
     {
         //Debug.Log(position);
+        //Debug.Log("showSection");
         GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
         Vector3 scale = new Vector3(ingotSectionWidth / 10, 1, ingotLength / 10);
         section.transform.localScale = scale;
@@ -175,8 +186,11 @@ public class AnvilAct : MonoBehaviour
     {
         float zClick = hit.point.z;
         float xClick = hit.point.x;
-        Debug.Log(xClick);
-        Debug.Log(zClick);
+        //Debug.Log("ingotClickHandler");
+        //sCounter++;
+        //Debug.Log("Clicked" + sCounter);
+        //Debug.Log(xClick);
+        //Debug.Log(zClick);
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
         {
             //if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
@@ -196,6 +210,7 @@ public class AnvilAct : MonoBehaviour
 
     private void mouseLeftButtonClickInHitModeHandler()
     {
+        //Debug.Log("mouseLeftButtonClickInHitModeHandler");
         Mouse mouse = Mouse.current;
         if (mouse.leftButton.wasPressedThisFrame)
         {
@@ -210,31 +225,33 @@ public class AnvilAct : MonoBehaviour
 
     private void anvilActive()
     {
+        //Debug.Log("anvilActive");
         if (roundCounter >= numberOfRounds)
         {
             hasWorkOnAnvil = false;
             roundCounter = 0;
-            Debug.Log("Done");
+            //Debug.Log("Done");
             StartCoroutine(FinishWork(5));
         }
         else
         {
-            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound[roundCounter] && !hitMode && roundCounter < numberOfRounds)
+            if (!sectionIsVisible && sectionCounter < numberOfSectionsInRound[roundCounter] && !hitMode)
             {
                 showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
                 sectionCounter++;
             }
-            if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
-            {
-                hitMode = true;
-                sectionCounter = 0;
-            }
+            //if (!sectionIsVisible && !hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
+            //{
+                //hitMode = true;
+                //sectionCounter = 0;
+            //}
             if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
             {
                 mouseLeftButtonClickInHitModeHandler();
             }
             if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
             {
+                hitMode = false;
                 mouseClickCounter = 0;
                 resultHandler(sectionResult);
                 StartCoroutine(RoundBreak(secondToLeave));
@@ -243,6 +260,7 @@ public class AnvilAct : MonoBehaviour
     }
     private void resultHandler(List<bool> results)
     {
+        //Debug.Log("resultHandler");
         //foreach (bool result in results)
         //{
         //Debug.Log("Result" + result);
@@ -257,7 +275,7 @@ public class AnvilAct : MonoBehaviour
 
     private void WorkHandler()
     {
-        Debug.Log("Work Handler!");
+        //Debug.Log("Work Handler!");
         float zMax = -3;
         float zMin = -9;
         float xMax = 9;
@@ -291,6 +309,7 @@ public class AnvilAct : MonoBehaviour
 
     private void createEmptyListsForRoundHandler()
     {
+        //Debug.Log("createEmptyListsForRoundHandler");
         sectionList = new List<float>();
         sectionResult = new List<bool>();
     }

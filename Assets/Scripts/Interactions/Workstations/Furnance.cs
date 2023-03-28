@@ -10,10 +10,12 @@ public class Furnance : MonoBehaviour, IInteractable
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("No edit")]
 
-    [SerializeField] private PlayerInput playerInput;    
+    [SerializeField] private PlayerInput playerInput;
+
+    [SerializeField] private s_GameEvent hint;
 
     private bool fuelIsFilled = false;
-    private bool fireIsKindled = false;
+    public bool fireIsKindled = false;
     private bool ingotInFurnace = false;
 
     public float furnaceTemperature = 0f;
@@ -58,12 +60,14 @@ public class Furnance : MonoBehaviour, IInteractable
         if (ingotInFurnace)
         {            
             Debug.Log("You need thongs to get an ingot from the furnace");
+            hint.Raise("You need thongs to get an ingot from the furnace");
             return true;
         }
 
         else if (fireIsKindled && !inventory.hasIngot)
         {            
             Debug.Log("No ingot");
+            hint.Raise("You need ingot to put it in the furnace");
             return true;
         }
 
@@ -100,12 +104,14 @@ public class Furnance : MonoBehaviour, IInteractable
                     Destroy(inventory.coal);
                     inventory.CoalIsPicked(false);
                     Debug.Log("Fuel Is Filled");
+                    hint.Raise("Fuel is filled. Now you can start a fire in the furnace");
                     return true;
                 }
 
                 else
                 {
                     Debug.Log("No fuel for furnace");
+                    hint.Raise("To start a fire, you need to put coal in the furnace");
                     return true;
                 }
             }
@@ -117,8 +123,9 @@ public class Furnance : MonoBehaviour, IInteractable
         fireIsKindled = true;
         furnaceTemperature = furnaceInitialTemperature;
         Debug.Log("Fire Is Kindled");
+        hint.Raise("Fire is kindled. Now you can put ingot in the furnace");
 
-        while(furnaceTemperature > minFireTemperature)
+        while (furnaceTemperature > minFireTemperature)
         {
             yield return new WaitForSeconds(1);
             furnaceTemperature -= 1;
@@ -132,6 +139,7 @@ public class Furnance : MonoBehaviour, IInteractable
         fireIsKindled = false;
         fuelIsFilled = false;
         Debug.Log("Fire went out");
+        hint.Raise("Fire went out");
     }
 
     void smeltingIngot(Collision ingot)
