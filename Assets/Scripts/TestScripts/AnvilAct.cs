@@ -50,6 +50,7 @@ public class AnvilAct : MonoBehaviour
     {
         camera = Camera.main;
         anvilCamera = GameObject.Find("Anvil Camera").GetComponent<Camera>();
+        anvilCamera.gameObject.SetActive(false);
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
         
         createEmptyListsForRoundHandler();
@@ -79,8 +80,8 @@ public class AnvilAct : MonoBehaviour
         if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         {
 
-            camera.enabled = false;
-            anvilCamera.enabled = true;
+            camera.gameObject.SetActive(false);
+            anvilCamera.gameObject.SetActive(true);
             anvilMode = true;
             if (anvilMode && hasWorkOnAnvil)
             {
@@ -88,8 +89,8 @@ public class AnvilAct : MonoBehaviour
             }   
         } else
         {
-            camera.enabled = true;
-            anvilCamera.enabled = false;
+            camera.gameObject.SetActive(true);
+            anvilCamera.gameObject.SetActive(false);
             anvilMode = false;
         }
     }
