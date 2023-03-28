@@ -34,7 +34,8 @@ public class Whetstone : MonoBehaviour, IInteractable
     private bool canControlIngot = false;
     private Transform weaponStartingPosition;
     private Transform playerTransform;
-    //private bool interacting = false;
+    //[SerializeField] private float ingotMovementSensetivity;
+    //[SerializeField] private float movementMultiplier;
 
     public string InteractionPrompt => _prompt;
 
@@ -43,6 +44,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         weaponStartingPosition = transform.Find("Weapon Starting Position");
         playerTransform = GameObject.Find("Player Transform").transform;
+
 
     }
 
@@ -199,8 +201,18 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         if (collision.collider.tag == "Ingot")
         {
-         
+            //movementMultiplier = 0.5f;
+
             SharpenWeapon(collision);
         }
     }
+    /*private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            //movementMultiplier = 1f;
+
+
+        }
+    }*/
 }
