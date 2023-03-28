@@ -11,7 +11,8 @@ public class Glasses : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private b_GameEvent activateGlasses;
     [SerializeField] private b_GameEvent deactivateGlasses;
-    [SerializeField] private i_GameEvent decreasedEnergy;
+    [SerializeField] private b_GameEvent chargingStatus;
+    [SerializeField] private i_GameEvent changeEnergy;
     [SerializeField] private i_GameEvent setEnergyMaxValue;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
@@ -22,8 +23,9 @@ public class Glasses : MonoBehaviour
 
     
 
-    private int currentEnergy;
+    private int currentEnergy;    
     private bool glassesOn = false;
+    private bool wearGlasses = true;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +47,7 @@ public class Glasses : MonoBehaviour
         {
             case "Glasses":
 
-                if (context.phase == InputActionPhase.Started)
+                if (context.phase == InputActionPhase.Started && wearGlasses)
                 {
                     glassesOn = !glassesOn;
                     ActivateGlasses(glassesOn);
@@ -61,6 +63,7 @@ public class Glasses : MonoBehaviour
         {
             activateGlasses.Raise(glassesOn);
             StartCoroutine(BlacksmithVision());
+            changeEnergy.Raise(currentEnergy);
             Debug.Log("Glasses activated");
         }
         else if(currentEnergy == 0)
@@ -76,13 +79,13 @@ public class Glasses : MonoBehaviour
 
     IEnumerator BlacksmithVision()
     {
-        while (currentEnergy > 0 && glassesOn == true)
+        while (currentEnergy > 0 && glassesOn == true && wearGlasses)
         {
             yield return new WaitForSeconds(dischargingSpeed);
             if (glassesOn)
             {
                 currentEnergy -= 1;
-                decreasedEnergy.Raise(currentEnergy);
+                changeEnergy.Raise(currentEnergy);
                 Debug.Log("Current charge of glasses is " + currentEnergy);
             }
         }
@@ -95,4 +98,30 @@ public class Glasses : MonoBehaviour
             Debug.Log("Glasses discharged");
         }        
     }
+
+    public void IncreaseEnergy(int energyIncrement)
+    {
+        if(currentEnergy < maxEnergy)
+        {
+            currentEnergy += energyIncrement;
+            changeEnergy.Raise(currentEnergy);
+        }
+        else
+        {
+            currentEnergy = maxEnergy;
+            chargingStatus.Raise(false);
+        }
+    }
+
+    public void GlassesStatus(bool glassesOnPlayer)
+    {
+        if (glassesOnPlayer)
+        {
+            wearGlasses = true;
+        }
+        else
+        {
+            wearGlasses = false;
+        }
+    }    
 }

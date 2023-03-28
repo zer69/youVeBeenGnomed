@@ -7,11 +7,13 @@ public class Inventory : MonoBehaviour
     public bool hasCoal = false;
     public bool hasIngot = false;
     public bool hasThongs = false;
+    public bool hasBattery = false;
 
     [SerializeField] private GameObject playerTransform;
     public GameObject ingot;
     public GameObject thongs;
     public GameObject coal;
+    public GameObject battery;
 
     [SerializeField] private int childNumber = 0;
     // Start is called before the first frame update
@@ -117,6 +119,37 @@ public class Inventory : MonoBehaviour
 
             coal = null;
             hasCoal = false;
+
+            childNumber -= 1;
+        }
+
+        return true;
+    }
+
+    public bool BatteryIsPicked(bool batteryPicked)
+    {
+        if (batteryPicked)
+        {
+            battery = playerTransform.transform.GetChild(childNumber).gameObject;
+            battery.GetComponent<BoxCollider>().enabled = false;
+            //coal.GetComponent<Rigidbody>().isKinematic = true;
+
+            //playerTransform.GetComponent<CameraClicker>().rightHand = false;
+            hasBattery = true;
+
+            childNumber += 1;
+            Debug.Log("Battery Picked");
+        }
+
+        else if (battery != null)
+        {
+            battery.GetComponent<BoxCollider>().enabled = true;
+            //coal.GetComponent<Rigidbody>().isKinematic = false;
+
+            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
+
+            battery = null;
+            hasBattery = false;
 
             childNumber -= 1;
         }
