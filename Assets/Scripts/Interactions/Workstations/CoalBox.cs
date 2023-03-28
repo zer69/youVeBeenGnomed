@@ -43,7 +43,8 @@ public class CoalBox : MonoBehaviour, IInteractable
         newCoal.transform.rotation = rightHand.rotation;
         newCoal.transform.SetParent(playerTransform);
         newCoal.GetComponent<BoxCollider>().enabled = false;
-        newCoal.GetComponent<Rigidbody>().isKinematic = true;
+        newCoal.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        //newCoal.GetComponent<Rigidbody>().isKinematic = true;
         Debug.Log("You picked up  some coal");
         ChangePileSize(coalInPile);
     }

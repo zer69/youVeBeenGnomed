@@ -5,11 +5,16 @@ using UnityEngine;
 public class CreateIngotOnAnvil : MonoBehaviour
 {
     [SerializeField] private GameObject ingotPrefab;
+    private float anvilHeight;
     // Start is called before the first frame update
     private void Awake()
     {
-        Vector3 position = new Vector3(0, 1.2f, 0);
-        Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
+        GameObject anvil = GameObject.Find("Anvil");
+        anvilHeight = anvil.GetComponent<BoxCollider>().bounds.size[1];
+        Vector3 position = new Vector3(0, anvilHeight, 0);
+        GameObject ingot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
+        ingot.transform.Rotate(Vector3.forward, 180);
+        Instantiate(ingotPrefab, new Vector3(20, 2, 20), ingotPrefab.transform.rotation);
     }
     void Start()
     {

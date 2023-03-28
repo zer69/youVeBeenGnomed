@@ -22,17 +22,17 @@ public class Ingot : MonoBehaviour
         Bronze
     };
 
-    enum Enchantment
+    public enum Enchantment
     {
         None,
         Fire,
         Water,
         Earth,
         Air,
-        Poison,
-        Lightning,
         Light,
-        Dark
+        Dark,
+        Poison,
+        Lightning
     };
 
     public enum CompletionStatus
@@ -96,6 +96,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
 
+    [SerializeField] private col_GameEvent weaponLanded;
+
    
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
@@ -103,6 +105,10 @@ public class Ingot : MonoBehaviour
     {
         coolingRate = airCoolingRate;
         currentTemperature = airTemperature;
+
+        isEnchanted = false;
+        enchantment = Enchantment.None;
+        enchantmentQuality = 1f;
     }
     private void Update()
     {
@@ -151,5 +157,30 @@ public class Ingot : MonoBehaviour
     {
         coolingRate = rate;
         Debug.Log("coolingRate: " + rate);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "TeleportPlatform")
+            weaponLanded.Raise(this.GetComponent<BoxCollider>());
+    }
+
+    public void setEnchantment(int enchantmentId, float quality)
+    {        
+        isEnchanted = true;
+        enchantment = (Enchantment)Enum.GetValues(typeof(Enchantment)).GetValue(enchantmentId); ;
+        enchantmentQuality = quality;
+    }
+
+    public void setEnchantment(Enchantment enchantment, float quality)
+    {
+        isEnchanted = true;
+        this.enchantment = enchantment;
+        enchantmentQuality = quality;
+    }
+
+    public Enchantment getEnchantment()
+    {
+        return enchantment;
     }
 }

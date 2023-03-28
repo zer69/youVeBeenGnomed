@@ -47,7 +47,8 @@ public class Furnance : MonoBehaviour, IInteractable
             ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
             ingot.transform.SetParent(thongs.transform);
             ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.GetComponent<Rigidbody>().isKinematic = true;
+            ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //ingot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
             ingotInFurnace = false;
             Debug.Log("Ingot taken");
@@ -73,7 +74,7 @@ public class Furnance : MonoBehaviour, IInteractable
             ingot.transform.position = new Vector3(-2.5f, 3.6f, -2);
             ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
             ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            ingot.GetComponent<Rigidbody>().isKinematic = false;
+            //ingot.GetComponent<Rigidbody>().isKinematic = false;
             ingot.GetComponent<BoxCollider>().enabled = true;
             ingot.transform.parent = null;
 

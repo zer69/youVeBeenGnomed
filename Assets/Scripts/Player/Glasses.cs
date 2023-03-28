@@ -5,16 +5,33 @@ using UnityEngine.InputSystem;
 
 public class Glasses : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private int maxEnergy = 10;
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [Header("No edit")]
 
-    private int currentEnergy;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private b_GameEvent activateGlasses;
+    [SerializeField] private b_GameEvent deactivateGlasses;
+    [SerializeField] private b_GameEvent chargingStatus;
+    [SerializeField] private i_GameEvent changeEnergy;
+    [SerializeField] private i_GameEvent setEnergyMaxValue;
+
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [Header("Energy parameters")]
+
+    [SerializeField] private int maxEnergy = 10;
+    [SerializeField] private float dischargingSpeed = 1f;
+
+    
+
+    private int currentEnergy;    
     private bool glassesOn = false;
+    private bool wearGlasses = true;
 
     // Start is called before the first frame update
     void Start()
     {
         currentEnergy = maxEnergy;
+        setEnergyMaxValue.Raise(maxEnergy);
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
     }
 
@@ -30,7 +47,7 @@ public class Glasses : MonoBehaviour
         {
             case "Glasses":
 
-                if (context.phase == InputActionPhase.Started)
+                if (context.phase == InputActionPhase.Started && wearGlasses)
                 {
                     glassesOn = !glassesOn;
                     ActivateGlasses(glassesOn);
@@ -44,7 +61,9 @@ public class Glasses : MonoBehaviour
     {
         if (activate && currentEnergy != 0)
         {
+            activateGlasses.Raise(glassesOn);
             StartCoroutine(BlacksmithVision());
+            changeEnergy.Raise(currentEnergy);
             Debug.Log("Glasses activated");
         }
         else if(currentEnergy == 0)
@@ -53,22 +72,56 @@ public class Glasses : MonoBehaviour
         }
         else
         {
+            deactivateGlasses.Raise(true);
             Debug.Log("Glasses deactivated");
         }
     }
 
     IEnumerator BlacksmithVision()
     {
-        while (currentEnergy > 0 && glassesOn == true)
+        while (currentEnergy > 0 && glassesOn == true && wearGlasses)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(dischargingSpeed);
             if (glassesOn)
             {
                 currentEnergy -= 1;
+                changeEnergy.Raise(currentEnergy);
                 Debug.Log("Current charge of glasses is " + currentEnergy);
             }
         }
 
+        deactivateGlasses.Raise(true);
         glassesOn = false;
+
+        if (currentEnergy == 0)
+        {
+            Debug.Log("Glasses discharged");
+        }        
     }
+
+    public void IncreaseEnergy(int energyIncrement)
+    {
+        if(currentEnergy < maxEnergy)
+        {
+            currentEnergy += energyIncrement;
+            changeEnergy.Raise(currentEnergy);
+        }
+        else
+        {
+            currentEnergy = maxEnergy;
+            chargingStatus.Raise(false);
+        }
+    }
+
+    public void GlassesStatus(bool glassesOnPlayer)
+    {
+        if (glassesOnPlayer)
+        {
+            wearGlasses = true;
+        }
+        else
+        {
+            wearGlasses = false;
+        }
+    }    
 }

@@ -40,8 +40,9 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             GameObject newIngot = Instantiate(ingot);
             newIngot.transform.position = thongs.transform.Find("ThongsPosition").position;
             newIngot.transform.SetParent(thongs.transform);
+            newIngot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             newIngot.GetComponent<BoxCollider>().enabled = false;
-            newIngot.GetComponent<Rigidbody>().isKinematic = true;
+            //newIngot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
             typeChoice.Raise(newIngot.transform);
             ChangePileSize(ingotsInPile);
@@ -55,7 +56,8 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             newIngot.transform.rotation = rightHand.rotation;
             newIngot.transform.SetParent(playerTransform);
             newIngot.GetComponent<BoxCollider>().enabled = false;
-            newIngot.GetComponent<Rigidbody>().isKinematic = true;
+            newIngot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //newIngot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
             typeChoice.Raise(newIngot.transform);
             ChangePileSize(ingotsInPile);
