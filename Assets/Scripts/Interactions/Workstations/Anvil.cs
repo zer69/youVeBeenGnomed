@@ -16,7 +16,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private float zMin;
     private float xMax;
     private float xMin;
-    [SerializeField] private float cameraY = 3.5f;
+    [SerializeField] private float cameraY = 4.5f;
     [SerializeField] private float cameraOffsetX = 0;
     [SerializeField] private float cameraOffsetZ = 0;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
@@ -72,8 +72,9 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-        ingotWidth = ingot.GetComponent<BoxCollider>().bounds.size[0];
-        ingotLength = ingot.GetComponent<BoxCollider>().bounds.size[2];
+        Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
+        ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
+        ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
         player = GameObject.Find("Player");
         playerRb = player.GetComponent<Rigidbody>();
@@ -339,7 +340,7 @@ public class Anvil : MonoBehaviour, IInteractable
         {
             Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
             processedIngot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
-            processedIngot.transform.Rotate(Vector3.forward, 180);
+            processedIngot.transform.Rotate(Vector3.forward, 90);
             processedIngot.tag = "IngotOnAnvil";
             ingotOnAnvil = true;
         }
