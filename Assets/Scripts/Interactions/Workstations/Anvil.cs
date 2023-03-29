@@ -76,7 +76,7 @@ public class Anvil : MonoBehaviour, IInteractable
         ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
-        player = GameObject.Find("Player");
+        player = GameObject.Find("PLAYER");
         playerRb = player.GetComponent<Rigidbody>();
         ingotSectionWidth = ingotWidth / 10;
         zMax = anvilPosition.z + ingotLength / 2;
@@ -360,6 +360,8 @@ public class Anvil : MonoBehaviour, IInteractable
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
+        //Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         
         return true;
