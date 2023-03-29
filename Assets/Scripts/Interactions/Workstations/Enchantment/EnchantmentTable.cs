@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class EnchantmentTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
+    [SerializeField] private s_GameEvent hint;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
@@ -144,24 +145,30 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
+        Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
+        //add chek if it's weapon of just ingot
 
-        weaponRB.transform.rotation = Quaternion.identity;
-        weaponRB.transform.position = enchantmentStartingPosition.position;
-        weaponRB.transform.SetParent(enchantmentStartingPosition);
+        if (inventory.hasIngot)
+        {
+            Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
-        weaponRB.transform.Rotate(180, 0, 0);
+            weaponRB.transform.rotation = Quaternion.identity;
+            weaponRB.transform.position = enchantmentStartingPosition.position;
+            weaponRB.transform.SetParent(enchantmentStartingPosition);
 
-        weapon = weaponRB.transform;
+            weaponRB.transform.Rotate(180, 0, 0);
 
-        cam.gameObject.SetActive(false);
-        cam2.gameObject.SetActive(true);
+            weapon = weaponRB.transform;
 
-        canEnchante = true;
-        Debug.Log("Enchantment Table is used");
+            cam.gameObject.SetActive(false);
+            cam2.gameObject.SetActive(true);
 
-
-        return true;
+            canEnchante = true;
+            Debug.Log("Enchantment Table is used");
+            return true;
+        }
+        hint.Raise("Hey, bring the weapon you want to enchant");
+        return false;
     }
 
 

@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Barrel : MonoBehaviour, IInteractable
 {
+    [SerializeField] private s_GameEvent hint;
     [SerializeField] private string _prompt;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
@@ -15,7 +16,7 @@ public class Barrel : MonoBehaviour, IInteractable
     private Transform thongs;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
-    [SerializeField] private float movementSensitivity;
+    [SerializeField] private float movementSensitivity = 0.4f;
 
     private bool canControlThongs = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
@@ -38,13 +39,13 @@ public class Barrel : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {    
-        Debug.Log("Interact");
+        //Debug.Log("Interact");
 
         Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
 
         if (inventory.hasIngot && inventory.hasThongs)
         {
-            Debug.Log("Interact ok");
+            //Debug.Log("Interact ok");
             Rigidbody thongsRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
             thongsRB.transform.rotation = Quaternion.identity;
@@ -64,7 +65,8 @@ public class Barrel : MonoBehaviour, IInteractable
             //Debug.Log("Barrel is used");
             return true;
         }
-        Debug.Log("No thongs and ingot");
+        //Debug.Log("No thongs and ingot");
+        hint.Raise("Hey, man, where's your weapon?");
         return false;
     }
 
