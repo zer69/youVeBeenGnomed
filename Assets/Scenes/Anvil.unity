@@ -1163,7 +1163,7 @@ PrefabInstance:
     - target: {fileID: 2654717810505217177, guid: 541aff6185b3fbf4fad9b6aaded54ca1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2654717810505217177, guid: 541aff6185b3fbf4fad9b6aaded54ca1,
         type: 3}
@@ -1173,7 +1173,7 @@ PrefabInstance:
     - target: {fileID: 2654717810505217177, guid: 541aff6185b3fbf4fad9b6aaded54ca1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2654717810505217177, guid: 541aff6185b3fbf4fad9b6aaded54ca1,
         type: 3}
@@ -2617,11 +2617,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: 
+  cameraY: 3.5
+  cameraOffsetX: 0
+  cameraOffsetZ: 0
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
   anvilMode: 0
   hitMode: 0
   hasWorkOnAnvil: 1
+  ingotOnAnvil: 0
   common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
   uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
   rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
