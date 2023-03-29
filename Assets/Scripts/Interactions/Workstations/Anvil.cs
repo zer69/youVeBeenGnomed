@@ -182,7 +182,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, processedIngot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f + anvilPosition.y, processedIngot.transform.position.z);
         return location;
     }
 
