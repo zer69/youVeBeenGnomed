@@ -86,6 +86,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         cam2.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
+        playerInput.actions.FindAction("DropItems").Disable();
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
 
@@ -114,6 +115,7 @@ public class Whetstone : MonoBehaviour, IInteractable
                     ingotRB.transform.SetParent(playerTransform);
                     ingotRB.GetComponent<BoxCollider>().enabled = false;
                     ingot = null;
+                    playerInput.actions.FindAction("DropItems").Enable();
                 }
                 
 
@@ -184,11 +186,13 @@ public class Whetstone : MonoBehaviour, IInteractable
             if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
             Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
+            ingot.gameObject.GetComponent<Ingot>().status = Ingot.CompletionStatus.Sharpened;
+            
 
         }
         else
         {
-            hint.Raise("The wheel should spin faster");
+            //hint.Raise("The wheel should spin faster");
         }
     }
 
