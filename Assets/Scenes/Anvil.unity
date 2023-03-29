@@ -1215,6 +1215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anvil
       objectReference: {fileID: 0}
+    - target: {fileID: 3430796666320498211, guid: 541aff6185b3fbf4fad9b6aaded54ca1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 541aff6185b3fbf4fad9b6aaded54ca1, type: 3}
 --- !u!1 &767839952
@@ -2558,7 +2563,7 @@ MonoBehaviour:
   rightHandPosition: {fileID: 429922905}
   thongsPosition: {fileID: 196055583}
   dropPower: 100
-  interactRange: 4
+  interactRange: 8
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
   crosshairResized: {fileID: 11400000, guid: 75c0f87e902580e4e9648d2cc8d4717c, type: 2}
@@ -2611,6 +2616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f92379ea80ef43478090e0f2b74e063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prompt: 
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
   anvilMode: 0
@@ -2632,6 +2638,7 @@ MonoBehaviour:
     type: 3}
   quality: {fileID: 0}
   initialQuality: {fileID: 0}
+  playerInput: {fileID: 857749841}
 --- !u!65 &1429946824
 BoxCollider:
   m_ObjectHideFlags: 0
