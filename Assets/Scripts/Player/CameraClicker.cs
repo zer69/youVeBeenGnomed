@@ -96,6 +96,9 @@ public class CameraClicker : MonoBehaviour
             case "Coal":
                 InteractWithCoal();
                 break;
+            case "Battery":
+                InteractWithBattery();
+                break;
         }
     }
 
@@ -212,6 +215,29 @@ public class CameraClicker : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
             playerInput.GetComponent<Inventory>().CoalIsPicked(true);
+
+            pickableObject = null;
+        }
+
+        else
+        {
+            Debug.Log("Your right hand is busy");
+        }
+    }
+    private void InteractWithBattery()
+    {
+        if (rightHand)
+        {
+            pickableObject.transform.position = rightHandPosition.position;
+            pickableObject.transform.rotation = rightHandPosition.rotation;
+            pickableObject.SetParent(playerTransform);
+
+            rightHand = false;
+
+            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
+            playerInput.GetComponent<Inventory>().BatteryIsPicked(true);
 
             pickableObject = null;
         }
