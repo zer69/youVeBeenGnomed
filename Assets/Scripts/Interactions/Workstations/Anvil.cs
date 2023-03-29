@@ -16,6 +16,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private float zMin;
     private float xMax;
     private float xMin;
+    [SerializeField] private float cameraY = 3.5f;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
@@ -23,6 +24,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
     [SerializeField] private bool hasWorkOnAnvil = true;
+    [SerializeField] private bool ingotOnAnvil = false;
     [SerializeField] private Material common;
     [SerializeField] private Material uncommon;
     [SerializeField] private Material rare;
@@ -35,7 +37,9 @@ public class Anvil : MonoBehaviour, IInteractable
     private List<float> sectionList;
     private List<bool> sectionResult;
     private GameObject ingot;
+    private GameObject processedIngot;
     private GameObject player;
+    private Vector3 anvilPosition;
     private Rigidbody playerRb;
     private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
@@ -52,9 +56,11 @@ public class Anvil : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     private void Awake()
     {
+        Debug.Log(gameObject.transform.position);
         camera = Camera.main;
+        anvilPosition = gameObject.transform.position;
         anvilCamera = GameObject.Find("Anvil Camera").GetComponent<Camera>();
-        anvilCamera.gameObject.SetActive(false);
+        cameraPreparation();
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         createEmptyListsForRoundHandler();
@@ -70,10 +76,10 @@ public class Anvil : MonoBehaviour, IInteractable
         player = GameObject.Find("Player");
         playerRb = player.GetComponent<Rigidbody>();
         ingotSectionWidth = ingotWidth / 10;
-        zMax = ingotLength / 2;
-        zMin = ingotLength / -2;
-        xMax = ingotWidth / 2;
-        xMin = ingotWidth / -2;
+        zMax = anvilPosition.z + ingotLength / 2;
+        zMin = anvilPosition.z + ingotLength / -2;
+        xMax = anvilPosition.x + ingotWidth / 2;
+        xMin = anvilPosition.x + ingotWidth / -2;
         //Debug.Log(ingotSectionWidth);
         //Debug.Log(ingotLength);
     }
@@ -81,7 +87,7 @@ public class Anvil : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if (anvilMode && hasWorkOnAnvil)
+        if (anvilMode && hasWorkOnAnvil && ingotOnAnvil)
         {
             anvilActive();
         }
@@ -155,6 +161,8 @@ public class Anvil : MonoBehaviour, IInteractable
     IEnumerator FinishWork(float seconds)
     {
         Debug.Log("Finish Work!");
+        Destroy(processedIngot.gameObject);
+        ingotOnAnvil = false;
         WorkHandler();
         yield return new WaitForSeconds(seconds);
         hasWorkOnAnvil = true;
@@ -163,7 +171,7 @@ public class Anvil : MonoBehaviour, IInteractable
     }
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
-        float leftBound = ingot.transform.position.x - ingotWidth / 2 + ingotSectionWidth / 2;
+        float leftBound = processedIngot.transform.position.x - ingotWidth / 2 + ingotSectionWidth / 2;
         float rightBound = leftBound + ingotWidth - ingotSectionWidth;
         float xLocation = Random.Range(leftBound, rightBound);
         return xLocation;
@@ -171,7 +179,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, ingot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, processedIngot.transform.position.z);
         return location;
     }
 
@@ -323,9 +331,28 @@ public class Anvil : MonoBehaviour, IInteractable
         sectionResult = new List<bool>();
     }
 
+    private void createIngotOnAnvil()
+    {
+        if (!ingotOnAnvil)
+        {
+            Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
+            processedIngot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
+            processedIngot.transform.Rotate(Vector3.forward, 180);
+            processedIngot.tag = "IngotOnAnvil";
+            ingotOnAnvil = true;
+        }
+    }
+
+    private void cameraPreparation()
+    {
+        anvilCamera.gameObject.SetActive(false);
+        anvilCamera.gameObject.transform.position = new Vector3(gameObject.transform.position.x, cameraY, gameObject.transform.position.z);
+    }
+
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
+        createIngotOnAnvil();
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
