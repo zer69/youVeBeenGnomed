@@ -183,4 +183,16 @@ public class Ingot : MonoBehaviour
     {
         return enchantment;
     }
+
+    public void Melting()
+    {
+        if (currentTemperature >= MeltingPoint)
+        {
+            status = CompletionStatus.Melted;
+        }
+        //else
+        //{
+        //    status = CompletionStatus.Cooled;
+        //}
+    }
 }

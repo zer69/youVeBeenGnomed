@@ -20,16 +20,22 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform rightHand;
 
+    [SerializeField] private s_GameEvent hint;
+
     public string InteractionPrompt => _prompt;
 
     public bool Interact(Interactor interactor)
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if (!inventory.hasBattery && (!inventory.hasIngot || inventory.hasThongs))
+        if (!inventory.hasBattery && (!inventory.hasIngot || inventory.hasThongs) && !inventory.coal)
         {
             GiveBattery();
             inventory.BatteryIsPicked(true);
+        }
+        else
+        {
+            hint.Raise("Your right hand is busy");
         }
 
         return true;

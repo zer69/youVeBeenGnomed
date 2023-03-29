@@ -21,6 +21,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     [SerializeField] private Transform rightHand;
 
     [SerializeField] private t_GameEvent typeChoice;
+    [SerializeField] private s_GameEvent hint;
 
     private GameObject thongs;
 
@@ -49,7 +50,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             Debug.Log("Ingot taken");
         }
 
-        else if (!inventory.hasThongs && !inventory.hasIngot && !inventory.coal)
+        else if (!inventory.hasThongs && !inventory.hasIngot && !inventory.coal && !inventory.hasBattery)
         {
             GameObject newIngot = Instantiate(ingot);
             newIngot.transform.position = rightHand.position;
@@ -62,6 +63,10 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             typeChoice.Raise(newIngot.transform);
             ChangePileSize(ingotsInPile);
             Debug.Log("Ingot taken");
+        }
+        else
+        {
+            hint.Raise("Your right hand is busy");
         }
 
         return true;
