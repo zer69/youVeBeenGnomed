@@ -17,6 +17,8 @@ public class Anvil : MonoBehaviour, IInteractable
     private float xMax;
     private float xMin;
     [SerializeField] private float cameraY = 3.5f;
+    [SerializeField] private float cameraOffsetX = 0;
+    [SerializeField] private float cameraOffsetZ = 0;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
@@ -346,7 +348,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private void cameraPreparation()
     {
         anvilCamera.gameObject.SetActive(false);
-        anvilCamera.gameObject.transform.position = new Vector3(gameObject.transform.position.x, cameraY, gameObject.transform.position.z);
+        anvilCamera.gameObject.transform.position = new Vector3(anvilPosition.x + cameraOffsetX, cameraY, anvilPosition.z + cameraOffsetZ);
     }
 
     public bool Interact(Interactor interactor)
