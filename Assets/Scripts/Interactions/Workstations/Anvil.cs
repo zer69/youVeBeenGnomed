@@ -344,6 +344,7 @@ public class Anvil : MonoBehaviour, IInteractable
             processedIngot.transform.Rotate(Vector3.forward, 90);
             processedIngot.tag = "IngotOnAnvil";
             Destroy(ingot.gameObject);
+            player.GetComponent<Inventory>().IngotIsPicked(false);
             ingotOnAnvil = true;
         }
     }
@@ -360,6 +361,7 @@ public class Anvil : MonoBehaviour, IInteractable
         if (player.GetComponent<Inventory>().CheckInventoryForItem("Ingot") && player.GetComponent<Inventory>().CheckInventoryForItem("Thongs") && !ingotOnAnvil && hasWorkOnAnvil)
         {
             GameObject thongsInHand = GameObject.Find("Thongs");
+            // hand flag?
             GameObject ingotInHand = FindChildByTag(thongsInHand.transform, "Ingot");
             Debug.Log(ingotInHand);
             createIngotOnAnvil(ingotInHand);
@@ -402,5 +404,12 @@ public class Anvil : MonoBehaviour, IInteractable
             }
         }
         return null;
+    }
+
+    private void returnIngotToHand(GameObject ingot)
+    {
+        ingot.tag = "Ingot";
+        
+
     }
 }
