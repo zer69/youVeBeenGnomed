@@ -49,6 +49,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private float sectionDisappearTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
     [SerializeField] private GameObject ingotPrefab;
+    private GameObject playerTransform;
     private int successfulHits = 0;
     public FloatVariable quality, initialQuality;
     [SerializeField] private PlayerInput playerInput;
@@ -334,14 +335,15 @@ public class Anvil : MonoBehaviour, IInteractable
         sectionResult = new List<bool>();
     }
 
-    private void createIngotOnAnvil()
+    private void createIngotOnAnvil(GameObject ingot)
     {
         if (!ingotOnAnvil)
         {
             Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
-            processedIngot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
+            processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
             processedIngot.transform.Rotate(Vector3.forward, 90);
             processedIngot.tag = "IngotOnAnvil";
+            Destroy(ingot.gameObject);
             ingotOnAnvil = true;
         }
     }
@@ -355,7 +357,14 @@ public class Anvil : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
-        createIngotOnAnvil();
+        if (player.GetComponent<Inventory>().CheckInventoryForItem("Ingot") && player.GetComponent<Inventory>().CheckInventoryForItem("Thongs") && !ingotOnAnvil && hasWorkOnAnvil)
+        {
+            GameObject thongsInHand = GameObject.Find("Thongs");
+            GameObject ingotInHand = FindChildByTag(thongsInHand.transform, "Ingot");
+            Debug.Log(ingotInHand);
+            createIngotOnAnvil(ingotInHand);
+        }
+        
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -377,8 +386,21 @@ public class Anvil : MonoBehaviour, IInteractable
                 anvilMode = false;
                 camera.gameObject.SetActive(true);
                 anvilCamera.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
 
                 break;
         }
+    }
+
+    private GameObject FindChildByTag(Transform tr, string tag)
+    {
+        for (int i = 0; i < tr.childCount; i++)
+        {
+            if (tr.GetChild(i).gameObject.tag == tag)
+            {
+                return tr.GetChild(i).gameObject;
+            }
+        }
+        return null;
     }
 }
