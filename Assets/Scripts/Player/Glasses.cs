@@ -14,6 +14,7 @@ public class Glasses : MonoBehaviour
     [SerializeField] private b_GameEvent chargingStatus;
     [SerializeField] private i_GameEvent changeEnergy;
     [SerializeField] private i_GameEvent setEnergyMaxValue;
+    [SerializeField] private s_GameEvent hint;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Energy parameters")]
@@ -69,6 +70,7 @@ public class Glasses : MonoBehaviour
         else if(currentEnergy == 0)
         {
             Debug.Log("Glasses is not charged");
+            hint.Raise("Glasses is not charged");
         }
         else
         {
@@ -96,6 +98,7 @@ public class Glasses : MonoBehaviour
         if (currentEnergy == 0)
         {
             Debug.Log("Glasses discharged");
+            hint.Raise("Glasses discharged");
         }        
     }
 

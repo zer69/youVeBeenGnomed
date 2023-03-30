@@ -34,7 +34,8 @@ public class Whetstone : MonoBehaviour, IInteractable
     private bool canControlIngot = false;
     private Transform weaponStartingPosition;
     private Transform playerTransform;
-    //private bool interacting = false;
+    //[SerializeField] private float ingotMovementSensetivity;
+    //[SerializeField] private float movementMultiplier;
 
     public string InteractionPrompt => _prompt;
 
@@ -43,6 +44,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         weaponStartingPosition = transform.Find("Weapon Starting Position");
         playerTransform = GameObject.Find("Player Transform").transform;
+
 
     }
 
@@ -84,6 +86,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         cam2.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
+        playerInput.actions.FindAction("DropItems").Disable();
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
 
@@ -112,6 +115,7 @@ public class Whetstone : MonoBehaviour, IInteractable
                     ingotRB.transform.SetParent(playerTransform);
                     ingotRB.GetComponent<BoxCollider>().enabled = false;
                     ingot = null;
+                    playerInput.actions.FindAction("DropItems").Enable();
                 }
                 
 
@@ -182,11 +186,13 @@ public class Whetstone : MonoBehaviour, IInteractable
             if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
             Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
+            ingot.gameObject.GetComponent<Ingot>().status = Ingot.CompletionStatus.Sharpened;
+            
 
         }
         else
         {
-            hint.Raise("The wheel should spin faster");
+            //hint.Raise("The wheel should spin faster");
         }
     }
 
@@ -199,8 +205,18 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         if (collision.collider.tag == "Ingot")
         {
-         
+            //movementMultiplier = 0.5f;
+
             SharpenWeapon(collision);
         }
     }
+    /*private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            //movementMultiplier = 1f;
+
+
+        }
+    }*/
 }

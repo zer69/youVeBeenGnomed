@@ -12,6 +12,7 @@ public class Forge : MonoBehaviour, IInteractable
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Furnance furnace;
+    [SerializeField] private s_GameEvent hint;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Inflation parameters")]
@@ -47,9 +48,13 @@ public class Forge : MonoBehaviour, IInteractable
     IEnumerator InflateForge()
     {
         canInflateForge = false;
-
-        furnace.furnaceTemperature += temperatureIncrement;
+        
         Debug.Log("Forge inflated");
+        if(furnace.fireIsKindled)
+        {
+            furnace.furnaceTemperature += temperatureIncrement;
+            hint.Raise("The fire burns stronger");
+        }
         yield return new WaitForSeconds(forgeCooldown);
 
         canInflateForge = true;

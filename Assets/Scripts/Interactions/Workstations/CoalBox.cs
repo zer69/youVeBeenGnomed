@@ -20,6 +20,8 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform rightHand;
 
+    [SerializeField] private s_GameEvent hint;
+
     public string InteractionPrompt => _prompt;
 
 
@@ -27,10 +29,14 @@ public class CoalBox : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if(!inventory.hasCoal && (!inventory.hasIngot || inventory.hasThongs))
+        if(!inventory.hasCoal && (!inventory.hasIngot || inventory.hasThongs) && !inventory.hasBattery)
         {
             GiveCoal();
             inventory.CoalIsPicked(true);
+        }
+        else
+        {
+            hint.Raise("Your right hand is busy");
         }
 
         return true;

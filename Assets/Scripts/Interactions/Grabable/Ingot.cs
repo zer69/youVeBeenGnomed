@@ -37,12 +37,16 @@ public class Ingot : MonoBehaviour
 
     public enum CompletionStatus
     {
-        Raw,
-        Melted,
-        Forged,
-        Cooled,
-        Sharpened,
-        Completed
+        Raw, // status for furnace
+        Melted, // status after furnace, anvil next
+
+        Forged, // done on anvil, new base status, next is heated/cooled
+        
+        Heated, // heat on furnace after forging
+        Cooled, // cooled after heating
+
+        Sharpened, // status after whetstone
+        Completed // status after workbench
 
     };
 
@@ -182,5 +186,17 @@ public class Ingot : MonoBehaviour
     public Enchantment getEnchantment()
     {
         return enchantment;
+    }
+
+    public void Melting()
+    {
+        if (currentTemperature >= MeltingPoint)
+        {
+            status = CompletionStatus.Melted;
+        }
+        //else
+        //{
+        //    status = CompletionStatus.Cooled;
+        //}
     }
 }
