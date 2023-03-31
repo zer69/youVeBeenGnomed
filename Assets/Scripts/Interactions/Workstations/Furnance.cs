@@ -14,12 +14,14 @@ public class Furnance : MonoBehaviour, IInteractable
 
     [SerializeField] private s_GameEvent hint;
 
+    [SerializeField] private Transform placeForIngot;
+
     private bool fuelIsFilled = false;
     public bool fireIsKindled = false;
     private bool ingotInFurnace = false;
 
     public float furnaceTemperature = 0f;
-
+    
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Furnace burning parameters")]
 
@@ -64,18 +66,27 @@ public class Furnance : MonoBehaviour, IInteractable
             return true;
         }
 
-        else if (fireIsKindled && !inventory.hasIngot)
+        else if (fireIsKindled && !inventory.hasIngot && !inventory.hasIngotInThongs)
         {            
             Debug.Log("No ingot");
             hint.Raise("You need ingot to put it in the furnace");
             return true;
         }
 
-        else if(fireIsKindled && inventory.hasIngot && !ingotInFurnace)
+        else if(fireIsKindled && !ingotInFurnace)
         {
-            ingot = inventory.ingot;
-            inventory.IngotIsPicked(false);
-            ingot.transform.position = new Vector3(-2.5f, 3.6f, -2);
+            if (inventory.hasIngot)
+            {
+                ingot = inventory.ingot;
+                inventory.IngotIsPicked(false);
+            }
+            else
+            {
+                ingot = inventory.ingotInThongs;
+                inventory.IngotIsPicked(false);
+            }
+
+            ingot.transform.position = placeForIngot.transform.position;
             ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
             ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //ingot.GetComponent<Rigidbody>().isKinematic = false;
