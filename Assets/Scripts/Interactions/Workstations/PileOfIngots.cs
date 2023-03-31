@@ -36,7 +36,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if (inventory.hasThongs && !inventory.hasIngot)
+        if (inventory.hasThongs && !inventory.hasIngotInThongs)
         {
             GameObject newIngot = Instantiate(ingot);
             newIngot.transform.position = thongs.transform.Find("ThongsPosition").position;
@@ -50,7 +50,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             Debug.Log("Ingot taken");
         }
 
-        else if (!inventory.hasThongs && !inventory.hasIngot && !inventory.coal && !inventory.hasBattery)
+        else if (inventory.rightHandFree == true)
         {
             GameObject newIngot = Instantiate(ingot);
             newIngot.transform.position = rightHand.position;

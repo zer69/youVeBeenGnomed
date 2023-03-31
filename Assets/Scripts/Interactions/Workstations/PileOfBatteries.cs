@@ -28,7 +28,7 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if (!inventory.hasBattery && (!inventory.hasIngot || inventory.hasThongs) && !inventory.coal)
+        if (inventory.rightHandFree == true)
         {
             GiveBattery();
             inventory.BatteryIsPicked(true);

@@ -194,9 +194,9 @@ public class Ingot : MonoBehaviour
         {
             status = CompletionStatus.Melted;
         }
-        //else
-        //{
-        //    status = CompletionStatus.Cooled;
-        //}
+        else
+        {
+            status = CompletionStatus.Raw;
+        }
     }
 }
