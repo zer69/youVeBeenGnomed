@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ingot : MonoBehaviour
 {
-    enum Rarity
+    public enum Rarity
     {
         Common,
         Uncommon,
@@ -14,7 +14,7 @@ public class Ingot : MonoBehaviour
         Legendary
     };
 
-    enum OreType
+    public enum OreType
     {
         Iron,
         Steel,
@@ -62,8 +62,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] public CompletionStatus status;
     [SerializeField] public WeaponType weaponType;
 
-    [SerializeField] private Rarity rarity;
-    [SerializeField] private OreType type;
+    [SerializeField] public Rarity rarity;
+    [SerializeField] public OreType type;
     
 
 
@@ -198,5 +198,15 @@ public class Ingot : MonoBehaviour
         {
             status = CompletionStatus.Raw;
         }
+    }
+
+    public ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> getData()
+    {
+        return (status, weaponType, rarity, type);
+    }
+
+    public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
+    {
+        (status, weaponType, rarity, type) = data;
     }
 }

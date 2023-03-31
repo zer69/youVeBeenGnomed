@@ -16,7 +16,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private float zMin;
     private float xMax;
     private float xMin;
-    [SerializeField] private float cameraY = 3.5f;
+    [SerializeField] private float cameraY = 4.5f;
     [SerializeField] private float cameraOffsetX = 0;
     [SerializeField] private float cameraOffsetZ = 0;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
@@ -49,6 +49,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private float sectionDisappearTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
     [SerializeField] private GameObject ingotPrefab;
+    private GameObject playerTransform;
     private int successfulHits = 0;
     public FloatVariable quality, initialQuality;
     [SerializeField] private PlayerInput playerInput;
@@ -72,10 +73,11 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-        ingotWidth = ingot.GetComponent<BoxCollider>().bounds.size[0];
-        ingotLength = ingot.GetComponent<BoxCollider>().bounds.size[2];
+        Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
+        ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
+        ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
-        player = GameObject.Find("Player");
+        player = GameObject.Find("PLAYER");
         playerRb = player.GetComponent<Rigidbody>();
         ingotSectionWidth = ingotWidth / 10;
         zMax = anvilPosition.z + ingotLength / 2;
@@ -333,14 +335,17 @@ public class Anvil : MonoBehaviour, IInteractable
         sectionResult = new List<bool>();
     }
 
-    private void createIngotOnAnvil()
+    private void createIngotOnAnvil(GameObject ingot)
     {
         if (!ingotOnAnvil)
         {
             Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
-            processedIngot = Instantiate(ingotPrefab, position, ingotPrefab.transform.rotation);
-            processedIngot.transform.Rotate(Vector3.forward, 180);
+            //processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
+            processedIngot = Instantiate(ingot, position, Quaternion.Euler(-90, 0, 90));
+            // processedIngot.transform.Rotate(Vector3.forward, 90);
             processedIngot.tag = "IngotOnAnvil";
+            Destroy(ingot.gameObject);
+            player.GetComponent<Inventory>().IngotIsPicked(false);
             ingotOnAnvil = true;
         }
     }
@@ -354,11 +359,21 @@ public class Anvil : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
-        createIngotOnAnvil();
+        if (player.GetComponent<Inventory>().CheckInventoryForItem("Ingot") && player.GetComponent<Inventory>().CheckInventoryForItem("Thongs") && !ingotOnAnvil && hasWorkOnAnvil)
+        {
+            GameObject thongsInHand = GameObject.Find("Thongs");
+            // hand flag?
+            GameObject ingotInHand = FindChildByTag(thongsInHand.transform, "Ingot");
+            Debug.Log(ingotInHand);
+            createIngotOnAnvil(ingotInHand);
+        }
+        
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
+        //Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         
         return true;
@@ -374,8 +389,28 @@ public class Anvil : MonoBehaviour, IInteractable
                 anvilMode = false;
                 camera.gameObject.SetActive(true);
                 anvilCamera.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
 
                 break;
         }
+    }
+
+    private GameObject FindChildByTag(Transform tr, string tag)
+    {
+        for (int i = 0; i < tr.childCount; i++)
+        {
+            if (tr.GetChild(i).gameObject.tag == tag)
+            {
+                return tr.GetChild(i).gameObject;
+            }
+        }
+        return null;
+    }
+
+    private void returnIngotToHand(GameObject ingot)
+    {
+        ingot.tag = "Ingot";
+        
+
     }
 }
