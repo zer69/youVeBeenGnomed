@@ -75,12 +75,12 @@ public class Inventory : MonoBehaviour
             hasIngot = false;
             childNumber -= 1;
 
-            if(ingotInThongs != null)
-            {
-                ingotInThongs = null;
-                hasIngotInThongs = false;
-                //childNumber -= 1;
-            }
+            //if (ingotInThongs != null)
+            //{
+            //    ingotInThongs = null;
+            //    hasIngotInThongs = false;
+            //    //childNumber -= 1;
+            //}
         }
         else if (ingotInThongs != null)
         {
@@ -109,6 +109,9 @@ public class Inventory : MonoBehaviour
                 ingotInThongs.GetComponent<BoxCollider>().enabled = true;
                 ingotInThongs.GetComponent<Rigidbody>().isKinematic = false;
                 ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+                ingotInThongs = null;
+                hasIngotInThongs = false;
 
                 thongs.transform.GetChild(1).SetParent(null);
                 //childNumber -= 1;
