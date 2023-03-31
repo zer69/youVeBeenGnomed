@@ -81,7 +81,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] public float coolingRate;
     [SerializeField] public float currentTemperature;
     //minTemperatureValue = airTemperature
-    [SerializeField] private float maxTemperatureValue = 1200;
+    //[SerializeField] private float maxTemperatureValue = 1200;
 
     [SerializeField] private float strength;
 
@@ -108,7 +108,7 @@ public class Ingot : MonoBehaviour
     private void Start()
     {
         coolingRate = airCoolingRate;
-        currentTemperature = airTemperature;
+        //currentTemperature = airTemperature;
 
         isEnchanted = false;
         enchantment = Enchantment.None;
@@ -126,12 +126,37 @@ public class Ingot : MonoBehaviour
         {
             currentTemperature -= coolingRate;
             //Debug.Log("currentTemperature: " + currentTemperature);
+
             return true;
         }
+
+        
+        if (status > CompletionStatus.Forged)
+        {
+            status = CompletionStatus.Cooled;
+        }
+
         return false;
     }
 
-    
+    public bool Heating(float furnaceTemperature, float smeltingSpeed)
+    {
+        if (currentTemperature < furnaceTemperature)
+        {
+            currentTemperature += smeltingSpeed * Time.deltaTime;
+            Melting();
+            //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
+
+            if (status > CompletionStatus.Forged)
+            {
+                status = CompletionStatus.Heated;
+            }
+            return true;
+        }
+
+        return false;
+    }
+
     public void StrengthModification(float rate)
     {
         //to decrease the value, a negative value must be passed
@@ -155,6 +180,12 @@ public class Ingot : MonoBehaviour
     {
         coolingRate = airCoolingRate;
         Debug.Log("coolingRate: " + airCoolingRate);
+    }
+
+    public void setZeroCoolingRate()
+    {
+        coolingRate = 0;
+        Debug.Log("coolingRate: ZeroCoolingRate");
     }
 
     public void setSpecificCoolingRate(float rate)

@@ -43,7 +43,7 @@ public class Barrel : MonoBehaviour, IInteractable
 
         Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
 
-        if (inventory.hasIngot && inventory.hasThongs)
+        if (inventory.hasIngotInThongs)
         {
             //Debug.Log("Interact ok");
             Rigidbody thongsRB = playerTransform.GetComponentInChildren<Rigidbody>();
@@ -110,7 +110,6 @@ public class Barrel : MonoBehaviour, IInteractable
         thongs.position += thongsVector;
 
     }
-
 
 
 
