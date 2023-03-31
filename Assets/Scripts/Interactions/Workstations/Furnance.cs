@@ -153,14 +153,14 @@ public class Furnance : MonoBehaviour, IInteractable
         hint.Raise("Fire went out");
     }
 
-    void smeltingIngot(Collision ingot)
+    void smeltingIngot(Collision ingotCollision)
     {
-        float ingotTemperature = ingot.gameObject.GetComponent<Ingot>().currentTemperature;
+        Ingot ingot = ingotCollision.gameObject.GetComponent<Ingot>();
 
-        if(ingotTemperature < furnaceTemperature)
+        if(ingot.currentTemperature < furnaceTemperature)
         {
-            ingot.gameObject.GetComponent<Ingot>().currentTemperature += smeltingSpeed * Time.deltaTime;
-            ingot.gameObject.GetComponent<Ingot>().Melting();
+            ingot.Heating(furnaceTemperature, smeltingSpeed);
+            ingot.Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
         }
     }
@@ -170,6 +170,27 @@ public class Furnance : MonoBehaviour, IInteractable
         if (collision.collider.tag == "Ingot")
         {
             smeltingIngot(collision);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            //we may have problems here when furnace is colder than ingot
+            if (furnaceTemperature > collision.gameObject.GetComponent<Ingot>().currentTemperature)
+            {
+                collision.gameObject.GetComponent<Ingot>().setZeroCoolingRate();
+            }
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Ingot")
+        {
+            collision.gameObject.GetComponent<Ingot>().setNormalCoolingRate();
         }
     }
 }

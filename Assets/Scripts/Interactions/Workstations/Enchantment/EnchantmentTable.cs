@@ -156,7 +156,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
             weaponRB.transform.position = enchantmentStartingPosition.position;
             weaponRB.transform.SetParent(enchantmentStartingPosition);
 
-            weaponRB.transform.Rotate(180, 0, 0);
+            weaponRB.transform.Rotate(-90, 0, 0);
 
             weapon = weaponRB.transform;
 
