@@ -183,7 +183,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f + anvilPosition.y, processedIngot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, processedIngot.transform.position.z);
         return location;
     }
 
@@ -340,8 +340,9 @@ public class Anvil : MonoBehaviour, IInteractable
         if (!ingotOnAnvil)
         {
             Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
-            processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
-            processedIngot.transform.Rotate(Vector3.forward, 90);
+            //processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
+            processedIngot = Instantiate(ingot, position, Quaternion.Euler(-90, 0, 90));
+            // processedIngot.transform.Rotate(Vector3.forward, 90);
             processedIngot.tag = "IngotOnAnvil";
             Destroy(ingot.gameObject);
             player.GetComponent<Inventory>().IngotIsPicked(false);
