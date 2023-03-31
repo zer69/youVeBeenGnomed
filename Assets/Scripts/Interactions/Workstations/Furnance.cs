@@ -44,7 +44,7 @@ public class Furnance : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if (ingotInFurnace && inventory.hasThongs)
+        if (ingotInFurnace && inventory.hasThongs && !inventory.hasIngotInThongs)
         {
             ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
             ingot.transform.SetParent(thongs.transform);
@@ -59,8 +59,8 @@ public class Furnance : MonoBehaviour, IInteractable
 
         if (ingotInFurnace)
         {            
-            Debug.Log("You need thongs to get an ingot from the furnace");
-            hint.Raise("You need thongs to get an ingot from the furnace");
+            Debug.Log("You need empty thongs to get an ingot from the furnace");
+            hint.Raise("You need empty thongs to get an ingot from the furnace");
             return true;
         }
 

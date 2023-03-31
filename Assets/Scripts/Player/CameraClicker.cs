@@ -126,7 +126,7 @@ public class CameraClicker : MonoBehaviour
                 pickableObject.SetParent(playerTransform);
                 rightHand = false;
 
-                playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
+                playerInput.GetComponent<Inventory>().HammerIsPicked(true);
             }
             else
                 return;
@@ -295,7 +295,7 @@ public class CameraClicker : MonoBehaviour
                 playerInput.GetComponent<Inventory>().IngotIsPicked(false);
                 playerInput.GetComponent<Inventory>().CoalIsPicked(false);
                 playerInput.GetComponent<Inventory>().BatteryIsPicked(false);
-
+                playerInput.GetComponent<Inventory>().HammerIsPicked(false);
         }
         playerTransform.DetachChildren();
         rightHand = true;

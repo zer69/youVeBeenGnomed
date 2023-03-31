@@ -194,10 +194,10 @@ public class Ingot : MonoBehaviour
         {
             status = CompletionStatus.Melted;
         }
-        //else
-        //{
-        //    status = CompletionStatus.Cooled;
-        //}
+        else
+        {
+            status = CompletionStatus.Raw;
+        }
     }
 
     public ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> getData()
