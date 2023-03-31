@@ -156,4 +156,29 @@ public class Inventory : MonoBehaviour
 
         return true;
     }
+
+    public bool CheckInventoryForItem(string item)
+    {
+        switch (item)
+        {
+            case "Ingot":
+                if (hasIngot)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            case "Thongs":
+                if (hasThongs)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            default:
+                return false;
+        }
+    }
 }
