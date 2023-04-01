@@ -39,10 +39,10 @@ public class PlayerController : MonoBehaviour
         switch (context.action.name)
         {
             case "Move":
-                if (onGround)
-                {
+                //if (onGround)
+                //{
                     moveCommand = context.action.ReadValue<Vector2>();
-                }
+                //}
                     
                 break;
 
@@ -65,12 +65,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Camera control
         if (lookCommand != Vector2.zero)
         {
             Look();
         }
-        //Debug.Log(onGround);
+
+        if (!playerInput.actions["Move"].IsPressed())
+        {
+           // moveCommand = Vector2.zero;
+        }
+        
+        ControlDrag();
+        
     }
     // Updating physic movement
     private void FixedUpdate()
@@ -86,9 +94,18 @@ public class PlayerController : MonoBehaviour
             Jump();
             onGround = false;
         }
-        if (!playerInput.actions["Move"].IsPressed())
+        
+    }
+
+    private void ControlDrag()
+    {
+        if (onGround)
         {
-            moveCommand = Vector2.zero;
+            playerRb.drag = groundDrag;
+        }
+        else
+        {
+            playerRb.drag = 1;
         }
     }
 
@@ -98,14 +115,7 @@ public class PlayerController : MonoBehaviour
     
         SpeedControl();
 
-        if (onGround)
-        {
-            playerRb.drag = groundDrag;
-        }
-        else
-        {
-            playerRb.drag = 0;
-        }
+       
         playerRb.AddForce(direction * speed, ForceMode.Force);
     }
 

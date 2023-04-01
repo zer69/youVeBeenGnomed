@@ -154,8 +154,8 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     void MoveWeapon()
     {
-        float xMouse = moveWeaponCommand.x  * Time.deltaTime;
-        float yMouse = moveWeaponCommand.y  * Time.deltaTime;
+        float xMouse = moveWeaponCommand.x * 0.25f  * Time.deltaTime;
+        float yMouse = moveWeaponCommand.y * 0.25f * Time.deltaTime;
 
         Vector3 weaponVector = new Vector3(0f, xMouse, -yMouse);
 
