@@ -57,10 +57,12 @@ public class Barrel : MonoBehaviour, IInteractable
             thongs = thongsRB.transform;
 
             cam.gameObject.SetActive(false);
+
             cam2.gameObject.SetActive(true);
             playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             playerInput.transform.localRotation = Quaternion.identity;
 
+            playerInput.actions.FindAction("DropItems").Disable();
             canControlThongs = true;
             //Debug.Log("Barrel is used");
             return true;
@@ -88,6 +90,7 @@ public class Barrel : MonoBehaviour, IInteractable
                     thongsRB.transform.SetParent(playerTransform);
 
                     //thongs = null;
+                    playerInput.actions.FindAction("DropItems").Enable();
 
                     canControlThongs = false;
                     
