@@ -182,7 +182,7 @@ public class CameraClicker : MonoBehaviour
             }
             pickableObject.transform.position = thongsPosition.position;
             pickableObject.transform.rotation = thongsPosition.rotation;
-            pickableObject.SetParent(thongs);
+            pickableObject.SetParent(thongsPosition);
             leftHand = false;
             pickableObject.GetComponent<BoxCollider>().enabled = false;
             leftWithIngot = true;

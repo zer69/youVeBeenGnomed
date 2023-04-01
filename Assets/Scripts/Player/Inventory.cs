@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
     {
         if (ingotPicked && hasThongs && ! hasIngotInThongs)
         {
-            ingotInThongs = thongs.transform.GetChild(1).gameObject;
+            ingotInThongs = thongs.transform.GetChild(0).GetChild(0).gameObject;
 
             ingotInThongs.GetComponent<BoxCollider>().enabled = false;
 
@@ -113,7 +113,7 @@ public class Inventory : MonoBehaviour
                 ingotInThongs = null;
                 hasIngotInThongs = false;
 
-                thongs.transform.GetChild(1).SetParent(null);
+                thongs.transform.GetChild(0).GetChild(0).SetParent(null);
                 //childNumber -= 1;
             }
             thongs = null;
