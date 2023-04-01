@@ -97,6 +97,18 @@ public class Inventory : MonoBehaviour
         if (thongsPicked)
         {
             thongs = playerTransform.transform.GetChild(childNumber).gameObject;
+            if(thongs.transform.GetChild(0).childCount == 1)
+            {
+                ingotInThongs = thongs.transform.GetChild(0).GetChild(0).gameObject;
+                ingotInThongs.transform.position = thongs.transform.Find("ThongsPosition").position;
+                ingotInThongs.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
+
+                //ingotInThongs.GetComponent<BoxCollider>().enabled = false;
+
+                playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = true;
+
+                hasIngotInThongs = true;
+            }
             hasThongs = true;
 
             childNumber += 1;
@@ -106,14 +118,18 @@ public class Inventory : MonoBehaviour
         {
             if (hasIngotInThongs)
             {
-                ingotInThongs.GetComponent<BoxCollider>().enabled = true;
-                ingotInThongs.GetComponent<Rigidbody>().isKinematic = false;
-                ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                //ingotInThongs.GetComponent<BoxCollider>().enabled = true;
+                //ingotInThongs.GetComponent<Rigidbody>().isKinematic = false;
+                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+                //ingotInThongs.GetComponent<Rigidbody>().constraints = ~RigidbodyConstraints.FreezeRotationX;
+                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
 
                 ingotInThongs = null;
                 hasIngotInThongs = false;
 
-                thongs.transform.GetChild(0).GetChild(0).SetParent(null);
+                //thongs.transform.GetChild(0).GetChild(0).SetParent(null);
                 //childNumber -= 1;
             }
             thongs = null;

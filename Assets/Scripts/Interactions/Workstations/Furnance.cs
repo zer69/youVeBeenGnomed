@@ -31,7 +31,7 @@ public class Furnance : MonoBehaviour, IInteractable
 
     [BackgroundColor()]
 
-    private GameObject ingot;
+    [SerializeField] private GameObject ingot;
     private GameObject thongs;
 
     
@@ -49,12 +49,14 @@ public class Furnance : MonoBehaviour, IInteractable
         if (ingotInFurnace && inventory.hasThongs && !inventory.hasIngotInThongs)
         {
             ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
-            ingot.transform.SetParent(thongs.transform);
+            ingot.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
+            ingot.transform.SetParent(thongs.transform.Find("ThongsPosition"));
             ingot.GetComponent<BoxCollider>().enabled = false;
             ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //ingot.GetComponent<Rigidbody>().isKinematic = true;
             inventory.IngotIsPicked(true);
             ingotInFurnace = false;
+            ingot = null;
             Debug.Log("Ingot taken");
             return true;
         }
@@ -88,9 +90,9 @@ public class Furnance : MonoBehaviour, IInteractable
 
             ingot.transform.position = placeForIngot.transform.position;
             ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
-            ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             //ingot.GetComponent<Rigidbody>().isKinematic = false;
-            ingot.GetComponent<BoxCollider>().enabled = true;
+            //ingot.GetComponent<BoxCollider>().enabled = true;
             ingot.transform.parent = null;
 
             ingotInFurnace = true;
