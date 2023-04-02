@@ -118,9 +118,9 @@ public class Inventory : MonoBehaviour
         {
             if (hasIngotInThongs)
             {
-                //ingotInThongs.GetComponent<BoxCollider>().enabled = true;
+                ingotInThongs.GetComponent<BoxCollider>().enabled = true;
                 //ingotInThongs.GetComponent<Rigidbody>().isKinematic = false;
-                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
                 //ingotInThongs.GetComponent<Rigidbody>().constraints = ~RigidbodyConstraints.FreezeRotationX;
                 //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
@@ -129,7 +129,7 @@ public class Inventory : MonoBehaviour
                 ingotInThongs = null;
                 hasIngotInThongs = false;
 
-                //thongs.transform.GetChild(0).GetChild(0).SetParent(null);
+                thongs.transform.GetChild(0).GetChild(0).SetParent(null);
                 //childNumber -= 1;
             }
             thongs = null;
