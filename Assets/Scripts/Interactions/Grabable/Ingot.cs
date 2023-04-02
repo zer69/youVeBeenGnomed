@@ -17,9 +17,8 @@ public class Ingot : MonoBehaviour
     public enum OreType
     {
         Iron,
-        Steel,
         Copper,
-        Bronze
+        Silver
     };
 
     public enum Enchantment
@@ -55,15 +54,26 @@ public class Ingot : MonoBehaviour
         None,
         Axe,
         Sword,
+        Dagger,
         Spear
+    }
+
+    public enum AnvilState
+    {
+        Raw,
+        Rare,
+        MediumRare,
+        WellDone,
+        Weapon
     }
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public CompletionStatus status;
     [SerializeField] public WeaponType weaponType;
 
+
     [SerializeField] public Rarity rarity;
-    [SerializeField] public OreType type;
+    [SerializeField] public OreType oreType;
     
 
 
@@ -102,11 +112,21 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] private col_GameEvent weaponLanded;
 
-   
+    [SerializeField] private Material ingotMaterial;
+    private Color emissiveColor = new Color(0.749f, 0.0078f, 0f, 1f);
+
+    [SerializeField] private GameObject state1;
+    [SerializeField] private GameObject state2;
+    [SerializeField] private AnvilState anvilState;
+
+    [SerializeField] private go_GameEvent sendIngot;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
+       
     {
+
+        //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
         //currentTemperature = airTemperature;
 
@@ -117,6 +137,42 @@ public class Ingot : MonoBehaviour
     private void Update()
     {
         Cooling();
+        HeatColor();
+        if (anvilState != AnvilState.Weapon)
+            UpdateGraphics();
+    }
+
+    public void UpdateGraphics()
+    {
+        switch (anvilState)
+        {
+            case AnvilState.Rare:
+                GetComponent<MeshRenderer>().enabled = false;
+                transform.Find("Ingot_2_Iron").gameObject.SetActive(true);
+                break;
+            case AnvilState.MediumRare:
+                transform.Find("Ingot_2_Iron").gameObject.SetActive(false);
+                transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
+                break;
+            case AnvilState.WellDone:
+                transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
+                UpdateWeaponGraphics();
+                break;
+        }
+    }
+
+    public void UpdateWeaponGraphics()
+    {
+        Debug.Log("SENTWEAPON");
+        sendIngot.Raise(this.gameObject);
+        anvilState = AnvilState.Weapon;
+
+
+    }
+
+    public void HeatColor()
+    {
+        ingotMaterial.SetColor("_EmissiveColor", emissiveColor * ((currentTemperature / MeltingPoint) * 15));
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change
@@ -233,11 +289,11 @@ public class Ingot : MonoBehaviour
 
     public ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> getData()
     {
-        return (status, weaponType, rarity, type);
+        return (status, weaponType, rarity, oreType);
     }
 
     public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
     {
-        (status, weaponType, rarity, type) = data;
+        (status, weaponType, rarity, oreType) = data;
     }
 }
