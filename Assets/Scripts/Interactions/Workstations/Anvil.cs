@@ -240,7 +240,7 @@ public class Anvil : MonoBehaviour, IInteractable
         //sCounter++;
         //Debug.Log("Clicked" + sCounter);
         
-        Vector3 ingotCenter = anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition").Find("Iron Ingot").position;
+        Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "IngotOnAnvil").transform.position;
 
         //Vector3 ingotCenter = Vector3.zero;
         Debug.Log(ingotCenter);
@@ -385,7 +385,7 @@ public class Anvil : MonoBehaviour, IInteractable
             Debug.Log(thongsWithIngot);
             Debug.Log(anvilPositionObject);
             thongsWithIngot.transform.SetParent(anvilPositionObject);
-            processedIngot = thongsWithIngot.transform.Find("ThongsPosition").Find("Iron Ingot").gameObject;
+            processedIngot = FindChildByTag(thongsWithIngot.transform.Find("ThongsPosition"), "Ingot");
             processedIngot.GetComponent<BoxCollider>().enabled = true;
             processedIngot.GetComponent<MeshCollider>().enabled = false;
             // processedIngot.transform.Rotate(Vector3.forward, 90);
