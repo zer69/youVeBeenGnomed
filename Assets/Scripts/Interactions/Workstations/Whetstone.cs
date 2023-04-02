@@ -178,14 +178,18 @@ public class Whetstone : MonoBehaviour, IInteractable
             float ingotFragility = ingot.gameObject.GetComponent<Ingot>().fragility;
             float sharpnessIncrement = ChangeSharpness(ingotFragility);
             if (ingot.gameObject.GetComponent<Ingot>().sharpness > 100f)
+            {
                 increasing = false;
+                hint.Raise("100% sharpened, get off until it's dull again");
+            }    
+                
             if (increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness += sharpnessIncrement;
             else
                 ingot.gameObject.GetComponent<Ingot>().sharpness -= sharpnessIncrement;
             if (ingot.gameObject.GetComponent<Ingot>().sharpness < 0f && !increasing)
                 ingot.gameObject.GetComponent<Ingot>().sharpness = 0;
-            Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
+            //Debug.Log("Sharpening now, current sharpness: " + ingot.gameObject.GetComponent<Ingot>().sharpness);
             ingot.gameObject.GetComponent<Ingot>().status = Ingot.CompletionStatus.Sharpened;
             
 
