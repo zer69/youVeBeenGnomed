@@ -4094,7 +4094,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820874714}
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0.2008, y: -0.038, z: 0.032}
+  m_LocalPosition: {x: 0.05, y: 0.05, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5864,9 +5864,13 @@ MonoBehaviour:
   cameraY: 5.3
   cameraOffsetX: 0.7
   cameraOffsetZ: -0.5
-  hammerX: 1.2
+  hammerX: 1.5
+  thongsX: -1
   hammerY: 2.9
+  thongsY: 3
   hammerZ: -0.5
+  thongsZ: 0
+  thongsSegmentRotation: 46.319
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
   anvilMode: 0
@@ -5878,6 +5882,7 @@ MonoBehaviour:
   rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
   supremacy: {fileID: 2100000, guid: 5a52ecbe77b0e224baf9d82f20d24c3a, type: 2}
   legendary: {fileID: 2100000, guid: 739a224e7d18b02449962684e1ce025b, type: 2}
+  anvilPositionObject: {fileID: 1922912777}
   sectionCounter: 0
   roundCounter: 0
   sectionLiveTime: 1
@@ -5890,6 +5895,7 @@ MonoBehaviour:
   quality: {fileID: 0}
   initialQuality: {fileID: 0}
   playerInput: {fileID: 1955815456}
+  hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
 --- !u!65 &1254662365
 BoxCollider:
   m_ObjectHideFlags: 0
