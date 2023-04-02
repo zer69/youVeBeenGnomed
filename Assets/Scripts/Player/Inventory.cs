@@ -241,7 +241,8 @@ public class Inventory : MonoBehaviour
                 if (hasIngot)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }
@@ -249,12 +250,46 @@ public class Inventory : MonoBehaviour
                 if (hasThongs)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     return false;
                 }
+            case "IngotInThongs":
+                if (hasIngotInThongs)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case "Hammer":
+                if (hasHammer)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
             default:
                 return false;
         }
     }
+
+    public void SetHasIngotInThongs(bool setTo)
+    {
+        if (setTo)
+        {
+            hasIngotInThongs = true;
+        } else
+        {
+            hasIngotInThongs = false;
+        }
+    }
 }
+        
+    
+
