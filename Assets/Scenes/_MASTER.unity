@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4032,7 +4032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &820874715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4124,14 +4124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820874714}
-  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalRotation: {x: 0.9567393, y: -0, z: -0, w: 0.29094684}
+  m_LocalPosition: {x: 0.00143, y: 0.0204, z: 0.0575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1254662368}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 146.171, y: 0, z: 0}
 --- !u!1001 &822452098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5904,6 +5904,7 @@ MonoBehaviour:
   thongsSegmentRotation: 46.319
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
+  anvilCamera: {fileID: 0}
   anvilMode: 0
   hitMode: 0
   hasWorkOnAnvil: 1

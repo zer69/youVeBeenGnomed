@@ -117,7 +117,7 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] private GameObject state1;
     [SerializeField] private GameObject state2;
-    [SerializeField] private AnvilState anvilState;
+    [SerializeField] public AnvilState anvilState;
 
     [SerializeField] private go_GameEvent sendIngot;
 

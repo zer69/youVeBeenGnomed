@@ -27,11 +27,10 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
-    Camera anvilCamera;
+    [SerializeField] private Camera anvilCamera;
     [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
     [SerializeField] private bool hasWorkOnAnvil = true;
-    [SerializeField] private bool ingotOnAnvil = false;
     private bool ingotToTake = false;
     [SerializeField] private Material common;
     [SerializeField] private Material uncommon;
@@ -52,7 +51,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private GameObject thongsPosition;
     private GameObject thongs;
     private GameObject anvilThongs;
-    private GameObject anvilHammer;
+    [SerializeField] private GameObject anvilHammer;
     //private GameObject anvilPositionObject;
     private Vector3 anvilPosition;
     
@@ -77,14 +76,11 @@ public class Anvil : MonoBehaviour, IInteractable
         Debug.Log(gameObject.transform.position);
         camera = Camera.main;
         anvilPosition = gameObject.transform.position;
-        anvilCamera = GameObject.Find("Anvil Camera").GetComponent<Camera>();
-        //anvilPositionObject = GameObject.Find("Anvil Position");
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
         hammer = GameObject.Find("Hammer");
         thongs = GameObject.Find("Thongs");
         Vector3 thongsColliderSize = thongs.GetComponent<BoxCollider>().bounds.size;
         thongsHeight = Mathf.Min(Mathf.Min(thongsColliderSize[0], thongsColliderSize[1]), thongsColliderSize[2]);
-        anvilObjectsPreparation();
         thongsPosition = GameObject.Find("ThongsPosition");
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         createEmptyListsForRoundHandler();
@@ -150,7 +146,6 @@ public class Anvil : MonoBehaviour, IInteractable
 
     IEnumerator IngotSectionDisappearRoutine(GameObject section, Vector3 targetScale, float seconds)
     {
-        //Debug.Log("IngotSectionDisappearRoutine");
         float time = 0;
         Vector3 currentScale = section.transform.localScale;
         while (time < seconds)
@@ -159,7 +154,6 @@ public class Anvil : MonoBehaviour, IInteractable
             time += Time.deltaTime;
             yield return null;
         }
-        // section.transform.localScale = targetScale;
         if (section is not null)
         {
             Destroy(section);
@@ -173,10 +167,8 @@ public class Anvil : MonoBehaviour, IInteractable
 
     IEnumerator RoundBreak(float seconds)
     {
-        //hitMode = false;
-        //Debug.Log("RoundBreak");
+
         yield return new WaitForSeconds(seconds);
-        
         roundCounter++;
         sectionCounter = 0;
         createEmptyListsForRoundHandler();
@@ -188,7 +180,6 @@ public class Anvil : MonoBehaviour, IInteractable
         Debug.Log("Finish Work!");
         returnIngotToHand(processedIngot);
         Destroy(processedIngot.gameObject);
-        ingotOnAnvil = false;
         ingotToTake = true;
         WorkHandler();
         yield return new WaitForSeconds(seconds);
@@ -218,15 +209,9 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void showSection(Vector3 position, float seconds)
     {
-        //Debug.Log(position);
-        //Debug.Log("showSection");
         GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
         Vector3 scale = new Vector3(ingotSectionWidth / 10, 1, ingotLength / 10);
         section.transform.localScale = scale;
-        //scale.z = ingotSectionWidth;
-        //scale.x = ingotLength;
-        //section.transform.localScale = scale;
-        //section.transform.SetParent(ingot.transform, false);
         sectionList.Add(position[0]);
         sectionIsVisible = true;
         StartCoroutine(IngotSectionRoutine(section, seconds));
@@ -236,13 +221,10 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         float zClick = hit.point.z;
         float xClick = hit.point.x;
-        //Debug.Log("ingotClickHandler");
-        //sCounter++;
-        //Debug.Log("Clicked" + sCounter);
         
         Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "IngotOnAnvil").transform.position;
 
-        //Vector3 ingotCenter = Vector3.zero;
+
         Debug.Log(ingotCenter);
         zMax = ingotCenter.z + ingotLength / 2;
         zMin = ingotCenter.z + ingotLength / -2;
@@ -253,16 +235,16 @@ public class Anvil : MonoBehaviour, IInteractable
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
         {
             Debug.Log("Ingot");
-            //if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
+
             if (xClick > sectionList[mouseClickCounter] - ingotSectionWidth / 2 && xClick < sectionList[mouseClickCounter] + ingotSectionWidth / 2)
             {
                 sectionResult.Add(true);
-                //quality.value += 0.1f;
+
             }
             else
             {
                 sectionResult.Add(false);
-                //quality.value -= 0.1f;
+
             }
             mouseClickCounter++;
         }
@@ -270,7 +252,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void mouseLeftButtonClickInHitModeHandler()
     {
-        //Debug.Log("mouseLeftButtonClickInHitModeHandler");
+
         Mouse mouse = Mouse.current;
         if (mouse.leftButton.wasPressedThisFrame)
         {
@@ -285,12 +267,12 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void anvilActive()
     {
-        //Debug.Log("anvilActive");
+
         if (roundCounter >= numberOfRounds)
         {
             hasWorkOnAnvil = false;
             roundCounter = 0;
-            //Debug.Log("Done");
+
             StartCoroutine(FinishWork(5));
         }
         else
@@ -320,13 +302,7 @@ public class Anvil : MonoBehaviour, IInteractable
     }
     private void resultHandler(List<bool> results)
     {
-        //Debug.Log("resultHandler");
-        //foreach (bool result in results)
-        //{
-        //Debug.Log("Result" + result);
-
-        //}
-        
+    
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
         
@@ -335,7 +311,6 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void WorkHandler()
     {
-        //Debug.Log("Work Handler!");
         float zMax = -3;
         float zMin = -9;
         float xMax = 9;
@@ -369,109 +344,41 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void createEmptyListsForRoundHandler()
     {
-        //Debug.Log("createEmptyListsForRoundHandler");
         sectionList = new List<float>();
         sectionResult = new List<bool>();
     }
 
-    private void createIngotOnAnvil(GameObject ingot)
+    private void createIngotOnAnvil()
     {
-        if (!ingotOnAnvil)
-        {
-            //Vector3 position = new Vector3(anvilPositionObject.x, anvilHeight, gameObject.transform.position.z);
-            //processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
-            //processedIngot = Instantiate(ingot, position, Quaternion.Euler(-90, 0, 90));
-            GameObject thongsWithIngot = Instantiate(ingot, anvilPositionObject.position, Quaternion.Euler(90, 0, -90));
-            Debug.Log(thongsWithIngot);
-            Debug.Log(anvilPositionObject);
-            thongsWithIngot.transform.SetParent(anvilPositionObject);
-            processedIngot = FindChildByTag(thongsWithIngot.transform.Find("ThongsPosition"), "Ingot");
-            processedIngot.GetComponent<BoxCollider>().enabled = true;
-            processedIngot.GetComponent<MeshCollider>().enabled = false;
-            // processedIngot.transform.Rotate(Vector3.forward, 90);
-            processedIngot.tag = "IngotOnAnvil";
-            Destroy(ingot);
-            //Debug.Log(ingot);
-            //player.GetComponent<Inventory>().IngotIsPicked(false);
-            player.GetComponent<Inventory>().SetHasIngotInThongs(false);
-            ingotOnAnvil = true;
-        }
-    }
 
-    private void cameraPreparation()
-    {
-        anvilCamera.gameObject.SetActive(false);
-        anvilCamera.gameObject.transform.position = new Vector3(anvilPosition.x + cameraOffsetX, cameraY, anvilPosition.z + cameraOffsetZ);
-    }
+        thongs.transform.SetParent(anvilPositionObject);
+        thongs.transform.position = anvilPositionObject.position;
+        thongs.transform.rotation = anvilPositionObject.rotation;
+        thongs.GetComponent<Rigidbody>().isKinematic = true;
+        thongs.GetComponent<BoxCollider>().enabled = false;
 
-    private void hammerPreparation()
-    {
-        Vector3 position = new Vector3(anvilPosition.x + hammerX, anvilPosition.y + hammerY, anvilPosition.z + hammerZ);
-        anvilHammer = Instantiate(GameObject.Find("Hammer"), position, Quaternion.Euler(0, 0, 0));
-        anvilHammer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        anvilHammer.transform.SetParent(gameObject.transform);
-        anvilHammer.gameObject.SetActive(false);
-    }
+        processedIngot = FindChildByTag(thongs.transform.Find("ThongsPosition"), "Ingot");
+        processedIngot.GetComponent<BoxCollider>().enabled = true;
+        processedIngot.GetComponent<MeshCollider>().enabled = false;
 
-    private void thongsPreparation()
-    {
-        Vector3 position = new Vector3(anvilPosition.x + thongsX, anvilPosition.y + thongsY, anvilPosition.z + thongsZ);
-        anvilThongs = Instantiate(thongs, position, Quaternion.Euler(90, 180, 90));
-        anvilThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //Transform segment1 = anvilThongs.transform.Find("Nail").Find("Tong Segment 1");
-        //Transform segment2 = anvilThongs.transform.Find("Nail").Find("Tong Segment 2");
-        //segment1.localRotation = Quaternion.Euler(thongsSegmentRotation, segment1.transform.rotation.eulerAngles.y, segment1.transform.rotation.eulerAngles.z);
-        //segment2.localRotation = Quaternion.Euler(thongsSegmentRotation, segment2.transform.rotation.eulerAngles.y, segment2.transform.rotation.eulerAngles.z);
-        anvilThongs.transform.SetParent(gameObject.transform);
-        anvilThongs.gameObject.SetActive(false);
-
-    }
-
-    private void nailsOnAnvil()
-    {
-        GameObject segment1 = GameObject.Find("Tong Segment 1");
-        GameObject segment2 = GameObject.Find("Tong Segment 2");
-        segment1.transform.rotation = Quaternion.Euler(46, segment1.transform.rotation.eulerAngles.y, segment1.transform.rotation.eulerAngles.z);
-        segment2.transform.rotation = Quaternion.Euler(46, segment2.transform.rotation.eulerAngles.y, segment2.transform.rotation.eulerAngles.z);
     }
 
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
-        if (player.GetComponent<Inventory>().CheckInventoryForItem("IngotInThongs") && player.GetComponent<Inventory>().CheckInventoryForItem("Hammer") && !ingotOnAnvil && hasWorkOnAnvil)
+        if (!(player.GetComponent<Inventory>().CheckInventoryForItem("IngotInThongs") && player.GetComponent<Inventory>().CheckInventoryForItem("Hammer")))
         {
-            //GameObject thongsInHand = GameObject.Find("ThongsPosition");
-            // hand flag?
-            //GameObject ingotInHand = FindChildByTag(thongsInHand.transform, "Ingot");
-            //Debug.Log(ingotInHand);
-            createIngotOnAnvil(thongs);
-            //Destroy(thongsInHand);
-            //thongsPreparation();
-            //StartCoroutine(ThongsPreparation(0.5f));
-            hammer.gameObject.SetActive(false);
-            anvilHammer.gameObject.SetActive(true);
-            //thongs.gameObject.SetActive(false);
-            //anvilThongs.gameObject.SetActive(true);
-            // nailsOnAnvil();
-        } else {
-            if (player.GetComponent<Inventory>().CheckInventoryForItem("Hammer"))
-            {
-                hammer.gameObject.SetActive(false);
-                anvilHammer.gameObject.SetActive(true);
-            }
-            //if (player.GetComponent<Inventory>().CheckInventoryForItem("Thongs"))
-            //{
-                //thongs.gameObject.SetActive(false);
-                //anvilThongs.gameObject.SetActive(true);
-            //}
-
+            return false;
         }
         
+        createIngotOnAnvil();
+        hammer.gameObject.SetActive(false);
+        anvilHammer.gameObject.SetActive(true);
+
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
-        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         
@@ -488,12 +395,15 @@ public class Anvil : MonoBehaviour, IInteractable
                 anvilMode = false;
                 camera.gameObject.SetActive(true);
                 anvilCamera.gameObject.SetActive(false);
+                playerInput.actions.FindAction("DropItems").Enable();
+                Cursor.lockState = CursorLockMode.Locked;
+
                 if (player.GetComponent<Inventory>().CheckInventoryForItem("Hammer"))
                 {
                     hammer.gameObject.SetActive(true);
                     anvilHammer.gameObject.SetActive(false);
                 }
-                
+
                 if (player.GetComponent<Inventory>().CheckInventoryForItem("Thongs"))
                 {
                     thongs.gameObject.SetActive(true);
@@ -533,19 +443,8 @@ public class Anvil : MonoBehaviour, IInteractable
     private bool InventoryToWork()
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (!inventory.CheckInventoryForItem("Ingot") && !inventory.CheckInventoryForItem("IngotInThongs") && inventory.CheckInventoryForItem("Thongs") && inventory.CheckInventoryForItem("Hammer"))
-        {
+        if (inventory.CheckInventoryForItem("IngotInThongs")&& inventory.CheckInventoryForItem("Hammer"))
             return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-    private void anvilObjectsPreparation()
-    {
-        cameraPreparation();
-        hammerPreparation();
-        //thongsPreparation();
+        return false;
     }
 }
