@@ -55,6 +55,7 @@ public class Ingot : MonoBehaviour
         None,
         Axe,
         Sword,
+        Dagger,
         Spear
     }
 
@@ -102,11 +103,15 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] private col_GameEvent weaponLanded;
 
-   
+    [SerializeField] private Material ingotMaterial;
+    private Color emissiveColor = new Color(0.749f, 0.0078f, 0f, 1f);
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
+       
     {
+
+        //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
         //currentTemperature = airTemperature;
 
@@ -117,6 +122,12 @@ public class Ingot : MonoBehaviour
     private void Update()
     {
         Cooling();
+        HeatColor();
+    }
+
+    public void HeatColor()
+    {
+        ingotMaterial.SetColor("_EmissiveColor", emissiveColor * ((currentTemperature / MeltingPoint) * 15 - 10));
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change

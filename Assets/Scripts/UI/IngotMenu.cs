@@ -63,4 +63,10 @@ public class IngotMenu : MonoBehaviour
         ingotToSet.GetComponent<Ingot>().weaponType = Ingot.WeaponType.Spear;
         UnlockMovement();
     }
+
+    public void SetDagger()
+    {
+        ingotToSet.GetComponent<Ingot>().weaponType = Ingot.WeaponType.Dagger;
+        UnlockMovement();
+    }
 }
