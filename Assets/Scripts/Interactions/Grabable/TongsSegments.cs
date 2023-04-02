@@ -10,7 +10,7 @@ public class TongsSegments : MonoBehaviour
 
     private float rotationValue;
     private float ingotRotationValue = 46.319f;
-    private float weaponRotationValue;
+    private float weaponRotationValue = 74.946f;
 
     // Start is called before the first frame update
     void Start()
