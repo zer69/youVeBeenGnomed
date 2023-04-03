@@ -6808,7 +6808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5134946a055de9e46b93c9d7969ca186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadingTime: 1
+  fadingTime: 1.6
 --- !u!1001 &1447876776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7522,6 +7522,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402204287236200389, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: CoolingRate
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402204287236200389, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: StrengthRate
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402204287236200389, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: FragilityRate
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6402204287413036179, guid: 694a13021fef4ae448d8e92273c7f572,
         type: 3}
