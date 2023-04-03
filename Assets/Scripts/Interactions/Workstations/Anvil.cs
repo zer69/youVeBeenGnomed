@@ -75,7 +75,7 @@ public class Anvil : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     private void Awake()
     {
-        Debug.Log(gameObject.transform.position);
+        //Debug.Log(gameObject.transform.position);
         camera = Camera.main;
         anvilPosition = gameObject.transform.position;
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
@@ -92,7 +92,7 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-        Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
+        //Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
         ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
@@ -272,16 +272,16 @@ public class Anvil : MonoBehaviour, IInteractable
         //Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "Ingot").transform.position;
         Vector3 ingotCenter = processedIngot.transform.position;
 
-        Debug.Log(ingotCenter);
+        //Debug.Log(ingotCenter);
         zMax = ingotCenter.z + ingotLength / 2;
         zMin = ingotCenter.z + ingotLength / -2;
         xMax = ingotCenter.x + ingotWidth / 2;
         xMin = ingotCenter.x + ingotWidth / -2;
-        Debug.Log(xClick);
-        Debug.Log(zClick);
+        //Debug.Log(xClick);
+        //Debug.Log(zClick);
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
         {
-            Debug.Log("Ingot");
+            //Debug.Log("Ingot");
 
             if (xClick > sectionList[mouseClickCounter] - ingotSectionWidth / 2 && xClick < sectionList[mouseClickCounter] + ingotSectionWidth / 2)
             {

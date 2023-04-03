@@ -164,7 +164,7 @@ public class Ingot : MonoBehaviour
 
     public void UpdateWeaponGraphics()
     {
-        Debug.Log("SENTWEAPON");
+        //Debug.Log("SENTWEAPON");
         sendIngot.Raise(this.gameObject);
         anvilState = AnvilState.Weapon;
 
@@ -208,7 +208,7 @@ public class Ingot : MonoBehaviour
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
-            if (status > CompletionStatus.Forged)
+            if (status >= CompletionStatus.Forged)
             {
                 status = CompletionStatus.Heated;
             }
@@ -282,6 +282,8 @@ public class Ingot : MonoBehaviour
 
     public void Melting()
     {
+        if (anvilState == AnvilState.Weapon)
+            return;
         if (currentTemperature >= MeltingPoint)
         {
             status = CompletionStatus.Melted;

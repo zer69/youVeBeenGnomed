@@ -39,7 +39,8 @@ public class Liquid : MonoBehaviour
 
     void OnTriggerStay(Collider collider)
     {
-        if (!CoolingWeapon(collider.gameObject.transform.GetChild(1).gameObject))
+        Debug.Log(collider.gameObject.transform.gameObject.name);
+        if (!CoolingWeapon(collider.gameObject.transform.gameObject))
         {
             hint.Raise("Oh my, it's cooled! Almost as cold as ice");
         }
