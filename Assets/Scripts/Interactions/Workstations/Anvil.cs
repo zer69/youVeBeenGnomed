@@ -185,7 +185,10 @@ public class Anvil : MonoBehaviour, IInteractable
             createEmptyListsForRoundHandler();
         }
         roundReset = false;
-        
+
+        if (anvilMode == false)
+            yield return null;
+
         hint.Raise("Memorize location of sections!");
         
     }
