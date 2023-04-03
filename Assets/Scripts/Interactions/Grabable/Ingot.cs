@@ -120,6 +120,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] public AnvilState anvilState;
 
     [SerializeField] private go_GameEvent sendIngot;
+    [SerializeField] private s_GameEvent hint;
+    bool readyRaised = true;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
@@ -287,6 +289,11 @@ public class Ingot : MonoBehaviour
         if (currentTemperature >= MeltingPoint)
         {
             status = CompletionStatus.Melted;
+            if (readyRaised)
+            {
+                hint.Raise("Ingot ready for forging!");
+                readyRaised = false;
+            }
         }
         else
         {
