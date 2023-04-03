@@ -39,31 +39,34 @@ public class Liquid : MonoBehaviour
 
     void OnTriggerStay(Collider collider)
     {
-        Debug.Log(collider.gameObject.transform.gameObject.name);
-        if (!CoolingWeapon(collider.gameObject.transform.gameObject))
+        if (collider.tag == "Ingot")
         {
-            hint.Raise("Oh my, it's cooled! Almost as cold as ice");
+            Debug.Log(collider.gameObject.transform.gameObject.name);
+            if (!CoolingWeapon(collider.gameObject.transform.gameObject))
+            {
+                hint.Raise("Oh my, it's cooled! Almost as cold as ice");
+            }
         }
-        
-        //if(collider.tag == "Tool")
-        //{            
-        //    //Debug.Log("Tool Stay");
-        //    CoolingWeapon(collider.gameObject.transform.GetChild(1).gameObject);
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Enter liquid");
-        Ingot ignot = other.gameObject.transform.GetChild(1).GetComponent<Ingot>();
-        ignot.setSpecificCoolingRate(CoolingRate);
+
+        if (other.tag == "Ingot")
+        {
+            Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
+            ignot.setSpecificCoolingRate(CoolingRate);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Exit liquid");
-        Ingot ignot = other.gameObject.transform.GetChild(1).GetComponent<Ingot>();
-        ignot.setNormalCoolingRate();
+        if (other.tag == "Ingot")
+        {            
+            Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
+            ignot.setNormalCoolingRate();
+        }
     }
 
 }
