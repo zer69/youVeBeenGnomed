@@ -70,6 +70,8 @@ public class Anvil : MonoBehaviour, IInteractable
     private bool start = true;
     private bool roundReset = true;
 
+    [SerializeField] private GameEvent resetAnvil;
+
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
@@ -110,10 +112,13 @@ public class Anvil : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if (anvilMode && hasWorkOnAnvil && InventoryToWork())
+        if (anvilMode)
         {
             anvilActive();
         }
+
+        Debug.Log(roundCounter);
+        
         //if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         //{
 
@@ -186,15 +191,15 @@ public class Anvil : MonoBehaviour, IInteractable
         }
         roundReset = false;
 
-        if (anvilMode == false)
-            yield return null;
 
-        hint.Raise("Memorize location of sections!");
+        if (roundCounter < 3)
+            
+            hint.Raise("Memorize location of sections!");
         
     }
 
 
-    IEnumerator FinishWork(float seconds)
+    private void FinishWork()
     {
         Debug.Log("Finish Work!");
 
@@ -222,11 +227,9 @@ public class Anvil : MonoBehaviour, IInteractable
         roundReset = true;
         //WorkHandler();
         
-        hasWorkOnAnvil = true;
         successfulHits = 0;
-        StopAllCoroutines();
-        anvilMode = false;
-        yield return null;
+        
+        
     }
 
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
@@ -326,11 +329,9 @@ public class Anvil : MonoBehaviour, IInteractable
 
         if (roundCounter >= numberOfRounds)
         {
-            hasWorkOnAnvil = false;
             roundCounter = 0;
-            
-
-            StartCoroutine(FinishWork(5));
+            anvilMode = false;
+            FinishWork();
         }
         else
         {
@@ -429,8 +430,9 @@ public class Anvil : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
-        if (!(player.GetComponent<Inventory>().CheckInventoryForItem("IngotInThongs") && player.GetComponent<Inventory>().CheckInventoryForItem("Hammer")))
+        if (!InventoryToWork())
         {
+            hint.Raise("Something is missing from my hands");
             return false;
         }
         
