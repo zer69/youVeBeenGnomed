@@ -125,6 +125,7 @@ public class Ingot : MonoBehaviour
     private void Start()
        
     {
+        ingotMaterial.EnableKeyword("_EMISSION");
 
         //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
@@ -172,7 +173,11 @@ public class Ingot : MonoBehaviour
 
     public void HeatColor()
     {
-        ingotMaterial.SetColor("_EmissiveColor", emissiveColor * ((currentTemperature / MeltingPoint) * 15));
+        //Debug.Log(emissiveColor);
+        //Debug.Log(currentTemperature);
+        emissiveColor = emissiveColor * ((currentTemperature / MeltingPoint) * 64f);
+        ingotMaterial.SetColor("_EmissionColor", emissiveColor);
+        ingotMaterial.EnableKeyword("_EMISSION");
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change

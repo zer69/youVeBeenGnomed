@@ -67,6 +67,8 @@ public class Anvil : MonoBehaviour, IInteractable
     public FloatVariable quality, initialQuality;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private s_GameEvent hint;
+    private bool start = true;
+    private bool roundReset = true;
 
     public string InteractionPrompt => _prompt;
 
@@ -108,7 +110,7 @@ public class Anvil : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if (anvilMode && hasWorkOnAnvil && ingotOnAnvil && InventoryToWork())
+        if (anvilMode && hasWorkOnAnvil && InventoryToWork())
         {
             anvilActive();
         }
@@ -136,7 +138,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(seconds);
         Vector3 currentScale = section.transform.localScale;
-        Vector3 targetScale = new Vector3(0, currentScale.y, currentScale.z);
+        Vector3 targetScale = new Vector3(0.00005f, currentScale.y, currentScale.z);
         StartCoroutine(IngotSectionDisappearRoutine(section, targetScale, sectionDisappearTime));
         
         
@@ -156,10 +158,14 @@ public class Anvil : MonoBehaviour, IInteractable
         }
         if (section is not null)
         {
-            Destroy(section);
+            //Destroy(section);
         }
         if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
         {
+            hint.Raise("Now hit!");
+            /*GameObject[] sectionsToClear = GameObject.FindGameObjectsWithTag("IngotSection");
+            foreach (GameObject sc in sectionsToClear)
+                sc.transform.localScale = new Vector3(0f, sc.transform.localScale.y, sc.transform.localScale.z);*/
             hitMode = true;
         }
         
@@ -167,32 +173,59 @@ public class Anvil : MonoBehaviour, IInteractable
 
     IEnumerator RoundBreak(float seconds)
     {
-
+        GameObject[] sectionsToDelete = GameObject.FindGameObjectsWithTag("IngotSection");
+        foreach (GameObject section in sectionsToDelete)
+            GameObject.Destroy(section);
         yield return new WaitForSeconds(seconds);
-        roundCounter++;
-        sectionCounter = 0;
-        createEmptyListsForRoundHandler();
+        if (!roundReset)
+        {
+            
+            roundCounter++;
+            sectionCounter = 0;
+            createEmptyListsForRoundHandler();
+        }
+        roundReset = false;
+        
+        hint.Raise("Memorize location of sections!");
+        
     }
 
 
     IEnumerator FinishWork(float seconds)
     {
         Debug.Log("Finish Work!");
-        returnIngotToHand(processedIngot);
-        Destroy(processedIngot.gameObject);
-        ingotToTake = true;
-        WorkHandler();
-        yield return new WaitForSeconds(seconds);
+
+        hammer.gameObject.SetActive(true);
+        anvilHammer.gameObject.SetActive(false);
+
+        camera.gameObject.SetActive(true);
+        anvilCamera.gameObject.SetActive(false);
+        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        //playerInput.transform.localRotation = Quaternion.identity;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        thongs.transform.SetParent(camera.transform.Find("Player Transform"));
+        thongs.transform.position = camera.transform.Find("Left Hand").position;
+        thongs.transform.rotation = camera.transform.Find("Left Hand").rotation;
+        thongs.GetComponent<Rigidbody>().isKinematic = false;
+        thongs.GetComponent<BoxCollider>().enabled = true;
+
+        processedIngot.GetComponent<BoxCollider>().enabled = false;
+        processedIngot.GetComponent<MeshCollider>().enabled = true;
+
+
+
+        start = true;
+        roundReset = true;
+        //WorkHandler();
+        
         hasWorkOnAnvil = true;
         successfulHits = 0;
-
+        StopAllCoroutines();
+        anvilMode = false;
+        yield return null;
     }
 
-    IEnumerator ThongsPreparation(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        thongsPreparation();
-    }
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
         float leftBound = processedIngot.transform.position.x - ingotWidth / 2 + ingotSectionWidth / 2;
@@ -203,7 +236,21 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.001f, processedIngot.transform.position.z);
+        float heightOffset = 0f;
+        switch(processedIngot.GetComponent<Ingot>().anvilState)
+        {
+            case Ingot.AnvilState.Raw:
+                heightOffset = 0.397548f;
+                break;
+            case Ingot.AnvilState.Rare:
+                heightOffset = 0.397548f + 0.15f;
+                break;
+            case Ingot.AnvilState.MediumRare:
+                heightOffset = 0.397548f + 0.15f + 0.071f;
+                break;
+
+        }
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset, processedIngot.transform.position.z);
         return location;
     }
 
@@ -222,8 +269,8 @@ public class Anvil : MonoBehaviour, IInteractable
         float zClick = hit.point.z;
         float xClick = hit.point.x;
         
-        Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "IngotOnAnvil").transform.position;
-
+        //Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "Ingot").transform.position;
+        Vector3 ingotCenter = processedIngot.transform.position;
 
         Debug.Log(ingotCenter);
         zMax = ingotCenter.z + ingotLength / 2;
@@ -267,11 +314,18 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void anvilActive()
     {
+        if (start)
+        {
+            StartCoroutine(RoundBreak(0f));
+            start = false;
+        }
+            
 
         if (roundCounter >= numberOfRounds)
         {
             hasWorkOnAnvil = false;
             roundCounter = 0;
+            
 
             StartCoroutine(FinishWork(5));
         }
@@ -281,6 +335,7 @@ public class Anvil : MonoBehaviour, IInteractable
             {
                 showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
                 sectionCounter++;
+                
             }
             //if (!sectionIsVisible && !hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
             //{
@@ -289,6 +344,7 @@ public class Anvil : MonoBehaviour, IInteractable
             //}
             if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
             {
+
                 mouseLeftButtonClickInHitModeHandler();
             }
             if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
@@ -305,7 +361,11 @@ public class Anvil : MonoBehaviour, IInteractable
     
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
-        
+
+        processedIngot.GetComponent<Ingot>().anvilState++;
+        if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
+            processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
+
         Debug.Log(successfulClicks);
     }
 
@@ -387,7 +447,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        switch (context.action.name)
+        /*switch (context.action.name)
         {
             case "Abort":
                 Debug.Log("Leave anvil");
@@ -416,7 +476,7 @@ public class Anvil : MonoBehaviour, IInteractable
                     player.GetComponent<Inventory>().SetHasIngotInThongs(true);
                 }
                 break;
-        }
+        }*/
     }
 
     private GameObject FindChildByTag(Transform tr, string tag)
@@ -431,14 +491,7 @@ public class Anvil : MonoBehaviour, IInteractable
         return null;
     }
 
-    private void returnIngotToHand(GameObject ingot)
-    {
-        GameObject ingotInHand = Instantiate(ingot, thongsPosition.transform.position, thongsPosition.transform.rotation);
-        ingotInHand.tag = "Ingot";
-        ingotInHand.GetComponent<MeshCollider>().enabled = true;
-        ingotInHand.GetComponent<BoxCollider>().enabled = false;
-        ingotInHand.transform.SetParent(thongsPosition.transform);
-    }
+
 
     private bool InventoryToWork()
     {
