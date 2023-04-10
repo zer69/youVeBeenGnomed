@@ -16,26 +16,28 @@ public class Anvil : MonoBehaviour, IInteractable
     private float zMin;
     private float xMax;
     private float xMin;
+    private float thongsHeight;
     [SerializeField] private float cameraY = 4.5f;
     [SerializeField] private float cameraOffsetX = 0;
     [SerializeField] private float cameraOffsetZ = 0;
-    [SerializeField] private float hammerX;
-    [SerializeField] private float hammerY;
-    [SerializeField] private float hammerZ;
+    [SerializeField] private float hammerX, thongsX;
+    [SerializeField] private float hammerY, thongsY;
+    [SerializeField] private float hammerZ, thongsZ;
+    [SerializeField] private float thongsSegmentRotation = 46.319f;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
-    Camera anvilCamera;
+    [SerializeField] private Camera anvilCamera;
     [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
     [SerializeField] private bool hasWorkOnAnvil = true;
-    [SerializeField] private bool ingotOnAnvil = false;
     private bool ingotToTake = false;
     [SerializeField] private Material common;
     [SerializeField] private Material uncommon;
     [SerializeField] private Material rare;
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
+    [SerializeField] private Transform anvilPositionObject;
     private float anvilRange = 3;
     [SerializeField] private int sectionCounter = 0;
     [SerializeField] private int roundCounter = 0;
@@ -47,8 +49,12 @@ public class Anvil : MonoBehaviour, IInteractable
     private GameObject player;
     private GameObject hammer;
     private GameObject thongsPosition;
-    private GameObject anvilHammer;
+    private GameObject thongs;
+    private GameObject anvilThongs;
+    [SerializeField] private GameObject anvilHammer;
+    //private GameObject anvilPositionObject;
     private Vector3 anvilPosition;
+    
     private Rigidbody playerRb;
     private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
@@ -60,20 +66,25 @@ public class Anvil : MonoBehaviour, IInteractable
     private int successfulHits = 0;
     public FloatVariable quality, initialQuality;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private s_GameEvent hint;
+    private bool start = true;
+    private bool roundReset = true;
+
+    [SerializeField] private GameEvent resetAnvil;
 
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        Debug.Log(gameObject.transform.position);
+        //Debug.Log(gameObject.transform.position);
         camera = Camera.main;
         anvilPosition = gameObject.transform.position;
-        anvilCamera = GameObject.Find("Anvil Camera").GetComponent<Camera>();
-        cameraPreparation();
-        hammerPreparation();
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
         hammer = GameObject.Find("Hammer");
+        thongs = GameObject.Find("Thongs");
+        Vector3 thongsColliderSize = thongs.GetComponent<BoxCollider>().bounds.size;
+        thongsHeight = Mathf.Min(Mathf.Min(thongsColliderSize[0], thongsColliderSize[1]), thongsColliderSize[2]);
         thongsPosition = GameObject.Find("ThongsPosition");
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         createEmptyListsForRoundHandler();
@@ -83,17 +94,17 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-        Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
+        //Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
         ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
         player = GameObject.Find("PLAYER");
         playerRb = player.GetComponent<Rigidbody>();
         ingotSectionWidth = ingotWidth / 10;
-        zMax = anvilPosition.z + ingotLength / 2;
-        zMin = anvilPosition.z + ingotLength / -2;
-        xMax = anvilPosition.x + ingotWidth / 2;
-        xMin = anvilPosition.x + ingotWidth / -2;
+        //zMax = anvilPosition.z + ingotLength / 2;
+        //zMin = anvilPosition.z + ingotLength / -2;
+        //xMax = anvilPosition.x + ingotWidth / 2;
+        //xMin = anvilPosition.x + ingotWidth / -2;
         //Debug.Log(ingotSectionWidth);
         //Debug.Log(ingotLength);
     }
@@ -101,10 +112,13 @@ public class Anvil : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if (anvilMode && hasWorkOnAnvil && ingotOnAnvil && InventoryToWork())
+        if (anvilMode)
         {
             anvilActive();
         }
+
+        Debug.Log(roundCounter);
+        
         //if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         //{
 
@@ -129,7 +143,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(seconds);
         Vector3 currentScale = section.transform.localScale;
-        Vector3 targetScale = new Vector3(0, currentScale.y, currentScale.z);
+        Vector3 targetScale = new Vector3(0.00005f, currentScale.y, currentScale.z);
         StartCoroutine(IngotSectionDisappearRoutine(section, targetScale, sectionDisappearTime));
         
         
@@ -139,7 +153,6 @@ public class Anvil : MonoBehaviour, IInteractable
 
     IEnumerator IngotSectionDisappearRoutine(GameObject section, Vector3 targetScale, float seconds)
     {
-        //Debug.Log("IngotSectionDisappearRoutine");
         float time = 0;
         Vector3 currentScale = section.transform.localScale;
         while (time < seconds)
@@ -148,13 +161,16 @@ public class Anvil : MonoBehaviour, IInteractable
             time += Time.deltaTime;
             yield return null;
         }
-        // section.transform.localScale = targetScale;
         if (section is not null)
         {
-            Destroy(section);
+            //Destroy(section);
         }
         if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
         {
+            hint.Raise("Now hit!");
+            /*GameObject[] sectionsToClear = GameObject.FindGameObjectsWithTag("IngotSection");
+            foreach (GameObject sc in sectionsToClear)
+                sc.transform.localScale = new Vector3(0f, sc.transform.localScale.y, sc.transform.localScale.z);*/
             hitMode = true;
         }
         
@@ -162,29 +178,60 @@ public class Anvil : MonoBehaviour, IInteractable
 
     IEnumerator RoundBreak(float seconds)
     {
-        //hitMode = false;
-        //Debug.Log("RoundBreak");
+        GameObject[] sectionsToDelete = GameObject.FindGameObjectsWithTag("IngotSection");
+        foreach (GameObject section in sectionsToDelete)
+            GameObject.Destroy(section);
         yield return new WaitForSeconds(seconds);
+        if (!roundReset)
+        {
+            
+            roundCounter++;
+            sectionCounter = 0;
+            createEmptyListsForRoundHandler();
+        }
+        roundReset = false;
+
+
+        if (roundCounter < 3)
+            
+            hint.Raise("Memorize location of sections!");
         
-        roundCounter++;
-        sectionCounter = 0;
-        createEmptyListsForRoundHandler();
     }
 
 
-    IEnumerator FinishWork(float seconds)
+    private void FinishWork()
     {
         Debug.Log("Finish Work!");
-        returnIngotToHand(processedIngot);
-        Destroy(processedIngot.gameObject);
-        ingotOnAnvil = false;
-        ingotToTake = true;
-        WorkHandler();
-        yield return new WaitForSeconds(seconds);
-        hasWorkOnAnvil = true;
-        successfulHits = 0;
 
+        hammer.gameObject.SetActive(true);
+        anvilHammer.gameObject.SetActive(false);
+
+        camera.gameObject.SetActive(true);
+        anvilCamera.gameObject.SetActive(false);
+        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        //playerInput.transform.localRotation = Quaternion.identity;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        thongs.transform.SetParent(camera.transform.Find("Player Transform"));
+        thongs.transform.position = camera.transform.Find("Left Hand").position;
+        thongs.transform.rotation = camera.transform.Find("Left Hand").rotation;
+        thongs.GetComponent<Rigidbody>().isKinematic = false;
+        thongs.GetComponent<BoxCollider>().enabled = true;
+
+        processedIngot.GetComponent<BoxCollider>().enabled = false;
+        processedIngot.GetComponent<MeshCollider>().enabled = true;
+
+
+
+        start = true;
+        roundReset = true;
+        //WorkHandler();
+        
+        successfulHits = 0;
+        
+        
     }
+
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
     {
         float leftBound = processedIngot.transform.position.x - ingotWidth / 2 + ingotSectionWidth / 2;
@@ -195,21 +242,29 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private Vector3 generateSectionLocation(float ingotWidth, float ingotHeight, float anvilHeight, float ingotSectionWidth)
     {
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + 0.001f, processedIngot.transform.position.z);
+        float heightOffset = 0f;
+        switch(processedIngot.GetComponent<Ingot>().anvilState)
+        {
+            case Ingot.AnvilState.Raw:
+                heightOffset = 0.397548f;
+                break;
+            case Ingot.AnvilState.Rare:
+                heightOffset = 0.397548f + 0.15f;
+                break;
+            case Ingot.AnvilState.MediumRare:
+                heightOffset = 0.397548f + 0.15f + 0.071f;
+                break;
+
+        }
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset, processedIngot.transform.position.z);
         return location;
     }
 
     private void showSection(Vector3 position, float seconds)
     {
-        //Debug.Log(position);
-        //Debug.Log("showSection");
         GameObject section = Instantiate(ingotSectionPrefab, position, ingotSectionPrefab.transform.rotation);
         Vector3 scale = new Vector3(ingotSectionWidth / 10, 1, ingotLength / 10);
         section.transform.localScale = scale;
-        //scale.z = ingotSectionWidth;
-        //scale.x = ingotLength;
-        //section.transform.localScale = scale;
-        //section.transform.SetParent(ingot.transform, false);
         sectionList.Add(position[0]);
         sectionIsVisible = true;
         StartCoroutine(IngotSectionRoutine(section, seconds));
@@ -219,24 +274,30 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         float zClick = hit.point.z;
         float xClick = hit.point.x;
-        //Debug.Log("ingotClickHandler");
-        //sCounter++;
-        //Debug.Log("Clicked" + sCounter);
-        Debug.Log(xClick);
-        Debug.Log(zClick);
+        
+        //Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "Ingot").transform.position;
+        Vector3 ingotCenter = processedIngot.transform.position;
+
+        //Debug.Log(ingotCenter);
+        zMax = ingotCenter.z + ingotLength / 2;
+        zMin = ingotCenter.z + ingotLength / -2;
+        xMax = ingotCenter.x + ingotWidth / 2;
+        xMin = ingotCenter.x + ingotWidth / -2;
+        //Debug.Log(xClick);
+        //Debug.Log(zClick);
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
         {
-            Debug.Log("Ingot");
-            //if (xClick > sectionList[mouseClickCounter] && xClick < sectionList[mouseClickCounter] + ingotSectionWidth)
+            //Debug.Log("Ingot");
+
             if (xClick > sectionList[mouseClickCounter] - ingotSectionWidth / 2 && xClick < sectionList[mouseClickCounter] + ingotSectionWidth / 2)
             {
                 sectionResult.Add(true);
-                //quality.value += 0.1f;
+
             }
             else
             {
                 sectionResult.Add(false);
-                //quality.value -= 0.1f;
+
             }
             mouseClickCounter++;
         }
@@ -244,7 +305,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void mouseLeftButtonClickInHitModeHandler()
     {
-        //Debug.Log("mouseLeftButtonClickInHitModeHandler");
+
         Mouse mouse = Mouse.current;
         if (mouse.leftButton.wasPressedThisFrame)
         {
@@ -259,13 +320,18 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void anvilActive()
     {
-        //Debug.Log("anvilActive");
+        if (start)
+        {
+            StartCoroutine(RoundBreak(0f));
+            start = false;
+        }
+            
+
         if (roundCounter >= numberOfRounds)
         {
-            hasWorkOnAnvil = false;
             roundCounter = 0;
-            //Debug.Log("Done");
-            StartCoroutine(FinishWork(5));
+            anvilMode = false;
+            FinishWork();
         }
         else
         {
@@ -273,6 +339,7 @@ public class Anvil : MonoBehaviour, IInteractable
             {
                 showSection(generateSectionLocation(ingotWidth, ingotHeight, anvilHeight, ingotSectionWidth), sectionLiveTime);
                 sectionCounter++;
+                
             }
             //if (!sectionIsVisible && !hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
             //{
@@ -281,6 +348,7 @@ public class Anvil : MonoBehaviour, IInteractable
             //}
             if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
             {
+
                 mouseLeftButtonClickInHitModeHandler();
             }
             if (hitMode && mouseClickCounter >= numberOfSectionsInRound[roundCounter])
@@ -294,22 +362,19 @@ public class Anvil : MonoBehaviour, IInteractable
     }
     private void resultHandler(List<bool> results)
     {
-        //Debug.Log("resultHandler");
-        //foreach (bool result in results)
-        //{
-        //Debug.Log("Result" + result);
-
-        //}
-        
+    
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
-        
+
+        processedIngot.GetComponent<Ingot>().anvilState++;
+        if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
+            processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
+
         Debug.Log(successfulClicks);
     }
 
     private void WorkHandler()
     {
-        //Debug.Log("Work Handler!");
         float zMax = -3;
         float zMin = -9;
         float xMax = 9;
@@ -343,67 +408,42 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void createEmptyListsForRoundHandler()
     {
-        //Debug.Log("createEmptyListsForRoundHandler");
         sectionList = new List<float>();
         sectionResult = new List<bool>();
     }
 
-    private void createIngotOnAnvil(GameObject ingot)
+    private void createIngotOnAnvil()
     {
-        if (!ingotOnAnvil)
-        {
-            Vector3 position = new Vector3(gameObject.transform.position.x, anvilHeight, gameObject.transform.position.z);
-            //processedIngot = Instantiate(ingot, position, ingotPrefab.transform.rotation);
-            processedIngot = Instantiate(ingot, position, Quaternion.Euler(-90, 0, 90));
-            processedIngot.GetComponent<BoxCollider>().enabled = true;
-            processedIngot.GetComponent<MeshCollider>().enabled = false;
-            // processedIngot.transform.Rotate(Vector3.forward, 90);
-            processedIngot.tag = "IngotOnAnvil";
-            Destroy(ingot.gameObject);
-            //player.GetComponent<Inventory>().IngotIsPicked(false);
-            player.GetComponent<Inventory>().SetHasIngotInThongs(false);
-            ingotOnAnvil = true;
-        }
-    }
 
-    private void cameraPreparation()
-    {
-        anvilCamera.gameObject.SetActive(false);
-        anvilCamera.gameObject.transform.position = new Vector3(anvilPosition.x + cameraOffsetX, cameraY, anvilPosition.z + cameraOffsetZ);
-    }
+        thongs.transform.SetParent(anvilPositionObject);
+        thongs.transform.position = anvilPositionObject.position;
+        thongs.transform.rotation = anvilPositionObject.rotation;
+        thongs.GetComponent<Rigidbody>().isKinematic = true;
+        thongs.GetComponent<BoxCollider>().enabled = false;
 
-    private void hammerPreparation()
-    {
-        Vector3 position = new Vector3(anvilPosition.x + hammerX, anvilPosition.y + hammerY, anvilPosition.z + hammerZ);
-        anvilHammer = Instantiate(GameObject.Find("Hammer"), position, Quaternion.Euler(0, 0, 0));
-        anvilHammer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        anvilHammer.transform.SetParent(gameObject.transform);
-        anvilHammer.gameObject.SetActive(false);
+        processedIngot = FindChildByTag(thongs.transform.Find("ThongsPosition"), "Ingot");
+        processedIngot.GetComponent<BoxCollider>().enabled = true;
+        processedIngot.GetComponent<MeshCollider>().enabled = false;
+
     }
 
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Anvil is used");
-        if (player.GetComponent<Inventory>().CheckInventoryForItem("IngotInThongs") && player.GetComponent<Inventory>().CheckInventoryForItem("Hammer") && !ingotOnAnvil && hasWorkOnAnvil)
+        if (!InventoryToWork())
         {
-            GameObject thongsInHand = GameObject.Find("ThongsPosition");
-            // hand flag?
-            GameObject ingotInHand = FindChildByTag(thongsInHand.transform, "Ingot");
-            Debug.Log(ingotInHand);
-            createIngotOnAnvil(ingotInHand);
-            hammer.gameObject.SetActive(false);
-            anvilHammer.gameObject.SetActive(true);
-        } else if (player.GetComponent<Inventory>().CheckInventoryForItem("Hammer"))
-        {
-            hammer.gameObject.SetActive(false);
-            anvilHammer.gameObject.SetActive(true);
+            hint.Raise("Something is missing from my hands");
+            return false;
         }
         
+        createIngotOnAnvil();
+        hammer.gameObject.SetActive(false);
+        anvilHammer.gameObject.SetActive(true);
+
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
-        //Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         
@@ -412,7 +452,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        switch (context.action.name)
+        /*switch (context.action.name)
         {
             case "Abort":
                 Debug.Log("Leave anvil");
@@ -420,18 +460,28 @@ public class Anvil : MonoBehaviour, IInteractable
                 anvilMode = false;
                 camera.gameObject.SetActive(true);
                 anvilCamera.gameObject.SetActive(false);
+                playerInput.actions.FindAction("DropItems").Enable();
+                Cursor.lockState = CursorLockMode.Locked;
+
                 if (player.GetComponent<Inventory>().CheckInventoryForItem("Hammer"))
                 {
                     hammer.gameObject.SetActive(true);
                     anvilHammer.gameObject.SetActive(false);
                 }
+
+                if (player.GetComponent<Inventory>().CheckInventoryForItem("Thongs"))
+                {
+                    thongs.gameObject.SetActive(true);
+                    anvilThongs.gameObject.SetActive(false);
+                }
+               
                 Cursor.lockState = CursorLockMode.Locked;
                 if (ingotToTake)
                 {
                     player.GetComponent<Inventory>().SetHasIngotInThongs(true);
                 }
                 break;
-        }
+        }*/
     }
 
     private GameObject FindChildByTag(Transform tr, string tag)
@@ -446,24 +496,13 @@ public class Anvil : MonoBehaviour, IInteractable
         return null;
     }
 
-    private void returnIngotToHand(GameObject ingot)
-    {
-        GameObject ingotInHand = Instantiate(ingot, thongsPosition.transform.position, thongsPosition.transform.rotation);
-        ingotInHand.tag = "Ingot";
-        ingotInHand.GetComponent<MeshCollider>().enabled = true;
-        ingotInHand.GetComponent<BoxCollider>().enabled = false;
-        ingotInHand.transform.SetParent(thongsPosition.transform);
-    }
+
 
     private bool InventoryToWork()
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (!inventory.CheckInventoryForItem("Ingot") && !inventory.CheckInventoryForItem("IngotInThongs") && inventory.CheckInventoryForItem("Thongs") && inventory.CheckInventoryForItem("Hammer"))
-        {
+        if (inventory.CheckInventoryForItem("IngotInThongs")&& inventory.CheckInventoryForItem("Hammer"))
             return true;
-        } else
-        {
-            return false;
-        }
+        return false;
     }
 }

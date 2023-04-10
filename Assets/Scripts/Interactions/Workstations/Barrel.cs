@@ -80,6 +80,9 @@ public class Barrel : MonoBehaviour, IInteractable
             {
                 case "Abort":
 
+                    canControlThongs = false;
+                    moveWeaponCommand = Vector2.zero;
+
                     cam.gameObject.SetActive(true);
                     cam2.gameObject.SetActive(false);
                     playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
@@ -87,12 +90,12 @@ public class Barrel : MonoBehaviour, IInteractable
                     Rigidbody thongsRB = thongs.GetComponent<Rigidbody>();
                     thongsRB.transform.rotation = Quaternion.identity;
                     thongsRB.transform.position = cam.transform.Find("Left Hand").position;
+                    thongsRB.transform.rotation = cam.transform.Find("Left Hand").rotation;
                     thongsRB.transform.SetParent(playerTransform);
 
                     //thongs = null;
                     playerInput.actions.FindAction("DropItems").Enable();
 
-                    canControlThongs = false;
                     
                     break;
 
