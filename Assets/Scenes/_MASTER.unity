@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6261,31 +6261,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: 
-  cameraY: 5.3
-  cameraOffsetX: 0.7
-  cameraOffsetZ: -0.5
-  hammerX: 1.5
-  thongsX: -1
-  hammerY: 2.9
-  thongsY: 3
-  hammerZ: -0.5
-  thongsZ: 0
-  thongsSegmentRotation: 46.319
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
   anvilCamera: {fileID: 820874717}
   anvilMode: 0
   hitMode: 0
   hasWorkOnAnvil: 1
-  common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
-  uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
-  rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
-  supremacy: {fileID: 2100000, guid: 5a52ecbe77b0e224baf9d82f20d24c3a, type: 2}
-  legendary: {fileID: 2100000, guid: 739a224e7d18b02449962684e1ce025b, type: 2}
   anvilPositionObject: {fileID: 14996842}
   sectionCounter: 0
   roundCounter: 0
-  anvilHammer: {fileID: 244447159}
+  anvilHammer: {fileID: 244447160}
   sectionLiveTime: 1
   secondToLeave: 2
   sectionDisappearTime: 1
@@ -6293,11 +6278,15 @@ MonoBehaviour:
     type: 3}
   ingotPrefab: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
     type: 3}
-  quality: {fileID: 0}
-  initialQuality: {fileID: 0}
   playerInput: {fileID: 1955815456}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
   resetAnvil: {fileID: 11400000, guid: f0477d0e67bea794197b7ea884ab14c4, type: 2}
+  common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
+  uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
+  rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
+  supremacy: {fileID: 2100000, guid: 5a52ecbe77b0e224baf9d82f20d24c3a, type: 2}
+  legendary: {fileID: 2100000, guid: 739a224e7d18b02449962684e1ce025b, type: 2}
+  crosshair: {fileID: 103888637}
 --- !u!65 &1254662365
 BoxCollider:
   m_ObjectHideFlags: 0
