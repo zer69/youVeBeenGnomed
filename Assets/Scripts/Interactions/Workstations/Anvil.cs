@@ -71,6 +71,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private bool roundReset = true;
 
     [SerializeField] private GameEvent resetAnvil;
+    [SerializeField] private Transform crosshair;
 
     public string InteractionPrompt => _prompt;
 
@@ -117,7 +118,6 @@ public class Anvil : MonoBehaviour, IInteractable
             anvilActive();
         }
 
-        Debug.Log(roundCounter);
         
         //if (Mathf.Abs(player.transform.position.x - transform.position.x) < anvilRange && Mathf.Abs(player.transform.position.z - transform.position.z) < anvilRange)
         //{
@@ -228,8 +228,11 @@ public class Anvil : MonoBehaviour, IInteractable
         //WorkHandler();
         
         successfulHits = 0;
-        
-        
+
+        crosshair.gameObject.SetActive(false);
+
+
+
     }
 
     private float generateXLocation(float ingotWidth, float ingotSectionWidth)
@@ -446,7 +449,8 @@ public class Anvil : MonoBehaviour, IInteractable
         playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
-        
+        crosshair.gameObject.SetActive(false);
+
         return true;
     }
 
