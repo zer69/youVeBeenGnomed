@@ -17,13 +17,6 @@ public class Anvil : MonoBehaviour, IInteractable
     private float xMax;
     private float xMin;
     private float thongsHeight;
-    [SerializeField] private float cameraY = 4.5f;
-    [SerializeField] private float cameraOffsetX = 0;
-    [SerializeField] private float cameraOffsetZ = 0;
-    [SerializeField] private float hammerX, thongsX;
-    [SerializeField] private float hammerY, thongsY;
-    [SerializeField] private float hammerZ, thongsZ;
-    [SerializeField] private float thongsSegmentRotation = 46.319f;
     [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
     [SerializeField] private int numberOfRounds = 3;
     Camera camera;
@@ -31,14 +24,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private bool anvilMode = false;
     [SerializeField] private bool hitMode = false;
     [SerializeField] private bool hasWorkOnAnvil = true;
-    private bool ingotToTake = false;
-    [SerializeField] private Material common;
-    [SerializeField] private Material uncommon;
-    [SerializeField] private Material rare;
-    [SerializeField] private Material supremacy;
-    [SerializeField] private Material legendary;
     [SerializeField] private Transform anvilPositionObject;
-    private float anvilRange = 3;
     [SerializeField] private int sectionCounter = 0;
     [SerializeField] private int roundCounter = 0;
     private int mouseClickCounter = 0;
@@ -48,66 +34,49 @@ public class Anvil : MonoBehaviour, IInteractable
     private GameObject processedIngot;
     private GameObject player;
     private GameObject hammer;
-    private GameObject thongsPosition;
     private GameObject thongs;
-    private GameObject anvilThongs;
     [SerializeField] private GameObject anvilHammer;
-    //private GameObject anvilPositionObject;
-    private Vector3 anvilPosition;
-    
-    private Rigidbody playerRb;
     private bool sectionIsVisible = false;
     [SerializeField] private float sectionLiveTime = 1;
     [SerializeField] private float secondToLeave = 2;
     [SerializeField] private float sectionDisappearTime = 1;
     [SerializeField] private GameObject ingotSectionPrefab;
     [SerializeField] private GameObject ingotPrefab;
-    private GameObject playerTransform;
     private int successfulHits = 0;
-    public FloatVariable quality, initialQuality;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private s_GameEvent hint;
     private bool start = true;
     private bool roundReset = true;
-
     [SerializeField] private GameEvent resetAnvil;
-    [SerializeField] private Transform crosshair;
+    [SerializeField] private Material common;
+    [SerializeField] private Material uncommon;
+    [SerializeField] private Material rare;
+    [SerializeField] private Material supremacy;
+    [SerializeField] private Material legendary;
 
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        //Debug.Log(gameObject.transform.position);
         camera = Camera.main;
-        anvilPosition = gameObject.transform.position;
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
         hammer = GameObject.Find("Hammer");
         thongs = GameObject.Find("Thongs");
         Vector3 thongsColliderSize = thongs.GetComponent<BoxCollider>().bounds.size;
         thongsHeight = Mathf.Min(Mathf.Min(thongsColliderSize[0], thongsColliderSize[1]), thongsColliderSize[2]);
-        thongsPosition = GameObject.Find("ThongsPosition");
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         createEmptyListsForRoundHandler();
     }
 
     void Start()
     {
-        
         ingot = GameObject.FindGameObjectWithTag("Ingot");
-        //Debug.Log(ingot.GetComponent<BoxCollider>().bounds.size);
         ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
         ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
         player = GameObject.Find("PLAYER");
-        playerRb = player.GetComponent<Rigidbody>();
         ingotSectionWidth = ingotWidth / 10;
-        //zMax = anvilPosition.z + ingotLength / 2;
-        //zMin = anvilPosition.z + ingotLength / -2;
-        //xMax = anvilPosition.x + ingotWidth / 2;
-        //xMin = anvilPosition.x + ingotWidth / -2;
-        //Debug.Log(ingotSectionWidth);
-        //Debug.Log(ingotLength);
     }
 
     // Update is called once per frame
@@ -160,10 +129,6 @@ public class Anvil : MonoBehaviour, IInteractable
             section.transform.localScale = Vector3.Lerp(currentScale, targetScale, time / seconds);
             time += Time.deltaTime;
             yield return null;
-        }
-        if (section is not null)
-        {
-            //Destroy(section);
         }
         if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
         {
@@ -278,16 +243,15 @@ public class Anvil : MonoBehaviour, IInteractable
         float zClick = hit.point.z;
         float xClick = hit.point.x;
         
-        //Vector3 ingotCenter = FindChildByTag(anvilPositionObject.Find("Thongs(Clone)").Find("ThongsPosition"), "Ingot").transform.position;
+        
         Vector3 ingotCenter = processedIngot.transform.position;
 
-        //Debug.Log(ingotCenter);
+        
         zMax = ingotCenter.z + ingotLength / 2;
         zMin = ingotCenter.z + ingotLength / -2;
         xMax = ingotCenter.x + ingotWidth / 2;
         xMin = ingotCenter.x + ingotWidth / -2;
-        //Debug.Log(xClick);
-        //Debug.Log(zClick);
+        
         if (zClick > zMin && zClick < zMax && xClick > xMin && xClick < xMax)
         {
             //Debug.Log("Ingot");
@@ -344,11 +308,6 @@ public class Anvil : MonoBehaviour, IInteractable
                 sectionCounter++;
                 
             }
-            //if (!sectionIsVisible && !hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
-            //{
-                //hitMode = true;
-                //sectionCounter = 0;
-            //}
             if (hitMode && mouseClickCounter < numberOfSectionsInRound[roundCounter])
             {
 
