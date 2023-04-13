@@ -7,6 +7,8 @@ using System.Linq;
 public class Anvil : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
+
+   
     private float ingotWidth;
     private float anvilHeight;
     private float ingotLength;
@@ -17,17 +19,7 @@ public class Anvil : MonoBehaviour, IInteractable
     private float xMax;
     private float xMin;
     private float thongsHeight;
-    [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
-    [SerializeField] private int numberOfRounds = 3;
     Camera camera;
-    [SerializeField] private Camera anvilCamera;
-    [SerializeField] private bool anvilMode = false;
-    [SerializeField] private bool hitMode = false;
-    [SerializeField] private bool hasWorkOnAnvil = true;
-    [SerializeField] private Transform anvilPositionObject;
-    [SerializeField] private int sectionCounter = 0;
-    [SerializeField] private int roundCounter = 0;
-    private int mouseClickCounter = 0;
     private List<float> sectionList;
     private List<bool> sectionResult;
     private Vector3 ingotBoundsSize;
@@ -35,25 +27,49 @@ public class Anvil : MonoBehaviour, IInteractable
     private Transform hammer;
     private Transform thongs;
     private Inventory playerInventory;
-    [SerializeField] private Transform anvilHammer;
-    private bool sectionIsVisible = false;
+
+    [Header("Anvil sections parameters")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
+    [SerializeField] private int numberOfRounds = 3;
     [SerializeField] private float sectionLiveTime = 1;
     [SerializeField] private float secondToLeave = 2;
     [SerializeField] private float sectionDisappearTime = 1;
-    [SerializeField] private GameObject ingotSectionPrefab;
-    [SerializeField] private GameObject ingotPrefab;
-    private int successfulHits = 0;
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private s_GameEvent hint;
+    
+
+    [Header("To track")]
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
+    [SerializeField] private bool anvilMode = false;
+    [SerializeField] private bool hitMode = false;
+    [SerializeField] private bool hasWorkOnAnvil = true;
+    [SerializeField] private int sectionCounter = 0;
+    [SerializeField] private int roundCounter = 0;
     private bool start = true;
     private bool roundReset = true;
+    private bool sectionIsVisible = false;
+    private int successfulHits = 0;
+    private int mouseClickCounter = 0;
+
+    [Header("Do not touch objects")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [SerializeField] private Camera anvilCamera;
+    [SerializeField] private Transform anvilPositionObject;
+    [SerializeField] private Transform anvilHammer;
+    [SerializeField] private GameObject ingotSectionPrefab;
+    [SerializeField] private GameObject ingotPrefab;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private s_GameEvent hint;
     [SerializeField] private GameEvent resetAnvil;
+    [SerializeField] private Transform crosshair;
+
+    [Header("To delete if useless")]
+    [BackgroundColor(1.5f, 0f, 1.5f, 1f)]
     [SerializeField] private Material common;
     [SerializeField] private Material uncommon;
     [SerializeField] private Material rare;
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
-    [SerializeField] private Transform crosshair;
+    
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
