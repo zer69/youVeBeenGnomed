@@ -7,6 +7,8 @@ using System.Linq;
 public class Anvil : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
+
+   
     private float ingotWidth;
     private float anvilHeight;
     private float ingotLength;
@@ -17,43 +19,57 @@ public class Anvil : MonoBehaviour, IInteractable
     private float xMax;
     private float xMin;
     private float thongsHeight;
-    [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
-    [SerializeField] private int numberOfRounds = 3;
     Camera camera;
-    [SerializeField] private Camera anvilCamera;
-    [SerializeField] private bool anvilMode = false;
-    [SerializeField] private bool hitMode = false;
-    [SerializeField] private bool hasWorkOnAnvil = true;
-    [SerializeField] private Transform anvilPositionObject;
-    [SerializeField] private int sectionCounter = 0;
-    [SerializeField] private int roundCounter = 0;
-    private int mouseClickCounter = 0;
     private List<float> sectionList;
     private List<bool> sectionResult;
-    private GameObject ingot;
+    private Vector3 ingotBoundsSize;
     private GameObject processedIngot;
-    private GameObject player;
-    private GameObject hammer;
-    private GameObject thongs;
-    [SerializeField] private GameObject anvilHammer;
-    private bool sectionIsVisible = false;
+    private Transform hammer;
+    private Transform thongs;
+    private Inventory playerInventory;
+
+    [Header("Anvil sections parameters")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
+    [SerializeField] private int[] numberOfSectionsInRound = new int[3] { 4, 3, 6 };
+    [SerializeField] private int numberOfRounds = 3;
     [SerializeField] private float sectionLiveTime = 1;
     [SerializeField] private float secondToLeave = 2;
     [SerializeField] private float sectionDisappearTime = 1;
-    [SerializeField] private GameObject ingotSectionPrefab;
-    [SerializeField] private GameObject ingotPrefab;
-    private int successfulHits = 0;
-    [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private s_GameEvent hint;
+    
+
+    [Header("To track")]
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
+    [SerializeField] private bool anvilMode = false;
+    [SerializeField] private bool hitMode = false;
+    [SerializeField] private bool hasWorkOnAnvil = true;
+    [SerializeField] private int sectionCounter = 0;
+    [SerializeField] private int roundCounter = 0;
     private bool start = true;
     private bool roundReset = true;
+    private bool sectionIsVisible = false;
+    private int successfulHits = 0;
+    private int mouseClickCounter = 0;
+
+    [Header("Do not touch objects")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [SerializeField] private Camera anvilCamera;
+    [SerializeField] private Transform anvilPositionObject;
+    [SerializeField] private Transform anvilHammer;
+    [SerializeField] private GameObject ingotSectionPrefab;
+    [SerializeField] private GameObject ingotPrefab;
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private s_GameEvent hint;
     [SerializeField] private GameEvent resetAnvil;
+    [SerializeField] private Transform crosshair;
+
+    [Header("To delete if useless")]
+    [BackgroundColor(1.5f, 0f, 1.5f, 1f)]
     [SerializeField] private Material common;
     [SerializeField] private Material uncommon;
     [SerializeField] private Material rare;
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
-
+    
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
@@ -61,9 +77,9 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         camera = Camera.main;
         anvilHeight = gameObject.GetComponent<BoxCollider>().size[2] * 100;
-        hammer = GameObject.Find("Hammer");
-        thongs = GameObject.Find("Thongs");
-        Vector3 thongsColliderSize = thongs.GetComponent<BoxCollider>().bounds.size;
+        hammer = GameObject.Find("Hammer").transform;
+        thongs = GameObject.Find("Thongs").transform;
+        Vector3 thongsColliderSize = thongs.gameObject.GetComponent<BoxCollider>().bounds.size;
         thongsHeight = Mathf.Min(Mathf.Min(thongsColliderSize[0], thongsColliderSize[1]), thongsColliderSize[2]);
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         createEmptyListsForRoundHandler();
@@ -71,11 +87,11 @@ public class Anvil : MonoBehaviour, IInteractable
 
     void Start()
     {
-        ingot = GameObject.FindGameObjectWithTag("Ingot");
-        ingotWidth = Mathf.Max(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
-        ingotLength = Mathf.Min(ingot.GetComponent<BoxCollider>().bounds.size[0], ingot.GetComponent<BoxCollider>().bounds.size[2]);
-        ingotHeight = ingot.GetComponent<BoxCollider>().bounds.size[1];
-        player = GameObject.Find("PLAYER");
+        ingotBoundsSize = GameObject.FindGameObjectWithTag("Ingot").GetComponent<BoxCollider>().bounds.size;
+        ingotWidth = Mathf.Max(ingotBoundsSize[0], ingotBoundsSize[2]);
+        ingotLength = Mathf.Min(ingotBoundsSize[0], ingotBoundsSize[2]);
+        ingotHeight = ingotBoundsSize[1];
+        playerInventory = GameObject.Find("PLAYER").GetComponent<Inventory>();
         ingotSectionWidth = ingotWidth / 10;
     }
 
@@ -177,11 +193,11 @@ public class Anvil : MonoBehaviour, IInteractable
         //playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
 
-        thongs.transform.SetParent(camera.transform.Find("Player Transform"));
-        thongs.transform.position = camera.transform.Find("Left Hand").position;
-        thongs.transform.rotation = camera.transform.Find("Left Hand").rotation;
-        thongs.GetComponent<Rigidbody>().isKinematic = false;
-        thongs.GetComponent<BoxCollider>().enabled = true;
+        thongs.SetParent(camera.transform.Find("Player Transform"));
+        thongs.position = camera.transform.Find("Left Hand").position;
+        thongs.rotation = camera.transform.Find("Left Hand").rotation;
+        thongs.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        thongs.gameObject.GetComponent<BoxCollider>().enabled = true;
 
         processedIngot.GetComponent<BoxCollider>().enabled = false;
         processedIngot.GetComponent<MeshCollider>().enabled = true;
@@ -377,13 +393,13 @@ public class Anvil : MonoBehaviour, IInteractable
     private void createIngotOnAnvil()
     {
 
-        thongs.transform.SetParent(anvilPositionObject);
-        thongs.transform.position = anvilPositionObject.position;
-        thongs.transform.rotation = anvilPositionObject.rotation;
-        thongs.GetComponent<Rigidbody>().isKinematic = true;
-        thongs.GetComponent<BoxCollider>().enabled = false;
+        thongs.SetParent(anvilPositionObject);
+        thongs.position = anvilPositionObject.position;
+        thongs.rotation = anvilPositionObject.rotation;
+        thongs.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        thongs.gameObject.GetComponent<BoxCollider>().enabled = false;
 
-        processedIngot = FindChildByTag(thongs.transform.Find("ThongsPosition"), "Ingot");
+        processedIngot = FindChildByTag(thongs.Find("ThongsPosition"), "Ingot");
         processedIngot.GetComponent<BoxCollider>().enabled = true;
         processedIngot.GetComponent<MeshCollider>().enabled = false;
 
@@ -463,8 +479,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
     private bool InventoryToWork()
     {
-        Inventory inventory = player.GetComponent<Inventory>();
-        if (inventory.CheckInventoryForItem("IngotInThongs")&& inventory.CheckInventoryForItem("Hammer"))
+        if (playerInventory.CheckInventoryForItem("IngotInThongs")&& playerInventory.CheckInventoryForItem("Hammer"))
             return true;
         return false;
     }
