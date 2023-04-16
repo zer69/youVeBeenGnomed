@@ -9,17 +9,23 @@ public class ShopItem : MonoBehaviour
     {
         Copper,
         Iron,
-        Tin,
+        Silver,
         Coal
     };
 
+    [Header("Item Stats")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     public ShopItemType shopItemType;
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     public int price;
     public int amount;
     public int currentAmount;
 
     private TextMeshProUGUI TMPAmount;
     private TextMeshProUGUI TMPPrice;
+
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
 
     public i_GameEvent itemAddedToTotal;
     public si_GameEvent itemAddedToShoppingCart;

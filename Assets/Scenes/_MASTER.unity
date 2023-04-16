@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf79f54ef6beb2459042fb2487b8e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairState: 0
 --- !u!114 &103888641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,20 +772,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ddcba01cbee4541acf5f76163dfec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPower: 100
+  interactRange: 4
+  lefttHandPosition: {fileID: 64592827}
+  rightHandPosition: {fileID: 1153290313}
+  thongsPosition: {fileID: 685193595}
   cam: {fileID: 0}
   crosshair: {fileID: 103888637}
   playerInput: {fileID: 1955815456}
   playerTransform: {fileID: 1420172718}
   thongs: {fileID: 1142157950}
-  pickableObject: {fileID: 0}
   leftHand: 1
   rightHand: 1
   leftWithIngot: 0
-  lefttHandPosition: {fileID: 64592827}
-  rightHandPosition: {fileID: 1153290313}
-  thongsPosition: {fileID: 685193595}
-  dropPower: 100
-  interactRange: 4
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
   crosshairResized: {fileID: 11400000, guid: 75c0f87e902580e4e9648d2cc8d4717c, type: 2}
@@ -1504,11 +1502,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6451542561330825637, guid: 1937421e4f5f94246ba0904ad0f68a87,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6577498290974666463, guid: 1937421e4f5f94246ba0904ad0f68a87,
         type: 3}
@@ -2358,6 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 4
+  anvilState: 0
   weaponType: 0
   rarity: 0
   oreType: 0
@@ -2377,14 +2371,11 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
-  weaponLanded: {fileID: 0}
-  ingotMaterial: {fileID: 0}
   state1: {fileID: 0}
   state2: {fileID: 0}
-  anvilState: 0
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
-  TemperatureText: {fileID: 0}
+  weaponLanded: {fileID: 0}
 --- !u!54 &404233159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3986,6 +3977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 3
+  anvilState: 0
   weaponType: 0
   rarity: 0
   oreType: 0
@@ -4005,14 +3997,11 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
-  weaponLanded: {fileID: 0}
-  ingotMaterial: {fileID: 0}
   state1: {fileID: 0}
   state2: {fileID: 0}
-  anvilState: 0
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
-  TemperatureText: {fileID: 0}
+  weaponLanded: {fileID: 0}
 --- !u!65 &758312960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4552,6 +4541,11 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
+    - target: {fileID: 8709962614976506517, guid: bceb6bd0f2f5b4644960a35bce61a8cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Silver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bceb6bd0f2f5b4644960a35bce61a8cf, type: 3}
 --- !u!20 &830636717 stripped
@@ -5062,11 +5056,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3985000755938981404, guid: ac5b07c47190dea41bb528c99c0e76e6,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4419104265261523709, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
@@ -5523,18 +5512,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2082725264}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1147070941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5552,18 +5529,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1292833570}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 2082725264}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -10441,12 +10406,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7340786656584388055, guid: 139f3375adb6ce3438e08e30437d2289,
     type: 3}
   m_PrefabInstance: {fileID: 1900041926}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2082725264 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6451542561330825637, guid: 1937421e4f5f94246ba0904ad0f68a87,
-    type: 3}
-  m_PrefabInstance: {fileID: 240028458}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2090507469 stripped
 Transform:
@@ -15974,6 +15933,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: hint
+      value: 
+      objectReference: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f,
+        type: 2}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: status

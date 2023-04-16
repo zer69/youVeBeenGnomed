@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TongsSegments : MonoBehaviour
 {
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Transform segment1;
     [SerializeField] private Transform segment2;
     [SerializeField] private Transform tongsPosition;

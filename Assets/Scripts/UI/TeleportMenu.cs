@@ -7,6 +7,8 @@ using TMPro;
 
 public class TeleportMenu : MonoBehaviour
 {
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Transform orderMenu;
     [SerializeField] private Transform shopMenu;
     [SerializeField] private Transform recyclingMenu;

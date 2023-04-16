@@ -6,21 +6,36 @@ using UnityEngine.InputSystem;
 
 public class CameraClicker : MonoBehaviour
 {
+    [Header("Camera Stats")]
+    [BackgroundColor (0f, 1.5f, 0f, 1f)]
+    [SerializeField] private float dropPower;
+    [SerializeField] private float interactRange = 3.0f;
 
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [SerializeField] private Transform lefttHandPosition;
+    [SerializeField] private Transform rightHandPosition;
+    [SerializeField] private Transform thongsPosition;
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform thongs;
+    public bool leftHand = true;
+    public bool rightHand = true;
+    public bool leftWithIngot = false;
 
-    public Transform pickableObject;
-    
+    [Header("Events")]
+    [BackgroundColor(.75f, 0f, 1.5f, 1f)]
+    [SerializeField] private t_GameEvent typeChoice;
+    [SerializeField] private col_GameEvent weaponPicked;
+    [SerializeField] private b_GameEvent crosshairResized;
 
+    private Transform pickableObject;
     private LayerMask pickableMask;
     private LayerMask interactiveMask;
 
     private bool targeted;
-    //private bool inHands;
     private bool canClick = true;
     private bool interacting = false;
 
@@ -28,19 +43,6 @@ public class CameraClicker : MonoBehaviour
     private int pickableLayer;
     private int toolLayer;
 
-    [SerializeField] private bool leftHand = true;
-    public bool rightHand = true;
-    public bool leftWithIngot = false;
-
-    [SerializeField] private Transform lefttHandPosition;
-    [SerializeField] private Transform rightHandPosition;
-    [SerializeField] private Transform thongsPosition;
-    [SerializeField] private float dropPower;
-    [SerializeField] private float interactRange = 3.0f;
-
-    [SerializeField] private t_GameEvent typeChoice;
-    [SerializeField] private col_GameEvent weaponPicked;
-    [SerializeField] private b_GameEvent crosshairResized;
 
 
 

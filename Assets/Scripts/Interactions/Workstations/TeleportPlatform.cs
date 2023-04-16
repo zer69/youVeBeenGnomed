@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TeleportPlatform : MonoBehaviour
 {
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     public List<GameObject> colliderList = new List<GameObject>();
 
     public void AddToList(Collider weapon)

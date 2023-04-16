@@ -7,6 +7,8 @@ public class HintManager : MonoBehaviour
 {
     private TextMeshProUGUI hintText;
     private bool canShowHints;
+    [Header("Hint Stats")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float fadingTime;
 
     // Start is called before the first frame update

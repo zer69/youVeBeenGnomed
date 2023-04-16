@@ -5,7 +5,8 @@ using TMPro;
 
 public class TotalValue : MonoBehaviour
 {
-
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private TextMeshProUGUI totalOrder;
     [SerializeField] private TextMeshProUGUI totalNow;
 
