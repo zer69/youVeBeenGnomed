@@ -194,7 +194,7 @@ public class Anvil : MonoBehaviour, IInteractable
         
         successfulHits = 0;
 
-        crosshair.gameObject.SetActive(false);
+        //crosshair.gameObject.SetActive(false);
 
 
 
@@ -408,7 +408,7 @@ public class Anvil : MonoBehaviour, IInteractable
         playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
-        crosshair.gameObject.SetActive(false);
+        //crosshair.gameObject.SetActive(false);
 
         return true;
     }
