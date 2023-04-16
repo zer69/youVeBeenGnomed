@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Furnance : MonoBehaviour, IInteractable
 {
@@ -15,6 +16,8 @@ public class Furnance : MonoBehaviour, IInteractable
     [SerializeField] private s_GameEvent hint;
 
     [SerializeField] private Transform placeForIngot;
+
+    [SerializeField] private TextMeshPro TemperatureText;
 
     private bool fuelIsFilled = false;
     public bool fireIsKindled = false;
@@ -142,6 +145,8 @@ public class Furnance : MonoBehaviour, IInteractable
         {
             yield return new WaitForSeconds(1);
             furnaceTemperature -= 1;
+
+            TemperatureText.text = furnaceTemperature.ToString() + "*C";
             Debug.Log("Current temperature of furnace is " + furnaceTemperature + "*C");
             if (ingotInFurnace)
             {

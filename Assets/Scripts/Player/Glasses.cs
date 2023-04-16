@@ -19,7 +19,7 @@ public class Glasses : MonoBehaviour
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Energy parameters")]
 
-    [SerializeField] private int maxEnergy = 10;
+    [SerializeField] private int maxEnergy;
     [SerializeField] private float dischargingSpeed = 1f;
 
     

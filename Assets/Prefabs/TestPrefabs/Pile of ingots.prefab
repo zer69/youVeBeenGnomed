@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3134098915777016711}
   - component: {fileID: 3134098915777016710}
   - component: {fileID: 3134098915777016706}
+  - component: {fileID: 8366227651039843076}
+  - component: {fileID: 8065174772873602764}
   m_Layer: 13
   m_Name: Pile of ingots
   m_TagString: Untagged
@@ -120,8 +122,65 @@ MonoBehaviour:
   ingotsInPile: 5
   playerTransform: {fileID: 0}
   rightHand: {fileID: 0}
+  glassesActivated: 0
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
+--- !u!114 &8366227651039843076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134098915777016729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 32dda0a2a24bd184b8ae86f3c7e176fe, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3134098915777016706}
+        m_TargetAssemblyTypeName: PileOfIngots, Assembly-CSharp
+        m_MethodName: GlassesStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &8065174772873602764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3134098915777016729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4b7ccb9eba6145046a622e5e0ebbcc25, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3134098915777016706}
+        m_TargetAssemblyTypeName: PileOfIngots, Assembly-CSharp
+        m_MethodName: GlassesStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3450447401895634280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +188,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3134098915777016709}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -214,12 +278,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727987, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4033505713782740866, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
+    - {fileID: -3582959539470149536, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!4 &7493031615490665395 stripped
 Transform:
@@ -234,6 +305,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3134098915777016709}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -319,12 +395,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727987, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4033505713782740866, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
+    - {fileID: -3582959539470149536, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!4 &743253075567150471 stripped
 Transform:
@@ -339,6 +422,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3134098915777016709}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -424,12 +512,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727987, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4033505713782740866, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
+    - {fileID: -3582959539470149536, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!4 &3189216166397340196 stripped
 Transform:
@@ -444,6 +539,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3134098915777016709}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -529,12 +629,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727987, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4033505713782740866, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
+    - {fileID: -3582959539470149536, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!4 &3583646140169854338 stripped
 Transform:
@@ -549,6 +656,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3134098915777016709}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -634,12 +746,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727987, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4033505713782740866, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
+    - {fileID: -3582959539470149536, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!4 &3916565896621431346 stripped
 Transform:

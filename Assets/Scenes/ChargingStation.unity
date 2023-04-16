@@ -1687,7 +1687,7 @@ MonoBehaviour:
   status: 3
   weaponType: 0
   rarity: 0
-  type: 0
+  oreType: 0
   airTemperature: 24
   airCoolingRate: 0.09
   quality: 0.2
@@ -1706,6 +1706,12 @@ MonoBehaviour:
   enchantmentQuality: 0
   weaponLanded: {fileID: 0}
   ingotMaterial: {fileID: 0}
+  state1: {fileID: 0}
+  state2: {fileID: 0}
+  anvilState: 0
+  sendIngot: {fileID: 0}
+  hint: {fileID: 0}
+  TemperatureText: {fileID: 0}
 --- !u!65 &758312960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2336,6 +2342,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1203775428}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1147070941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2353,6 +2371,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1292833570}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1203775428}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2443,6 +2473,24 @@ Transform:
   m_Father: {fileID: 1256614491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1203775428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6451542561330825637, guid: 1937421e4f5f94246ba0904ad0f68a87,
+    type: 3}
+  m_PrefabInstance: {fileID: 7050162110218342170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1203775430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2556541448319906617, guid: 1937421e4f5f94246ba0904ad0f68a87,
+    type: 3}
+  m_PrefabInstance: {fileID: 7050162110218342170}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203775428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1235160906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4243,7 +4291,7 @@ MonoBehaviour:
   changeEnergy: {fileID: 11400000, guid: 7f49328042e58fb438e6a3b9d6824506, type: 2}
   setEnergyMaxValue: {fileID: 11400000, guid: 547a26f7671060b489777c68eca7b757, type: 2}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
-  maxEnergy: 10
+  maxEnergy: 20
   dischargingSpeed: 1
 --- !u!114 &1955815461
 MonoBehaviour:
@@ -4951,6 +4999,11 @@ PrefabInstance:
       propertyPath: smeltingSpeed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7050162109455422267, guid: 1937421e4f5f94246ba0904ad0f68a87,
+        type: 3}
+      propertyPath: TemperatureText
+      value: 
+      objectReference: {fileID: 1203775430}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1937421e4f5f94246ba0904ad0f68a87, type: 3}
 --- !u!1001 &7612007374980471239
@@ -4960,10 +5013,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1998960160}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
       value: Iron Ingot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5196849596629716699, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}

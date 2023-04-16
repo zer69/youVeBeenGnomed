@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Ingot : MonoBehaviour
 {
@@ -121,6 +122,9 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] private go_GameEvent sendIngot;
     [SerializeField] private s_GameEvent hint;
+
+    [SerializeField] private TextMeshPro TemperatureText;
+
     bool readyRaised = true;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
@@ -188,6 +192,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature - coolingRate >= airTemperature)
         {
             currentTemperature -= coolingRate;
+            TemperatureText.text = currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
 
             return true;
@@ -207,6 +212,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature < furnaceTemperature)
         {
             currentTemperature += smeltingSpeed * Time.deltaTime;
+            TemperatureText.text = currentTemperature.ToString("F2") + " *C";
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
