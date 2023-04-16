@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CrosshairResizer : MonoBehaviour
 {
-    public bool crosshairState;
+    private bool crosshairState;
     private RectTransform crosshair;
 
     // Start is called before the first frame update

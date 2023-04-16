@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf79f54ef6beb2459042fb2487b8e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairState: 0
 --- !u!114 &103888641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,20 +772,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ddcba01cbee4541acf5f76163dfec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropPower: 100
+  interactRange: 4
+  lefttHandPosition: {fileID: 64592827}
+  rightHandPosition: {fileID: 1153290313}
+  thongsPosition: {fileID: 685193595}
   cam: {fileID: 0}
   crosshair: {fileID: 103888637}
   playerInput: {fileID: 1955815456}
   playerTransform: {fileID: 1420172718}
   thongs: {fileID: 1142157950}
-  pickableObject: {fileID: 0}
   leftHand: 1
   rightHand: 1
   leftWithIngot: 0
-  lefttHandPosition: {fileID: 64592827}
-  rightHandPosition: {fileID: 1153290313}
-  thongsPosition: {fileID: 685193595}
-  dropPower: 100
-  interactRange: 4
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
   crosshairResized: {fileID: 11400000, guid: 75c0f87e902580e4e9648d2cc8d4717c, type: 2}
@@ -2353,6 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 4
+  anvilState: 0
   weaponType: 0
   rarity: 0
   oreType: 0
@@ -2372,13 +2371,11 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
-  weaponLanded: {fileID: 0}
-  ingotMaterial: {fileID: 0}
   state1: {fileID: 0}
   state2: {fileID: 0}
-  anvilState: 0
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
+  weaponLanded: {fileID: 0}
 --- !u!54 &404233159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3980,6 +3977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 3
+  anvilState: 0
   weaponType: 0
   rarity: 0
   oreType: 0
@@ -3999,13 +3997,11 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
-  weaponLanded: {fileID: 0}
-  ingotMaterial: {fileID: 0}
   state1: {fileID: 0}
   state2: {fileID: 0}
-  anvilState: 0
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
+  weaponLanded: {fileID: 0}
 --- !u!65 &758312960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4545,6 +4541,11 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
+    - target: {fileID: 8709962614976506517, guid: bceb6bd0f2f5b4644960a35bce61a8cf,
+        type: 3}
+      propertyPath: m_Name
+      value: Silver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bceb6bd0f2f5b4644960a35bce61a8cf, type: 3}
 --- !u!20 &830636717 stripped
@@ -6263,17 +6264,17 @@ MonoBehaviour:
   _prompt: 
   numberOfSectionsInRound: 040000000300000006000000
   numberOfRounds: 3
-  anvilCamera: {fileID: 820874717}
-  anvilMode: 0
-  hitMode: 0
-  hasWorkOnAnvil: 1
-  anvilPositionObject: {fileID: 14996842}
-  sectionCounter: 0
-  roundCounter: 0
-  anvilHammer: {fileID: 244447160}
   sectionLiveTime: 1
   secondToLeave: 2
   sectionDisappearTime: 1
+  anvilMode: 0
+  hitMode: 0
+  hasWorkOnAnvil: 1
+  sectionCounter: 0
+  roundCounter: 0
+  anvilCamera: {fileID: 820874717}
+  anvilPositionObject: {fileID: 14996842}
+  anvilHammer: {fileID: 244447160}
   ingotSectionPrefab: {fileID: 3662050256835462987, guid: 075da90ce8fbe3e4da698d8a27cd4f55,
     type: 3}
   ingotPrefab: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
@@ -6281,12 +6282,12 @@ MonoBehaviour:
   playerInput: {fileID: 1955815456}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
   resetAnvil: {fileID: 11400000, guid: f0477d0e67bea794197b7ea884ab14c4, type: 2}
+  crosshair: {fileID: 103888637}
   common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
   uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
   rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
   supremacy: {fileID: 2100000, guid: 5a52ecbe77b0e224baf9d82f20d24c3a, type: 2}
   legendary: {fileID: 2100000, guid: 739a224e7d18b02449962684e1ce025b, type: 2}
-  crosshair: {fileID: 103888637}
 --- !u!65 &1254662365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15932,6 +15933,12 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: hint
+      value: 
+      objectReference: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f,
+        type: 2}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: status

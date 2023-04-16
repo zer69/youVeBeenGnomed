@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InfoPanel : MonoBehaviour
 {
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private List<Transform> shopItems;
 
     public void SwitchInfo(int state)
@@ -22,7 +24,7 @@ public class InfoPanel : MonoBehaviour
     {
         foreach (Transform item in this.transform)
         {
-            if (item.gameObject.tag == "ShopItem" && item.gameObject.active)
+            if (item.gameObject.tag == "ShopItem" && item.gameObject.activeSelf)
             {
                 item.GetComponent<ShopItem>().SendItemInfo(true);
                 break;
@@ -35,7 +37,7 @@ public class InfoPanel : MonoBehaviour
     {
         foreach (Transform item in this.transform)
         {
-            if (item.gameObject.tag == "ShopItem" && item.gameObject.active)
+            if (item.gameObject.tag == "ShopItem" && item.gameObject.activeSelf)
             {
                 item.GetComponent<ShopItem>().SendItemInfo(false);
                 break;

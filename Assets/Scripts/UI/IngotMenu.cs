@@ -9,6 +9,8 @@ public class IngotMenu : MonoBehaviour
 {
 
     private Transform ingotToSet;
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform ingotMenu;
     [SerializeField] private Transform Buttons;

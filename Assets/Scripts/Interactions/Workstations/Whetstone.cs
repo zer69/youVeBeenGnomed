@@ -8,23 +8,27 @@ public class Whetstone : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
 
+    [Header("No Edit")]
     [BackgroundColor(1.5f,0f,0f,1f)]
     [SerializeField] private Camera cam;
     [SerializeField] private Camera cam2;
     [SerializeField] private PlayerInput playerInput;
-
     [SerializeField] private Rigidbody whetStoneWheel;
+    [SerializeField] private float sharpeningSpeed;
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
+
+    [Header("One Rotation Stat")]
     [SerializeField] private Vector3 rotationForce;
 
     private float currentAngleVelocity;
+    [Header("Sharpening Stats")]
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
-    [SerializeField] private float sharpeningAngleVelocity = 12f;
+    [SerializeField] private float sharpeningAngleVelocity;
     [SerializeField] private float mouseSensetivity;
-    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     private Transform ingot;
-    [SerializeField] private float sharpeningSpeed;
-    [BackgroundColor()]
+    
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
 
     [SerializeField] private s_GameEvent hint;
 

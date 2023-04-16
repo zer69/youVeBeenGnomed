@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ShoppingCart : MonoBehaviour
 {
-
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private List<ShopItem.ShopItemType> shoppingCart;
     // Start is called before the first frame update
     void Start()

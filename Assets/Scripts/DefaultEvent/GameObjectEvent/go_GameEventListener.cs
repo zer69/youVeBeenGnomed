@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class go_GameEventListener : MonoBehaviour
 {
-    public go_GameEvent Event;
-    public UnityEvent<GameObject> Response;
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)] public go_GameEvent Event;
+    [BackgroundColor(0.75f, 0f, 1.5f, .4f)] public UnityEvent<GameObject> Response;
 
     private void OnEnable()
     { Event.RegisterListener(this); }

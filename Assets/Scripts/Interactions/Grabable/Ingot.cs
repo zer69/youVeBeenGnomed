@@ -69,6 +69,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public CompletionStatus status;
+    [SerializeField] public AnvilState anvilState;
     [SerializeField] public WeaponType weaponType;
 
 
@@ -77,32 +78,36 @@ public class Ingot : MonoBehaviour
     
 
 
-    [Header("Air temperature")]
+    [Header("Air Temperature")]
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] public float airTemperature = 24;
     [SerializeField] public float airCoolingRate = 0.09f;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
-    [Header("Ignot properties")]
+    [Header("Ignot Properties")]
+    [Header("Quality")]
     [SerializeField] private float quality;
 
+    [Header("Temperature")]
     [SerializeField] private float MeltingPoint;
 
     [SerializeField] public float coolingRate;
     [SerializeField] public float currentTemperature;
     //minTemperatureValue = airTemperature
     //[SerializeField] private float maxTemperatureValue = 1200;
-
+    [Header("Structure")]
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] private float strength;
-
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minStrengthValue = 0;
     [SerializeField] private float maxStrengthValue = 100;
-
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public float fragility;
-
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minFragilityValue = 0;
     [SerializeField] private float maxFragilityValue = 100;
 
+    [Header("Sharpness")]
     [SerializeField] public float sharpness;
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
@@ -110,24 +115,27 @@ public class Ingot : MonoBehaviour
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
 
-    [SerializeField] private col_GameEvent weaponLanded;
+    
 
-    [SerializeField] private Material ingotMaterial;
-    private Color emissiveColor = new Color(0.749f, 0.0078f, 0f, 1f);
 
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private GameObject state1;
     [SerializeField] private GameObject state2;
-    [SerializeField] public AnvilState anvilState;
+
+
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
 
     [SerializeField] private go_GameEvent sendIngot;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private col_GameEvent weaponLanded;
     bool readyRaised = true;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
        
     {
-        ingotMaterial.EnableKeyword("_EMISSION");
 
         //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
@@ -140,7 +148,6 @@ public class Ingot : MonoBehaviour
     private void Update()
     {
         Cooling();
-        HeatColor();
         if (anvilState != AnvilState.Weapon)
             UpdateGraphics();
     }
@@ -171,15 +178,6 @@ public class Ingot : MonoBehaviour
         anvilState = AnvilState.Weapon;
 
 
-    }
-
-    public void HeatColor()
-    {
-        //Debug.Log(emissiveColor);
-        //Debug.Log(currentTemperature);
-        emissiveColor = emissiveColor * ((currentTemperature / MeltingPoint) * 64f);
-        ingotMaterial.SetColor("_EmissionColor", emissiveColor);
-        ingotMaterial.EnableKeyword("_EMISSION");
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change
