@@ -22,6 +22,8 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     [SerializeField] private s_GameEvent hint;
 
+    private GameObject newCoal;
+
     public string InteractionPrompt => _prompt;
 
 
@@ -44,13 +46,12 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     void GiveCoal()
     {
-        GameObject newCoal = Instantiate(coal);
+        newCoal = Instantiate(coal);
         newCoal.transform.position = rightHand.position;
         newCoal.transform.rotation = rightHand.rotation;
         newCoal.transform.SetParent(playerTransform);
         newCoal.GetComponent<BoxCollider>().enabled = false;
         newCoal.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //newCoal.GetComponent<Rigidbody>().isKinematic = true;
         Debug.Log("You picked up  some coal");
         ChangePileSize(coalInPile);
     }

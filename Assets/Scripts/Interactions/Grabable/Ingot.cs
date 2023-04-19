@@ -132,7 +132,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private col_GameEvent weaponLanded;
 
-    [SerializeField] private TextMeshPro TemperatureText;
+    [SerializeField] private TextMeshPro temperatureText;
+    [SerializeField] private TextMeshPro sharpnessText;
 
     bool readyRaised = true;
 
@@ -154,6 +155,9 @@ public class Ingot : MonoBehaviour
         Cooling();
         if (anvilState != AnvilState.Weapon)
             UpdateGraphics();
+
+        if (status == CompletionStatus.Cooled || status == CompletionStatus.Sharpened)
+            SharpnessInfoUpdate();
     }
 
     public void UpdateGraphics()
@@ -190,7 +194,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature - coolingRate >= airTemperature)
         {
             currentTemperature -= coolingRate;
-            TemperatureText.text = currentTemperature.ToString("F2") + " *C";
+            temperatureText.text = currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
 
             return true;
@@ -210,7 +214,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature < furnaceTemperature)
         {
             currentTemperature += smeltingSpeed * Time.deltaTime;
-            TemperatureText.text = currentTemperature.ToString("F2") + " *C";
+            temperatureText.text = currentTemperature.ToString("F2") + " *C";
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
@@ -313,5 +317,10 @@ public class Ingot : MonoBehaviour
     public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
     {
         (status, weaponType, rarity, oreType) = data;
+    }
+
+    void SharpnessInfoUpdate()
+    {
+        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
     }
 }

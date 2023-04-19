@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3985000755938981404}
   - component: {fileID: 2264212129682591259}
   - component: {fileID: 6828119712423841889}
+  - component: {fileID: 483538975605186212}
   m_Layer: 10
   m_Name: Ingot temperature (TMP)
   m_TagString: Untagged
@@ -118,7 +119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: 0.00129}
   m_SizeDelta: {x: 0.34, y: 0.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2264212129682591259
@@ -141,7 +142,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2534513083937743537, guid: 96b3eb5e1ab84a74eb4712862474a343, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,8 +186,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 24 *c
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 96b3eb5e1ab84a74eb4712862474a343, type: 2}
+  m_sharedMaterial: {fileID: -2534513083937743537, guid: 96b3eb5e1ab84a74eb4712862474a343,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -210,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.025
-  m_fontSizeBase: 0.025
+  m_fontSize: 0.01
+  m_fontSizeBase: 0.01
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -255,6 +257,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2264212129682591259}
   m_maskType: 0
+--- !u!114 &483538975605186212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729368566808158006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddb9917a61d9254dae09bef5f9c317e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4088522555503738817
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
+  anvilState: 0
   weaponType: 0
   rarity: 0
   oreType: 0
@@ -541,14 +556,13 @@ MonoBehaviour:
   isEnchanted: 0
   enchantment: 0
   enchantmentQuality: 0
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  ingotMaterial: {fileID: 2100000, guid: ebbd7c3b13e09d24b879935495609bfa, type: 2}
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  anvilState: 0
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
-  TemperatureText: {fileID: 6828119712423841889}
+  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
+  temperatureText: {fileID: 6828119712423841889}
+  sharpnessText: {fileID: 0}
 --- !u!54 &6365213482536727987
 Rigidbody:
   m_ObjectHideFlags: 0
