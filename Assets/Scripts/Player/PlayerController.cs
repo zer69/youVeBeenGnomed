@@ -5,15 +5,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
+    [Header("Player controller parameters")]
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float jumpForce;
     [SerializeField] private float speed;
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float playerHeight;
-    [SerializeField] private float groundDrag; 
+    [SerializeField] private float groundDrag;
     [SerializeField] private float angleVelocity;
     [SerializeField] private float maxVelocity;
     [SerializeField] private float mouseSensetivity;
+
+    [Header("Do not touch objects")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private float playerHeight;
+    
     private GameObject playerCamera;
     private Rigidbody playerRb;
     private bool onGround;
@@ -112,7 +117,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 direction = transform.forward * moveCommand.y + transform.right * moveCommand.x;
-    
+        
         SpeedControl();
 
        

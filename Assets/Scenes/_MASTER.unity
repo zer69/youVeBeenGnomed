@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2376,7 +2376,8 @@ MonoBehaviour:
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
   weaponLanded: {fileID: 0}
-  TemperatureText: {fileID: 0}
+  temperatureText: {fileID: 0}
+  sharpnessText: {fileID: 0}
 --- !u!54 &404233159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4009,7 +4010,8 @@ MonoBehaviour:
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
   weaponLanded: {fileID: 0}
-  TemperatureText: {fileID: 0}
+  temperatureText: {fileID: 0}
+  sharpnessText: {fileID: 0}
 --- !u!65 &758312960
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4437,7 +4439,7 @@ PrefabInstance:
     - target: {fileID: 8709962614012041180, guid: bceb6bd0f2f5b4644960a35bce61a8cf,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8709962614012041181, guid: bceb6bd0f2f5b4644960a35bce61a8cf,
         type: 3}
@@ -10095,15 +10097,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d803c933fdcd84ca3c6cbf85d752f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1955815456}
   jumpForce: 500
   speed: 1200
-  rotationSpeed: 20
-  playerHeight: 2
-  groundDrag: 6
+  groundDrag: 5
   angleVelocity: 100
   maxVelocity: 5
   mouseSensetivity: 10
+  playerInput: {fileID: 1955815456}
+  playerHeight: 2
 --- !u!114 &1955815458
 MonoBehaviour:
   m_ObjectHideFlags: 0
