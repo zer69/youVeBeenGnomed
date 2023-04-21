@@ -5019,7 +5019,7 @@ PrefabInstance:
     - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1781508194981288863, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -5264,6 +5264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6828119712423841889, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
+      propertyPath: m_text
+      value: <sprite=2> 24 *c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828119712423841889, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
       propertyPath: m_fontSize
       value: 0.01
       objectReference: {fileID: 0}
@@ -5272,6 +5277,12 @@ PrefabInstance:
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 96b3eb5e1ab84a74eb4712862474a343,
+        type: 2}
+    - target: {fileID: 6828119712423841889, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f065785786159a340a18c0d4cc4231ba,
         type: 2}
     - target: {fileID: 6828119712423841889, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -5304,7 +5315,8 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 483538975605186212, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
 --- !u!1 &1063519672
 GameObject:
@@ -9809,12 +9821,12 @@ GameObject:
   - component: {fileID: 1944971842}
   - component: {fileID: 1944971844}
   m_Layer: 10
-  m_Name: Text
+  m_Name: Sharpness Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1944971841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10198,15 +10210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d803c933fdcd84ca3c6cbf85d752f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 1955815456}
   jumpForce: 500
   speed: 1200
-  rotationSpeed: 20
-  playerHeight: 2
   groundDrag: 6
   angleVelocity: 100
   maxVelocity: 5
   mouseSensetivity: 10
+  playerInput: {fileID: 1955815456}
+  playerHeight: 2
 --- !u!114 &1955815458
 MonoBehaviour:
   m_ObjectHideFlags: 0

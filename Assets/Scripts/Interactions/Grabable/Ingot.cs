@@ -194,7 +194,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature - coolingRate >= airTemperature)
         {
             currentTemperature -= coolingRate;
-            temperatureText.text = currentTemperature.ToString("F2") + " *C";
+            temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
 
             return true;
@@ -214,7 +214,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature < furnaceTemperature)
         {
             currentTemperature += smeltingSpeed * Time.deltaTime;
-            temperatureText.text = currentTemperature.ToString("F2") + " *C";
+            temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
