@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float angleVelocity;
     [SerializeField] private float maxVelocity;
     [SerializeField] private float mouseSensetivity;
+    [SerializeField] private float jumpDelay;
+
 
     [Header("Do not touch objects")]
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 lookCommand = Vector2.zero;
     private Vector2 moveCommand = Vector2.zero;
     private bool jumping = false;
+    InputAction jumpAction;
     // Initializing variables on awake
     private void Awake()
     {
@@ -36,7 +39,8 @@ public class PlayerController : MonoBehaviour
         playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         isGround = LayerMask.GetMask("jumpingSurface", "Pickable");
         Cursor.lockState = CursorLockMode.Locked;
-        
+        jumpAction = playerInput.actions.FindAction("Jump");
+
     }
     // Gain inputs
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
@@ -102,6 +106,12 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    IEnumerator JumpDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        jumpAction.Enable();
+    }
+
     private void ControlDrag()
     {
         if (onGround)
@@ -126,7 +136,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);     
+        playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        jumpAction.Disable();
+        StartCoroutine(JumpDelay(jumpDelay));
     }
 
     private void Look()
