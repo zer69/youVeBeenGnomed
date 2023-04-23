@@ -14,6 +14,7 @@ public class Glasses : MonoBehaviour
     [SerializeField] private b_GameEvent chargingStatus;
     [SerializeField] private i_GameEvent changeEnergy;
     [SerializeField] private i_GameEvent setEnergyMaxValue;
+    [SerializeField] private i_GameEvent setGlassesLayer;
     [SerializeField] private s_GameEvent hint;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
@@ -24,7 +25,8 @@ public class Glasses : MonoBehaviour
 
     
 
-    private int currentEnergy;    
+    private int currentEnergy;
+    private int glassesLayer = 1;
     private bool glassesOn = false;
     private bool wearGlasses = true;
 
@@ -55,6 +57,18 @@ public class Glasses : MonoBehaviour
                 }
 
                 break;
+
+            case "SwitchGlassesLayer":
+
+                if (context.phase == InputActionPhase.Started && glassesOn)
+                {
+                    glassesLayer += 1;
+                    if (glassesLayer > 2)
+                        glassesLayer = 1;
+                    setGlassesLayer.Raise(glassesLayer);
+                }
+
+                break;
         }
     }
 
@@ -63,6 +77,7 @@ public class Glasses : MonoBehaviour
         if (activate && currentEnergy != 0)
         {
             activateGlasses.Raise(glassesOn);
+            setGlassesLayer.Raise(glassesLayer);
             StartCoroutine(BlacksmithVision());
             changeEnergy.Raise(currentEnergy);
             Debug.Log("Glasses activated");

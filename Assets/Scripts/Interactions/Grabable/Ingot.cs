@@ -156,8 +156,7 @@ public class Ingot : MonoBehaviour
         if (anvilState != AnvilState.Weapon)
             UpdateGraphics();
 
-        if (status == CompletionStatus.Cooled || status == CompletionStatus.Sharpened)
-            SharpnessInfoUpdate();
+        InfoUpdate();
     }
 
     public void UpdateGraphics()
@@ -194,7 +193,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature - coolingRate >= airTemperature)
         {
             currentTemperature -= coolingRate;
-            temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
+            //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
 
             return true;
@@ -214,7 +213,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature < furnaceTemperature)
         {
             currentTemperature += smeltingSpeed * Time.deltaTime;
-            temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
+            //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
@@ -319,8 +318,25 @@ public class Ingot : MonoBehaviour
         (status, weaponType, rarity, oreType) = data;
     }
 
-    void SharpnessInfoUpdate()
+    void InfoUpdate()
     {
+        temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
         sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
+    }
+
+    public void SwitchGlassesLayer(int layer)
+    {
+        switch (layer)
+        {
+            case 1:
+                temperatureText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                break;
+
+            case 2:
+                sharpnessText.gameObject.SetActive(true);
+                temperatureText.gameObject.SetActive(false);
+                break;
+        }
     }
 }
