@@ -2657,6 +2657,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7354971872729700850, guid: 33b4376fd5be9e4489800e1c2b9a632a,
         type: 3}
+      propertyPath: setCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955,
+        type: 2}
+    - target: {fileID: 7354971872729700850, guid: 33b4376fd5be9e4489800e1c2b9a632a,
+        type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
@@ -5019,7 +5025,7 @@ PrefabInstance:
     - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1781508194981288863, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -5225,7 +5231,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: status
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -5295,6 +5301,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2534513083937743537, guid: 96b3eb5e1ab84a74eb4712862474a343,
         type: 2}
+    - target: {fileID: 7288905592659542922, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8450852832836843581, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
@@ -10281,8 +10292,9 @@ MonoBehaviour:
   chargingStatus: {fileID: 11400000, guid: cbf6bce8d19e97b4890c87bd088f9d84, type: 2}
   changeEnergy: {fileID: 11400000, guid: 7f49328042e58fb438e6a3b9d6824506, type: 2}
   setEnergyMaxValue: {fileID: 11400000, guid: 547a26f7671060b489777c68eca7b757, type: 2}
+  setGlassesLayer: {fileID: 11400000, guid: 72d9a14d18d0c4c4cae825a5bc17a75c, type: 2}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
-  maxEnergy: 10
+  maxEnergy: 100
   dischargingSpeed: 1
 --- !u!114 &1955815461
 MonoBehaviour:
@@ -16004,6 +16016,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1998960160}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name

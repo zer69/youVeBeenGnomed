@@ -31,6 +31,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
 
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent setCamera;
 
     private bool isTired = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
@@ -88,6 +89,7 @@ public class Whetstone : MonoBehaviour, IInteractable
 
         cam.gameObject.SetActive(false);
         cam2.gameObject.SetActive(true);
+        setCamera.Raise(cam2.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         playerInput.actions.FindAction("DropItems").Disable();
@@ -109,6 +111,7 @@ public class Whetstone : MonoBehaviour, IInteractable
                 {
                     cam.gameObject.SetActive(true);
                     cam2.gameObject.SetActive(false);
+                    setCamera.Raise(cam.gameObject);
                     playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     this.GetComponent<CapsuleCollider>().enabled = true;
                     canControlIngot = false;
