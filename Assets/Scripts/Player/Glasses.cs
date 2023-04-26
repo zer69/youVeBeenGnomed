@@ -63,7 +63,7 @@ public class Glasses : MonoBehaviour
                 if (context.phase == InputActionPhase.Started && glassesOn)
                 {
                     glassesLayer += 1;
-                    if (glassesLayer > 2)
+                    if (glassesLayer > 5)
                         glassesLayer = 1;
                     setGlassesLayer.Raise(glassesLayer);
                 }
