@@ -134,6 +134,9 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] private TextMeshPro temperatureText;
     [SerializeField] private TextMeshPro sharpnessText;
+    [SerializeField] private TextMeshPro fragilityText;
+    [SerializeField] private TextMeshPro strengthText;
+    [SerializeField] private TextMeshPro enchantmentText;
 
     bool readyRaised = true;
 
@@ -322,6 +325,9 @@ public class Ingot : MonoBehaviour
     {
         temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
         sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
+        fragilityText.text = "<sprite=1> " + fragility.ToString("F2");
+        strengthText.text = "<sprite=4> " + strength.ToString("F2");
+        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");
     }
 
     public void SwitchGlassesLayer(int layer)
@@ -331,11 +337,41 @@ public class Ingot : MonoBehaviour
             case 1:
                 temperatureText.gameObject.SetActive(true);
                 sharpnessText.gameObject.SetActive(false);
+                enchantmentText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
                 break;
 
             case 2:
+                fragilityText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);                
+                strengthText.gameObject.SetActive(false);
+                break;
+
+            case 3:
+                strengthText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);                
+                break;
+
+            case 4:
                 sharpnessText.gameObject.SetActive(true);
                 temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                break;
+
+            case 5:
+                enchantmentText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);                
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
                 break;
         }
     }
