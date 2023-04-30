@@ -53,7 +53,7 @@ public class WeaponManager : MonoBehaviour
                 break;
             case Ingot.WeaponType.Spear:
                 GameObject Spear = Instantiate(weaponList[Random.Range(7, 10)], ingot.transform.Find("SpearPos"));
-                Spear.transform.localPosition = Vector3.zero;
+                //Spear.transform.localPosition = Vector3.zero;
                 //Spear.transform.rotation = ingot.transform.rotation;
                 break;
         }
