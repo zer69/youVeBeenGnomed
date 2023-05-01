@@ -41,7 +41,7 @@ public class Liquid : MonoBehaviour
 
     void OnTriggerStay(Collider collider)
     {
-        if (barrel.canControlThongs && collider.tag == "Ingot")
+        if (barrel.canControlTongs && collider.tag == "Ingot")
         {
             //Debug.Log(collider.gameObject.transform.gameObject.name);
             if (!CoolingWeapon(collider.gameObject.transform.gameObject))
@@ -54,7 +54,7 @@ public class Liquid : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Enter liquid");
-        if (barrel.canControlThongs && other.tag == "Ingot")
+        if (barrel.canControlTongs && other.tag == "Ingot")
         {
             Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
             ignot.setSpecificCoolingRate(CoolingRate);
@@ -63,7 +63,7 @@ public class Liquid : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (barrel.canControlThongs && other.tag == "Ingot")
+        if (barrel.canControlTongs && other.tag == "Ingot")
         {            
             Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
             ignot.setNormalCoolingRate();
