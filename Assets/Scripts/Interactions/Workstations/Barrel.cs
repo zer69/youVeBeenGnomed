@@ -12,13 +12,14 @@ public class Barrel : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponStartingPosition;
+    [SerializeField] private Rigidbody thongsRB;
 
     private Transform thongs;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float movementSensitivity = 0.4f;
 
-    private bool canControlThongs = false;
+    public bool canControlThongs = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
     
     public string InteractionPrompt => _prompt;
@@ -46,8 +47,6 @@ public class Barrel : MonoBehaviour, IInteractable
         if (inventory.hasIngotInThongs)
         {
             //Debug.Log("Interact ok");
-            Rigidbody thongsRB = playerTransform.GetComponentInChildren<Rigidbody>();
-
             thongsRB.transform.rotation = Quaternion.identity;
             thongsRB.transform.position = weaponStartingPosition.position;
             thongsRB.transform.SetParent(weaponStartingPosition);
@@ -86,8 +85,7 @@ public class Barrel : MonoBehaviour, IInteractable
                     cam.gameObject.SetActive(true);
                     cam2.gameObject.SetActive(false);
                     playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-
-                    Rigidbody thongsRB = thongs.GetComponent<Rigidbody>();
+                    
                     thongsRB.transform.rotation = Quaternion.identity;
                     thongsRB.transform.position = cam.transform.Find("Left Hand").position;
                     thongsRB.transform.rotation = cam.transform.Find("Left Hand").rotation;

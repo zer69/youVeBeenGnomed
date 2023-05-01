@@ -11,6 +11,8 @@ public class Liquid : MonoBehaviour
     [SerializeField] private float StrengthRate;
     [SerializeField] private float FragilityRate;
 
+    [SerializeField] private Barrel barrel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +41,9 @@ public class Liquid : MonoBehaviour
 
     void OnTriggerStay(Collider collider)
     {
-        if (collider.tag == "Ingot")
+        if (barrel.canControlThongs && collider.tag == "Ingot")
         {
-            Debug.Log(collider.gameObject.transform.gameObject.name);
+            //Debug.Log(collider.gameObject.transform.gameObject.name);
             if (!CoolingWeapon(collider.gameObject.transform.gameObject))
             {
                 hint.Raise("Oh my, it's cooled! Almost as cold as ice");
@@ -52,8 +54,7 @@ public class Liquid : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Enter liquid");
-
-        if (other.tag == "Ingot")
+        if (barrel.canControlThongs && other.tag == "Ingot")
         {
             Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
             ignot.setSpecificCoolingRate(CoolingRate);
@@ -62,7 +63,7 @@ public class Liquid : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Ingot")
+        if (barrel.canControlThongs && other.tag == "Ingot")
         {            
             Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
             ignot.setNormalCoolingRate();
