@@ -203,7 +203,7 @@ public class Ingot : MonoBehaviour
         }
 
         
-        if (status > CompletionStatus.Forged)
+        if (status == CompletionStatus.Heated)
         {
             status = CompletionStatus.Cooled;
         }
