@@ -12,14 +12,14 @@ public class Barrel : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform weaponStartingPosition;
-    [SerializeField] private Rigidbody thongsRB;
+    [SerializeField] private Rigidbody tongsRB;
 
-    private Transform thongs;
+    private Transform tongs;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float movementSensitivity = 0.4f;
 
-    public bool canControlThongs = false;
+    public bool canControlTongs = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
     
     public string InteractionPrompt => _prompt;
@@ -47,13 +47,13 @@ public class Barrel : MonoBehaviour, IInteractable
         if (inventory.hasIngotInThongs)
         {
             //Debug.Log("Interact ok");
-            thongsRB.transform.rotation = Quaternion.identity;
-            thongsRB.transform.position = weaponStartingPosition.position;
-            thongsRB.transform.SetParent(weaponStartingPosition);
+            tongsRB.transform.rotation = Quaternion.identity;
+            tongsRB.transform.position = weaponStartingPosition.position;
+            tongsRB.transform.SetParent(weaponStartingPosition);
 
-            thongsRB.transform.Rotate(180, 0, 0);
+            tongsRB.transform.Rotate(180, 0, 0);
 
-            thongs = thongsRB.transform;
+            tongs = tongsRB.transform;
 
             cam.gameObject.SetActive(false);
 
@@ -62,7 +62,7 @@ public class Barrel : MonoBehaviour, IInteractable
             playerInput.transform.localRotation = Quaternion.identity;
 
             playerInput.actions.FindAction("DropItems").Disable();
-            canControlThongs = true;
+            canControlTongs = true;
             //Debug.Log("Barrel is used");
             return true;
         }
@@ -73,23 +73,23 @@ public class Barrel : MonoBehaviour, IInteractable
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        if (canControlThongs)
+        if (canControlTongs)
         {
             switch (context.action.name)
             {
                 case "Abort":
 
-                    canControlThongs = false;
+                    canControlTongs = false;
                     moveWeaponCommand = Vector2.zero;
 
                     cam.gameObject.SetActive(true);
                     cam2.gameObject.SetActive(false);
                     playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     
-                    thongsRB.transform.rotation = Quaternion.identity;
-                    thongsRB.transform.position = cam.transform.Find("Left Hand").position;
-                    thongsRB.transform.rotation = cam.transform.Find("Left Hand").rotation;
-                    thongsRB.transform.SetParent(playerTransform);
+                    tongsRB.transform.rotation = Quaternion.identity;
+                    tongsRB.transform.position = cam.transform.Find("Left Hand").position;
+                    tongsRB.transform.rotation = cam.transform.Find("Left Hand").rotation;
+                    tongsRB.transform.SetParent(playerTransform);
 
                     //thongs = null;
                     playerInput.actions.FindAction("DropItems").Enable();
@@ -109,9 +109,9 @@ public class Barrel : MonoBehaviour, IInteractable
     {
         float yMouse = moveWeaponCommand.y * Time.deltaTime * movementSensitivity;
 
-        Vector3 thongsVector = new Vector3(0, yMouse, 0);
+        Vector3 tongsVector = new Vector3(0, yMouse, 0);
 
-        thongs.position += thongsVector;
+        tongs.position += tongsVector;
 
     }
 
