@@ -375,4 +375,16 @@ public class Ingot : MonoBehaviour
                 break;
         }
     }
+
+    public void setComponentsActive(bool activity)
+    {
+        transform.Find("AxePos").Find("ShaftPos1").gameObject.SetActive(activity);
+        transform.Find("AxePos").Find("ShaftPos2").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos1").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos2").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("HiltPos").gameObject.SetActive(activity);
+        transform.Find("SpearPos").Find("ShaftPos").gameObject.SetActive(activity);
+    }
 }
