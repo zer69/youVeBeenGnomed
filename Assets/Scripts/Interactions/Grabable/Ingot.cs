@@ -175,6 +175,7 @@ public class Ingot : MonoBehaviour
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
                 break;
             case AnvilState.WellDone:
+                anvilState = AnvilState.Weapon;
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
                 UpdateWeaponGraphics();
                 break;
@@ -185,7 +186,7 @@ public class Ingot : MonoBehaviour
     {
         //Debug.Log("SENTWEAPON");
         sendIngot.Raise(this.gameObject);
-        anvilState = AnvilState.Weapon;
+        
 
 
     }

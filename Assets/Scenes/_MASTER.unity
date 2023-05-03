@@ -1244,6 +1244,7 @@ MonoBehaviour:
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
   crosshairResized: {fileID: 11400000, guid: 75c0f87e902580e4e9648d2cc8d4717c, type: 2}
+  pickObject: {fileID: 0}
 --- !u!1001 &190745751
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7670,6 +7671,9 @@ MonoBehaviour:
   - {fileID: 878053203360225563, guid: 2e16cf787416d4b43b2b3ac00a66d0af, type: 3}
   - {fileID: 2790497833067148513, guid: 9e516d9dd6efa3d468087cc641e0b078, type: 3}
   - {fileID: 4059044854970165307, guid: f65c43b8d1b0ae4499bbfb1119d719bc, type: 3}
+  ironWeaponComponents: []
+  copperWeaponComponents: []
+  silverWeaponComponents: []
 --- !u!1 &1153290312
 GameObject:
   m_ObjectHideFlags: 0
@@ -14290,13 +14294,18 @@ MonoBehaviour:
   hasBattery: 0
   hasHammer: 0
   rightHandFree: 1
+  leftHandFree: 1
   playerTransform: {fileID: 1420172717}
+  leftHandPosition: {fileID: 0}
+  rightHandPosition: {fileID: 0}
+  thongsPosition: {fileID: 0}
   ingot: {fileID: 0}
   ingotInThongs: {fileID: 0}
   thongs: {fileID: 0}
   coal: {fileID: 0}
   battery: {fileID: 0}
   hammer: {fileID: 0}
+  currentObject: {fileID: 0}
   childNumber: 0
 --- !u!114 &1955815460
 MonoBehaviour:
@@ -20265,7 +20274,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: anvilState
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -20285,7 +20294,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727988, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727988, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
