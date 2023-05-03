@@ -30,6 +30,7 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private t_GameEvent typeChoice;
     [SerializeField] private col_GameEvent weaponPicked;
     [SerializeField] private b_GameEvent crosshairResized;
+    [SerializeField] private go_GameEvent pickObject;
 
     private Transform pickableObject;
     private LayerMask pickableMask;
@@ -96,10 +97,12 @@ public class CameraClicker : MonoBehaviour
                 InteractWithTool();
                 break;
             case "Coal":
-                InteractWithCoal();
+                pickObject.Raise(pickableObject.gameObject);
+                //InteractWithCoal();
                 break;
             case "Battery":
-                InteractWithBattery();
+                pickObject.Raise(pickableObject.gameObject);
+                //InteractWithBattery();
                 break;
         }
     }
@@ -203,52 +206,52 @@ public class CameraClicker : MonoBehaviour
         //pickableObject = null;
     }
 
-    private void InteractWithCoal()
-    {
-        if (rightHand)
-        {
-            pickableObject.transform.position = rightHandPosition.position;
-            pickableObject.transform.rotation = rightHandPosition.rotation;
-            pickableObject.SetParent(playerTransform);
+    //private void InteractWithCoal()
+    //{
+    //    if (rightHand)
+    //    {
+    //        pickableObject.transform.position = rightHandPosition.position;
+    //        pickableObject.transform.rotation = rightHandPosition.rotation;
+    //        pickableObject.SetParent(playerTransform);
 
-            rightHand = false;
+    //        rightHand = false;
 
-            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+    //        Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+    //        rb.constraints = RigidbodyConstraints.FreezeAll;
 
-            playerInput.GetComponent<Inventory>().CoalIsPicked(true);
+    //        playerInput.GetComponent<Inventory>().CoalIsPicked(true);
 
-            pickableObject = null;
-        }
+    //        pickableObject = null;
+    //    }
 
-        else
-        {
-            Debug.Log("Your right hand is busy");
-        }
-    }
-    private void InteractWithBattery()
-    {
-        if (rightHand)
-        {
-            pickableObject.transform.position = rightHandPosition.position;
-            pickableObject.transform.rotation = rightHandPosition.rotation;
-            pickableObject.SetParent(playerTransform);
+    //    else
+    //    {
+    //        Debug.Log("Your right hand is busy");
+    //    }
+    //}
+    //private void InteractWithBattery()
+    //{
+    //    if (rightHand)
+    //    {
+    //        pickableObject.transform.position = rightHandPosition.position;
+    //        pickableObject.transform.rotation = rightHandPosition.rotation;
+    //        pickableObject.SetParent(playerTransform);
 
-            rightHand = false;
+    //        rightHand = false;
 
-            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeAll;
+    //        Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
+    //        rb.constraints = RigidbodyConstraints.FreezeAll;
 
-            playerInput.GetComponent<Inventory>().BatteryIsPicked(true);
+    //        playerInput.GetComponent<Inventory>().BatteryIsPicked(true);
 
-            pickableObject = null;
-        }
+    //        pickableObject = null;
+    //    }
 
-        else
-        {
-            Debug.Log("Your right hand is busy");
-        }
-    }
+    //    else
+    //    {
+    //        Debug.Log("Your right hand is busy");
+    //    }
+    //}
 
     private void CheckForTargets()
     {

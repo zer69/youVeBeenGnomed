@@ -11,16 +11,23 @@ public class Inventory : MonoBehaviour
     public bool hasBattery = false;
     public bool hasHammer = false;
     public bool rightHandFree = true;
+    public bool leftHandFree = true;
 
-    [SerializeField] private GameObject playerTransform;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform leftHandPosition;
+    [SerializeField] private Transform rightHandPosition;
+    [SerializeField] private Transform thongsPosition;
     public GameObject ingot;
     public GameObject ingotInThongs;
     public GameObject thongs;
     public GameObject coal;
     public GameObject battery;
     public GameObject hammer;
+
+    [SerializeField] private GameObject currentObject;
         
-    [SerializeField] private int childNumber = 0;
+    [SerializeField] private int childNumber = 0;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -146,7 +153,13 @@ public class Inventory : MonoBehaviour
     {
         if (coalPicked)
         {
-            coal = playerTransform.transform.GetChild(childNumber).gameObject;
+            coal = currentObject;
+            //coal = playerTransform.transform.GetChild(childNumber).gameObject;
+            coal.transform.position = rightHandPosition.position;
+            coal.transform.rotation = rightHandPosition.rotation;
+            coal.transform.SetParent(playerTransform);
+
+            coal.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             coal.GetComponent<BoxCollider>().enabled = false;
             //coal.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -179,7 +192,13 @@ public class Inventory : MonoBehaviour
     {
         if (batteryPicked)
         {
-            battery = playerTransform.transform.GetChild(childNumber).gameObject;
+            battery = currentObject;
+            //coal = playerTransform.transform.GetChild(childNumber).gameObject;
+            battery.transform.position = rightHandPosition.position;
+            battery.transform.rotation = rightHandPosition.rotation;
+            battery.transform.SetParent(playerTransform);
+
+            battery.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             battery.GetComponent<BoxCollider>().enabled = false;
             //coal.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -287,6 +306,42 @@ public class Inventory : MonoBehaviour
         } else
         {
             hasIngotInThongs = false;
+        }
+    }
+
+    public void GrabInteraction(GameObject pickableObject)
+    {
+        currentObject = pickableObject;
+
+        switch (pickableObject.gameObject.tag)
+        {
+            //case "Ingot":
+            //    InteractWithIngot();
+            //    pickableObject = null;
+            //    break;
+            //case "Tool":
+            //    InteractWithTool();
+            //    break;
+            case "Coal":
+                if(rightHandFree == true)
+                {
+                    CoalIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your right hand is busy");
+                }
+                break;
+            case "Battery":
+                if (rightHandFree == true)
+                {
+                    BatteryIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your right hand is busy");
+                }
+                break;
         }
     }
 }
