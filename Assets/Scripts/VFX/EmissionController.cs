@@ -25,8 +25,8 @@ public class EmissionController : MonoBehaviour
         baseEmission = new Color(baseEmissionValue.x, baseEmissionValue.y, baseEmissionValue.z, 1f);
         currentEmission = shiverMaterial.GetColor("_EmissionColor");
 
-        Debug.Log(baseEmission);
-        Debug.Log(currentEmission);
+        //Debug.Log(baseEmission);
+        //Debug.Log(currentEmission);
     }
 
     private void Update()
