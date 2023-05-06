@@ -14,6 +14,7 @@ public class Furnance : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
 
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent pickObject;
 
     [SerializeField] private Transform placeForIngot;
 
@@ -62,91 +63,6 @@ public class Furnance : MonoBehaviour, IInteractable
     {
         InteractWithFurnace();
         return true;
-        //var inventory = interactor.GetComponent<Inventory>();
-
-        //if (ingotInFurnace && inventory.hasThongs && !inventory.hasIngotInThongs)
-        //{
-        //    ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
-        //    ingot.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
-        //    ingot.transform.SetParent(thongs.transform.Find("ThongsPosition"));
-        //    ingot.GetComponent<BoxCollider>().enabled = false;
-        //    ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //    //ingot.GetComponent<Rigidbody>().isKinematic = true;
-        //    inventory.IngotIsPicked(true);
-        //    ingotInFurnace = false;
-        //    ingot = null;
-        //    Debug.Log("Ingot taken");
-        //    return true;
-        //}
-
-        //if (ingotInFurnace)
-        //{            
-        //    Debug.Log("You need empty thongs to get an ingot from the furnace");
-        //    hint.Raise("You need empty thongs to get an ingot from the furnace");
-        //    return true;
-        //}
-
-        //else if (fireIsKindled && !inventory.hasIngot && !inventory.hasIngotInThongs)
-        //{            
-        //    Debug.Log("No ingot");
-        //    hint.Raise("You need ingot to put it in the furnace");
-        //    return true;
-        //}
-
-        //else if(fireIsKindled && !ingotInFurnace)
-        //{
-        //    if (inventory.hasIngot)
-        //    {
-        //        ingot = inventory.ingot;
-        //        inventory.IngotIsPicked(false);
-        //    }
-        //    else
-        //    {
-        //        ingot = inventory.ingotInThongs;
-        //        inventory.IngotIsPicked(false);
-        //    }
-
-        //    ingot.transform.position = placeForIngot.transform.position;
-        //    ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
-        //    //ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //    //ingot.GetComponent<Rigidbody>().isKinematic = false;
-        //    //ingot.GetComponent<BoxCollider>().enabled = true;
-        //    ingot.transform.parent = null;
-
-        //    ingotInFurnace = true;
-
-        //    Debug.Log("Ingot placed in the furnace");
-        //    return true;
-        //}
-
-        //else
-        //{
-        //    if (fuelIsFilled)
-        //    {
-        //        StartCoroutine(Burning());
-        //        return true;
-        //    }
-
-        //    else
-        //    {
-        //        if (inventory.hasCoal)
-        //        {
-        //            fuelIsFilled = inventory.hasCoal;
-        //            Destroy(inventory.coal);
-        //            inventory.CoalIsPicked(false);
-        //            Debug.Log("Fuel Is Filled");
-        //            hint.Raise("Fuel is filled. Now you can start a fire in the furnace");
-        //            return true;
-        //        }
-
-        //        else
-        //        {
-        //            Debug.Log("No fuel for furnace");
-        //            hint.Raise("To start a fire, you need to put coal in the furnace");
-        //            return true;
-        //        }
-        //    }
-        //}
     }
 
     IEnumerator Burning()
@@ -272,13 +188,7 @@ public class Furnance : MonoBehaviour, IInteractable
             case FurnaceState.HasIngot:
                 if (inventory.hasThongs && !inventory.hasIngotInThongs)
                 {
-                    ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
-                    ingot.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
-                    ingot.transform.SetParent(thongs.transform.Find("ThongsPosition"));
-                    ingot.GetComponent<BoxCollider>().enabled = false;
-                    ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                    //ingot.GetComponent<Rigidbody>().isKinematic = true;
-                    inventory.IngotIsPicked(true);
+                    pickObject.Raise(ingot);
                     ingotInFurnace = false;
                     ingot = null;
                     Debug.Log("Ingot taken");
