@@ -164,7 +164,7 @@ public class Furnance : MonoBehaviour, IInteractable
                     ingot = inventory.ingot;
                     inventory.IngotIsPicked(false);
                 }
-                else
+                else if(inventory.hasIngotInThongs)
                 {
                     ingot = inventory.ingotInThongs;
                     inventory.IngotIsPicked(false);

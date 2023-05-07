@@ -22032,6 +22032,7 @@ GameObject:
   - component: {fileID: 1955815460}
   - component: {fileID: 1955815462}
   - component: {fileID: 1955815461}
+  - component: {fileID: 1955815463}
   m_Layer: 14
   m_Name: PLAYER
   m_TagString: Untagged
@@ -22234,10 +22235,10 @@ MonoBehaviour:
   hasHammer: 0
   rightHandFree: 1
   leftHandFree: 1
-  playerTransform: {fileID: 1420172717}
-  leftHandPosition: {fileID: 0}
-  rightHandPosition: {fileID: 0}
-  thongsPosition: {fileID: 0}
+  playerTransform: {fileID: 1420172718}
+  leftHandPosition: {fileID: 64592827}
+  rightHandPosition: {fileID: 1153290313}
+  thongsPosition: {fileID: 685193595}
   ingot: {fileID: 0}
   ingotInThongs: {fileID: 0}
   thongs: {fileID: 0}
@@ -22263,7 +22264,7 @@ MonoBehaviour:
   chargingStatus: {fileID: 11400000, guid: cbf6bce8d19e97b4890c87bd088f9d84, type: 2}
   changeEnergy: {fileID: 11400000, guid: 7f49328042e58fb438e6a3b9d6824506, type: 2}
   setEnergyMaxValue: {fileID: 11400000, guid: 547a26f7671060b489777c68eca7b757, type: 2}
-  setGlassesLayer: {fileID: 0}
+  setGlassesLayer: {fileID: 11400000, guid: 72d9a14d18d0c4c4cae825a5bc17a75c, type: 2}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
   maxEnergy: 10
   dischargingSpeed: 1
@@ -22314,6 +22315,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1955815460}
         m_TargetAssemblyTypeName: Glasses, Assembly-CSharp
         m_MethodName: GlassesStatus
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1955815463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955815450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb03742d5999704a9d20f2a0615628b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 2785be93ad231ec43b0c58412fbea136, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1955815459}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: GrabInteraction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25395,7 +25424,7 @@ GameObject:
   - component: {fileID: 6641446115407231093}
   m_Layer: 12
   m_Name: Hammer
-  m_TagString: Tool
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
