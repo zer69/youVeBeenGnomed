@@ -11,16 +11,21 @@ public class Inventory : MonoBehaviour
     public bool hasBattery = false;
     public bool hasHammer = false;
     public bool rightHandFree = true;
+    public bool leftHandFree = true;
 
-    [SerializeField] private GameObject playerTransform;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform leftHandPosition;
+    [SerializeField] private Transform rightHandPosition;
+    [SerializeField] private Transform thongsPosition;
     public GameObject ingot;
     public GameObject ingotInThongs;
     public GameObject thongs;
     public GameObject coal;
     public GameObject battery;
     public GameObject hammer;
-        
-    [SerializeField] private int childNumber = 0;
+
+    [SerializeField] private GameObject currentObject;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,56 +42,43 @@ public class Inventory : MonoBehaviour
     {
         if (ingotPicked && hasThongs && ! hasIngotInThongs)
         {
-            ingotInThongs = thongs.transform.GetChild(0).GetChild(0).gameObject;
+            ingotInThongs = currentObject;
+            ingotInThongs.transform.position = thongsPosition.position;
+            ingotInThongs.transform.rotation = thongsPosition.rotation;
+            ingotInThongs.transform.SetParent(thongsPosition);
 
+            ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingotInThongs.GetComponent<BoxCollider>().enabled = false;
 
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = true;
-            //ingot.GetComponent<Rigidbody>().isKinematic = true;
-
             hasIngotInThongs = true;
-            //childNumber += 1;
         }
 
         else if (ingotPicked)
         {
-            ingot = playerTransform.transform.GetChild(childNumber).gameObject;
+            ingot = currentObject;
+            ingot.transform.position = rightHandPosition.position;
+            ingot.transform.rotation = rightHandPosition.rotation;
+            ingot.transform.SetParent(playerTransform);
 
+            ingot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingot.GetComponent<BoxCollider>().enabled = false;
-            //ingot.GetComponent<Rigidbody>().isKinematic = true;
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             rightHandFree = false;
             hasIngot = true;
-            childNumber += 1;
         }
 
         else if (ingot != null)
         {
             ingot.GetComponent<BoxCollider>().enabled = true;
-            //ingot.GetComponent<Rigidbody>().isKinematic = false;
-
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = false;
 
             ingot = null;
             rightHandFree = true;
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             hasIngot = false;
-            childNumber -= 1;
-
-            //if (ingotInThongs != null)
-            //{
-            //    ingotInThongs = null;
-            //    hasIngotInThongs = false;
-            //    //childNumber -= 1;
-            //}
         }
         else if (ingotInThongs != null)
         {
             ingotInThongs = null;
             hasIngotInThongs = false;
-            //childNumber -= 1;
         }
 
             return true;
@@ -96,22 +88,13 @@ public class Inventory : MonoBehaviour
     {
         if (thongsPicked)
         {
-            thongs = playerTransform.transform.GetChild(childNumber).gameObject;
-            if(thongs.transform.GetChild(0).childCount == 1)
-            {
-                ingotInThongs = thongs.transform.GetChild(0).GetChild(0).gameObject;
-                ingotInThongs.transform.position = thongs.transform.Find("ThongsPosition").position;
-                ingotInThongs.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
+            thongs = currentObject;
+            thongs.transform.position = leftHandPosition.position;
+            thongs.transform.rotation = leftHandPosition.rotation;
+            thongs.transform.SetParent(playerTransform);
 
-                //ingotInThongs.GetComponent<BoxCollider>().enabled = false;
-
-                playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = true;
-
-                hasIngotInThongs = true;
-            }
+            thongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             hasThongs = true;
-
-            childNumber += 1;
         }
 
         else if (thongs != null)
@@ -119,24 +102,14 @@ public class Inventory : MonoBehaviour
             if (hasIngotInThongs)
             {
                 ingotInThongs.GetComponent<BoxCollider>().enabled = true;
-                //ingotInThongs.GetComponent<Rigidbody>().isKinematic = false;
                 ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
-                //ingotInThongs.GetComponent<Rigidbody>().constraints = ~RigidbodyConstraints.FreezeRotationX;
-                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                //ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
-
+                ingotInThongs.transform.SetParent(null);
                 ingotInThongs = null;
                 hasIngotInThongs = false;
-
-                thongs.transform.GetChild(0).GetChild(0).SetParent(null);
-                //childNumber -= 1;
             }
             thongs = null;
             hasThongs = false;
-
-            childNumber -= 1;
-            //Debug.Log(hasThongs);
         }
 
         return true;
@@ -146,30 +119,27 @@ public class Inventory : MonoBehaviour
     {
         if (coalPicked)
         {
-            coal = playerTransform.transform.GetChild(childNumber).gameObject;
-            coal.GetComponent<BoxCollider>().enabled = false;
-            //coal.GetComponent<Rigidbody>().isKinematic = true;
+            coal = currentObject;
+            coal.transform.position = rightHandPosition.position;
+            coal.transform.rotation = rightHandPosition.rotation;
+            coal.transform.SetParent(playerTransform);
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
+            coal.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            coal.GetComponent<BoxCollider>().enabled = false;
+
             rightHandFree = false;
             hasCoal = true;
 
-            childNumber += 1;
             Debug.Log("Coal Picked");
         }
 
         else if (coal != null)
         {
             coal.GetComponent<BoxCollider>().enabled = true;
-            //coal.GetComponent<Rigidbody>().isKinematic = false;
-
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 
             coal = null;
             rightHandFree = true;
             hasCoal = false;
-
-            childNumber -= 1;
         }
 
         return true;
@@ -179,30 +149,27 @@ public class Inventory : MonoBehaviour
     {
         if (batteryPicked)
         {
-            battery = playerTransform.transform.GetChild(childNumber).gameObject;
-            battery.GetComponent<BoxCollider>().enabled = false;
-            //coal.GetComponent<Rigidbody>().isKinematic = true;
+            battery = currentObject;
+            battery.transform.position = rightHandPosition.position;
+            battery.transform.rotation = rightHandPosition.rotation;
+            battery.transform.SetParent(playerTransform);
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
+            battery.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            battery.GetComponent<BoxCollider>().enabled = false;
+
             rightHandFree = false;
             hasBattery = true;
 
-            childNumber += 1;
             Debug.Log("Battery Picked");
         }
 
         else if (battery != null)
         {
             battery.GetComponent<BoxCollider>().enabled = true;
-            //coal.GetComponent<Rigidbody>().isKinematic = false;
-
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 
             battery = null;
             rightHandFree = true;
             hasBattery = false;
-
-            childNumber -= 1;
         }
 
         return true;
@@ -212,12 +179,15 @@ public class Inventory : MonoBehaviour
     {
         if (hammerPicked)
         {
-            hammer = playerTransform.transform.GetChild(childNumber).gameObject;
+            hammer = currentObject;
+            hammer.transform.position = rightHandPosition.position;
+            hammer.transform.rotation = rightHandPosition.rotation;
+            hammer.transform.SetParent(playerTransform);
+
+            hammer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
             rightHandFree = false;
             hasHammer = true;
-
-            childNumber += 1;
         }
 
         else if (hammer != null)
@@ -226,8 +196,6 @@ public class Inventory : MonoBehaviour
 
             rightHandFree = true;
             hasHammer = false;
-
-            childNumber -= 1;
         }
 
         return true;
@@ -287,6 +255,65 @@ public class Inventory : MonoBehaviour
         } else
         {
             hasIngotInThongs = false;
+        }
+    }
+
+    public void GrabInteraction(GameObject pickableObject)
+    {
+        currentObject = pickableObject;
+
+        switch (pickableObject.gameObject.tag)
+        {
+            case "Ingot":
+                if ((hasIngot == false && rightHandFree) || (hasIngotInThongs == false && hasThongs == true))
+                {
+                    IngotIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Both hands are busy");
+                }
+                break;
+            case "Hammer":
+                if (rightHandFree == true)
+                {
+                    HammerIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your right hand is busy");
+                }
+                break;
+            case "Thongs":
+                if (leftHandFree == true)
+                {
+                    ThongsIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your left hand is busy");
+                }
+                break;
+            case "Coal":
+                if(rightHandFree == true)
+                {
+                    CoalIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your right hand is busy");
+                }
+                break;
+            case "Battery":
+                if (rightHandFree == true)
+                {
+                    BatteryIsPicked(true);
+                }
+                else
+                {
+                    Debug.Log("Your right hand is busy");
+                }
+                break;
         }
     }
 }

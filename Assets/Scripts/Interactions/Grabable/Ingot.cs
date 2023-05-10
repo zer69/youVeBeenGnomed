@@ -175,6 +175,7 @@ public class Ingot : MonoBehaviour
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
                 break;
             case AnvilState.WellDone:
+                anvilState = AnvilState.Weapon;
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
                 UpdateWeaponGraphics();
                 break;
@@ -185,7 +186,7 @@ public class Ingot : MonoBehaviour
     {
         //Debug.Log("SENTWEAPON");
         sendIngot.Raise(this.gameObject);
-        anvilState = AnvilState.Weapon;
+        
 
 
     }
@@ -203,7 +204,7 @@ public class Ingot : MonoBehaviour
         }
 
         
-        if (status > CompletionStatus.Forged)
+        if (status == CompletionStatus.Heated)
         {
             status = CompletionStatus.Cooled;
         }
@@ -323,11 +324,11 @@ public class Ingot : MonoBehaviour
 
     void InfoUpdate()
     {
-        temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
+        /*temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
         sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
         fragilityText.text = "<sprite=1> " + fragility.ToString("F2");
         strengthText.text = "<sprite=4> " + strength.ToString("F2");
-        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");
+        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");*/
     }
 
     public void SwitchGlassesLayer(int layer)
@@ -374,5 +375,17 @@ public class Ingot : MonoBehaviour
                 strengthText.gameObject.SetActive(false);
                 break;
         }
+    }
+
+    public void setComponentsActive(bool activity)
+    {
+        transform.Find("AxePos").Find("ShaftPos1").gameObject.SetActive(activity);
+        transform.Find("AxePos").Find("ShaftPos2").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos1").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos2").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("HiltPos").gameObject.SetActive(activity);
+        transform.Find("SpearPos").Find("ShaftPos").gameObject.SetActive(activity);
     }
 }

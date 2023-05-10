@@ -170,7 +170,7 @@ public class Whetstone : MonoBehaviour, IInteractable
         Vector3 tmppos = ingot.localPosition;
 
         float newY = Mathf.Clamp(tmppos.y, -1f, 1f);
-        float newZ = Mathf.Clamp(tmppos.z, -1.5f, -1f);
+        float newZ = Mathf.Clamp(tmppos.z, -1.5f, -1.2f);
 
         ingot.localPosition = new Vector3(ingot.localPosition.x, newY, newZ);
 

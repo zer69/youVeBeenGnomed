@@ -165,6 +165,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
             canEnchante = true;
             Debug.Log("Enchantment Table is used");
+
+            playerInput.actions.FindAction("DropItems").Disable();
             return true;
         }
         hint.Raise("Hey, bring the weapon you want to enchant");
@@ -192,62 +194,68 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        switch (context.action.name)
+        if (canEnchante)
         {
-            case "Abort":
+            switch (context.action.name)
+            {
+                case "Abort":
 
-                Rigidbody weaponRB = weapon.GetComponent<Rigidbody>();
-                weaponRB.transform.rotation = Quaternion.identity;
-                weaponRB.transform.position = cam.transform.Find("Right Hand").position;
-                weaponRB.transform.SetParent(playerTransform);
+                    Rigidbody weaponRB = weapon.GetComponent<Rigidbody>();
+                    weaponRB.transform.rotation = Quaternion.identity;
+                    weaponRB.transform.position = cam.transform.Find("Right Hand").position;
+                    weaponRB.transform.rotation = cam.transform.Find("Right Hand").rotation;
+                    weaponRB.transform.SetParent(playerTransform);
 
-                cam.gameObject.SetActive(true);
-                cam2.gameObject.SetActive(false);
-                              
-                canEnchante = false;
+                    cam.gameObject.SetActive(true);
+                    cam2.gameObject.SetActive(false);
+
+                    canEnchante = false;
 
 
-                resetPattern();
+                    resetPattern();
 
-                break;
+                    playerInput.actions.FindAction("DropItems").Enable();
 
-            case "DrawMagicRune":
-                //Debug.Log("try move stone");
+                    break;
 
-                if (canEnchante && !magicStone.IsAutoMoving)
-                {
-                    magicStone.CanMove = !magicStone.CanMove;
-                    if (magicStone.CanMove)
+                case "DrawMagicRune":
+                    //Debug.Log("try move stone");
+
+                    if (!magicStone.IsAutoMoving)
                     {
-                        magicStone.setCanMove();
-                        magicStone.stoneDown();
-                        //break;
+                        magicStone.CanMove = !magicStone.CanMove;
+                        if (magicStone.CanMove)
+                        {
+                            magicStone.setCanMove();
+                            magicStone.stoneDown();
+                            //break;
+                        }
+                        else
+                        {
+                            magicStone.setBlockMove();
+                            magicStone.stoneUp();
+
+                        }
                     }
-                    else
+                    break;
+
+                case "MoveMagicStone":
+
+                    if (magicStone.CanMove && !magicStone.IsAutoMoving)
                     {
-                        magicStone.setBlockMove();
-                        magicStone.stoneUp();
-                        
+                        //Debug.Log("moving stone");
+                        moveStoneCommand = context.action.ReadValue<Vector2>();
                     }
-                }
-                break;
-
-            case "MoveMagicStone":
-                                
-                if (magicStone.CanMove && !magicStone.IsAutoMoving)
-                {
-                    //Debug.Log("moving stone");
-                    moveStoneCommand = context.action.ReadValue<Vector2>();
-                }
-                break;
+                    break;
 
 
-            case "ResetDrawingRune":
+                case "ResetDrawingRune":
 
-                //Debug.Log("resetPattern");
-                resetPattern();
+                    //Debug.Log("resetPattern");
+                    resetPattern();
 
-                break;
+                    break;
+            }
         }
     }
 

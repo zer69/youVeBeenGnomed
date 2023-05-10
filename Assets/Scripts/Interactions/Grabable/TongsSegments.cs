@@ -36,8 +36,30 @@ public class TongsSegments : MonoBehaviour
         }
             
         Ingot.CompletionStatus completionstatus = Ingot.CompletionStatus.Raw;
+        Ingot.WeaponType weaponType = Ingot.WeaponType.None;
         foreach (Transform child in tongsPosition)
+        {
             completionstatus = child.GetComponent<Ingot>().status;
+            weaponType = child.GetComponent<Ingot>().weaponType;
+            Debug.Log(weaponType);
+        }
+            
+
+        switch(weaponType)
+        {
+            case Ingot.WeaponType.Axe:
+                weaponRotationValue = 80.5f;
+                break;
+            case Ingot.WeaponType.Sword:
+                weaponRotationValue = 74.946f;
+                break;
+            case Ingot.WeaponType.Dagger:
+                weaponRotationValue = 74.946f;
+                break;
+            case Ingot.WeaponType.Spear:
+                weaponRotationValue = 80.54f;
+                break;
+        }
 
         switch (completionstatus)
         {
