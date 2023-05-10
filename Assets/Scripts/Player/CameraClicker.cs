@@ -13,17 +13,10 @@ public class CameraClicker : MonoBehaviour
 
     [Header("No Edit")]
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
-    [SerializeField] private Transform lefttHandPosition;
-    [SerializeField] private Transform rightHandPosition;
-    [SerializeField] private Transform thongsPosition;
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] Transform playerTransform;
-    [SerializeField] Transform thongs;
-    public bool leftHand = true;
-    public bool rightHand = true;
-    public bool leftWithIngot = false;
 
     [Header("Events")]
     [BackgroundColor(.75f, 0f, 1.5f, 1f)]
@@ -141,10 +134,6 @@ public class CameraClicker : MonoBehaviour
                 playerInput.GetComponent<Inventory>().HammerIsPicked(false);
         }
         playerTransform.DetachChildren();
-        rightHand = true;
-        leftHand = true;
-        leftWithIngot = false;
-        pickableObject = null;
     }
 
     private void ResizeCrossHair()
