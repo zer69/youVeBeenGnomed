@@ -50,8 +50,6 @@ public class Inventory : MonoBehaviour
             ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingotInThongs.GetComponent<BoxCollider>().enabled = false;
 
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = true;
-
             hasIngotInThongs = true;
         }
 
@@ -65,7 +63,6 @@ public class Inventory : MonoBehaviour
             ingot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingot.GetComponent<BoxCollider>().enabled = false;
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             rightHandFree = false;
             hasIngot = true;
         }
@@ -74,12 +71,8 @@ public class Inventory : MonoBehaviour
         {
             ingot.GetComponent<BoxCollider>().enabled = true;
 
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().leftWithIngot = false;
-
             ingot = null;
             rightHandFree = true;
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             hasIngot = false;
         }
         else if (ingotInThongs != null)
@@ -134,7 +127,6 @@ public class Inventory : MonoBehaviour
             coal.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             coal.GetComponent<BoxCollider>().enabled = false;
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             rightHandFree = false;
             hasCoal = true;
 
@@ -144,8 +136,6 @@ public class Inventory : MonoBehaviour
         else if (coal != null)
         {
             coal.GetComponent<BoxCollider>().enabled = true;
-
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 
             coal = null;
             rightHandFree = true;
@@ -167,7 +157,6 @@ public class Inventory : MonoBehaviour
             battery.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             battery.GetComponent<BoxCollider>().enabled = false;
 
-            playerTransform.GetComponentInParent<CameraClicker>().rightHand = false;
             rightHandFree = false;
             hasBattery = true;
 
@@ -177,8 +166,6 @@ public class Inventory : MonoBehaviour
         else if (battery != null)
         {
             battery.GetComponent<BoxCollider>().enabled = true;
-
-            playerTransform.gameObject.GetComponentInParent<CameraClicker>().rightHand = true;
 
             battery = null;
             rightHandFree = true;
