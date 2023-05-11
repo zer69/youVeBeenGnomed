@@ -247,7 +247,7 @@ public class Anvil : MonoBehaviour, IInteractable
                 break;
 
         }
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset + 2.603f+0.06f, processedIngot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset + 2.603f, processedIngot.transform.position.z);
         return location;
     }
 
