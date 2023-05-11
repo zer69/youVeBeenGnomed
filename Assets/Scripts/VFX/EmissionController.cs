@@ -53,7 +53,7 @@ public class EmissionController : MonoBehaviour
     IEnumerator ShiverCooldown()
     {
         canChangeEmission = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.5f);
         canChangeEmission = true;
     }
     
