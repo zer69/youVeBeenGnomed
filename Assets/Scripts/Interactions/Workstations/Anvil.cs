@@ -148,13 +148,20 @@ public class Anvil : MonoBehaviour, IInteractable
         }
         if (!hitMode && sectionCounter >= numberOfSectionsInRound[roundCounter])
         {
-            hint.Raise("Now hit!");
+            StartCoroutine(hint.DelaySeconds("Now Hit!", 1f));
             /*GameObject[] sectionsToClear = GameObject.FindGameObjectsWithTag("IngotSection");
             foreach (GameObject sc in sectionsToClear)
                 sc.transform.localScale = new Vector3(0f, sc.transform.localScale.y, sc.transform.localScale.z);*/
-            hitMode = true;
+            StartCoroutine(ActivateHitMode());
         }
         
+    }
+
+    IEnumerator ActivateHitMode()
+    {
+        yield return new WaitForSeconds(sectionDisappearTime);
+        hitMode = true;
+        yield return null;
     }
 
     IEnumerator RoundBreak(float seconds)
@@ -233,14 +240,14 @@ public class Anvil : MonoBehaviour, IInteractable
                 heightOffset = 0.397548f;
                 break;
             case Ingot.AnvilState.Rare:
-                heightOffset = 0.397548f + 0.15f;
+                heightOffset =  0.397548f + 0.15f;
                 break;
             case Ingot.AnvilState.MediumRare:
-                heightOffset = 0.397548f + 0.15f + 0.071f;
+                heightOffset =  0.397548f + 0.15f + 0.071f;
                 break;
 
         }
-        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset, processedIngot.transform.position.z);
+        Vector3 location = new Vector3(generateXLocation(ingotWidth, ingotSectionWidth), ingotHeight + anvilHeight + thongsHeight + 0.0001f - heightOffset + 2.603f+0.06f, processedIngot.transform.position.z);
         return location;
     }
 
