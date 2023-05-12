@@ -94,6 +94,10 @@ public class Ingot : MonoBehaviour
 
     [SerializeField] public float coolingRate;
     [SerializeField] public float currentTemperature;
+    [SerializeField] private Vector3 targetGlow;
+    private Color targetGlowColor;
+    private float glowRate;
+
     //minTemperatureValue = airTemperature
     //[SerializeField] private float maxTemperatureValue = 1200;
     [Header("Structure")]
@@ -124,6 +128,8 @@ public class Ingot : MonoBehaviour
     [SerializeField] private GameObject state1;
     [SerializeField] private GameObject state2;
 
+    [SerializeField] private Material GlowMaterial;
+
 
     [Header("Events")]
     [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
@@ -138,12 +144,23 @@ public class Ingot : MonoBehaviour
     [SerializeField] private TextMeshPro strengthText;
     [SerializeField] private TextMeshPro enchantmentText;
 
+
+    private Transform axePos;
+    private Transform bladePos;
+    private Transform spearPos;
+    private Transform daggerPos;
+
     bool readyRaised = true;
+    bool weaponMaterialSet = false;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
        
     {
+        GlowMaterial = GetComponent<MeshRenderer>().material;
+        
+
+        targetGlowColor = new Color(targetGlow.x, targetGlow.y, targetGlow.z);
 
         //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
@@ -152,14 +169,28 @@ public class Ingot : MonoBehaviour
         isEnchanted = false;
         enchantment = Enchantment.None;
         enchantmentQuality = 1f;
+
+        axePos = transform.Find("AxePos");
+        bladePos = transform.Find("BladePos");
+        spearPos = transform.Find("SpearPos");
+        daggerPos = transform.Find("DaggerPos");
     }
     private void Update()
     {
+        UpdateMat();
         Cooling();
         if (anvilState != AnvilState.Weapon)
             UpdateGraphics();
-
+        
         InfoUpdate();
+       
+    }
+
+    private void UpdateMat()
+    {
+        glowRate = Mathf.Clamp(currentTemperature-airTemperature - MeltingPoint/3f, 0f, MeltingPoint * 1.5f) / MeltingPoint;
+
+        GlowMaterial.SetColor("_EmissionColor", targetGlowColor * glowRate);
     }
 
     public void UpdateGraphics()
@@ -169,26 +200,82 @@ public class Ingot : MonoBehaviour
             case AnvilState.Rare:
                 GetComponent<MeshRenderer>().enabled = false;
                 transform.Find("Ingot_2_Iron").gameObject.SetActive(true);
+                ResetMaterial(transform.Find("Ingot_2_Iron"));
                 break;
             case AnvilState.MediumRare:
                 transform.Find("Ingot_2_Iron").gameObject.SetActive(false);
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
+                ResetMaterial(transform.Find("Ingot_3_Iron"));
                 break;
             case AnvilState.WellDone:
                 anvilState = AnvilState.Weapon;
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
                 UpdateWeaponGraphics();
                 break;
+            
         }
     }
+
+    
 
     public void UpdateWeaponGraphics()
     {
         //Debug.Log("SENTWEAPON");
         sendIngot.Raise(this.gameObject);
         
+        
 
 
+    }
+
+    public void SetWeaponMaterial()
+    {
+        
+        switch (weaponType)
+        {
+            case WeaponType.Axe:
+                if (axePos.GetChild(axePos.childCount-1).gameObject.tag == "axe1")
+                {
+                    GetRootMaterial(axePos, axePos.childCount - 1);
+                    SetRootMaterial(axePos.GetChild(axePos.childCount - 1));
+                }
+                else
+                    ResetMaterial(axePos.GetChild(axePos.childCount - 1));
+
+
+                break;
+            case WeaponType.Sword:
+                ResetMaterial(bladePos.GetChild(bladePos.childCount - 1));
+                break;
+            case WeaponType.Spear:
+                GetRootMaterial(spearPos, spearPos.childCount - 1);
+                SetRootMaterial(spearPos.GetChild(spearPos.childCount - 1));
+                break;
+            case WeaponType.Dagger:
+                ResetMaterial(daggerPos.GetChild(daggerPos.childCount - 1));
+                break;
+        }
+    }
+
+    private void ResetMaterial(Transform obj)
+    {
+        GlowMaterial = obj.GetComponent<MeshRenderer>().material;
+        GlowMaterial.EnableKeyword("_EMISSION");
+    }
+
+    private void GetRootMaterial(Transform obj, int child)
+    {
+        GlowMaterial = obj.GetChild(child).GetChild(0).GetComponent<MeshRenderer>().material;
+        GlowMaterial.EnableKeyword("_EMISSION");
+
+    }
+
+    private void SetRootMaterial(Transform obj)
+    {
+        foreach (Transform child in obj)
+        {
+            child.GetComponent<MeshRenderer>().material = GlowMaterial;
+        }
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change

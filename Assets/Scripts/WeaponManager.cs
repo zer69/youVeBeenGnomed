@@ -14,7 +14,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private List<GameObject> copperWeaponComponents;
     [SerializeField] private List<GameObject> silverWeaponComponents;
 
-
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
+    [SerializeField] private GameEvent weaponUpdated;
 
     public void UpdateWeaponMesh(GameObject ingot)
     {
@@ -33,6 +35,7 @@ public class WeaponManager : MonoBehaviour
                 ingot.GetComponent<Ingot>().setComponentsActive(false);
                 break;
         }
+        weaponUpdated.Raise();
 
 
     }
@@ -44,11 +47,11 @@ public class WeaponManager : MonoBehaviour
             case Ingot.WeaponType.Axe:
                 int rnd;
                 rnd = Random.Range(0, 2);
-                GameObject Axe = Instantiate(weaponList[0], ingot.transform.Find("AxePos"));
+                GameObject Axe = Instantiate(weaponList[rnd], ingot.transform.Find("AxePos"));
                 Axe.transform.localPosition = Vector3.zero;
                 //Axe.transform.rotation = ingot.transform.rotation;
 
-                SetWeaponComponents(ingot, rnd, weaponCoponents);
+                //SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Sword:
                 rnd = Random.Range(2, 6);
@@ -56,7 +59,7 @@ public class WeaponManager : MonoBehaviour
                 Sword.transform.localPosition = Vector3.zero;
                 //Sword.transform.rotation = ingot.transform.rotation;
 
-                SetWeaponComponents(ingot, rnd, weaponCoponents);
+                //SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Dagger:
                 rnd = 6;
@@ -64,7 +67,7 @@ public class WeaponManager : MonoBehaviour
                 Dagger.transform.localPosition = Vector3.zero;
                 //Dagger.transform.rotation = ingot.transform.rotation;
 
-                SetWeaponComponents(ingot, rnd, weaponCoponents);
+                //SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Spear:
                 rnd = Random.Range(7, 10);
@@ -72,7 +75,7 @@ public class WeaponManager : MonoBehaviour
                 //Spear.transform.localPosition = Vector3.zero;
                 //Spear.transform.rotation = ingot.transform.rotation;
 
-                SetWeaponComponents(ingot, rnd, weaponCoponents);
+                //SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
         }
     }

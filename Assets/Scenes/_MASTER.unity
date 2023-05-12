@@ -7085,6 +7085,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -7097,6 +7098,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 0}
   state2: {fileID: 0}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
   weaponLanded: {fileID: 0}
@@ -13630,6 +13632,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -13642,6 +13645,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 0}
   state2: {fileID: 0}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 0}
   hint: {fileID: 0}
   weaponLanded: {fileID: 0}
@@ -14934,6 +14938,12 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6327103114103948579, guid: a46d55589d3a4e74c875fc5f0d92556a,
     type: 3}
   m_PrefabInstance: {fileID: 1943551657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &836922837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612007374980471239}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &837925316 stripped
 Transform:
@@ -19353,6 +19363,7 @@ MonoBehaviour:
   ironWeaponComponents: []
   copperWeaponComponents: []
   silverWeaponComponents: []
+  weaponUpdated: {fileID: 11400000, guid: 4d951cddc86df474eb0b63203df681c6, type: 2}
 --- !u!1 &1153290312
 GameObject:
   m_ObjectHideFlags: 0
@@ -40503,6 +40514,46 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7612007374980471239}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2431278920987989794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612007374980471239}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836922837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2431278920987989798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836922837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9339b9285779d8f469bd30ebddc4d0b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4d951cddc86df474eb0b63203df681c6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2431278920987989794}
+        m_TargetAssemblyTypeName: Ingot, Assembly-CSharp
+        m_MethodName: SetWeaponMaterial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2436454691172864121
 GameObject:
   m_ObjectHideFlags: 0
@@ -44091,7 +44142,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: status
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -44101,7 +44152,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: weaponType
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -44110,8 +44161,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
+      propertyPath: targetGlow.x
+      value: 3.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: targetGlow.y
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: targetGlow.z
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
       propertyPath: currentTemperature
-      value: 50
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727988, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -44122,6 +44188,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727988, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365213482536727988, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}
