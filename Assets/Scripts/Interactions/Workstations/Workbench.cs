@@ -54,14 +54,17 @@ public class Workbench : MonoBehaviour, IInteractable
                     case Ingot.WeaponType.Axe:
                     case Ingot.WeaponType.Spear:
                         weaponRB.transform.position = workbenchStartingPosition1.position;
+                        weaponRB.transform.rotation = workbenchStartingPosition1.rotation;
                         weaponRB.transform.SetParent(workbenchStartingPosition1);
                         break;
                     case Ingot.WeaponType.Sword:
                         weaponRB.transform.position = workbenchStartingPosition3.position;
+                        weaponRB.transform.rotation = workbenchStartingPosition1.rotation;
                         weaponRB.transform.SetParent(workbenchStartingPosition3);
                         break;
                     case Ingot.WeaponType.Dagger:
                         weaponRB.transform.position = workbenchStartingPosition2.position;
+                        weaponRB.transform.rotation = workbenchStartingPosition1.rotation;
                         weaponRB.transform.SetParent(workbenchStartingPosition2);
                         break;
                 }
@@ -110,9 +113,11 @@ public class Workbench : MonoBehaviour, IInteractable
                     break;
 
                 case "Build":
-
-                    ingot.setComponentsActive(true);
-
+                    if (ingot.status != Ingot.CompletionStatus.Completed) {
+                        ingot.setComponentsActive(true);
+                        ingot.status = Ingot.CompletionStatus.Completed;
+                        hint.Raise("Done!");
+                    }
                     break;
             }
         }
