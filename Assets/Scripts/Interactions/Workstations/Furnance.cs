@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Furnance : MonoBehaviour, IInteractable
 {
@@ -13,12 +14,14 @@ public class Furnance : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
 
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent pickObject;
 
     [SerializeField] private Transform placeForIngot;
 
+    [SerializeField] private TextMeshPro TemperatureText;
+
     private bool fuelIsFilled = false;
     public bool fireIsKindled = false;
-    private bool ingotInFurnace = false;
 
     public float furnaceTemperature = 0f;
     
@@ -33,107 +36,42 @@ public class Furnance : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject ingot;
     private GameObject thongs;
+    private Inventory inventory;
 
+    public enum FurnaceState
+    {
+        NoFuel,
+        HasFuel,
+        Kindled
+    }
+
+    public enum IngotState
+    {
+        NoIngot,
+        HasIngot
+    }
+
+    public FurnaceState state;
+    public IngotState ingotState;
     
     public string InteractionPrompt => _prompt;
 
     void Start()
     {
         thongs = GameObject.Find("Thongs");
+        inventory = GameObject.Find("PLAYER").GetComponent<Inventory>();
     }
 
     public bool Interact(Interactor interactor)
     {
-        var inventory = interactor.GetComponent<Inventory>();
-
-        if (ingotInFurnace && inventory.hasThongs && !inventory.hasIngotInThongs)
-        {
-            ingot.transform.position = thongs.transform.Find("ThongsPosition").position;
-            ingot.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
-            ingot.transform.SetParent(thongs.transform.Find("ThongsPosition"));
-            ingot.GetComponent<BoxCollider>().enabled = false;
-            ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //ingot.GetComponent<Rigidbody>().isKinematic = true;
-            inventory.IngotIsPicked(true);
-            ingotInFurnace = false;
-            ingot = null;
-            Debug.Log("Ingot taken");
-            return true;
-        }
-
-        if (ingotInFurnace)
-        {            
-            Debug.Log("You need empty thongs to get an ingot from the furnace");
-            hint.Raise("You need empty thongs to get an ingot from the furnace");
-            return true;
-        }
-
-        else if (fireIsKindled && !inventory.hasIngot && !inventory.hasIngotInThongs)
-        {            
-            Debug.Log("No ingot");
-            hint.Raise("You need ingot to put it in the furnace");
-            return true;
-        }
-
-        else if(fireIsKindled && !ingotInFurnace)
-        {
-            if (inventory.hasIngot)
-            {
-                ingot = inventory.ingot;
-                inventory.IngotIsPicked(false);
-            }
-            else
-            {
-                ingot = inventory.ingotInThongs;
-                inventory.IngotIsPicked(false);
-            }
-
-            ingot.transform.position = placeForIngot.transform.position;
-            ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
-            //ingot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //ingot.GetComponent<Rigidbody>().isKinematic = false;
-            //ingot.GetComponent<BoxCollider>().enabled = true;
-            ingot.transform.parent = null;
-
-            ingotInFurnace = true;
-
-            Debug.Log("Ingot placed in the furnace");
-            return true;
-        }
-
-        else
-        {
-            if (fuelIsFilled)
-            {
-                StartCoroutine(Burning());
-                return true;
-            }
-
-            else
-            {
-                if (inventory.hasCoal)
-                {
-                    fuelIsFilled = inventory.hasCoal;
-                    Destroy(inventory.coal);
-                    inventory.CoalIsPicked(false);
-                    Debug.Log("Fuel Is Filled");
-                    hint.Raise("Fuel is filled. Now you can start a fire in the furnace");
-                    return true;
-                }
-
-                else
-                {
-                    Debug.Log("No fuel for furnace");
-                    hint.Raise("To start a fire, you need to put coal in the furnace");
-                    return true;
-                }
-            }
-        }
+        InteractWithFurnace();
+        return true;
     }
 
     IEnumerator Burning()
     {
         fireIsKindled = true;
+        state = FurnaceState.Kindled;
         furnaceTemperature = furnaceInitialTemperature;
         Debug.Log("Fire Is Kindled");
         hint.Raise("Fire is kindled. Now you can put ingot in the furnace");
@@ -142,15 +80,14 @@ public class Furnance : MonoBehaviour, IInteractable
         {
             yield return new WaitForSeconds(1);
             furnaceTemperature -= 1;
+
+            TemperatureText.text = furnaceTemperature.ToString() + "*C";
             Debug.Log("Current temperature of furnace is " + furnaceTemperature + "*C");
-            if (ingotInFurnace)
-            {
-                Debug.Log("Current temperature of ingot is " + ingot.gameObject.GetComponent<Ingot>().currentTemperature + "*C");
-            }
         }
 
         fireIsKindled = false;
         fuelIsFilled = false;
+        state = FurnaceState.NoFuel;
         Debug.Log("Fire went out");
         hint.Raise("Fire went out");
     }
@@ -193,6 +130,87 @@ public class Furnance : MonoBehaviour, IInteractable
         if (collision.collider.tag == "Ingot")
         {
             collision.gameObject.GetComponent<Ingot>().setNormalCoolingRate();
+        }
+    }
+
+    private void InteractWithFurnace()
+    {
+        switch (state)
+        {
+            case FurnaceState.NoFuel:
+                Refuel();
+                break;
+
+            case FurnaceState.HasFuel:
+                StartCoroutine(Burning());
+                break;
+
+            case FurnaceState.Kindled:
+                InteractWithIngotInFurnace();
+                break;
+        }
+    }
+
+    void Refuel()
+    {
+        if (ingotState == IngotState.HasIngot)
+        {
+            InteractWithIngotInFurnace();
+        }
+        else if (inventory.hasCoal)
+        {
+            fuelIsFilled = inventory.hasCoal;
+            Destroy(inventory.coal);
+            inventory.CoalIsPicked(false);
+            Debug.Log("Fuel Is Filled");
+            hint.Raise("Fuel is filled. Now you can start a fire in the furnace");
+            state = FurnaceState.HasFuel;
+        }
+        else
+        {
+            Debug.Log("No fuel for furnace");
+            hint.Raise("To start a fire, you need to put coal in the furnace");
+        }
+    }
+
+    void InteractWithIngotInFurnace()
+    {
+        switch (ingotState)
+        {
+            case IngotState.NoIngot:
+                if (inventory.hasIngot)
+                {
+                    ingot = inventory.ingot;
+                    inventory.IngotIsPicked(false);
+                }
+                else if (inventory.hasIngotInThongs)
+                {
+                    ingot = inventory.ingotInThongs;
+                    inventory.IngotIsPicked(false);
+                }
+
+                ingot.transform.position = placeForIngot.transform.position;
+                ingot.transform.rotation = Quaternion.AngleAxis(-90, Vector3.right);
+                ingot.transform.parent = null;
+
+                Debug.Log("Ingot placed in the furnace");
+                ingotState = IngotState.HasIngot;
+                break;
+
+            case IngotState.HasIngot:
+                if (inventory.hasThongs && !inventory.hasIngotInThongs)
+                {
+                    pickObject.Raise(ingot);
+                    ingot = null;
+                    Debug.Log("Ingot taken");
+                    ingotState = IngotState.NoIngot;
+                }
+                else
+                {
+                    Debug.Log("You need empty thongs to get an ingot from the furnace");
+                    hint.Raise("You need empty thongs to get an ingot from the furnace");
+                }
+                break;
         }
     }
 }

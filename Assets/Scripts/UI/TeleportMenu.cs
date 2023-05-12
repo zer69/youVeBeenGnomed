@@ -7,10 +7,9 @@ using TMPro;
 
 public class TeleportMenu : MonoBehaviour
 {
-    [SerializeField] private Transform orderMenu;
-    [SerializeField] private Transform shopMenu;
-    [SerializeField] private Transform recyclingMenu;
-    [SerializeField] private Transform blackMarketMenu;
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
+
     [SerializeField] private PlayerInput playerInput;
 
     // Start is called before the first frame update
@@ -44,30 +43,7 @@ public class TeleportMenu : MonoBehaviour
 
 
 
-    public void SwitchMenu(int state)
-    {
-        orderMenu.gameObject.SetActive(false);
-        shopMenu.gameObject.SetActive(false);
-        recyclingMenu.gameObject.SetActive(false); 
-        blackMarketMenu.gameObject.SetActive(false);
-
-
-        switch (state)
-        {
-            case 0:
-                orderMenu.gameObject.SetActive(true);
-                break;
-            case 1:
-                shopMenu.gameObject.SetActive(true);
-                break;
-            case 2:
-                recyclingMenu.gameObject.SetActive(true);
-                break;
-            case 3:
-                blackMarketMenu.gameObject.SetActive(true);
-                break;
-        }
-    }
+    
 
 
 }

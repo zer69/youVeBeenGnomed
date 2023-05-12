@@ -16,11 +16,11 @@ public class CoalBox : MonoBehaviour, IInteractable
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("No edit")]
 
-    [SerializeField] private Transform playerTransform;
-
-    [SerializeField] private Transform rightHand;
-
     [SerializeField] private s_GameEvent hint;
+
+    [SerializeField] private go_GameEvent pickObject;
+
+    private GameObject newCoal;
 
     public string InteractionPrompt => _prompt;
 
@@ -32,7 +32,6 @@ public class CoalBox : MonoBehaviour, IInteractable
         if(inventory.rightHandFree == true)
         {
             GiveCoal();
-            inventory.CoalIsPicked(true);
         }
         else
         {
@@ -44,14 +43,8 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     void GiveCoal()
     {
-        GameObject newCoal = Instantiate(coal);
-        newCoal.transform.position = rightHand.position;
-        newCoal.transform.rotation = rightHand.rotation;
-        newCoal.transform.SetParent(playerTransform);
-        newCoal.GetComponent<BoxCollider>().enabled = false;
-        newCoal.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //newCoal.GetComponent<Rigidbody>().isKinematic = true;
-        Debug.Log("You picked up  some coal");
+        newCoal = Instantiate(coal);
+        pickObject.Raise(newCoal);
         ChangePileSize(coalInPile);
     }
 

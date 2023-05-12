@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Ingot : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public CompletionStatus status;
+    [SerializeField] public AnvilState anvilState;
     [SerializeField] public WeaponType weaponType;
 
 
@@ -77,32 +79,36 @@ public class Ingot : MonoBehaviour
     
 
 
-    [Header("Air temperature")]
+    [Header("Air Temperature")]
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] public float airTemperature = 24;
     [SerializeField] public float airCoolingRate = 0.09f;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
-    [Header("Ignot properties")]
+    [Header("Ignot Properties")]
+    [Header("Quality")]
     [SerializeField] private float quality;
 
+    [Header("Temperature")]
     [SerializeField] private float MeltingPoint;
 
     [SerializeField] public float coolingRate;
     [SerializeField] public float currentTemperature;
     //minTemperatureValue = airTemperature
     //[SerializeField] private float maxTemperatureValue = 1200;
-
+    [Header("Structure")]
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] private float strength;
-
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minStrengthValue = 0;
     [SerializeField] private float maxStrengthValue = 100;
-
+    [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public float fragility;
-
+    [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minFragilityValue = 0;
     [SerializeField] private float maxFragilityValue = 100;
 
+    [Header("Sharpness")]
     [SerializeField] public float sharpness;
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
@@ -110,24 +116,34 @@ public class Ingot : MonoBehaviour
     [SerializeField] private Enchantment enchantment;
     [SerializeField] private float enchantmentQuality;
 
-    [SerializeField] private col_GameEvent weaponLanded;
+    
 
-    [SerializeField] private Material ingotMaterial;
-    private Color emissiveColor = new Color(0.749f, 0.0078f, 0f, 1f);
 
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private GameObject state1;
     [SerializeField] private GameObject state2;
-    [SerializeField] public AnvilState anvilState;
+
+
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
 
     [SerializeField] private go_GameEvent sendIngot;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private col_GameEvent weaponLanded;
+
+    [SerializeField] private TextMeshPro temperatureText;
+    [SerializeField] private TextMeshPro sharpnessText;
+    [SerializeField] private TextMeshPro fragilityText;
+    [SerializeField] private TextMeshPro strengthText;
+    [SerializeField] private TextMeshPro enchantmentText;
+
     bool readyRaised = true;
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
        
     {
-        ingotMaterial.EnableKeyword("_EMISSION");
 
         //ingotMaterial = this.gameObject.GetComponent<Material>();
         coolingRate = airCoolingRate;
@@ -140,9 +156,10 @@ public class Ingot : MonoBehaviour
     private void Update()
     {
         Cooling();
-        HeatColor();
         if (anvilState != AnvilState.Weapon)
             UpdateGraphics();
+
+        InfoUpdate();
     }
 
     public void UpdateGraphics()
@@ -158,6 +175,7 @@ public class Ingot : MonoBehaviour
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
                 break;
             case AnvilState.WellDone:
+                anvilState = AnvilState.Weapon;
                 transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
                 UpdateWeaponGraphics();
                 break;
@@ -168,18 +186,9 @@ public class Ingot : MonoBehaviour
     {
         //Debug.Log("SENTWEAPON");
         sendIngot.Raise(this.gameObject);
-        anvilState = AnvilState.Weapon;
+        
 
 
-    }
-
-    public void HeatColor()
-    {
-        //Debug.Log(emissiveColor);
-        //Debug.Log(currentTemperature);
-        emissiveColor = emissiveColor * ((currentTemperature / MeltingPoint) * 64f);
-        ingotMaterial.SetColor("_EmissionColor", emissiveColor);
-        ingotMaterial.EnableKeyword("_EMISSION");
     }
 
     //method for ingot temperature reduction, rate - how much does the temperature change
@@ -188,13 +197,14 @@ public class Ingot : MonoBehaviour
         if (currentTemperature - coolingRate >= airTemperature)
         {
             currentTemperature -= coolingRate;
+            //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
 
             return true;
         }
 
         
-        if (status > CompletionStatus.Forged)
+        if (status == CompletionStatus.Heated)
         {
             status = CompletionStatus.Cooled;
         }
@@ -207,6 +217,7 @@ public class Ingot : MonoBehaviour
         if (currentTemperature < furnaceTemperature)
         {
             currentTemperature += smeltingSpeed * Time.deltaTime;
+            //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             Melting();
             //Debug.Log("Current temperature of ingot is " + ingotTemperature + "*C");
 
@@ -309,5 +320,72 @@ public class Ingot : MonoBehaviour
     public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
     {
         (status, weaponType, rarity, oreType) = data;
+    }
+
+    void InfoUpdate()
+    {
+        /*temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
+        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
+        fragilityText.text = "<sprite=1> " + fragility.ToString("F2");
+        strengthText.text = "<sprite=4> " + strength.ToString("F2");
+        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");*/
+    }
+
+    public void SwitchGlassesLayer(int layer)
+    {
+        switch (layer)
+        {
+            case 1:
+                temperatureText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                enchantmentText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                break;
+
+            case 2:
+                fragilityText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);                
+                strengthText.gameObject.SetActive(false);
+                break;
+
+            case 3:
+                strengthText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);                
+                break;
+
+            case 4:
+                sharpnessText.gameObject.SetActive(true);
+                temperatureText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                break;
+
+            case 5:
+                enchantmentText.gameObject.SetActive(true);
+                sharpnessText.gameObject.SetActive(false);
+                temperatureText.gameObject.SetActive(false);                
+                fragilityText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    public void setComponentsActive(bool activity)
+    {
+        transform.Find("AxePos").Find("ShaftPos1").gameObject.SetActive(activity);
+        transform.Find("AxePos").Find("ShaftPos2").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos1").gameObject.SetActive(activity);
+        transform.Find("BladePos").Find("HiltPos2").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("GardaPos").gameObject.SetActive(activity);
+        transform.Find("DaggerPos").Find("HiltPos").gameObject.SetActive(activity);
+        transform.Find("SpearPos").Find("ShaftPos").gameObject.SetActive(activity);
     }
 }

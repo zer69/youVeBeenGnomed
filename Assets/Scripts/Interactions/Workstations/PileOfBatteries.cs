@@ -16,11 +16,11 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("No edit")]
 
-    [SerializeField] private Transform playerTransform;
-
-    [SerializeField] private Transform rightHand;
-
     [SerializeField] private s_GameEvent hint;
+
+    [SerializeField] private go_GameEvent pickObject;
+
+    private GameObject newBattery;
 
     public string InteractionPrompt => _prompt;
 
@@ -31,7 +31,6 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
         if (inventory.rightHandFree == true)
         {
             GiveBattery();
-            inventory.BatteryIsPicked(true);
         }
         else
         {
@@ -55,14 +54,8 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
     void GiveBattery()
     {
-        GameObject newBattery = Instantiate(battery);
-        newBattery.transform.position = rightHand.position;
-        newBattery.transform.rotation = rightHand.rotation;
-        newBattery.transform.SetParent(playerTransform);
-        newBattery.GetComponent<BoxCollider>().enabled = false;
-        newBattery.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //newCoal.GetComponent<Rigidbody>().isKinematic = true;
-        Debug.Log("You picked up battery");
+        newBattery = Instantiate(battery);
+        pickObject.Raise(newBattery);
         ChangePileSize(batteriesInPile);
     }
 

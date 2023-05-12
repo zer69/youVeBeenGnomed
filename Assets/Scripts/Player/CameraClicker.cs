@@ -6,21 +6,30 @@ using UnityEngine.InputSystem;
 
 public class CameraClicker : MonoBehaviour
 {
+    [Header("Camera Stats")]
+    [BackgroundColor (0f, 1.5f, 0f, 1f)]
+    [SerializeField] private float dropPower;
+    [SerializeField] private float interactRange = 3.0f;
 
+    [Header("No Edit")]
+    [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
     [SerializeField] private RectTransform crosshair;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] Transform playerTransform;
-    [SerializeField] Transform thongs;
 
-    public Transform pickableObject;
-    
+    [Header("Events")]
+    [BackgroundColor(.75f, 0f, 1.5f, 1f)]
+    [SerializeField] private t_GameEvent typeChoice;
+    [SerializeField] private col_GameEvent weaponPicked;
+    [SerializeField] private b_GameEvent crosshairResized;
+    [SerializeField] private go_GameEvent pickObject;
 
+    [SerializeField] private Transform pickableObject;
     private LayerMask pickableMask;
     private LayerMask interactiveMask;
 
     private bool targeted;
-    //private bool inHands;
     private bool canClick = true;
     private bool interacting = false;
 
@@ -28,19 +37,6 @@ public class CameraClicker : MonoBehaviour
     private int pickableLayer;
     private int toolLayer;
 
-    [SerializeField] private bool leftHand = true;
-    public bool rightHand = true;
-    public bool leftWithIngot = false;
-
-    [SerializeField] private Transform lefttHandPosition;
-    [SerializeField] private Transform rightHandPosition;
-    [SerializeField] private Transform thongsPosition;
-    [SerializeField] private float dropPower;
-    [SerializeField] private float interactRange = 3.0f;
-
-    [SerializeField] private t_GameEvent typeChoice;
-    [SerializeField] private col_GameEvent weaponPicked;
-    [SerializeField] private b_GameEvent crosshairResized;
 
 
 
@@ -84,168 +80,8 @@ public class CameraClicker : MonoBehaviour
 
     private void PickInteraction()
     {
-        switch (pickableObject.gameObject.tag)
-        {
-            case "Ingot":
-                InteractWithIngot();
-                pickableObject = null;
-                break;
-            case "Tool":
-                InteractWithTool();
-                break;
-            case "Coal":
-                InteractWithCoal();
-                break;
-            case "Battery":
-                InteractWithBattery();
-                break;
-        }
-    }
-
-    private void InteractWithTool()
-    {
-        switch (pickableObject.GetComponent<Instrument>().type)
-        {
-            case Instrument.Type.Thongs:
-                PickUpTool(false);
-                break;
-            case Instrument.Type.Hammer:
-                PickUpTool(true);
-                break;
-        }
-    }
-    
-    private void PickUpTool(bool hand) //if false then check for left, if hammer then check for right
-    {
-        if (hand)
-        {
-            if (rightHand)
-            {
-                pickableObject.transform.position = rightHandPosition.position;
-                pickableObject.transform.rotation = rightHandPosition.rotation;
-                pickableObject.SetParent(playerTransform);
-                rightHand = false;
-
-                playerInput.GetComponent<Inventory>().HammerIsPicked(true);
-            }
-            else
-                return;
-        }
-        else
-        {
-            pickableObject.transform.position = lefttHandPosition.position;
-            pickableObject.transform.rotation = lefttHandPosition.rotation;
-            pickableObject.SetParent(playerTransform);
-            leftHand = false;
-
-            playerInput.GetComponent<Inventory>().ThongsIsPicked(true);
-        }
-        Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-
+        pickObject.Raise(pickableObject.gameObject);
         pickableObject = null;
-    }
-
-    private void InteractWithIngot()
-    {   
-        bool targetHand;
-        if (leftHand)// hands are true when free, false when full
-        {
-            targetHand = true; // targets right without thongs
-        }
-        else
-        {
-            targetHand = false; // targets left with thongs
-        }
-
-
-
-        if (targetHand)
-        {
-            if (rightHand)
-            {
-                pickableObject.transform.position = rightHandPosition.position;
-                pickableObject.transform.rotation = rightHandPosition.rotation;
-                pickableObject.SetParent(playerTransform);
-                rightHand = false;
-            }
-                
-            else
-                return;
-        }
-        else
-        {
-            if (leftWithIngot)
-            {
-                //showhint
-                return;
-            }
-            pickableObject.transform.position = thongsPosition.position;
-            pickableObject.transform.rotation = thongsPosition.rotation;
-            pickableObject.SetParent(thongsPosition);
-            leftHand = false;
-            pickableObject.GetComponent<BoxCollider>().enabled = false;
-            leftWithIngot = true;
-        }
-
-        Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        if (pickableObject.GetComponent<Ingot>().weaponType == Ingot.WeaponType.None)
-        {
-            typeChoice.Raise(pickableObject);
-        }
-
-        playerInput.GetComponent<Inventory>().IngotIsPicked(true);
-        weaponPicked.Raise(pickableObject.GetComponent<BoxCollider>());
-
-        //pickableObject = null;
-    }
-
-    private void InteractWithCoal()
-    {
-        if (rightHand)
-        {
-            pickableObject.transform.position = rightHandPosition.position;
-            pickableObject.transform.rotation = rightHandPosition.rotation;
-            pickableObject.SetParent(playerTransform);
-
-            rightHand = false;
-
-            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-
-            playerInput.GetComponent<Inventory>().CoalIsPicked(true);
-
-            pickableObject = null;
-        }
-
-        else
-        {
-            Debug.Log("Your right hand is busy");
-        }
-    }
-    private void InteractWithBattery()
-    {
-        if (rightHand)
-        {
-            pickableObject.transform.position = rightHandPosition.position;
-            pickableObject.transform.rotation = rightHandPosition.rotation;
-            pickableObject.SetParent(playerTransform);
-
-            rightHand = false;
-
-            Rigidbody rb = pickableObject.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-
-            playerInput.GetComponent<Inventory>().BatteryIsPicked(true);
-
-            pickableObject = null;
-        }
-
-        else
-        {
-            Debug.Log("Your right hand is busy");
-        }
     }
 
     private void CheckForTargets()
@@ -298,10 +134,6 @@ public class CameraClicker : MonoBehaviour
                 playerInput.GetComponent<Inventory>().HammerIsPicked(false);
         }
         playerTransform.DetachChildren();
-        rightHand = true;
-        leftHand = true;
-        leftWithIngot = false;
-        pickableObject = null;
     }
 
     private void ResizeCrossHair()

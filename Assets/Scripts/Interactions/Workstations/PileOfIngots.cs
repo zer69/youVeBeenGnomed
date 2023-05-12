@@ -20,10 +20,14 @@ public class PileOfIngots : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform rightHand;
 
+    [SerializeField] private bool glassesActivated = false;
+
     [SerializeField] private t_GameEvent typeChoice;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent pickObject;
 
     private GameObject thongs;
+    private GameObject newIngot;
 
     public string InteractionPrompt => _prompt;
 
@@ -36,41 +40,24 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     {
         var inventory = interactor.GetComponent<Inventory>();
 
-        if (inventory.hasThongs && !inventory.hasIngotInThongs)
+        if ((inventory.hasIngot == false && inventory.rightHandFree) || (inventory.hasIngotInThongs == false && inventory.hasThongs == true))
         {
-            GameObject newIngot = Instantiate(ingot);
-            newIngot.transform.position = thongs.transform.Find("ThongsPosition").position;
-            newIngot.transform.rotation = thongs.transform.Find("ThongsPosition").rotation;
-            newIngot.transform.SetParent(thongs.transform.Find("ThongsPosition"));
-            newIngot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            newIngot.GetComponent<BoxCollider>().enabled = false;
-            //newIngot.GetComponent<Rigidbody>().isKinematic = true;
-            inventory.IngotIsPicked(true);
-            typeChoice.Raise(newIngot.transform);
-            ChangePileSize(ingotsInPile);
-            Debug.Log("Ingot taken");
-        }
-
-        else if (inventory.rightHandFree == true)
-        {
-            GameObject newIngot = Instantiate(ingot);
-            newIngot.transform.position = rightHand.position;
-            newIngot.transform.rotation = rightHand.rotation;
-            newIngot.transform.SetParent(playerTransform);
-            newIngot.GetComponent<BoxCollider>().enabled = false;
-            newIngot.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            //newIngot.GetComponent<Rigidbody>().isKinematic = true;
-            inventory.IngotIsPicked(true);
-            typeChoice.Raise(newIngot.transform);
-            ChangePileSize(ingotsInPile);
-            Debug.Log("Ingot taken");
+            GiveIngot();
         }
         else
         {
-            hint.Raise("Your right hand is busy");
-        }
+            hint.Raise("Your hands are busy");
+        }   
 
         return true;
+    }
+
+    void GiveIngot()
+    {
+        newIngot = Instantiate(ingot);
+        pickObject.Raise(newIngot);
+        newIngot.transform.Find("Ingot temperature (TMP)").gameObject.SetActive(glassesActivated);
+        ChangePileSize(ingotsInPile);
     }
 
     void ChangePileSize(int pileSize)
@@ -84,6 +71,19 @@ public class PileOfIngots : MonoBehaviour, IInteractable
             {
                 gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void GlassesStatus(bool active)
+    {
+        if (active)
+        {
+            glassesActivated = true;
+        }
+
+        else
+        {
+            glassesActivated = false;
         }
     }
 }
