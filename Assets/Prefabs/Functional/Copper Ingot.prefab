@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4213968407226709210}
   - component: {fileID: 2134691626883710992}
   m_Layer: 0
-  m_Name: Ingot_2_Iron
+  m_Name: Ingot_2_Copper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6878a28b4176a434486cb7529ef2a39d, type: 2}
+  - {fileID: 2100000, guid: acbbb4abcbe2fd641931c1991c8311be, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 91446106712381232}
   - component: {fileID: 2783249815679525882}
   m_Layer: 0
-  m_Name: Ingot_3_Iron
+  m_Name: Ingot_3_Copper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,7 +765,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1abae20e845302f44b97dc524ef25110, type: 2}
+  - {fileID: 2100000, guid: ddb85fd57658465479921ff82ae2ef84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: -3582959539470149536}
   - component: {fileID: 368462891689397641}
   m_Layer: 10
-  m_Name: Iron Ingot
+  m_Name: Copper Ingot
   m_TagString: Ingot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -897,7 +897,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ebbd7c3b13e09d24b879935495609bfa, type: 2}
+  - {fileID: 2100000, guid: f21a3987b69403f479563d6aca0a66a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -948,11 +948,11 @@ MonoBehaviour:
   anvilState: 0
   weaponType: 0
   rarity: 0
-  oreType: 0
+  oreType: 1
   airTemperature: 24
   airCoolingRate: 0.09
   quality: 0.2
-  MeltingPoint: 300
+  MeltingPoint: 450
   coolingRate: 0
   currentTemperature: 0
   targetGlow: {x: 0, y: 0, z: 0}

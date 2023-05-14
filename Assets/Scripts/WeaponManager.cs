@@ -51,7 +51,7 @@ public class WeaponManager : MonoBehaviour
                 Axe.transform.localPosition = Vector3.zero;
                 //Axe.transform.rotation = ingot.transform.rotation;
 
-                //SetWeaponComponents(ingot, rnd, weaponCoponents);
+                SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Sword:
                 rnd = Random.Range(2, 6);
@@ -59,7 +59,7 @@ public class WeaponManager : MonoBehaviour
                 Sword.transform.localPosition = Vector3.zero;
                 //Sword.transform.rotation = ingot.transform.rotation;
 
-                //SetWeaponComponents(ingot, rnd, weaponCoponents);
+                SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Dagger:
                 rnd = 6;
@@ -67,7 +67,7 @@ public class WeaponManager : MonoBehaviour
                 Dagger.transform.localPosition = Vector3.zero;
                 //Dagger.transform.rotation = ingot.transform.rotation;
 
-                //SetWeaponComponents(ingot, rnd, weaponCoponents);
+                SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
             case Ingot.WeaponType.Spear:
                 rnd = Random.Range(7, 10);
@@ -75,7 +75,7 @@ public class WeaponManager : MonoBehaviour
                 //Spear.transform.localPosition = Vector3.zero;
                 //Spear.transform.rotation = ingot.transform.rotation;
 
-                //SetWeaponComponents(ingot, rnd, weaponCoponents);
+                SetWeaponComponents(ingot, rnd, weaponCoponents);
                 break;
         }
     }

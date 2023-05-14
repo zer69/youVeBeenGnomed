@@ -199,17 +199,17 @@ public class Ingot : MonoBehaviour
         {
             case AnvilState.Rare:
                 GetComponent<MeshRenderer>().enabled = false;
-                transform.Find("Ingot_2_Iron").gameObject.SetActive(true);
-                ResetMaterial(transform.Find("Ingot_2_Iron"));
+                transform.GetChild(0).gameObject.SetActive(true);
+                ResetMaterial(transform.GetChild(0));
                 break;
             case AnvilState.MediumRare:
-                transform.Find("Ingot_2_Iron").gameObject.SetActive(false);
-                transform.Find("Ingot_3_Iron").gameObject.SetActive(true);
-                ResetMaterial(transform.Find("Ingot_3_Iron"));
+                transform.GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(true);
+                ResetMaterial(transform.GetChild(1));
                 break;
             case AnvilState.WellDone:
                 anvilState = AnvilState.Weapon;
-                transform.Find("Ingot_3_Iron").gameObject.SetActive(false);
+                transform.GetChild(1).gameObject.SetActive(false);
                 UpdateWeaponGraphics();
                 break;
             
