@@ -18,6 +18,8 @@ public class Cart : MonoBehaviour
     [SerializeField] private List<int> itemAmounts;
     [SerializeField] private List<ItemPrice> itemPrices;
 
+    [SerializeField] private ShopOrderManager shopOrderManager;
+
 
     private void Start()
     {
@@ -28,6 +30,22 @@ public class Cart : MonoBehaviour
     private void Update()
     {
         CalculateTotal();
+    }
+
+    public void SendOrder(int days)
+    {
+        shopOrderManager.RecieveOrder(itemAmounts, days);
+        ClearAmounts();
+    }
+
+    private void ClearAmounts()
+    {
+        for (int i = 0; i < itemAmounts.Count; i++)
+        {
+            itemAmounts[i] = 0;
+            RemoveItem(i);
+        }
+            
     }
 
     private void CalculateTotal()
@@ -77,7 +95,8 @@ public class Cart : MonoBehaviour
 
     public void RemoveItem(int key)
     {
-
+        if (!cartItems.Contains(key))
+            return;
         cartItems.Remove(key);
         foreach (Transform child in transform)
         {
