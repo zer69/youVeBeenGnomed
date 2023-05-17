@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class SwitchDay : MonoBehaviour, IInteractable
 {
     public string _prompt;
     public string InteractionPrompt => _prompt;
 
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject blackScreen;
     [SerializeField] private GameObject sleepText;
     [SerializeField] private float fadeSpeed = 1f;
+
+    [SerializeField] private GameEvent switchDay;
 
     private float fadeAmount;
 
@@ -25,10 +29,13 @@ public class SwitchDay : MonoBehaviour, IInteractable
     void StartNewDay()
     {
         StartCoroutine(Sleeping());
+        switchDay.Raise();
     }
 
     IEnumerator Sleeping()
     {
+        playerInput.DeactivateInput();
+        blackScreen.SetActive(true);
         screenColor = blackScreen.GetComponent<Image>().color;
         sleepText.SetActive(true);
 
@@ -41,7 +48,9 @@ public class SwitchDay : MonoBehaviour, IInteractable
             yield return new WaitForEndOfFrame();
         }
 
+        playerInput.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
         yield return new WaitForSeconds(2);
+        playerInput.ActivateInput();
         sleepText.SetActive(false);
 
         while (blackScreen.GetComponent<Image>().color.a > 0)
@@ -52,5 +61,7 @@ public class SwitchDay : MonoBehaviour, IInteractable
             blackScreen.GetComponent<Image>().color = screenColor;
             yield return new WaitForEndOfFrame();
         }
+
+        blackScreen.SetActive(false);
     }
 }

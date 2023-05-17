@@ -43,4 +43,10 @@ public class ShopOrderManager : MonoBehaviour
                 itemEvents[i].Raise(itemAmount[i]);
         Debug.Log(itemAmount);
     }
+
+    public void NewDay()
+    {
+        currentDay += 1;
+        CheckForDelivery();
+    }
 }
