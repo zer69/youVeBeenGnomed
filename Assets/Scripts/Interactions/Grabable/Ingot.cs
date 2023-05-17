@@ -68,6 +68,16 @@ public class Ingot : MonoBehaviour
         Weapon
     }
 
+    public enum OreQuality
+    {
+        Poor,
+        Medium,
+        Normal,
+        Good,
+        Exellent,
+        Legendary
+    };
+
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] public CompletionStatus status;
     [SerializeField] public AnvilState anvilState;

@@ -107,32 +107,32 @@ public class OrderListEditor : EditorWindow
                 EditorGUILayout.LabelField("of   " + orderList.orderList.Count.ToString() + "  orders", "", GUILayout.ExpandWidth(false));
                 GUILayout.EndHorizontal();
 
-                orderList.orderList[viewIndex - 1].itemName = EditorGUILayout.TextField("Item Name", orderList.orderList[viewIndex - 1].itemName as string);
-                orderList.orderList[viewIndex - 1].id = EditorGUILayout.IntField("Order ID", orderList.orderList[viewIndex - 1].id);
+                //orderList.orderList[viewIndex - 1].itemName = EditorGUILayout.TextField("Item Name", orderList.orderList[viewIndex - 1].itemName as string);
+                //orderList.orderList[viewIndex - 1].id = EditorGUILayout.IntField("Order ID", orderList.orderList[viewIndex - 1].id);
 
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                orderList.orderList[viewIndex - 1].typeId = (Ingot.WeaponType)EditorGUILayout.EnumPopup("Weapon type", orderList.orderList[viewIndex - 1].typeId);
-                orderList.orderList[viewIndex - 1].metallId = (Ingot.OreType)EditorGUILayout.EnumPopup("Ore type", orderList.orderList[viewIndex - 1].metallId);
+                orderList.orderList[viewIndex - 1].weaponType = (Ingot.WeaponType)EditorGUILayout.EnumPopup("Weapon type", orderList.orderList[viewIndex - 1].weaponType);
+                orderList.orderList[viewIndex - 1].oreType = (Ingot.OreType)EditorGUILayout.EnumPopup("Ore type", orderList.orderList[viewIndex - 1].oreType);
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                orderList.orderList[viewIndex - 1].requiredQuality = EditorGUILayout.IntSlider("Required quality", orderList.orderList[viewIndex - 1].requiredQuality, 0, 100);
+                orderList.orderList[viewIndex - 1].oreQuality = (Ingot.OreQuality)EditorGUILayout.EnumPopup("Required quality", orderList.orderList[viewIndex - 1].oreQuality);
                 orderList.orderList[viewIndex - 1].requiredSharpness = EditorGUILayout.IntSlider("Required sharpness", orderList.orderList[viewIndex - 1].requiredSharpness, 0, 100);
                 orderList.orderList[viewIndex - 1].requiredFragility = EditorGUILayout.IntSlider("Required fragility", orderList.orderList[viewIndex - 1].requiredFragility, 0, 100);
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
 
-                GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Hits per section");
-                orderList.orderList[viewIndex - 1].hitsPerSection[0] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[0]);
-                orderList.orderList[viewIndex - 1].hitsPerSection[1] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[1]);
-                orderList.orderList[viewIndex - 1].hitsPerSection[2] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[2]);
-                GUILayout.EndHorizontal();
+                //GUILayout.BeginHorizontal();
+                //EditorGUILayout.LabelField("Hits per section");
+                //orderList.orderList[viewIndex - 1].hitsPerSection[0] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[0]);
+                //orderList.orderList[viewIndex - 1].hitsPerSection[1] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[1]);
+                //orderList.orderList[viewIndex - 1].hitsPerSection[2] = EditorGUILayout.IntField("", orderList.orderList[viewIndex - 1].hitsPerSection[2]);
+                //GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
 
@@ -144,13 +144,15 @@ public class OrderListEditor : EditorWindow
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                orderList.orderList[viewIndex - 1].reputationLevelRequired = EditorGUILayout.IntField("Reputation level required", orderList.orderList[viewIndex - 1].reputationLevelRequired);
+                orderList.orderList[viewIndex - 1].orderComplexity = EditorGUILayout.IntField("Reputation level required", orderList.orderList[viewIndex - 1].orderComplexity);
+                orderList.orderList[viewIndex - 1].enchantmentLevel = EditorGUILayout.IntField("Enchantment level", orderList.orderList[viewIndex - 1].enchantmentLevel);
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                orderList.orderList[viewIndex - 1].description = EditorGUILayout.TextField("Order description", orderList.orderList[viewIndex - 1].description);
+                //orderList.orderList[viewIndex - 1].description = EditorGUILayout.TextField("Order description", orderList.orderList[viewIndex - 1].description);
+                orderList.orderList[viewIndex - 1].enchantment = (Ingot.Enchantment)EditorGUILayout.EnumPopup("Enchantment", orderList.orderList[viewIndex - 1].enchantment);
                 GUILayout.EndHorizontal();
 
 
@@ -202,7 +204,7 @@ public class OrderListEditor : EditorWindow
     void AddItem()
     {
         Order newItem = new Order();
-        newItem.itemName = "New Order";
+        //newItem.itemName = "New Order";
         orderList.orderList.Add(newItem);
         viewIndex = orderList.orderList.Count;
     }
