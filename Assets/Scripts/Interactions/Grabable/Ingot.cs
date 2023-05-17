@@ -240,7 +240,7 @@ public class Ingot : MonoBehaviour
 
     public void SetWeaponMaterial()
     {
-        
+        //Debug.Log(transform.gameObject.name);
         switch (weaponType)
         {
             case WeaponType.Axe:

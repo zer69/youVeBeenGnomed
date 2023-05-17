@@ -27,7 +27,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject currentObject;
 
     private int pickableLayer = 10;
-    private int toolLayer = 12;
     private int inHandsLayer = 15;
 
     // Start is called before the first frame update
