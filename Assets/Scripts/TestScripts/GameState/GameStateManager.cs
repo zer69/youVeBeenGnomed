@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     [SerializeField] private int[] levelValues;
     [SerializeField] private b_GameEvent reputationLevelUp;
     [SerializeField] private b_GameEvent reputationLevelDown;
+    [SerializeField] private o_GameEvent ordersListUpdate;
     // Start is called before the first frame update
     void Awake()
     {
@@ -86,13 +87,32 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
             {
                 orders.Add(order);
             }
+
+            ordersListUpdate.Raise(orders);
+
             Debug.Log("Processing");
         }
+    }
+
+    public void OrderProcessing(Order result, int i)
+    {
+        ordersDone++;
+        Order order = orders[i];
+        DoneOrderCalculations(result, order);
+        orders.RemoveAt(i);
+        ordersListUpdate.Raise(orders);
     }
 
     private void ExpiredOrderCalculations(Order order)
     {
         reputation -= order.reputation * fineMultiplier;
+        CheckReputationLevel();
+    }
+
+    private void DoneOrderCalculations(Order result, Order order)
+    {
+        money += order.price;
+        reputation += order.reputation;
         CheckReputationLevel();
     }
 

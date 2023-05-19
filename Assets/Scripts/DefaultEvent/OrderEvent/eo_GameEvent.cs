@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class o_GameEvent : ScriptableObject
+public class eo_GameEvent : ScriptableObject
 {
-    private List<o_GameEventListener> listeners =
-        new List<o_GameEventListener>();
+    private List<eo_GameEventListener> listeners =
+         new List<eo_GameEventListener>();
 
-    public void Raise(List<Order> obj)
+    public void Raise(Order obj, int j)
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
-            listeners[i].OnEventRaised(obj);
+            listeners[i].OnEventRaised(obj, j);
     }
 
-    public void RegisterListener(o_GameEventListener listener)
+    public void RegisterListener(eo_GameEventListener listener)
     {
         if (!listeners.Contains(listener))
             listeners.Add(listener);
     }
 
-    public void UnregisterListener(o_GameEventListener listener)
+    public void UnregisterListener(eo_GameEventListener listener)
     {
         if (listeners.Contains(listener))
             listeners.Remove(listener);
     }
 }
-
-
