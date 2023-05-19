@@ -56,20 +56,22 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
     {
         newBattery = Instantiate(battery);
         pickObject.Raise(newBattery);
-        ChangePileSize(batteriesInPile);
+        ChangePileSize(-1);
     }
 
-    void ChangePileSize(int pileSize)
+    public void ChangePileSize(int pileSize)
     {
-        if (pileSize > 0)
-        {
-            pileSize -= 1;
-            batteriesInPile = pileSize;
+        batteriesInPile += pileSize;
 
-            if (pileSize == 0)
-            {
-                gameObject.SetActive(false);
-            }
+        if (batteriesInPile == 0)
+        {
+            gameObject.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

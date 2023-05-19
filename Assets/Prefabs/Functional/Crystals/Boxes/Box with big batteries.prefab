@@ -2848,6 +2848,7 @@ GameObject:
   - component: {fileID: 996442806992065648}
   - component: {fileID: 3766448688388196835}
   - component: {fileID: 3390491893309548556}
+  - component: {fileID: 3930027307982290223}
   m_Layer: 13
   m_Name: Crystals
   m_TagString: Untagged
@@ -2933,6 +2934,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3162484, y: 1.2831762, z: 1.3439035}
   m_Center: {x: 0.047317743, y: 0.14158824, z: 0.032620907}
+--- !u!114 &3930027307982290223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3867214244269044175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: efd078f24738f0d4eb169d2691be6431, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3766448688388196835}
+        m_TargetAssemblyTypeName: PileOfBatteries, Assembly-CSharp
+        m_MethodName: ChangePileSize
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4007213768993497168
 GameObject:
   m_ObjectHideFlags: 0
