@@ -29,6 +29,9 @@ public class Inventory : MonoBehaviour
     private int pickableLayer = 10;
     private int inHandsLayer = 15;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event IngotPikedSoundEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -289,6 +292,8 @@ public class Inventory : MonoBehaviour
                 if ((hasIngot == false && rightHandFree) || (hasIngotInThongs == false && hasThongs == true))
                 {
                     IngotIsPicked(true);
+
+                    IngotPikedSoundEvent.Post(gameObject);
                 }
                 else
                 {
