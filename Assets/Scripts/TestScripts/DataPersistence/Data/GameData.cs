@@ -7,13 +7,17 @@ public class GameData
 {
     public int money;
     public int reputation;
+    public int reputationLevel;
+    public int currentOrder;
+    public int day;
     public Vector3 playerPosition;
     public Vector3 thongsPosition;
     public Vector3 hammerPosition;
     // public Vector3 glassesPosition;
-    public List<int> currentOrders;
+    public List<Order> orders;
     public int charge;
     public int ordersDone;
+    public int ordersExpired;
     public bool thongsInHand;
     public bool hammerInHand;
     public bool ingotInHand;
@@ -23,16 +27,20 @@ public class GameData
     public GameData()
     {
         money = 500;
-        reputation = 0;
+        reputation = 110;
+        reputationLevel = 2;
+        currentOrder = -1;
         ordersDone = 0;
+        ordersExpired = 0;
         ingotsObtained = 0;
         charge = 100;
+        day = 1;
 
         playerPosition = new Vector3(-14.44f, -2.89f, -3.44f);
         thongsPosition = new Vector3(-15.55f, 3.754186f, 4.886346f);
         hammerPosition = new Vector3(-12.42f, -0.85f, 0.99f);
 
-        currentOrders = new List<int>();
+        orders = new List<Order>();
 
         thongsInHand = false;
         hammerInHand = false;

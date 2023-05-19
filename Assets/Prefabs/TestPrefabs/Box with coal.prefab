@@ -244,6 +244,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91da2d5e723bb9242b38a5c7e7490d61, type: 3}
+--- !u!1 &5087244973077762960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919321008912776322, guid: 91da2d5e723bb9242b38a5c7e7490d61,
+    type: 3}
+  m_PrefabInstance: {fileID: 5358038702100426514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9056681582070168889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087244973077762960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 0}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5087244973077762961}
+        m_TargetAssemblyTypeName: CoalBox, Assembly-CSharp
+        m_MethodName: ChangePileSize
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5087244973077762961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 919321008912776323, guid: 91da2d5e723bb9242b38a5c7e7490d61,
+    type: 3}
+  m_PrefabInstance: {fileID: 5358038702100426514}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087244973077762960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a54f6ef48f922ac478a4a60990794dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5087244973077762989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 919321008912776383, guid: 91da2d5e723bb9242b38a5c7e7490d61,

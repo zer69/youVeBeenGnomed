@@ -11,10 +11,50 @@ public class Cart : MonoBehaviour
     [SerializeField] private float currentIndent = 0;
     private float indentIncrement = -38.72f;
 
+    [SerializeField] private TMP_Text totalOrder;
+    [SerializeField] private TMP_Text totalNow;
+
+    public Transform stock;
+    [SerializeField] private List<int> itemAmounts;
+    [SerializeField] private List<ItemPrice> itemPrices;
+
+    [SerializeField] private ShopOrderManager shopOrderManager;
+
 
     private void Start()
     {
         cartItems = new Hashtable();
+        
+    }
+
+    private void Update()
+    {
+        CalculateTotal();
+    }
+
+    public void SendOrder(int days)
+    {
+        shopOrderManager.RecieveOrder(itemAmounts, days);
+        ClearAmounts();
+    }
+
+    private void ClearAmounts()
+    {
+        for (int i = 0; i < itemAmounts.Count; i++)
+        {
+            itemAmounts[i] = 0;
+            RemoveItem(i);
+        }
+            
+    }
+
+    private void CalculateTotal()
+    {
+        int tmpTotal = 0;
+        for (int i = 0; i < itemAmounts.Count; i++)
+            tmpTotal += itemAmounts[i] * itemPrices[i].price;
+        totalOrder.text = tmpTotal.ToString();
+        totalNow.text = (tmpTotal * 1.5f).ToString();
     }
 
     public void AddItem(int key)
@@ -23,6 +63,7 @@ public class Cart : MonoBehaviour
         if (cartItems.ContainsKey(key))
         {
             cartItems[key] = int.Parse(cartItems[key].ToString()) + 1;
+            
             TMP_Text itemQuantity = transform.Find(cartItemPrefabs[key].name + "(Clone)").Find("Quantity").GetComponent<TMP_Text>();
             itemQuantity.text = cartItems[key].ToString();
         }
@@ -33,6 +74,7 @@ public class Cart : MonoBehaviour
             RectTransform thisRect = GetComponent<RectTransform>();
             thisRect.sizeDelta = new Vector2(200f, 30.72f - currentIndent);
         }
+        itemAmounts[key]++;
 
 
     }
@@ -48,11 +90,13 @@ public class Cart : MonoBehaviour
 
         TMP_Text itemQuantity = transform.Find(cartItemPrefabs[key].name + "(Clone)").Find("Quantity").GetComponent<TMP_Text>();
         itemQuantity.text = cartItems[key].ToString();
+        itemAmounts[key]--;
     }
 
     public void RemoveItem(int key)
     {
-
+        if (!cartItems.Contains(key))
+            return;
         cartItems.Remove(key);
         foreach (Transform child in transform)
         {
@@ -61,6 +105,7 @@ public class Cart : MonoBehaviour
         }
         currentIndent -= indentIncrement;
         GetComponent<RectTransform>().sizeDelta = new Vector2(200f, 30.72f - currentIndent);
+        itemAmounts[key] = 0;
     }
 
 
@@ -75,4 +120,7 @@ public class Cart : MonoBehaviour
         newItem.transform.Translate(new Vector3(0f, currentIndent, 0f));
         currentIndent += indentIncrement;
     }
+
+
+
 }

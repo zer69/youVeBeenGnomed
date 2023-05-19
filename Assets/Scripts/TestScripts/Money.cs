@@ -34,4 +34,9 @@ public class Money : MonoBehaviour, IDataPersistence
         yield return new WaitForSeconds(seconds);
         money += income;
     }
+
+    public void SpendMoney(int value)
+    {
+        money -= value;
+    }
 }

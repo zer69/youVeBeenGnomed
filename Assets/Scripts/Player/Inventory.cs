@@ -24,7 +24,13 @@ public class Inventory : MonoBehaviour
     public GameObject battery;
     public GameObject hammer;
 
-    [SerializeField] private GameObject currentObject;    
+    [SerializeField] private GameObject currentObject;
+
+    private int pickableLayer = 10;
+    private int inHandsLayer = 15;
+
+    [Header("Sound Events")]
+    public AK.Wwise.Event IngotPikedSoundEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +55,7 @@ public class Inventory : MonoBehaviour
 
             ingotInThongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingotInThongs.GetComponent<BoxCollider>().enabled = false;
+            SwitchToInHandsLayer(ingotInThongs.transform);
 
             hasIngotInThongs = true;
         }
@@ -60,8 +67,10 @@ public class Inventory : MonoBehaviour
             ingot.transform.rotation = rightHandPosition.rotation;
             ingot.transform.SetParent(playerTransform);
 
+            ingot.layer = inHandsLayer;
             ingot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             ingot.GetComponent<BoxCollider>().enabled = false;
+            SwitchToInHandsLayer(ingot.transform);
 
             rightHandFree = false;
             hasIngot = true;
@@ -70,6 +79,7 @@ public class Inventory : MonoBehaviour
         else if (ingot != null)
         {
             ingot.GetComponent<BoxCollider>().enabled = true;
+            SwitchToPickableLayer(ingot.transform);
 
             ingot = null;
             rightHandFree = true;
@@ -77,6 +87,8 @@ public class Inventory : MonoBehaviour
         }
         else if (ingotInThongs != null)
         {
+            SwitchToPickableLayer(ingotInThongs.transform);
+
             ingotInThongs = null;
             hasIngotInThongs = false;
         }
@@ -93,12 +105,16 @@ public class Inventory : MonoBehaviour
             thongs.transform.rotation = leftHandPosition.rotation;
             thongs.transform.SetParent(playerTransform);
 
+            SwitchToInHandsLayer(thongs.transform);
+
             thongs.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             hasThongs = true;
         }
 
         else if (thongs != null)
         {
+            SwitchToPickableLayer(thongs.transform);
+
             if (hasIngotInThongs)
             {
                 ingotInThongs.GetComponent<BoxCollider>().enabled = true;
@@ -126,6 +142,7 @@ public class Inventory : MonoBehaviour
 
             coal.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             coal.GetComponent<BoxCollider>().enabled = false;
+            SwitchToInHandsLayer(coal.transform);
 
             rightHandFree = false;
             hasCoal = true;
@@ -136,6 +153,7 @@ public class Inventory : MonoBehaviour
         else if (coal != null)
         {
             coal.GetComponent<BoxCollider>().enabled = true;
+            SwitchToPickableLayer(coal.transform);
 
             coal = null;
             rightHandFree = true;
@@ -156,6 +174,7 @@ public class Inventory : MonoBehaviour
 
             battery.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             battery.GetComponent<BoxCollider>().enabled = false;
+            SwitchToInHandsLayer(battery.transform);
 
             rightHandFree = false;
             hasBattery = true;
@@ -166,6 +185,7 @@ public class Inventory : MonoBehaviour
         else if (battery != null)
         {
             battery.GetComponent<BoxCollider>().enabled = true;
+            SwitchToPickableLayer(battery.transform);
 
             battery = null;
             rightHandFree = true;
@@ -184,6 +204,8 @@ public class Inventory : MonoBehaviour
             hammer.transform.rotation = rightHandPosition.rotation;
             hammer.transform.SetParent(playerTransform);
 
+            SwitchToInHandsLayer(hammer.transform);
+
             hammer.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
             rightHandFree = false;
@@ -192,8 +214,10 @@ public class Inventory : MonoBehaviour
 
         else if (hammer != null)
         {
-            hammer = null;
+            SwitchToPickableLayer(hammer.transform);
 
+            hammer = null;
+            
             rightHandFree = true;
             hasHammer = false;
         }
@@ -268,6 +292,8 @@ public class Inventory : MonoBehaviour
                 if ((hasIngot == false && rightHandFree) || (hasIngotInThongs == false && hasThongs == true))
                 {
                     IngotIsPicked(true);
+
+                    IngotPikedSoundEvent.Post(gameObject);
                 }
                 else
                 {
@@ -314,6 +340,32 @@ public class Inventory : MonoBehaviour
                     Debug.Log("Your right hand is busy");
                 }
                 break;
+        }
+    }
+
+    void SwitchToInHandsLayer(Transform objectInHand)
+    {
+        objectInHand.gameObject.layer = inHandsLayer;
+        foreach (Transform child in objectInHand)
+        {
+            child.gameObject.layer = inHandsLayer;
+            foreach (Transform grandchild in child.transform)
+            {
+                grandchild.gameObject.layer = inHandsLayer;
+            }
+        }
+    }
+
+    void SwitchToPickableLayer(Transform objectInHand)
+    {
+        objectInHand.gameObject.layer = pickableLayer;
+        foreach (Transform child in objectInHand)
+        {
+            child.gameObject.layer = pickableLayer;
+            foreach (Transform grandchild in child.transform)
+            {
+                grandchild.gameObject.layer = pickableLayer;
+            }
         }
     }
 }

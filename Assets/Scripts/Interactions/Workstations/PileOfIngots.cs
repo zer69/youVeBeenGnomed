@@ -20,6 +20,8 @@ public class PileOfIngots : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform rightHand;
 
+    [SerializeField] private GameObject ingots;
+
     [SerializeField] private bool glassesActivated = false;
 
     [SerializeField] private t_GameEvent typeChoice;
@@ -57,20 +59,22 @@ public class PileOfIngots : MonoBehaviour, IInteractable
         newIngot = Instantiate(ingot);
         pickObject.Raise(newIngot);
         newIngot.transform.Find("Ingot temperature (TMP)").gameObject.SetActive(glassesActivated);
-        ChangePileSize(ingotsInPile);
+        ChangePileSize(-1);
     }
 
-    void ChangePileSize(int pileSize)
+    public void ChangePileSize(int pileSize)
     {
-        if(pileSize > 0)
-        {
-            pileSize -= 1;
-            ingotsInPile = pileSize;
+        ingotsInPile += pileSize;
 
-            if(pileSize == 0)
-            {
-                gameObject.SetActive(false);
-            }
+        if(ingotsInPile == 0)
+        {
+            ingots.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            ingots.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
         }
     }
 

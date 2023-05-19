@@ -45,20 +45,22 @@ public class CoalBox : MonoBehaviour, IInteractable
     {
         newCoal = Instantiate(coal);
         pickObject.Raise(newCoal);
-        ChangePileSize(coalInPile);
+        ChangePileSize(-1);
     }
 
-    void ChangePileSize(int pileSize)
+    public void ChangePileSize(int pileSize)
     {
-        if (pileSize > 0)
-        {
-            pileSize -= 1;
-            coalInPile = pileSize;
+        coalInPile += pileSize;
 
-            if (pileSize == 0)
-            {
-                gameObject.SetActive(false);
-            }
+        if (coalInPile == 0)
+        {
+            gameObject.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
         }
     }
 }

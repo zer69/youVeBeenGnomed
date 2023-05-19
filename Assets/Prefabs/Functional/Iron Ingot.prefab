@@ -952,9 +952,10 @@ MonoBehaviour:
   airTemperature: 24
   airCoolingRate: 0.09
   quality: 0.2
-  MeltingPoint: 1000
+  MeltingPoint: 300
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -967,6 +968,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}

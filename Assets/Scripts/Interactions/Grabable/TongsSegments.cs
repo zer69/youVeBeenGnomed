@@ -41,7 +41,7 @@ public class TongsSegments : MonoBehaviour
         {
             completionstatus = child.GetComponent<Ingot>().status;
             weaponType = child.GetComponent<Ingot>().weaponType;
-            Debug.Log(weaponType);
+           
         }
             
 

@@ -14,7 +14,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private List<GameObject> copperWeaponComponents;
     [SerializeField] private List<GameObject> silverWeaponComponents;
 
-
+    [Header("Events")]
+    [BackgroundColor(0.75f, 0f, 1.5f, 1f)]
+    [SerializeField] private GameEvent weaponUpdated;
 
     public void UpdateWeaponMesh(GameObject ingot)
     {
@@ -33,6 +35,7 @@ public class WeaponManager : MonoBehaviour
                 ingot.GetComponent<Ingot>().setComponentsActive(false);
                 break;
         }
+        weaponUpdated.Raise();
 
 
     }
@@ -44,7 +47,7 @@ public class WeaponManager : MonoBehaviour
             case Ingot.WeaponType.Axe:
                 int rnd;
                 rnd = Random.Range(0, 2);
-                GameObject Axe = Instantiate(weaponList[0], ingot.transform.Find("AxePos"));
+                GameObject Axe = Instantiate(weaponList[rnd], ingot.transform.Find("AxePos"));
                 Axe.transform.localPosition = Vector3.zero;
                 //Axe.transform.rotation = ingot.transform.rotation;
 
