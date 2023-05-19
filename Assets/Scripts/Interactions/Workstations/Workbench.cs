@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Workbench : MonoBehaviour, IInteractable
 {
+    
     [SerializeField] private string _prompt;
     [SerializeField] private s_GameEvent hint;
 
@@ -21,6 +22,8 @@ public class Workbench : MonoBehaviour, IInteractable
     private Ingot ingot;
     private bool workbenchIsUsed;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event DoneSoundEvent;
     public string InteractionPrompt => _prompt;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,7 @@ public class Workbench : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
+        
         Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
 
         //add chek if it's weapon of just ingot
@@ -113,7 +117,10 @@ public class Workbench : MonoBehaviour, IInteractable
                     break;
 
                 case "Build":
-                    if (ingot.status != Ingot.CompletionStatus.Completed) {
+                   if (ingot.status != Ingot.CompletionStatus.Completed) {
+
+                        DoneSoundEvent.Post(gameObject);
+
                         ingot.setComponentsActive(true);
                         ingot.status = Ingot.CompletionStatus.Completed;
                         hint.Raise("Done!");
