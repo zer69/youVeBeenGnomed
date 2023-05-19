@@ -14,10 +14,13 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     public int ordersDone;
     public int ordersExpired;
     public List<Order> orders;
+    // Some values for basic calculations
     [SerializeField] private int fineMultiplier;
     [SerializeField] private int[] levelValues;
+    // Game events to declare change of player's reputation level
     [SerializeField] private b_GameEvent reputationLevelUp;
     [SerializeField] private b_GameEvent reputationLevelDown;
+    // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
     // Start is called before the first frame update
     void Awake()
@@ -103,12 +106,14 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         ordersListUpdate.Raise(orders);
     }
 
+    // Function for calculating effects of expired order
     private void ExpiredOrderCalculations(Order order)
     {
         reputation -= order.reputation * fineMultiplier;
         CheckReputationLevel();
     }
 
+    // Function for calculating effects of order player has finished
     private void DoneOrderCalculations(Order result, Order order)
     {
         money += order.price;
