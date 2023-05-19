@@ -23,4 +23,20 @@ public class NextDayTest : MonoBehaviour
         nextDay.Raise(true);
         Debug.Log("Next Day");
     }
+
+    public void LevelUp(bool levelUp)
+    {
+        if (levelUp)
+        {
+            Debug.Log("Level UP!");
+        }
+    }
+
+    public void LevelDown(bool levelDown)
+    {
+        if (levelDown)
+        {
+            Debug.Log("Level DOWN!");
+        }
+    }
 }

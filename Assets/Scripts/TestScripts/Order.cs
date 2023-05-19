@@ -18,7 +18,7 @@ public class Order
     // public string description = "On time or beheaded";
     public int price = 2000;
     public int reputation = 10;
-    public int daysToExpire = 4;
+    public int daysToExpire = 2;
     // public int[] hitsPerSection = { 4, 3, 6 };
     //public int reputationLevelRequired = 1;
 
