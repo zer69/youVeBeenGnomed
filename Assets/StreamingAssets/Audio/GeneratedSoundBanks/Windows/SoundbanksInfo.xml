@@ -22,28 +22,55 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{68702B39-B04C-2331-BA80-121CD1479E91}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{244FB5D6-971A-DE64-8DDD-69FD321B7D98}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="345645255" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>magic-strike.wav</ShortName>
+					<CachePath>SFX/magic-strike_4D5B6031.wem</CachePath>
+				</File>
 				<File Id="427840010" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>knife-scrape-and-hit.wav</ShortName>
-					<CachePath>SFX/knife-scrape-and-hit_E64187C6.wem</CachePath>
+					<CachePath>SFX/knife-scrape-and-hit_F6A7F953.wem</CachePath>
 				</File>
 				<File Id="474252998" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>lit-fireplace.wav</ShortName>
-					<CachePath>SFX/lit-fireplace_7E40E836.wem</CachePath>
+					<CachePath>SFX/lit-fireplace_5365E9B0.wem</CachePath>
+				</File>
+				<File Id="505975120" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>a-sudden-appearance.wav</ShortName>
+					<CachePath>SFX/a-sudden-appearance_97BB5202.wem</CachePath>
 				</File>
 				<File Id="520683815" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>concrete-footsteps-6752.wav</ShortName>
-					<CachePath>SFX/concrete-footsteps-6752_0CC1DED2.wem</CachePath>
+					<CachePath>SFX/concrete-footsteps-6752_5E383A11.wem</CachePath>
 				</File>
 				<File Id="799131975" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>bang-wood-rattle.wav</ShortName>
-					<CachePath>SFX/bang-wood-rattle_C5C794F0.wem</CachePath>
+					<CachePath>SFX/bang-wood-rattle_C71FE629.wem</CachePath>
+				</File>
+				<File Id="818966047" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>error.wav</ShortName>
+					<CachePath>SFX/error_10C4C929.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
+				<Event Id="3386453524" Name="Play_enchantment_done" DurationType="OneShot" DurationMin="2.29881" DurationMax="2.29881">
+					<MediaRefs>
+						<MediaRef Id="345645255"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="174977958" Name="Play_enchantment_point_on" DurationType="OneShot" DurationMin="0.781851" DurationMax="0.781851">
+					<MediaRefs>
+						<MediaRef Id="505975120"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2189013097" Name="Play_enchantment_reset" DurationType="OneShot" DurationMin="2.2465305" DurationMax="2.2465305">
+					<MediaRefs>
+						<MediaRef Id="818966047"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="1501216439" Name="Play_fireplace" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="474252998"/>
@@ -67,5 +94,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{49FDAA17-29C0-E75B-1B5F-168205212329}</FileHash>
+	<FileHash>{E85F3481-51A9-2D6C-C63D-82CB731D56ED}</FileHash>
 </SoundBanksInfo>
