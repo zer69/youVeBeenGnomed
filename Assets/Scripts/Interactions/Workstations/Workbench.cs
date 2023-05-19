@@ -17,6 +17,12 @@ public class Workbench : MonoBehaviour, IInteractable
     [SerializeField] private Transform workbenchStartingPosition2;
     [SerializeField] private Transform workbenchStartingPosition3;
 
+    [SerializeField] private int swordGuard;
+    [SerializeField] private int swordHilt;
+    [SerializeField] private int spearHandle;
+    [SerializeField] private int axeHandle;
+
+
     private Transform weapon;
     private Ingot ingot;
     private bool workbenchIsUsed;
@@ -123,5 +129,23 @@ public class Workbench : MonoBehaviour, IInteractable
         }
     }
 
+    public void ChangeAmounOfSwordGuard(int amount)
+    {
+        swordGuard += amount;
+    }
 
+    public void ChangeAmounOfSwordHilt(int amount)
+    {
+        swordHilt += amount;
+    }
+
+    public void ChangeAmounOfSpearHandle(int amount)
+    {
+        spearHandle += amount;
+    }
+
+    public void ChangeAmounOfAxeHandle(int amount)
+    {
+        axeHandle += amount;
+    }
 }
