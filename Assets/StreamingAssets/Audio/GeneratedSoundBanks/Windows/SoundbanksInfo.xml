@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
+	<RootPaths>
+		<ProjectRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed</ProjectRoot>
+		<SourceFilesRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed/.cache/Windows</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{986487A9-2683-E47A-8688-3D0FE6FDB954}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+		</SoundBank>
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{68702B39-B04C-2331-BA80-121CD1479E91}">
+			<ShortName>Main</ShortName>
+			<Path>Main.bnk</Path>
+			<Media>
+				<File Id="427840010" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>knife-scrape-and-hit.wav</ShortName>
+					<CachePath>SFX/knife-scrape-and-hit_E64187C6.wem</CachePath>
+				</File>
+				<File Id="474252998" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>lit-fireplace.wav</ShortName>
+					<CachePath>SFX/lit-fireplace_7E40E836.wem</CachePath>
+				</File>
+				<File Id="520683815" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>concrete-footsteps-6752.wav</ShortName>
+					<CachePath>SFX/concrete-footsteps-6752_0CC1DED2.wem</CachePath>
+				</File>
+				<File Id="799131975" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>bang-wood-rattle.wav</ShortName>
+					<CachePath>SFX/bang-wood-rattle_C5C794F0.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="1501216439" Name="Play_fireplace" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="474252998"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3854155799" Name="Play_footsteps" DurationType="OneShot" DurationMin="8.955324" DurationMax="8.955324">
+					<MediaRefs>
+						<MediaRef Id="520683815"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3325582906" Name="Play_weapon_up" DurationType="OneShot" DurationMin="0.69270855" DurationMax="0.69270855">
+					<MediaRefs>
+						<MediaRef Id="427840010"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="598364336" Name="Play_workbench_done" DurationType="OneShot" DurationMin="0.6450425" DurationMax="0.6450425">
+					<MediaRefs>
+						<MediaRef Id="799131975"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{49FDAA17-29C0-E75B-1B5F-168205212329}</FileHash>
+</SoundBanksInfo>
