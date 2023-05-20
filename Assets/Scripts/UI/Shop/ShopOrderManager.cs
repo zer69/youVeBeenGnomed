@@ -8,7 +8,7 @@ public class ShopOrderManager : MonoBehaviour
 
     [SerializeField]private List<List<int>> ordersOnHold;
 
-    private List<int> deliveryDay;
+    public List<int> deliveryDay;
 
     public GameStateManager currentDay;
 

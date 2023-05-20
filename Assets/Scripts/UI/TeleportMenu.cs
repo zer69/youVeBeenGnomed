@@ -35,7 +35,7 @@ public class TeleportMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void UnlockMovement()
+    public void UnlockMovement()
     {
         playerInput.ActivateInput();
         Cursor.lockState = CursorLockMode.Locked;
