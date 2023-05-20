@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [System.Serializable]                         
-public class Order
+public class Order : MonoBehaviour
 {
     //public int id = 0;
     //public string itemName = "New Item";
