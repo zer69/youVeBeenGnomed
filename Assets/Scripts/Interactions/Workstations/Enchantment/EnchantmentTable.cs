@@ -243,7 +243,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 case "DrawMagicRune":
                     //Debug.Log("try move stone");
 
-                    if (!magicStone.IsAutoMoving)
+                    if (!magicStone.IsAutoMoving && EnergyReceiver.hasBattery)
                     {
                         magicStone.CanMove = !magicStone.CanMove;
                         if (magicStone.CanMove)
@@ -258,6 +258,9 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                             magicStone.stoneUp();
 
                         }
+                    }else if (!EnergyReceiver.hasBattery)
+                    {
+                        hint.Raise("No energy");
                     }
                     break;
 

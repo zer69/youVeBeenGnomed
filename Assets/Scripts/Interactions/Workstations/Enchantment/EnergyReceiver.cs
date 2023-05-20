@@ -135,6 +135,7 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
                     case "Build":
                         Debug.Log("take back");
                         pickObject.Raise(battery);
+                        inventory.battery.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                         battery = null;
                         hasBattery = false;
                         
