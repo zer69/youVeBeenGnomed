@@ -17,6 +17,7 @@ public class GameData
     public List<Order> orders;
     public int charge;
     public int ordersDone;
+    public int ordersExpired;
     public bool thongsInHand;
     public bool hammerInHand;
     public bool ingotInHand;
@@ -26,10 +27,11 @@ public class GameData
     public GameData()
     {
         money = 500;
-        reputation = 0;
-        reputationLevel = 1;
+        reputation = 110;
+        reputationLevel = 2;
         currentOrder = -1;
         ordersDone = 0;
+        ordersExpired = 0;
         ingotsObtained = 0;
         charge = 100;
         day = 1;

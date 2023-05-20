@@ -8,7 +8,7 @@ public class o_GameEvent : ScriptableObject
     private List<o_GameEventListener> listeners =
         new List<o_GameEventListener>();
 
-    public void Raise(Order obj)
+    public void Raise(List<Order> obj)
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
             listeners[i].OnEventRaised(obj);

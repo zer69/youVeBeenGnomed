@@ -92,8 +92,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 79727887578947389}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.137, y: -0.38499993, z: 0}
-  m_LocalScale: {x: 118.10333, y: 118.103325, z: 118.103325}
+  m_LocalPosition: {x: -0.051170245, y: -0.067640215, z: 1.2725058}
+  m_LocalScale: {x: 354.31, y: 354.30994, z: 354.30994}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5736079536964169763}
@@ -102,7 +102,7 @@ Transform:
   - {fileID: 4327932278516336236}
   - {fileID: 3965716851325760353}
   - {fileID: 4228287257412545429}
-  m_Father: {fileID: 3134098915777016709}
+  m_Father: {fileID: 6793762049394028814}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4467372019493276194
@@ -191,6 +191,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -203,6 +204,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
@@ -926,8 +928,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2812937326823190686}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -0.502, z: 0}
-  m_LocalScale: {x: 118.10333, y: 118.103325, z: 118.103325}
+  m_LocalPosition: {x: 0.35982972, y: -0.41864035, z: 1.2725058}
+  m_LocalScale: {x: 354.31, y: 354.30994, z: 354.30994}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7604445058490474368}
@@ -936,7 +938,7 @@ Transform:
   - {fileID: 1881705252672481743}
   - {fileID: 1232792194824477890}
   - {fileID: 2071421995790943286}
-  m_Father: {fileID: 3134098915777016709}
+  m_Father: {fileID: 6793762049394028814}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2012410437676885377
@@ -1025,6 +1027,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -1037,6 +1040,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
@@ -1254,11 +1258,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3189216166397340196}
-  - {fileID: 3583646140169854338}
-  - {fileID: 3916565896621431346}
-  - {fileID: 743253075567150471}
-  - {fileID: 7493031615490665395}
+  - {fileID: 6793762049394028814}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1342,6 +1342,7 @@ MonoBehaviour:
   ingotsInPile: 5
   playerTransform: {fileID: 0}
   rightHand: {fileID: 0}
+  ingots: {fileID: 6066534465969827876}
   glassesActivated: 0
   typeChoice: {fileID: 11400000, guid: 25425a7bd0ae0a04f96e078d0bea9222, type: 2}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
@@ -1588,8 +1589,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247030246537578296}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.247, y: -0.502, z: 0}
-  m_LocalScale: {x: 118.10333, y: 118.103325, z: 118.103325}
+  m_LocalPosition: {x: 1.1008297, y: -0.41864035, z: 1.2725058}
+  m_LocalScale: {x: 354.31, y: 354.30994, z: 354.30994}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8390661733886289958}
@@ -1598,7 +1599,7 @@ Transform:
   - {fileID: 568822361576070761}
   - {fileID: 928363715855575908}
   - {fileID: 92006365161141136}
-  m_Father: {fileID: 3134098915777016709}
+  m_Father: {fileID: 6793762049394028814}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &438099000269804071
@@ -1687,6 +1688,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -1699,6 +1701,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
@@ -1829,8 +1832,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4400508601193971848}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.26, y: -0.502, z: 0}
-  m_LocalScale: {x: 118.10333, y: 118.103325, z: 118.103325}
+  m_LocalPosition: {x: -0.42017025, y: -0.41864035, z: 1.2725058}
+  m_LocalScale: {x: 354.31, y: 354.30994, z: 354.30994}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8327255387547955094}
@@ -1839,7 +1842,7 @@ Transform:
   - {fileID: 1433967107234265}
   - {fileID: 793743089556483284}
   - {fileID: 479382185636312096}
-  m_Father: {fileID: 3134098915777016709}
+  m_Father: {fileID: 6793762049394028814}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &141217407355622807
@@ -1928,6 +1931,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -1940,6 +1944,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
@@ -2707,6 +2712,42 @@ Transform:
   m_Father: {fileID: 928363715855575908}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &6066534465969827876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6793762049394028814}
+  m_Layer: 0
+  m_Name: Ingots
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6793762049394028814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6066534465969827876}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.119943246, y: -0.3624532, z: -0.4241686}
+  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3189216166397340196}
+  - {fileID: 3583646140169854338}
+  - {fileID: 3916565896621431346}
+  - {fileID: 743253075567150471}
+  - {fileID: 7493031615490665395}
+  m_Father: {fileID: 3134098915777016709}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6214693832931114209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,8 +3321,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7833809385261887753}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.122, y: -0.38499996, z: 0}
-  m_LocalScale: {x: 118.10333, y: 118.103325, z: 118.103325}
+  m_LocalPosition: {x: 0.7258297, y: -0.067640305, z: 1.2725058}
+  m_LocalScale: {x: 354.31, y: 354.30994, z: 354.30994}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2465348906231324183}
@@ -3290,7 +3331,7 @@ Transform:
   - {fileID: 5882808648368646232}
   - {fileID: 6531633710888869205}
   - {fileID: 6269552662099821985}
-  m_Father: {fileID: 3134098915777016709}
+  m_Father: {fileID: 6793762049394028814}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5788043719447454742
@@ -3379,6 +3420,7 @@ MonoBehaviour:
   MeltingPoint: 1000
   coolingRate: 0
   currentTemperature: 0
+  targetGlow: {x: 0, y: 0, z: 0}
   strength: 0.5
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -3391,6 +3433,7 @@ MonoBehaviour:
   enchantmentQuality: 0
   state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
   state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
+  GlowMaterial: {fileID: 0}
   sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
   hint: {fileID: 0}
   weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
