@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6043438616903026240}
   - component: {fileID: 6043438616903026243}
   - component: {fileID: 6043438616903026247}
+  - component: {fileID: 1121081051466076815}
   m_Layer: 10
   m_Name: Small battery
   m_TagString: Battery
@@ -200,6 +201,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1121081051466076815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6043438616903026242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee68a06477882c4f8b9048435ccc4ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 1
 --- !u!1 &8223719062444289466
 GameObject:
   m_ObjectHideFlags: 0
