@@ -34,8 +34,21 @@ public class Cart : MonoBehaviour
 
     public void SendOrder(int days)
     {
+        if (CartEmpty())
+            return;
         shopOrderManager.RecieveOrder(itemAmounts, days);
         ClearAmounts();
+    }
+
+    private bool CartEmpty()
+    {
+        foreach (int item in itemAmounts)
+        {
+            if (item > 0)
+                return true;
+            
+        }
+        return false;
     }
 
     private void ClearAmounts()

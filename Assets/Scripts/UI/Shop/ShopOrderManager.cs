@@ -29,11 +29,21 @@ public class ShopOrderManager : MonoBehaviour
 
     private void CheckForDelivery()
     {
+        List<int> recievedOrders = new List<int>();
         for (int i = 0; i < deliveryDay.Count; i++)
         {
             if (deliveryDay[i] == currentDay)
+            {
                 RecieveShopOrder(ordersOnHold[i]);
+            }
+                
         }
+
+        for (int i = recievedOrders.Count-1; i >=0 ; i--)
+        {
+            ordersOnHold.RemoveAt(recievedOrders[i]);
+        }
+
     }
 
     private void RecieveShopOrder(List<int> itemAmount)
