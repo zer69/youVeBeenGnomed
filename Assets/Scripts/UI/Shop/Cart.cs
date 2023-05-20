@@ -45,10 +45,9 @@ public class Cart : MonoBehaviour
         foreach (int item in itemAmounts)
         {
             if (item > 0)
-                return true;
-            
+                return false;
         }
-        return false;
+        return true;
     }
 
     private void ClearAmounts()

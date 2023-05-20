@@ -10,7 +10,7 @@ public class ShopOrderManager : MonoBehaviour
 
     private List<int> deliveryDay;
 
-    public int currentDay = 0;
+    public GameStateManager currentDay;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class ShopOrderManager : MonoBehaviour
     public void RecieveOrder(List<int> itemAmount, int days)
     {
         ordersOnHold.Add(itemAmount);
-        deliveryDay.Add(currentDay + days);
+        deliveryDay.Add(currentDay.day + days);
         CheckForDelivery();
     }
 
@@ -32,9 +32,10 @@ public class ShopOrderManager : MonoBehaviour
         List<int> recievedOrders = new List<int>();
         for (int i = 0; i < deliveryDay.Count; i++)
         {
-            if (deliveryDay[i] == currentDay)
+            if (deliveryDay[i] == currentDay.day)
             {
                 RecieveShopOrder(ordersOnHold[i]);
+                recievedOrders.Add(i);
             }
                 
         }
@@ -42,7 +43,9 @@ public class ShopOrderManager : MonoBehaviour
         for (int i = recievedOrders.Count-1; i >=0 ; i--)
         {
             ordersOnHold.RemoveAt(recievedOrders[i]);
+            deliveryDay.RemoveAt(recievedOrders[i]);
         }
+        
 
     }
 
@@ -56,7 +59,7 @@ public class ShopOrderManager : MonoBehaviour
 
     public void NewDay()
     {
-        currentDay += 1;
+        //currentDay += 1;
         CheckForDelivery();
     }
 }

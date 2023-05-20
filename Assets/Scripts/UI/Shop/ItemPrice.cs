@@ -5,7 +5,7 @@ using TMPro;
 
 public class ItemPrice : MonoBehaviour
 {
-    private Transform reputation;
+    public GameStateManager reputation;
     private float priceModifier;
 
     [SerializeField] private int basePrice;
@@ -14,7 +14,7 @@ public class ItemPrice : MonoBehaviour
     
     private void Start()
     {
-        reputation = GameObject.Find("ReputationManager").transform;
+        
         priceText = transform.Find("Price").GetComponent<TMP_Text>();
     }
 
@@ -26,7 +26,7 @@ public class ItemPrice : MonoBehaviour
 
     void GetPriceModifier()
     {
-        priceModifier = 1f - (reputation.GetComponent<ReputationTmp>().reputation / reputation.GetComponent<ReputationTmp>().maxRep)/2f;
+        priceModifier = 1f;
     }
 
    void SetPrice()

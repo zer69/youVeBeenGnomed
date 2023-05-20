@@ -1918,6 +1918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 30
   price: 0
 --- !u!1 &103888636
@@ -12294,6 +12295,7 @@ GameObject:
   - component: {fileID: 674214587}
   - component: {fileID: 674214588}
   - component: {fileID: 674214589}
+  - component: {fileID: 674214590}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: Untagged
@@ -12314,7 +12316,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1948323884}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &674214587
 MonoBehaviour:
@@ -12342,6 +12344,7 @@ MonoBehaviour:
   reputationLevelDown: {fileID: 11400000, guid: 61ef5a4157fc06f4b874de30f94fb909,
     type: 2}
   ordersListUpdate: {fileID: 11400000, guid: 82833c2158eb7034b80caeb8f00eff88, type: 2}
+  rep: {fileID: 1170159691}
 --- !u!114 &674214588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12393,6 +12396,34 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &674214590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674214585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 768fc380c0dd6844ca8cbb61124c5459, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 674214587}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12746,53 +12777,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696819063}
   m_Mesh: {fileID: 2629167563190259465, guid: e94fe0bf582eef44b853cff8e57cc8f8, type: 3}
---- !u!1 &709149268
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 709149269}
-  - component: {fileID: 709149270}
-  m_Layer: 0
-  m_Name: ReputationManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &709149269
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709149268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1948323884}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &709149270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 709149268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83642717985d2c4439bc4635e1c5268a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reputation: 0
-  maxRep: 200
-  rep: {fileID: 1170159691}
 --- !u!1 &709909673
 GameObject:
   m_ObjectHideFlags: 0
@@ -15434,6 +15418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 150
   price: 0
 --- !u!1 &836922837 stripped
@@ -16869,6 +16854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 150
   price: 0
 --- !u!1001 &909245767
@@ -18281,6 +18267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 30
   price: 0
 --- !u!1 &990727972
@@ -18549,7 +18536,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1948323884}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1013155657
 MonoBehaviour:
@@ -18573,7 +18560,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 20f27ba1b03f87040a3bea2e4fee6228, type: 2}
   - {fileID: 11400000, guid: a33d426ac5148624ca4723a62f167a55, type: 2}
   - {fileID: 11400000, guid: efd078f24738f0d4eb169d2691be6431, type: 2}
-  currentDay: 0
+  currentDay: {fileID: 674214587}
 --- !u!114 &1013155658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19330,6 +19317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 20
   price: 0
 --- !u!1001 &1085653578
@@ -19928,6 +19916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 20
   price: 0
 --- !u!1 &1130767116
@@ -24796,6 +24785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 100
   price: 0
 --- !u!1 &1387211933
@@ -27117,6 +27107,12 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 9056681582070168889, guid: f3906ad50094b39488cdd93c1f296487,
+        type: 3}
+      propertyPath: Event
+      value: 
+      objectReference: {fileID: 11400000, guid: 3722b65131c608c4ba18dd51c0a68062,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3906ad50094b39488cdd93c1f296487, type: 3}
 --- !u!1 &1498392450
@@ -29420,6 +29416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 60
   price: 0
 --- !u!1001 &1603380033
@@ -29640,6 +29637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 40
   price: 0
 --- !u!1 &1603534203
@@ -31663,6 +31661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 16
   price: 0
 --- !u!1 &1703052736
@@ -34236,6 +34235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 60
   price: 0
 --- !u!1 &1863537910
@@ -34585,6 +34585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 60
   price: 0
 --- !u!1 &1877277725
@@ -34738,7 +34739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070b58e4d7f5e7942a3ea62bdb30c3ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: {fileID: 1432117068}
+  money: {fileID: 674214587}
   moneyText: {fileID: 449475536}
   totalOrder: {fileID: 1832686015}
   totalNow: {fileID: 1894067715}
@@ -36720,7 +36721,6 @@ Transform:
   - {fileID: 1188308136}
   - {fileID: 1473385796}
   - {fileID: 1346074262}
-  - {fileID: 709149269}
   - {fileID: 1013155656}
   - {fileID: 674214586}
   m_Father: {fileID: 0}
@@ -37885,6 +37885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 200
   price: 0
 --- !u!1 &1965415112
@@ -39140,6 +39141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 200
   price: 0
 --- !u!1001 &2042407919
@@ -39967,6 +39969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 100
   price: 0
 --- !u!1 &2088218355
@@ -40406,6 +40409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 60
   price: 0
 --- !u!1 &2111342005
@@ -40575,6 +40579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 40
   price: 0
 --- !u!1 &2122046316
@@ -40923,6 +40928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reputation: {fileID: 0}
   basePrice: 16
   price: 0
 --- !u!1 &2147438915
