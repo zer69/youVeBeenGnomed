@@ -11,7 +11,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject ingot;
 
-    [SerializeField] private int ingotsInPile = 5;
+    [SerializeField] public int ingotsInPile = 5;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("No edit")]
