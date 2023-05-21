@@ -62,7 +62,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         currentOrder = 1;
         money += 20;
         orderPool.orderList = orders;
-        Debug.Log(orders[currentOrder].oreType);
+        //Debug.Log(orders[currentOrder].oreType);
     }
 
     public void SpendMoney(int value)
