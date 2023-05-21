@@ -13,6 +13,8 @@ public class Door : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform player;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event DoorOpenSoundEvent;
     private bool inForgery = true;
 
     public string InteractionPrompt => _prompt;
@@ -26,12 +28,14 @@ public class Door : MonoBehaviour, IInteractable
             forgeryPosition.position = player.position;
             player.position = magicPosition.position;
             inForgery = false;
+            DoorOpenSoundEvent.Post(gameObject);
         }
         else
         {
             magicPosition.position = player.position;
             player.position = forgeryPosition.position;
             inForgery = true;
+            DoorOpenSoundEvent.Post(gameObject);
         }
 
 
