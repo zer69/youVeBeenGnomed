@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Interactions.Workstations.Enchantment;
+
 
 public class DockStation : MonoBehaviour, IInteractable
 {
@@ -17,9 +19,11 @@ public class DockStation : MonoBehaviour, IInteractable
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("DockStation parameters")]
 
-    [SerializeField] private int maxEnergy = 20;
+    [SerializeField] private int maxEnergy = 100;
     [SerializeField] private int energyIncrement;
-    [SerializeField] private int chargingSpeed;
+    [SerializeField] private float chargingSpeed;
+
+    [SerializeField] private EnergyReceiver energyReceiver;
 
     private int currentEnergy;
     private int glassesMaxEnergy;
@@ -28,19 +32,24 @@ public class DockStation : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        var inventory = interactor.GetComponent<Inventory>();
-
-        if (inventory.hasBattery)
+        if (energyReceiver.hasBattery)
         {
-            currentEnergy = maxEnergy;
-            Destroy(inventory.battery);
-            inventory.BatteryIsPicked(false);
-            Debug.Log("DockStation is fully charged again");
-            hint.Raise("Dock station is fully charged again");
-            return true;
+            if (currentEnergy == 0)
+                RechargeDockStation();
+            //currentEnergy = EnergyReceiver.battery.GetComponent<EnergyStone>.;
+            //Destroy(inventory.battery);
+            //inventory.BatteryIsPicked(false);
+            //Debug.Log("DockStation is fully charged again");
+            //hint.Raise("Dock station is fully charged again");
+            //return true;
+            wearGlasses.Raise(glassesPutOn);
+            glassesPutOn = !glassesPutOn;
+            //isGlassesCharging = !isGlassesCharging;
+            glasses.gameObject.SetActive(glassesPutOn);
+            chargeGlasses(glassesPutOn);
         }
 
-        else
+        else if (!energyReceiver.hasBattery && glassesPutOn)
         {
             wearGlasses.Raise(glassesPutOn);
             glassesPutOn = !glassesPutOn;
@@ -49,13 +58,18 @@ public class DockStation : MonoBehaviour, IInteractable
             chargeGlasses(glassesPutOn);
         }
 
+        else
+        {
+            Debug.Log("Need energy stone to charge glasses");
+        }
+
         return true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        currentEnergy = maxEnergy;
+        currentEnergy = 0;
     }
 
     // Update is called once per frame
@@ -80,7 +94,7 @@ public class DockStation : MonoBehaviour, IInteractable
 
         while (currentEnergy > 0 && isGlassesCharging == true)
         {
-            yield return new WaitForSeconds(chargingSpeed);
+            yield return new WaitForSeconds(1/chargingSpeed);
             if (isGlassesCharging)
             {
                 increasedEnergy.Raise(energyIncrement);
@@ -95,6 +109,7 @@ public class DockStation : MonoBehaviour, IInteractable
 
         if(currentEnergy == 0)
         {
+            energyReceiver.destroyBattery();
             hint.Raise("Dock station discharged. Insert a mana-battery to recharge it");
         }
     }
@@ -104,6 +119,25 @@ public class DockStation : MonoBehaviour, IInteractable
         if(status != true)
         {
             isGlassesCharging = false;
+        }
+    }
+
+    void RechargeDockStation()
+    {
+        switch (energyReceiver.battery.GetComponent<EnergyStone>().energy)
+        {
+            case EnergyStone.Energy.S:
+                currentEnergy = 25;
+                break;
+
+            case EnergyStone.Energy.M:
+                currentEnergy = 50;
+                break;
+
+            case EnergyStone.Energy.L:
+                currentEnergy = maxEnergy;
+                break;
+
         }
     }
 }

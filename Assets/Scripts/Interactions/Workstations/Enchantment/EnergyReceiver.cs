@@ -88,7 +88,7 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
             {              
 
                 battery = inventory.battery;
-                battery.gameObject.layer = inHandsLayer;
+                SwitchToPickableLayer(battery.transform);
 
                 inventory.hasBattery = false;
                 inventory.battery = null;
@@ -135,6 +135,7 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
                     case "Build":
                         Debug.Log("take back");
                         pickObject.Raise(battery);
+                        SwitchToInHandsLayer(battery.transform);
                         inventory.battery.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                         battery = null;
                         hasBattery = false;
@@ -144,6 +145,32 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
                 }
             }
 
+        }
+
+        void SwitchToInHandsLayer(Transform objectInHand)
+        {
+            objectInHand.gameObject.layer = inHandsLayer;
+            foreach (Transform child in objectInHand)
+            {
+                child.gameObject.layer = inHandsLayer;
+                foreach (Transform grandchild in child.transform)
+                {
+                    grandchild.gameObject.layer = inHandsLayer;
+                }
+            }
+        }
+
+        void SwitchToPickableLayer(Transform objectInHand)
+        {
+            objectInHand.gameObject.layer = pickableLayer;
+            foreach (Transform child in objectInHand)
+            {
+                child.gameObject.layer = pickableLayer;
+                foreach (Transform grandchild in child.transform)
+                {
+                    grandchild.gameObject.layer = pickableLayer;
+                }
+            }
         }
 
     }
