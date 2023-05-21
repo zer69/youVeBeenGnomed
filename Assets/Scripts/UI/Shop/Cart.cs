@@ -16,6 +16,7 @@ public class Cart : MonoBehaviour
 
     public Transform stock;
     [SerializeField] private List<int> itemAmounts;
+    private List<int> orders;
     [SerializeField] private List<ItemPrice> itemPrices;
 
     [SerializeField] private ShopOrderManager shopOrderManager;
@@ -24,7 +25,7 @@ public class Cart : MonoBehaviour
     private void Start()
     {
         cartItems = new Hashtable();
-        
+        orders = new List<int>();
     }
 
     private void Update()
@@ -34,9 +35,10 @@ public class Cart : MonoBehaviour
 
     public void SendOrder(int days)
     {
+        CreateOrder();
         if (CartEmpty())
-            return;
-        shopOrderManager.RecieveOrder(itemAmounts, days);
+            return;        
+        shopOrderManager.RecieveOrder(orders, days);
         PrintList(itemAmounts);
         ClearAmounts();
     }
@@ -142,6 +144,15 @@ public class Cart : MonoBehaviour
         currentIndent += indentIncrement;
     }
 
+    void CreateOrder()
+    {
+        for (int i = 0; i < itemAmounts.Count; i++)
+        {
+            orders.Add(0);
+            if (itemAmounts[i] > 0)
+                    orders[i] = itemAmounts[i];
+        }
+    }
 
 
 }
