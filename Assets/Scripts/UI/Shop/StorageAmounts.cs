@@ -33,6 +33,8 @@ public class StorageAmounts : MonoBehaviour
         amounts[7] = storages[7].GetComponent<Workbench>().spearHandle;
 
         amounts[8] = storages[8].GetComponent<PileOfBatteries>().batteriesInPile;
+        amounts[9] = storages[9].GetComponent<PileOfBatteries>().batteriesInPile;
+        amounts[10] = storages[10].GetComponent<PileOfBatteries>().batteriesInPile;
 
     }
 
