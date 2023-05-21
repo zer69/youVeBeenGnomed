@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class OrderReciever : MonoBehaviour
 {
+    [SerializeField] private Transform orderContent;
+
     private Order activeOrder;
+    private Order orderInTeleport;
 
     private Image orderImage;
     [SerializeField] private List<Sprite> weaponSpriteList;
@@ -50,6 +53,9 @@ public class OrderReciever : MonoBehaviour
     private TMP_Text enchantmentName;
     private Ingot.Enchantment enchantmentStat;
 
+    [SerializeField]private List<RectTransform> progress = new List<RectTransform>();
+    [SerializeField]private List<float> progressStat;
+
     private void Start()
     {
         orderImage = transform.Find("Image").GetComponent<Image>();
@@ -65,20 +71,28 @@ public class OrderReciever : MonoBehaviour
         fragility = transform.Find("Stats").Find("Fragility");
         fragilityValue = fragility.Find("Value").GetComponent<TMP_Text>();
         fragilityThreshhold = fragility.Find("ProgressBarFrame").Find("Threshhold");
+        progress[0] = (fragility.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
+
 
 
         sharpness = transform.Find("Stats").Find("Sharpness");
         sharpnessValue = sharpness.Find("Value").GetComponent<TMP_Text>();
         sharpnessThreshhold = sharpness.Find("ProgressBarFrame").Find("Threshhold");
+        progress[1] = (sharpness.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
 
         sturdiness = transform.Find("Stats").Find("Sturdiness");
         sturdinessValue = sturdiness.Find("Value").GetComponent<TMP_Text>();
         sturdinessThreshhold = sturdiness.Find("ProgressBarFrame").Find("Threshhold");
+        progress[2] = (sturdiness.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
 
         enchantment = transform.Find("Stats").Find("Enchantment");
         enchantmentName = enchantment.Find("Name").GetComponent<TMP_Text>();
 
+
+        ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
     }
+
+
 
     public void ReadOrderStats(Order order)
     {
@@ -168,6 +182,28 @@ public class OrderReciever : MonoBehaviour
     {
         enchantmentName.text = activeOrder.enchantment.ToString();
         enchantmentStat = activeOrder.enchantment;
+    }
+
+    public void RecieveOrder(Ingot order)
+    {
+        if (order == null)
+        {
+            progressStat[0] = 0;
+            progressStat[1] = 0;
+            progressStat[2] = 0;
+        }
+        else
+        {
+            progressStat[0] = order.fragility;
+            progressStat[1] = order.sharpness;
+            progressStat[2] = order.strength;
+        }
+
+        
+        for (int i = 0; i < 3; i++)
+        {
+            progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
+        }
     }
 
 }
