@@ -22,13 +22,17 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{244FB5D6-971A-DE64-8DDD-69FD321B7D98}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{66C2E9D6-2F27-D2AD-86BB-C705D8418678}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="259445909" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>door-3-close.wav</ShortName>
+					<CachePath>SFX/door-3-close_10C4C929.wem</CachePath>
+				</File>
 				<File Id="345645255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>magic-strike.wav</ShortName>
-					<CachePath>SFX/magic-strike_4D5B6031.wem</CachePath>
+					<CachePath>SFX/magic-strike_652348C8.wem</CachePath>
 				</File>
 				<File Id="427840010" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>knife-scrape-and-hit.wav</ShortName>
@@ -40,7 +44,7 @@
 				</File>
 				<File Id="505975120" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>a-sudden-appearance.wav</ShortName>
-					<CachePath>SFX/a-sudden-appearance_97BB5202.wem</CachePath>
+					<CachePath>SFX/a-sudden-appearance_13A476D6.wem</CachePath>
 				</File>
 				<File Id="520683815" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>concrete-footsteps-6752.wav</ShortName>
@@ -54,8 +58,22 @@
 					<ShortName>error.wav</ShortName>
 					<CachePath>SFX/error_10C4C929.wem</CachePath>
 				</File>
+				<File Id="903990436" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>hot-metal-in-water.wav</ShortName>
+					<CachePath>SFX/hot-metal-in-water_21FA162C.wem</CachePath>
+				</File>
 			</Media>
 			<Events>
+				<Event Id="3467531863" Name="Play_cooling" DurationType="OneShot" DurationMin="2.2973228" DurationMax="2.2973228">
+					<MediaRefs>
+						<MediaRef Id="903990436"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1660008929" Name="Play_door_open" DurationType="OneShot" DurationMin="1.6683542" DurationMax="1.6683542">
+					<MediaRefs>
+						<MediaRef Id="259445909"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="3386453524" Name="Play_enchantment_done" DurationType="OneShot" DurationMin="2.29881" DurationMax="2.29881">
 					<MediaRefs>
 						<MediaRef Id="345645255"/>
@@ -94,5 +112,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{E85F3481-51A9-2D6C-C63D-82CB731D56ED}</FileHash>
+	<FileHash>{22A0DCDD-6F37-2BEC-EE42-26727003956B}</FileHash>
 </SoundBanksInfo>
