@@ -112,7 +112,7 @@ public class Ingot : MonoBehaviour
     //[SerializeField] private float maxTemperatureValue = 1200;
     [Header("Structure")]
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
-    [SerializeField] private float strength;
+    [SerializeField] public float strength;
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minStrengthValue = 0;
     [SerializeField] private float maxStrengthValue = 100;

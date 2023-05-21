@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]                         
 public class Order : MonoBehaviour
@@ -48,5 +49,25 @@ public class Order : MonoBehaviour
         }
 
         return value;
+    }
+
+    private void Start()
+    {
+        SetupButtonPresses();
+    }
+
+    private void SetupButtonPresses()
+    {
+        GameObject orderReciever = GameObject.Find("OrderInfo");
+        GameObject detectionZone = GameObject.Find("DetectionZone");
+        transform.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            orderReciever.GetComponent<OrderReciever>().ReadOrderStats(transform.GetComponent<Order>());
+        });
+        transform.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            detectionZone.GetComponent<TeleportPlatform>().PreSend();
+        });
+
     }
 }

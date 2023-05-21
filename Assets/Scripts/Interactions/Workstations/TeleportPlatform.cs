@@ -7,6 +7,7 @@ public class TeleportPlatform : MonoBehaviour
     [Header("No Edit")]
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     public List<GameObject> colliderList = new List<GameObject>();
+    public OrderReciever orderReciever;
 
     public void AddToList(Collider weapon)
     {
@@ -31,5 +32,17 @@ public class TeleportPlatform : MonoBehaviour
     public void Send()
     {
         colliderList.RemoveAt(0);
+    }
+
+    private void Update()
+    {
+        PreSend();
+    }
+
+    public void PreSend()
+    {
+        if (colliderList.Count == 0)
+            orderReciever.RecieveOrder(null);
+        orderReciever.RecieveOrder(colliderList[0].GetComponent<Ingot>());
     }
 }
