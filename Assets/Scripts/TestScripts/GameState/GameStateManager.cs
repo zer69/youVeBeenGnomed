@@ -15,7 +15,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     public int currentOrder;
     public int ordersDone;
     public int ordersExpired;
-    public List<Order> orders;
+    public List<Order> orders = new List<Order>();
     // Some values for basic calculations
     [SerializeField] private int fineMultiplier;
     [SerializeField] private int[] levelValues;
@@ -24,6 +24,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     [SerializeField] private b_GameEvent reputationLevelDown;
     // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
+    [SerializeField] private OrderPool orderPool;
     // Start is called before the first frame update
 
     public TMP_Text rep;
@@ -36,7 +37,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-        //StartCoroutine(TestOrders(1));
+        StartCoroutine(TestOrders(3f));
     }
 
     // Update is called once per frame
@@ -51,7 +52,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
 
         //orders = new List<Order>();
         
-        List<Order> generateOrders = GenerateOrders(reputationLevel, 3);
+        List<Order> generateOrders = GenerateOrders(reputationLevel, 1);
     
         foreach (Order order in generateOrders)
         {
@@ -60,8 +61,8 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
       
         currentOrder = 1;
         money += 20;
-
-        Debug.Log(orders[currentOrder].oreType);
+        orderPool.orderList = orders;
+        //Debug.Log(orders[currentOrder].oreType);
     }
 
     public void SpendMoney(int value)
@@ -101,7 +102,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
                 orders.Add(order);
             }
 
-            ordersListUpdate.Raise(orders);
+            orderPool.orderList = orders;
 
             Debug.Log("Processing");
         }

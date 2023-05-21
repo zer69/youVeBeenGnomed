@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class OrderReciever : MonoBehaviour
 {
+    [SerializeField] private Transform orderCover;
+
     [SerializeField] private Transform orderContent;
 
     private Order activeOrder;
-    private Order orderInTeleport;
+    private Order orderInTeleport; // send with ingot to manager
 
     private Image orderImage;
     [SerializeField] private List<Sprite> weaponSpriteList;
@@ -56,6 +58,8 @@ public class OrderReciever : MonoBehaviour
     [SerializeField]private List<RectTransform> progress = new List<RectTransform>();
     [SerializeField]private List<float> progressStat;
 
+    [SerializeField] private Button sendOrderButton;
+
     private void Start()
     {
         orderImage = transform.Find("Image").GetComponent<Image>();
@@ -89,13 +93,14 @@ public class OrderReciever : MonoBehaviour
         enchantmentName = enchantment.Find("Name").GetComponent<TMP_Text>();
 
 
-        ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
+        
     }
 
 
 
     public void ReadOrderStats(Order order)
     {
+        orderCover.gameObject.SetActive(false);
         activeOrder = order;
         
         SetImage();
@@ -191,19 +196,31 @@ public class OrderReciever : MonoBehaviour
             progressStat[0] = 0;
             progressStat[1] = 0;
             progressStat[2] = 0;
+            sendOrderButton.interactable = false;
         }
         else
         {
             progressStat[0] = order.fragility;
             progressStat[1] = order.sharpness;
             progressStat[2] = order.strength;
+            sendOrderButton.interactable = true;
         }
 
-        
-        for (int i = 0; i < 3; i++)
+        if (progress[0] != null)
+            for (int i = 0; i < 3; i++)
+                progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
+    }
+
+    private void OnEnable()
+    {
+        if (transform.childCount > 0)
         {
-            progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
+            
+            ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
         }
+            
+        else
+            orderCover.gameObject.SetActive(true);
     }
 
 }
