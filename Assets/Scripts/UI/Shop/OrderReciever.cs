@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class OrderReciever : MonoBehaviour
 {
+    [SerializeField] private Transform orderCover;
+
     [SerializeField] private Transform orderContent;
 
     private Order activeOrder;
@@ -91,13 +93,14 @@ public class OrderReciever : MonoBehaviour
         enchantmentName = enchantment.Find("Name").GetComponent<TMP_Text>();
 
 
-        ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
+        
     }
 
 
 
     public void ReadOrderStats(Order order)
     {
+        orderCover.gameObject.SetActive(false);
         activeOrder = order;
         
         SetImage();
@@ -208,6 +211,16 @@ public class OrderReciever : MonoBehaviour
                 progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
     }
 
-
+    private void OnEnable()
+    {
+        if (transform.childCount > 0)
+        {
+            
+            ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
+        }
+            
+        else
+            orderCover.gameObject.SetActive(true);
+    }
 
 }
