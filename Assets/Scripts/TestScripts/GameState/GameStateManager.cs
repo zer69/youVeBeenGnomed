@@ -59,7 +59,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
             orders.Add(order);
         }
       
-        currentOrder = 1;
+        //currentOrder = 1;
         money += 20;
         orderPool.orderList = orders;
         //Debug.Log(orders[currentOrder].oreType);
@@ -160,7 +160,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         this.money = data.money;
         this.reputation = data.reputation;
         this.reputationLevel = data.reputationLevel;
-        this.currentOrder = data.currentOrder;
+        //this.currentOrder = data.currentOrder;
         this.orders = data.orders;
         this.day = data.day;
         this.ordersDone = data.ordersDone;
@@ -172,7 +172,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         data.money = this.money;
         data.reputation = this.reputation;
         data.reputationLevel = this.reputationLevel;
-        data.currentOrder = this.currentOrder;
+        //data.currentOrder = this.currentOrder;
         data.orders = this.orders;
         data.day = this.day;
         data.ordersDone = this.ordersDone;

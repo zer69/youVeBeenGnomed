@@ -27,9 +27,9 @@ public class GameData
     public GameData()
     {
         money = 500;
-        reputation = 500;
-        reputationLevel = 5;
-        currentOrder = -1;
+        reputation = 1500;
+        reputationLevel = 7;
+        // currentOrder = -1;
         ordersDone = 0;
         ordersExpired = 0;
         ingotsObtained = 0;
