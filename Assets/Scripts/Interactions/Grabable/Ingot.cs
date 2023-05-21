@@ -112,7 +112,7 @@ public class Ingot : MonoBehaviour
     //[SerializeField] private float maxTemperatureValue = 1200;
     [Header("Structure")]
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
-    [SerializeField] private float strength;
+    [SerializeField] public float strength;
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [SerializeField] private float minStrengthValue = 0;
     [SerializeField] private float maxStrengthValue = 100;
@@ -128,10 +128,22 @@ public class Ingot : MonoBehaviour
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] bool isEnchanted;
     [SerializeField] private Enchantment enchantment;
-    [SerializeField] private float enchantmentQuality;
-
-    
-
+    [SerializeField] private int enchantmentQuality;
+    public int EnchantmentQuality
+    {
+        get => enchantmentQuality;
+        set
+        {
+            if (enchantmentQuality != 0)
+            {
+                enchantmentQuality = (value + enchantmentQuality) / 2;
+            }
+            else
+            {
+                enchantmentQuality = value;
+            }
+        }
+    }
 
     [Header("No Edit")]
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
@@ -178,7 +190,7 @@ public class Ingot : MonoBehaviour
 
         isEnchanted = false;
         enchantment = Enchantment.None;
-        enchantmentQuality = 1f;
+        EnchantmentQuality = 0;
 
         axePos = transform.Find("AxePos");
         bladePos = transform.Find("BladePos");
@@ -371,18 +383,18 @@ public class Ingot : MonoBehaviour
             weaponLanded.Raise(this.GetComponent<BoxCollider>());
     }
 
-    public void setEnchantment(int enchantmentId, float quality)
+    public void setEnchantment(int enchantmentId, int quality)
     {        
         isEnchanted = true;
         enchantment = (Enchantment)Enum.GetValues(typeof(Enchantment)).GetValue(enchantmentId); ;
-        enchantmentQuality = quality;
+        EnchantmentQuality = quality;
     }
 
-    public void setEnchantment(Enchantment enchantment, float quality)
+    public void setEnchantment(Enchantment enchantment, int quality)
     {
         isEnchanted = true;
         this.enchantment = enchantment;
-        enchantmentQuality = quality;
+        EnchantmentQuality = quality;
     }
 
     public Enchantment getEnchantment()

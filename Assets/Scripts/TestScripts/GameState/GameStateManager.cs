@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
+
 
 public class GameStateManager : MonoBehaviour, IDataPersistence
 {
@@ -23,6 +25,9 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
     // Start is called before the first frame update
+
+    public TMP_Text rep;
+
     void Awake()
     {
         fineMultiplier = 2;
@@ -37,7 +42,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
-        
+        rep.text = reputation.ToString();
     }
 
     IEnumerator TestOrders(float seconds)
@@ -57,6 +62,11 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         money += 20;
 
         Debug.Log(orders[currentOrder].oreType);
+    }
+
+    public void SpendMoney(int value)
+    {
+        money -= value;
     }
 
     public List<Order> GenerateOrders(int reputationLevel, int quantity)

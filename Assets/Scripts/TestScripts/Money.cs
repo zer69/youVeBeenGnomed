@@ -35,8 +35,5 @@ public class Money : MonoBehaviour, IDataPersistence
         money += income;
     }
 
-    public void SpendMoney(int value)
-    {
-        money -= value;
-    }
+    
 }

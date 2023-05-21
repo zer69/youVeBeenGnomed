@@ -11,7 +11,7 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject battery;
 
-    [SerializeField] private int batteriesInPile = 5;
+    [SerializeField] public int batteriesInPile = 5;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("No edit")]

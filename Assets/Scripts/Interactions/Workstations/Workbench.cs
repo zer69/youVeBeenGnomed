@@ -18,10 +18,10 @@ public class Workbench : MonoBehaviour, IInteractable
     [SerializeField] private Transform workbenchStartingPosition2;
     [SerializeField] private Transform workbenchStartingPosition3;
 
-    [SerializeField] private int swordGuard;
-    [SerializeField] private int swordHilt;
-    [SerializeField] private int spearHandle;
-    [SerializeField] private int axeHandle;
+    [SerializeField] public int swordGuard;
+    [SerializeField] public int swordHilt;
+    [SerializeField] public int spearHandle;
+    [SerializeField] public int axeHandle;
 
 
     private Transform weapon;

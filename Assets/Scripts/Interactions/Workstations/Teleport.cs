@@ -58,6 +58,13 @@ public class Teleport : MonoBehaviour, IInteractable
         return true;
     }
 
+    public void EndInteraction()
+    {
+        cam.gameObject.SetActive(true);
+        cam2.gameObject.SetActive(false);
+        playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
     private void CheckForWeapons()
     {
         if (detectionZone.GetComponent<TeleportPlatform>().colliderList.Count > 0)

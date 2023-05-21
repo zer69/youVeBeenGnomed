@@ -3,133 +3,157 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class OrderReciever : MonoBehaviour
 {
-    private Transform orderImage;
+    [SerializeField] private Transform orderContent;
 
-    private Transform orderName;
+    private Order activeOrder;
+    private Order orderInTeleport;
 
-    private Transform money;
+    private Image orderImage;
+    [SerializeField] private List<Sprite> weaponSpriteList;
+
+    private TMP_Text orderName;
+
+    private TMP_Text money;
     private float moneyStat;
 
-    private Transform reputation;
+    private TMP_Text reputation;
     private float reputationStat;
 
     private Transform quality;
-    private Transform qualityImage;
-    private Transform materialName;
-    private Transform qualityValue;
-    [SerializeField] private List<GameObject> materialSpriteList;
+    private Image qualityImage;
+    private TMP_Text materialName;
+    private TMP_Text qualityValue;
+    [SerializeField] private List<Sprite> materialSpriteList;
+    private Ingot.OreType materialTypeStat;
+    private Ingot.OreQuality materialQualityStat;
 
 
     private Transform fragility;
-    private Transform fragilityValue;
+    private TMP_Text fragilityValue;
     private Transform fragilityThreshhold;
-    private int fragilityStat;
+    private float fragilityStat;
     
     private Transform sharpness;
-    private Transform sharpnessValue;
+    private TMP_Text sharpnessValue;
     private Transform sharpnessThreshhold;
-    private int sharpnessStat;
+    private float sharpnessStat;
 
 
     private Transform sturdiness;
-    private Transform sturdinessValue;
+    private TMP_Text sturdinessValue;
     private Transform sturdinessThreshhold;
-    private int sturdinessStat;
+    private float sturdinessStat;
 
 
     private Transform enchantment;
-    private Transform enchantmentName;
-    private string enchantmentStat;
+    private TMP_Text enchantmentName;
+    private Ingot.Enchantment enchantmentStat;
+
+    [SerializeField]private List<RectTransform> progress = new List<RectTransform>();
+    [SerializeField]private List<float> progressStat;
 
     private void Start()
     {
-        orderImage = transform.Find("Image");
-        orderName = transform.Find("Name");
-        money = transform.Find("Price");
-        reputation = transform.Find("Reputation");
+        orderImage = transform.Find("Image").GetComponent<Image>();
+        orderName = transform.Find("Name").GetComponent<TMP_Text>();
+        money = transform.Find("Price").GetComponent<TMP_Text>();
+        reputation = transform.Find("Reputation").GetComponent<TMP_Text>();
 
         quality = transform.Find("Stats").Find("Quality");
-        qualityImage = quality.Find("Image");
-        materialName = quality.Find("Name");
-        qualityValue = quality.Find("QualityValue");
+        qualityImage = quality.Find("Image").GetComponent<Image>();
+        materialName = quality.Find("Name").GetComponent<TMP_Text>();
+        qualityValue = quality.Find("QualityValue").GetComponent<TMP_Text>();
 
         fragility = transform.Find("Stats").Find("Fragility");
-        fragilityValue = fragility.Find("Value");
+        fragilityValue = fragility.Find("Value").GetComponent<TMP_Text>();
         fragilityThreshhold = fragility.Find("ProgressBarFrame").Find("Threshhold");
+        progress[0] = (fragility.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
+
 
 
         sharpness = transform.Find("Stats").Find("Sharpness");
-        sharpnessValue = sharpness.Find("Value");
+        sharpnessValue = sharpness.Find("Value").GetComponent<TMP_Text>();
         sharpnessThreshhold = sharpness.Find("ProgressBarFrame").Find("Threshhold");
+        progress[1] = (sharpness.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
 
         sturdiness = transform.Find("Stats").Find("Sturdiness");
-        sturdinessValue = sturdiness.Find("Value");
+        sturdinessValue = sturdiness.Find("Value").GetComponent<TMP_Text>();
         sturdinessThreshhold = sturdiness.Find("ProgressBarFrame").Find("Threshhold");
+        progress[2] = (sturdiness.Find("ProgressBarFrame").Find("Progress").GetComponent<RectTransform>());
 
         enchantment = transform.Find("Stats").Find("Enchantment");
-        enchantmentName = enchantment.Find("Name");
+        enchantmentName = enchantment.Find("Name").GetComponent<TMP_Text>();
 
+
+        ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
     }
 
-    public void ReadOrderStats(Transform order)
+
+
+    public void ReadOrderStats(Order order)
     {
-        int fragility = 30;
-        int sharpness = 50;
-        int sturdiness = 45;
-        int mone = 0;
+        activeOrder = order;
+        
         SetImage();
         SetName();
-        SetPayBack("money", mone);
-        SetPayBack("reputation", mone);
+
+        SetPayBack("money", activeOrder.price);
+        SetPayBack("reputation", activeOrder.reputation);
 
 
 
         SetMaterial();
-        SetStatProgressBar("fragility", fragility);
-        SetStatProgressBar("sharpness", sharpness);
-        SetStatProgressBar("sturdiness", sturdiness);
+
+        SetStatProgressBar("fragility", activeOrder.requiredFragility);
+        SetStatProgressBar("sharpness", activeOrder.requiredSharpness);
+        SetStatProgressBar("sturdiness", activeOrder.requiredStrength);
+        
         SetEnchantment();
 
     }
 
     private void SetImage()//probably value here
     {
-
+        orderImage.sprite = weaponSpriteList[(int)activeOrder.weaponType - 1];
     }
 
     private void SetName()//probably value here
     {
-
+        orderName.text = activeOrder.oreType.ToString() + " " + activeOrder.weaponType.ToString();
     }
 
     private void SetPayBack(string stat, float value)
     {
-        Transform tmpPayBack = null;
         switch (stat)
         {
             case "money":
-                tmpPayBack = money;
                 moneyStat = value;
+                money.text = value.ToString();
                 break;
             case "reputation":
-                tmpPayBack = reputation;
                 reputationStat = value;
+                reputation.text = value.ToString();
                 break;
         }
-        tmpPayBack.GetComponent<TMP_Text>().text = value.ToString();
     }
 
     private void SetMaterial()//value here
     {
-        throw new NotImplementedException();
+        qualityImage.sprite = materialSpriteList[(int)activeOrder.oreType];
+        qualityValue.text = activeOrder.oreQuality.ToString();
+        materialName.text = activeOrder.oreType.ToString();
+        materialTypeStat = activeOrder.oreType;
+        materialQualityStat = activeOrder.oreQuality;
+
     }
 
-    private void SetStatProgressBar(string stat, int value)
+    private void SetStatProgressBar(string stat, float value)
     {
-        Transform tmpValue = null;
+        TMP_Text tmpValue = null;
         Transform tmpThreshHold = null;
         switch (stat)
         {
@@ -150,12 +174,36 @@ public class OrderReciever : MonoBehaviour
                 break;
         }
         tmpValue.GetComponent<TMP_Text>().text = value.ToString();
-        tmpThreshHold.localPosition = new Vector3(value, 0f, 0f);
+        
+        tmpThreshHold.localPosition = new Vector3(value -50f, 2f, 0f);
     }
 
     private void SetEnchantment()//value here
     {
+        enchantmentName.text = activeOrder.enchantment.ToString();
+        enchantmentStat = activeOrder.enchantment;
+    }
 
+    public void RecieveOrder(Ingot order)
+    {
+        if (order == null)
+        {
+            progressStat[0] = 0;
+            progressStat[1] = 0;
+            progressStat[2] = 0;
+        }
+        else
+        {
+            progressStat[0] = order.fragility;
+            progressStat[1] = order.sharpness;
+            progressStat[2] = order.strength;
+        }
+
+        
+        for (int i = 0; i < 3; i++)
+        {
+            progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
+        }
     }
 
 }

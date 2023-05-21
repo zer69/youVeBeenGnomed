@@ -12,20 +12,20 @@ public class MagicStone : MonoBehaviour
     Renderer rend;
 
     [Header("How hight stone must be")]
-    [SerializeField] private float yRange = 0.3f;
+    [SerializeField] private float yRange = 0.14f;
 
     [Header("Borders")]
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
-    [SerializeField] private float xMax = 8.2f;
-    [SerializeField] private float xMin = 5.5f;
-    [SerializeField] private float zMax = 5f;
-    [SerializeField] private float zMin = 2.6f;
-
+    [SerializeField] private float xMax = 0.2444f;
+    [SerializeField] private float xMin = 0.0006f;
+    [SerializeField] private float zMax = 0.563f;
+    [SerializeField] private float zMin = 0.11f;
+    
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("speed")]
     [SerializeField] private float speedVertic;
     //actual speed
-    private float speed;
+    [SerializeField] private float speed;
 
     private float startTime;
     private float journeyLength;
@@ -38,7 +38,7 @@ public class MagicStone : MonoBehaviour
     //if canMove - stone moves down and player can draw
     //else stone flying under the table      
     public bool CanMove { get; set; }
-
+    //ûû
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [Header("Transform")]
     [SerializeField] private Transform magicStoneTransform;
@@ -57,7 +57,7 @@ public class MagicStone : MonoBehaviour
     {
         if (IsAutoMoving)
         {            
-            float distCovered = (Time.time - startTime) * speed;
+            float distCovered = (Time.time - startTime) * speedVertic;
             float fractionOfJourney = distCovered / journeyLength;
             if (journeyLength != 0)
             {
@@ -74,8 +74,8 @@ public class MagicStone : MonoBehaviour
 
     public void MoveStone(Vector2 moveStoneCommand)
     {
-        float zMouse = moveStoneCommand.y * Time.deltaTime;
-        float xMouse = moveStoneCommand.x * Time.deltaTime;
+        float zMouse = moveStoneCommand.y * Time.deltaTime * speed;
+        float xMouse = moveStoneCommand.x * Time.deltaTime * speed;
 
         Vector3 stoneVector = new Vector3(xMouse, 0, zMouse);
 
@@ -120,7 +120,7 @@ public class MagicStone : MonoBehaviour
     public void startAutoMove(Vector3 endPosition, float speed)
     {
         IsAutoMoving = true;
-        this.speed = speed;
+        //this.speed = speed;
 
         startTime = Time.time;
 

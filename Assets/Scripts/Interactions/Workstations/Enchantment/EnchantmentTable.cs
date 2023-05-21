@@ -1,3 +1,4 @@
+using Assets.Scripts.Interactions.Workstations.Enchantment;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private s_GameEvent hint;
+
+    [Header("Sound Events")]
+    public AK.Wwise.Event DoneSoundEvent;
+    public AK.Wwise.Event ResetSoundEvent;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
@@ -20,8 +25,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
     
     [SerializeField] private MagicStone magicStone;
-
-    private float enchantmentQuality = 0.5f;
+    [SerializeField] private EnergyReceiver EnergyReceiver;
+    private int enchantmentQuality = 1;
 
     private Vector2 moveStoneCommand = Vector2.zero;
 
@@ -30,6 +35,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("stone returning speed")]
     [SerializeField] private float speedHoriz;
+
 
     public string InteractionPrompt => _prompt;
 
@@ -53,6 +59,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     magicStone.startAutoMove(stoneDefaultPosition.position, speedHoriz);
 
                     moveStoneCommand = Vector2.zero;
+
+                    DoneSoundEvent.Post(gameObject);
                 }
                 else
                 {
@@ -74,6 +82,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
             case Ingot.Enchantment.None:
                 Debug.Log("set enchantment id: " + enchantmentId);
                 weapon.GetComponent<Ingot>().setEnchantment(enchantmentId, enchantmentQuality);
+                EnergyReceiver.destroyBattery();
                 break;
 
             case Ingot.Enchantment.Water:
@@ -89,6 +98,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     Debug.Log("enchantment failed");
                     resetPattern();
                 }
+                EnergyReceiver.destroyBattery();
                 break;
 
             case Ingot.Enchantment.Dark:
@@ -104,6 +114,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     Debug.Log("enchantment failed");
                     resetPattern();
                 }
+                EnergyReceiver.destroyBattery();
                 break;
 
             case Ingot.Enchantment.Fire:
@@ -119,6 +130,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     Debug.Log("enchantment failed");
                     resetPattern();
                 }
+                EnergyReceiver.destroyBattery();
                 break;
 
             case Ingot.Enchantment.Light:
@@ -134,11 +146,12 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     Debug.Log("enchantment failed");
                     resetPattern();
                 }
+                EnergyReceiver.destroyBattery();
                 break;
 
             default:
                 Debug.Log("enchantment failed");
-
+                EnergyReceiver.destroyBattery();
                 break;
         }
     }
@@ -146,30 +159,37 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         Inventory inventory = playerTransform.GetComponentInParent<Inventory>();
-        //add chek if it's weapon of just ingot
-
-        if (inventory.hasIngot)
+        //add chek if it's weapon not just ingot
+        if (EnergyReceiver.hasBattery)
         {
-            Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
+            if (inventory.hasIngot)
+            {
+                Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
-            weaponRB.transform.rotation = Quaternion.identity;
-            weaponRB.transform.position = enchantmentStartingPosition.position;
-            weaponRB.transform.SetParent(enchantmentStartingPosition);
+                weaponRB.transform.rotation = Quaternion.identity;
+                weaponRB.transform.position = enchantmentStartingPosition.position;
+                weaponRB.transform.SetParent(enchantmentStartingPosition);
 
-            weaponRB.transform.Rotate(-90, 0, 0);
+                weaponRB.transform.Rotate(-90, 0, 0);
 
-            weapon = weaponRB.transform;
+                weapon = weaponRB.transform;
 
-            cam.gameObject.SetActive(false);
-            cam2.gameObject.SetActive(true);
+                cam.gameObject.SetActive(false);
+                cam2.gameObject.SetActive(true);
 
-            canEnchante = true;
-            Debug.Log("Enchantment Table is used");
+                enchantmentQuality = EnergyReceiver.enchantmentQuality;
 
-            playerInput.actions.FindAction("DropItems").Disable();
-            return true;
+                canEnchante = true;
+                Debug.Log("Enchantment Table is used");
+
+                playerInput.actions.FindAction("DropItems").Disable();
+                playerInput.actions.FindAction("Use").Disable();
+                playerInput.actions.FindAction("Build").Disable();
+                return true;
+            }
+            hint.Raise("Hey, bring the weapon you want to enchant");
         }
-        hint.Raise("Hey, bring the weapon you want to enchant");
+        hint.Raise("No energy");
         return false;
     }
 
@@ -188,7 +208,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
         enchantmentPattern.resetRunes();
         enchantmentPattern.resetLogic();
 
-        enchantmentQuality = 1f;
+        enchantmentQuality = 0;
 
     }
 
@@ -215,13 +235,15 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     resetPattern();
 
                     playerInput.actions.FindAction("DropItems").Enable();
+                    playerInput.actions.FindAction("Use").Enable();
+                    playerInput.actions.FindAction("Build").Enable();
 
                     break;
 
                 case "DrawMagicRune":
                     //Debug.Log("try move stone");
 
-                    if (!magicStone.IsAutoMoving)
+                    if (!magicStone.IsAutoMoving && EnergyReceiver.hasBattery)
                     {
                         magicStone.CanMove = !magicStone.CanMove;
                         if (magicStone.CanMove)
@@ -236,6 +258,9 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                             magicStone.stoneUp();
 
                         }
+                    }else if (!EnergyReceiver.hasBattery)
+                    {
+                        hint.Raise("No energy");
                     }
                     break;
 
@@ -253,7 +278,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                     //Debug.Log("resetPattern");
                     resetPattern();
-
+                    ResetSoundEvent.Post(gameObject);
                     break;
             }
         }
