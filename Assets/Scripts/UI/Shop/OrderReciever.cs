@@ -10,7 +10,7 @@ public class OrderReciever : MonoBehaviour
     [SerializeField] private Transform orderContent;
 
     private Order activeOrder;
-    private Order orderInTeleport;
+    private Order orderInTeleport; // send with ingot to manager
 
     private Image orderImage;
     [SerializeField] private List<Sprite> weaponSpriteList;
@@ -55,6 +55,8 @@ public class OrderReciever : MonoBehaviour
 
     [SerializeField]private List<RectTransform> progress = new List<RectTransform>();
     [SerializeField]private List<float> progressStat;
+
+    [SerializeField] private Button sendOrderButton;
 
     private void Start()
     {
@@ -191,19 +193,21 @@ public class OrderReciever : MonoBehaviour
             progressStat[0] = 0;
             progressStat[1] = 0;
             progressStat[2] = 0;
+            sendOrderButton.interactable = false;
         }
         else
         {
             progressStat[0] = order.fragility;
             progressStat[1] = order.sharpness;
             progressStat[2] = order.strength;
+            sendOrderButton.interactable = true;
         }
 
-        
-        for (int i = 0; i < 3; i++)
-        {
-            progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
-        }
+        if (progress[0] != null)
+            for (int i = 0; i < 3; i++)
+                progress[i].offsetMax = new Vector2(-(100 - progressStat[i]), progress[i].offsetMax.y);
     }
+
+
 
 }
