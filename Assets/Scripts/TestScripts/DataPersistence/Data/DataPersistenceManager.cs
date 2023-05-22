@@ -37,14 +37,20 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void OnLoadButtonClick(bool loadButton)
     {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         if (loadButton)
-        {
-            this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
-            this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        {   
             LoadGame();
         } else
         {
+            Debug.Log("New Game Pressed");
+            this.gameData = dataHandler.Load();
             NewGame();
+            foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
+            {
+                dataPersistenceObj.LoadData(gameData);
+            }
         }
     }
 
