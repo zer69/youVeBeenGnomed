@@ -11,6 +11,8 @@ public class GameData
     public int ordersDone;
     public int ordersExpired;
     public List<int> amounts;
+    public List<List<int>> ordersOnHold;
+    public List<int> deliveryDay;
 
     public GameData()
     {
@@ -23,5 +25,7 @@ public class GameData
 
         orders = new List<Order>();
         amounts = new List<int>();
+        ordersOnHold = new List<List<int>>();
+        deliveryDay = new List<int>();
     }
 }

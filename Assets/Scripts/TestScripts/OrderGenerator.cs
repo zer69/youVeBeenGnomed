@@ -365,7 +365,7 @@ class OrderGenerator
 
     public int genPrice(int playerLvl)
     {
-        int basePrice = 100;
+        int basePrice = 250;
         float[] multipliersList = new float[7] { 1, 1.2f, 1.5f, 1.9f, 2.4f, 3, 3.7f };
         int range = 40;
 

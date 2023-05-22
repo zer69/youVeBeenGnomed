@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemPrice : MonoBehaviour
 {
-    public GameStateManager reputation;
+    public GameStateManager reputationLevel;
     private float priceModifier;
 
     [SerializeField] private int basePrice;

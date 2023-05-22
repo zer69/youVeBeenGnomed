@@ -32,6 +32,7 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private go_GameEvent setCamera;
+    [SerializeField] private s_GameEvent hotkey;
 
     [Header("Sound Events")]
     public AK.Wwise.Event SpiningPlaySoundEvent;
@@ -114,8 +115,8 @@ public class Whetstone : MonoBehaviour, IInteractable
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
 
-        
 
+        hotkey.Raise("whetstone");
         //Debug.Log("Whetstone is used");
         return true;
     }
@@ -141,6 +142,7 @@ public class Whetstone : MonoBehaviour, IInteractable
                     ingotRB.GetComponent<BoxCollider>().enabled = false;
                     ingot = null;
                     playerInput.actions.FindAction("DropItems").Enable();
+                    hotkey.Raise("inHands");
                 }
                 
 
