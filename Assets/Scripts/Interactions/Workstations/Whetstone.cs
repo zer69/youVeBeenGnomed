@@ -33,6 +33,14 @@ public class Whetstone : MonoBehaviour, IInteractable
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private go_GameEvent setCamera;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event SpiningPlaySoundEvent;
+    public AK.Wwise.Event SpiningStopSoundEvent;
+
+    public AK.Wwise.Event SharpenPlaySoundEvent;
+    public AK.Wwise.Event SharpenStopSoundEvent;
+
+    private bool isPlayingSpining = false;
     private bool isTired = false;
     private Vector2 moveWeaponCommand = Vector2.zero;
     private bool increasing = true;
@@ -62,6 +70,16 @@ public class Whetstone : MonoBehaviour, IInteractable
         if (canControlIngot && (moveWeaponCommand != Vector2.zero))
         {
             MoveWeapon();
+        }
+
+        if (sharpeningSpeed != 0 && !isPlayingSpining)
+        {
+            SpiningPlaySoundEvent.Post(gameObject);
+            isPlayingSpining = true;
+        }
+        else if (sharpeningSpeed == 0 && isPlayingSpining)
+        {
+            SpiningStopSoundEvent.Post(gameObject);
         }
     }
 
@@ -182,6 +200,7 @@ public class Whetstone : MonoBehaviour, IInteractable
     {
         if (currentAngleVelocity >= sharpeningAngleVelocity)
         {
+
             float ingotFragility = ingot.gameObject.GetComponent<Ingot>().fragility;
             float sharpnessIncrement = ChangeSharpness(ingotFragility);
             if (ingot.gameObject.GetComponent<Ingot>().sharpness > 100f)
@@ -217,9 +236,21 @@ public class Whetstone : MonoBehaviour, IInteractable
         if (collision.collider.tag == "Ingot")
         {
             //movementMultiplier = 0.5f;
-
             SharpenWeapon(collision);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isPlayingSpining && canControlIngot)
+        {
+            SharpenPlaySoundEvent.Post(gameObject);
+        }        
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        SharpenStopSoundEvent.Post(gameObject);
     }
     /*private void OnCollisionExit(Collision collision)
     {

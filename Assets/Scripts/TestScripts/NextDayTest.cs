@@ -10,6 +10,7 @@ public class NextDayTest : MonoBehaviour
     [SerializeField] private b_GameEvent loadButton;
     public int i;
     public Order order;
+
     // Start is called before the first frame update
     void Start()
     {

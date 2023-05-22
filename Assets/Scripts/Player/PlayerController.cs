@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     // Initializing variables on awake
     [Header("Sound Events")]
     public AK.Wwise.Event JumpSoundEvent;
+    public AK.Wwise.Event FootstepsSoundEvent;
+    public AK.Wwise.Event FootstepsSpopSoundEvent;
+
+    private bool isPlayingFootsteps = false;
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -60,7 +64,6 @@ public class PlayerController : MonoBehaviour
             case "Jump":
                 if (context.phase == InputActionPhase.Started)
                 {
-                    JumpSoundEvent.Post(gameObject);
                     jumping = true;
                 } else if (context.phase == InputActionPhase.Canceled)
                 {
@@ -100,15 +103,27 @@ public class PlayerController : MonoBehaviour
         if (moveCommand != Vector2.zero)
         {
             Move();
+
+            if (!isPlayingFootsteps)
+            {
+                FootstepsSoundEvent.Post(gameObject);
+                isPlayingFootsteps = true;
+            }
         }
         if (jumping && onGround)
         {
             Jump();
+            FootstepsSpopSoundEvent.Post(gameObject);
+            JumpSoundEvent.Post(gameObject);
             onGround = false;
+            isPlayingFootsteps = false;
         }
-        
+        if(moveCommand == Vector2.zero)
+        {
+            isPlayingFootsteps = false;
+            FootstepsSpopSoundEvent.Post(gameObject);
+        }
     }
-
     IEnumerator JumpDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
