@@ -14,7 +14,6 @@ public class MainMenuManager : MonoBehaviour
     private void Start()
     {
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         playerInput.DeactivateInput();
         Cursor.lockState = CursorLockMode.None;
     }
