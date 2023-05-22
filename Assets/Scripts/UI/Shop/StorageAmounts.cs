@@ -12,7 +12,7 @@ public class StorageAmounts : MonoBehaviour, IDataPersistence
     {
         ReadAmounts();
         if (transform.gameObject.tag == "Finish")
-        SetStorageAmounts();
+            SetStorageAmounts();
     }
 
     private void ReadAmounts()

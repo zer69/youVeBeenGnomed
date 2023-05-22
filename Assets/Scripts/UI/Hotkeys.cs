@@ -40,6 +40,9 @@ public class Hotkeys : MonoBehaviour
             case "esc":
                 exit.gameObject.SetActive(true);
                 break;
+            case "anvil":
+                glasses.gameObject.SetActive(false);
+                break;
             case "inHands":
                 interact.gameObject.SetActive(true);
                 help.gameObject.SetActive(true);
