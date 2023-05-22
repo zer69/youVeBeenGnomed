@@ -22,7 +22,7 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{9225A811-8068-9F8C-35D2-16633692D37E}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{B652A90B-CBB7-1CC5-2B51-311E1AA537EE}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
@@ -33,6 +33,10 @@
 				<File Id="89177527" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>throw_battery.wav</ShortName>
 					<CachePath>SFX/throw_battery_41D8889B.wem</CachePath>
+				</File>
+				<File Id="123514220" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>click_plus.wav</ShortName>
+					<CachePath>SFX/click_plus_C4BD0CED.wem</CachePath>
 				</File>
 				<File Id="144478016" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>shavel_coal.wav</ShortName>
@@ -94,6 +98,10 @@
 					<ShortName>sand-cooling.wav</ShortName>
 					<CachePath>SFX/sand-cooling_8B31DB40.wem</CachePath>
 				</File>
+				<File Id="729588487" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>click_button.wav</ShortName>
+					<CachePath>SFX/click_button_925E7DC3.wem</CachePath>
+				</File>
 				<File Id="763745347" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Handbellows.wav</ShortName>
 					<CachePath>SFX/Handbellows_5237C19E.wem</CachePath>
@@ -117,6 +125,10 @@
 				<File Id="799173073" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>hammer.wav</ShortName>
 					<CachePath>SFX/hammer_863CCEE6.wem</CachePath>
+				</File>
+				<File Id="816190309" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>money.wav</ShortName>
+					<CachePath>SFX/money_9E744BFF.wem</CachePath>
 				</File>
 				<File Id="818966047" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>error.wav</ShortName>
@@ -144,6 +156,11 @@
 				</File>
 			</Media>
 			<Events>
+				<Event Id="1204484095" Name="Play_add_item" DurationType="OneShot" DurationMin="0.4374105" DurationMax="0.4374105">
+					<MediaRefs>
+						<MediaRef Id="123514220"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="473040767" Name="Play_battery_drop" DurationType="OneShot" DurationMin="1.3058782" DurationMax="1.3058782">
 					<MediaRefs>
 						<MediaRef Id="89177527"/>
@@ -152,6 +169,11 @@
 				<Event Id="2239353525" Name="Play_battery_pick_up" DurationType="OneShot" DurationMin="0.48194635" DurationMax="0.48194635">
 					<MediaRefs>
 						<MediaRef Id="363028766"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1149159311" Name="Play_button_click" DurationType="OneShot" DurationMin="1.2815574" DurationMax="1.2815574">
+					<MediaRefs>
+						<MediaRef Id="729588487"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3467531863" Name="Play_cooling" DurationType="OneShot" DurationMin="2.312976" DurationMax="2.312976">
@@ -244,6 +266,11 @@
 						<MediaRef Id="1008480027"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="80633010" Name="Play_money" DurationType="OneShot" DurationMin="1.1690948" DurationMax="1.1690948">
+					<MediaRefs>
+						<MediaRef Id="816190309"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="824709767" Name="Play_partly_done_ingot" DurationType="OneShot" DurationMin="1.8233731" DurationMax="1.8233731">
 					<MediaRefs>
 						<MediaRef Id="331309920"/>
@@ -306,5 +333,5 @@
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{963BB901-7016-217B-1BC7-B6DCE701FBEB}</FileHash>
+	<FileHash>{D5D6213E-BC9F-E4F1-65AC-B090B95C41B4}</FileHash>
 </SoundBanksInfo>

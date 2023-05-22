@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 5661725097255402962}
   - component: {fileID: 5661725097255402963}
   - component: {fileID: 5661725097255402964}
+  - component: {fileID: 7986629793593702403}
   m_Layer: 5
   m_Name: Delete
   m_TagString: Untagged
@@ -481,6 +482,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7986629793593702403}
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIButtonSound, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7986629793593702403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661725097255402966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d5b6897728904fa71a10f44faf8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 42230ab3a6551634eb6c628e76fec89b,
+      type: 2}
 --- !u!1 &5661725098091055446
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 6
+  infoContainer: {fileID: 0}
   itemInfoUpdate: {fileID: 11400000, guid: 8bff020a8f30dd947abde686c96951dc, type: 2}
 --- !u!1 &5661725098214474644
 GameObject:
@@ -549,6 +580,7 @@ GameObject:
   - component: {fileID: 5661725098214474640}
   - component: {fileID: 5661725098214474641}
   - component: {fileID: 5661725098214474642}
+  - component: {fileID: 4336464828496355437}
   m_Layer: 5
   m_Name: Minus
   m_TagString: Untagged
@@ -671,6 +703,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4336464828496355437}
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIButtonSound, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4336464828496355437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661725098214474644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d5b6897728904fa71a10f44faf8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 42230ab3a6551634eb6c628e76fec89b,
+      type: 2}
 --- !u!1 &5661725098458580365
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +880,7 @@ GameObject:
   - component: {fileID: 5661725098997302357}
   - component: {fileID: 5661725098997302358}
   - component: {fileID: 5661725098997302359}
+  - component: {fileID: 6530993006911917791}
   m_Layer: 5
   m_Name: Plus
   m_TagString: Untagged
@@ -941,3 +1003,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6530993006911917791}
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIButtonSound, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6530993006911917791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661725098997302377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d5b6897728904fa71a10f44faf8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 42230ab3a6551634eb6c628e76fec89b,
+      type: 2}

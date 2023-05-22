@@ -8,7 +8,7 @@
 						<Action Name="" ID="{DCDAF309-9CB2-4183-A7DE-3273C3171B65}" ShortID="552395738">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="concrete-footsteps-6752" ID="{5F6959D6-207D-4B5F-810F-6846DF197A9C}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+									<ObjectRef Name="footsteps" ID="{5F6959D6-207D-4B5F-810F-6846DF197A9C}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -96,7 +96,7 @@
 						<Action Name="" ID="{42006533-AA3D-4AAF-A8C6-C213BF5AD5E1}" ShortID="374060288">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="hot-metal-in-water" ID="{828ED9FB-69DB-48DA-B0B2-D2E1F6FA6E16}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+									<ObjectRef Name="hot_metall_in_water" ID="{127227C7-15BF-4910-9B05-87790EBC786F}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>
@@ -113,6 +113,334 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_weapon_down" ID="{BC4E6528-D797-4115-9F30-CE5DD18D4DE2}">
+					<ChildrenList>
+						<Action Name="" ID="{5EFC6903-7ABE-4666-A30A-F2274A1A2031}" ShortID="100694028">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="knife-scrape-and-hit_down" ID="{1683AE94-D480-4D85-9D05-824B265649E4}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tool_pick_up" ID="{798F2768-463B-4BF3-B513-6ABECFB69A5B}">
+					<ChildrenList>
+						<Action Name="" ID="{8E732B06-2943-4A05-996B-ABD2808C8FBA}" ShortID="929827767">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tool_pick_up" ID="{4EF37999-E42E-4146-BBD2-FD8F5B9087E1}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_tool_put_down" ID="{144A14AD-8C94-4994-8A4B-31C53BF3D9E5}">
+					<ChildrenList>
+						<Action Name="" ID="{26846FB6-C60A-4894-AE61-FAB93DADF526}" ShortID="378800836">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="tool_put_down" ID="{345AEDD6-8807-403C-B01E-F899E586D6FC}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_jump" ID="{53705C40-B20F-4EA5-89E4-298E30F2EA51}">
+					<ChildrenList>
+						<Action Name="" ID="{EA05C6BC-41C8-4B10-A96B-34A3D809BE60}" ShortID="96209663">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="jump" ID="{CF046DCC-49C3-4ECC-B8EF-73FA2529CF7E}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_shavel_coal" ID="{C579F0E5-AD9A-4394-91A2-EC6445A9AC08}">
+					<ChildrenList>
+						<Action Name="" ID="{0F30B391-FA90-4E12-ABB5-252ED1C94380}" ShortID="97724938">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shavel_coal" ID="{C6655A1A-6B53-4A87-9D74-7815EA23DE20}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_shavel_coal_throw" ID="{66120B89-676B-4A3F-B12C-735F5AD9E32D}">
+					<ChildrenList>
+						<Action Name="" ID="{3BDB3809-992F-498E-B40E-F6A2D75966C3}" ShortID="228513711">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shavel_coal_throw" ID="{3B5C2A29-F508-4AF5-A39F-1FC5B3D18E1E}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Handbellows" ID="{9921B1F5-4CA2-4FD7-9B83-69DEC4C94579}">
+					<ChildrenList>
+						<Action Name="" ID="{CF66E3CE-EC4E-466A-AEA4-2C16CC5274B6}" ShortID="758357596">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Handbellows" ID="{0E53A3BC-4570-4B64-B748-8DA7B171939B}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_footsteps" ID="{2DED5DBE-4CA6-49A9-9F4A-D36149952B06}">
+					<ChildrenList>
+						<Action Name="" ID="{74A2DF6F-47AF-415B-A8AE-3ADD49CB6E9C}" ShortID="373044444">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="footsteps" ID="{5F6959D6-207D-4B5F-810F-6846DF197A9C}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_small_fireplase" ID="{09F43F82-1F97-4E12-B878-5F1966397323}">
+					<ChildrenList>
+						<Action Name="" ID="{77DE901E-D8CD-4A81-995D-48008BEB776D}" ShortID="146821181">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="small-fireplace" ID="{05AEEB31-EF25-4B47-B88E-ABF691527810}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_fireplase" ID="{4C2822AC-6129-41D8-BC1C-B17C8A10EEAB}">
+					<ChildrenList>
+						<Action Name="" ID="{58E10D25-116A-49C5-804C-0263A6D93E31}" ShortID="201345473">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+								<Property Name="FadeTime" Type="Real64" Value="6.5"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="lit-fireplace" ID="{34624C6E-D47C-48C4-8B8C-7379C49FB331}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_hammer" ID="{086AA0D3-BAD0-4C66-AD62-DCF0C053D3A9}">
+					<ChildrenList>
+						<Action Name="" ID="{5F47F14C-A869-423F-AA95-3A81743A6597}" ShortID="364123805">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="hammer" ID="{1A0AFDA3-6E1E-49F0-9DFA-043B62F208A4}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_yawn" ID="{56FB0B2D-65A1-4BE5-AF57-15255A19E491}">
+					<ChildrenList>
+						<Action Name="" ID="{F179D7CE-16EB-487B-9D7B-4C2D72980519}" ShortID="952451494">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="yawn" ID="{CD84BEDB-4B30-4B7D-B013-D3C4425FC73B}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_partly_done_ingot" ID="{B70F990A-40A8-4E34-8B05-57C2BA016DC3}">
+					<ChildrenList>
+						<Action Name="" ID="{10308647-5F7F-4AAC-B719-43DB1411B5F8}" ShortID="463860893">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ingot_weapon" ID="{A9C61B97-D895-4FC9-93A8-EE84AC2AE822}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_done_ingot" ID="{13A40918-C948-412D-8BA7-CA130E3C9BED}">
+					<ChildrenList>
+						<Action Name="" ID="{0315B784-7BD8-46FA-AFB0-7CA8BB02BB7B}" ShortID="1069940524">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="draw-sword" ID="{71E08EC1-DB28-496B-81B1-19AAC8CF26DF}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_enchantment_error" ID="{C671EA9B-7CF1-42C4-A53B-8986B83E6B17}">
+					<ChildrenList>
+						<Action Name="" ID="{8F6478D5-21D6-4127-97E8-6CCC9F2C8AB6}" ShortID="740804735">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="error" ID="{B62A2755-D7EB-4EA9-8B5F-E5C748E5BF75}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_magic_stone_on" ID="{FC6876CD-ED2B-467F-A456-BA344B14E984}">
+					<ChildrenList>
+						<Action Name="" ID="{74F04FF1-8A5B-4627-9AB2-FFFBA63E3604}" ShortID="490164657">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="magic_stone_on" ID="{FF229968-E567-4B11-9CB0-65B5C9599B11}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_magic_stone_off" ID="{80FD515D-B2AB-4168-B46C-8516D63D89A1}">
+					<ChildrenList>
+						<Action Name="" ID="{FF61E11B-EE9F-4A75-A368-BD86DB1C8AC6}" ShortID="389746684">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="magic_stone_off" ID="{9A784AE5-41B6-4CFF-934F-40F892527424}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_battery_pick_up" ID="{D4EAB395-40FE-4B71-AD03-CB1505041AA8}">
+					<ChildrenList>
+						<Action Name="" ID="{BA33BB12-6E64-483A-A3F3-C29E46A43E38}" ShortID="408086312">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="pick_up_battery" ID="{3A825EC3-5378-4BD1-96BE-38C54F4F08BE}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_battery_drop" ID="{B7884C47-E1CD-4CF5-8897-6F37E926311D}">
+					<ChildrenList>
+						<Action Name="" ID="{F438B297-6244-45E0-919B-9F0B21998CA6}" ShortID="21223477">
+							<PropertyList>
+								<Property Name="Delay" Type="Real64" Value="0.3"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="throw_battery" ID="{3C72541A-CC83-4443-A17A-4C23021F2D19}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_energy_receiver" ID="{D6595BE8-7533-4143-B61B-595F6ABE6C28}">
+					<ChildrenList>
+						<Action Name="" ID="{9B2ACE87-C937-4B75-ADBD-5DF7BFF2974D}" ShortID="179697496">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="energy_receiver" ID="{B605A5A1-13E1-4F97-8BBB-90FA23B1AF73}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_weapon_put" ID="{41421AB5-ADCF-4B9F-A958-DBC1F094F8C6}">
+					<ChildrenList>
+						<Action Name="" ID="{56C8E493-AF4F-43AA-A25F-757D87D90503}" ShortID="113281504">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="weapon_put" ID="{CCCB4BDF-1F44-42AB-87E4-CB36BDF0B73F}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_grindstone_spinning" ID="{484AD749-208E-483F-B5EA-A1A345060D39}">
+					<ChildrenList>
+						<Action Name="" ID="{DF845599-1CC6-4B62-9458-0B5BFCC21AA5}" ShortID="445547103">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="grindstone_spinning" ID="{46CF0248-7DC1-465D-BAF1-6CB0D1AD25A7}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_grindstone_sharpen" ID="{FECA7598-4F50-4B3C-9ABC-9AC0812253C5}">
+					<ChildrenList>
+						<Action Name="" ID="{B9BAC5B3-13CD-45C3-8B42-B8658DE2D875}" ShortID="180694360">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="grindstone_sharpen" ID="{A8F78EE5-4B10-43AE-AB2C-8F3422399814}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stop_grindstone_spinning" ID="{DFC093CC-32C0-40B4-8DFE-6B2D2803A1B1}">
+					<ChildrenList>
+						<Action Name="" ID="{BBD88C7B-63EA-48B5-86B6-422CC01315D8}" ShortID="737754674">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="2"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="grindstone_spinning" ID="{46CF0248-7DC1-465D-BAF1-6CB0D1AD25A7}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_grindstone_sharpen" ID="{E3ED1472-FD8E-43D7-B4C2-A6CFBB6BC456}">
+					<ChildrenList>
+						<Action Name="" ID="{A1F94625-7479-494F-99AC-706CA27F1FFD}" ShortID="136207598">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="grindstone_sharpen" ID="{A8F78EE5-4B10-43AE-AB2C-8F3422399814}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Folder Name="ui" ID="{CB0D201A-9845-49BB-B44B-A281CCF99FD7}" ShortID="250861367">
+					<ChildrenList>
+						<Event Name="Play_button_click" ID="{0409EA7B-DE4B-47AC-ABF0-6A838A4478C6}">
+							<ChildrenList>
+								<Action Name="" ID="{41AD3CBD-C0FF-4FB4-B341-42AB7422D414}" ShortID="408227643">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="click_button" ID="{DA92B2E1-0610-4AD8-9EFB-59D163BE2697}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_money" ID="{05A01B58-7B47-4A76-8B2B-0F092B1B7D1F}">
+							<ChildrenList>
+								<Action Name="" ID="{0F2527CB-E035-4929-9213-3C3686EF1379}" ShortID="492251896">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="money" ID="{E5B31462-A90B-422F-8273-C4F27E653D96}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_add_item" ID="{CDB45CFA-77D9-4516-B255-3B518ECC724C}">
+							<ChildrenList>
+								<Action Name="" ID="{137D2EE4-EC76-486D-9135-FFA4EB07C640}" ShortID="768794056">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="click_plus" ID="{6CF78D87-5192-4C67-86B7-AC916F5AA765}" WorkUnitID="{87DA84CE-F4CA-4DA3-B543-7AA3F2C1D46E}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
