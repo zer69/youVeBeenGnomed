@@ -21,6 +21,8 @@ public class Forge : MonoBehaviour, IInteractable
     [SerializeField] private float forgeCooldown = 1f;
 
     [BackgroundColor()]
+    [Header("Sound Events")]
+    public AK.Wwise.Event BellowsSoundEvent; 
 
     private bool canInflateForge = true;
 
@@ -34,6 +36,7 @@ public class Forge : MonoBehaviour, IInteractable
     public bool Interact(Interactor interactor)
     {
         useForge();
+        BellowsSoundEvent.Post(gameObject);
         return true;
     }
 

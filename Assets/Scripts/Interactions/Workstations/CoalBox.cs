@@ -20,6 +20,9 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     [SerializeField] private go_GameEvent pickObject;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event GaveCoalSoundEvent;
+
     private GameObject newCoal;
 
     public string InteractionPrompt => _prompt;
@@ -32,6 +35,7 @@ public class CoalBox : MonoBehaviour, IInteractable
         if(inventory.rightHandFree == true)
         {
             GiveCoal();
+            GaveCoalSoundEvent.Post(gameObject);
         }
         else
         {

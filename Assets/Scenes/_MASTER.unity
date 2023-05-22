@@ -4921,6 +4921,12 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 7050162109455422267, guid: 1937421e4f5f94246ba0904ad0f68a87,
+        type: 3}
+      propertyPath: ThrowCoalPikedSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 359633bc9e8bac448818e20d51adab3c,
+        type: 2}
     - target: {fileID: 7609147433584324422, guid: 1937421e4f5f94246ba0904ad0f68a87,
         type: 3}
       propertyPath: m_Name
@@ -8593,6 +8599,12 @@ PrefabInstance:
       propertyPath: barrel
       value: 
       objectReference: {fileID: 447529050}
+    - target: {fileID: 8038245579296023013, guid: 35eb9d523bbbc7846908fd1043c77c9c,
+        type: 3}
+      propertyPath: CoolingSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 38af99cf588a99e47bdebd0d7ed49a54,
+        type: 2}
     - target: {fileID: 8038245579404726963, guid: 35eb9d523bbbc7846908fd1043c77c9c,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -8682,6 +8694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8038245580449341281, guid: 35eb9d523bbbc7846908fd1043c77c9c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 8038245580662014965, guid: 35eb9d523bbbc7846908fd1043c77c9c,
         type: 3}
@@ -15823,6 +15840,12 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
+    - target: {fileID: 1287752689265902978, guid: de092d3fa9902614c9761c8438000ba6,
+        type: 3}
+      propertyPath: BellowsSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cb1443835fa87949bba120e2d0696ba,
+        type: 2}
     - target: {fileID: 1287752689265902983, guid: de092d3fa9902614c9761c8438000ba6,
         type: 3}
       propertyPath: m_Name
@@ -26142,6 +26165,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1346074262}
   - component: {fileID: 1346074263}
+  - component: {fileID: 1346074264}
+  - component: {fileID: 1346074265}
   m_Layer: 0
   m_Name: DataPersistenceManager
   m_TagString: Untagged
@@ -26178,6 +26203,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: data.game
   useEncryption: 0
+--- !u!114 &1346074264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346074261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 2312f8e312c97824680e00f532e21465, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1346074263}
+        m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
+        m_MethodName: OnSaveButtonClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1346074265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346074261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 127817db3cf63694f954fda0ee0fa45f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1346074263}
+        m_TargetAssemblyTypeName: DataPersistenceManager, Assembly-CSharp
+        m_MethodName: OnLoadButtonClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!20 &1349183428 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6402204288029838152, guid: 694a13021fef4ae448d8e92273c7f572,
@@ -29279,6 +29360,12 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1420172718}
+    - target: {fileID: 5087244973077762961, guid: f3906ad50094b39488cdd93c1f296487,
+        type: 3}
+      propertyPath: GaveCoalSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: dc30fd9cb9f5acf4ebd0ce8f1ccb0fd2,
+        type: 2}
     - target: {fileID: 5087244973814899594, guid: f3906ad50094b39488cdd93c1f296487,
         type: 3}
       propertyPath: m_Name
@@ -31348,6 +31435,12 @@ PrefabInstance:
       propertyPath: FragilityRate
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 6402204287236200389, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: CoolingSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 38af99cf588a99e47bdebd0d7ed49a54,
+        type: 2}
     - target: {fileID: 6402204287413036179, guid: 694a13021fef4ae448d8e92273c7f572,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -31412,6 +31505,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402204288498542913, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 6402204289243018709, guid: 694a13021fef4ae448d8e92273c7f572,
         type: 3}
@@ -34214,6 +34312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextDay: {fileID: 11400000, guid: c291ca28bee47f845afc6706248791be, type: 2}
   orderDone: {fileID: 11400000, guid: 25a606394eddb0447b1484b15dd45aa9, type: 2}
+  saveButton: {fileID: 11400000, guid: 2312f8e312c97824680e00f532e21465, type: 2}
+  loadButton: {fileID: 11400000, guid: 127817db3cf63694f954fda0ee0fa45f, type: 2}
   i: 1
   order:
     weaponType: 0
@@ -39408,6 +39508,11 @@ PrefabInstance:
       propertyPath: ReflectionColor.r
       value: 0.34942997
       objectReference: {fileID: 0}
+    - target: {fileID: 6327103114626867244, guid: a46d55589d3a4e74c875fc5f0d92556a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.16
+      objectReference: {fileID: 0}
     - target: {fileID: 6327103115851215357, guid: a46d55589d3a4e74c875fc5f0d92556a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -39433,6 +39538,12 @@ PrefabInstance:
       propertyPath: barrel
       value: 
       objectReference: {fileID: 2136207248}
+    - target: {fileID: 6327103115851215359, guid: a46d55589d3a4e74c875fc5f0d92556a,
+        type: 3}
+      propertyPath: CoolingSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c6fe126765747d94d8c6f343b249b01a,
+        type: 2}
     - target: {fileID: 6814282245179712100, guid: a46d55589d3a4e74c875fc5f0d92556a,
         type: 3}
       propertyPath: m_Enabled
@@ -40310,6 +40421,11 @@ MonoBehaviour:
   jumpDelay: 0
   playerInput: {fileID: 1955815456}
   playerHeight: 2
+  JumpSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9d821b2f0e483884baa7386e5af4b6c9,
+      type: 2}
 --- !u!114 &1955815458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40363,6 +40479,21 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 6327ffc2ad510ed4492011f19fe8fcc1,
+      type: 2}
+  ToolPikedSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: d9b1f67b22deeb04e8ec881ce874b7cd,
+      type: 2}
+  IngotDropedSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 36b850facff7c5b40bb4ff4a2f391be8,
+      type: 2}
+  ToolDropedSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6efd00551aa75b34e89b6982d3d8ea89,
       type: 2}
 --- !u!114 &1955815460
 MonoBehaviour:

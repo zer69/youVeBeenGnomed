@@ -31,7 +31,9 @@ public class Inventory : MonoBehaviour
 
     [Header("Sound Events")]
     public AK.Wwise.Event IngotPikedSoundEvent;
-
+    public AK.Wwise.Event ToolPikedSoundEvent;
+    public AK.Wwise.Event IngotDropedSoundEvent;
+    public AK.Wwise.Event ToolDropedSoundEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +76,8 @@ public class Inventory : MonoBehaviour
 
             rightHandFree = false;
             hasIngot = true;
+
+            
         }
 
         else if (ingot != null)
@@ -84,6 +88,7 @@ public class Inventory : MonoBehaviour
             ingot = null;
             rightHandFree = true;
             hasIngot = false;
+            IngotDropedSoundEvent.Post(gameObject);
         }
         else if (ingotInThongs != null)
         {
@@ -91,6 +96,7 @@ public class Inventory : MonoBehaviour
 
             ingotInThongs = null;
             hasIngotInThongs = false;
+            IngotDropedSoundEvent.Post(gameObject);
         }
 
             return true;
@@ -126,6 +132,7 @@ public class Inventory : MonoBehaviour
             }
             thongs = null;
             hasThongs = false;
+            ToolDropedSoundEvent.Post(gameObject);
         }
 
         return true;
@@ -220,6 +227,7 @@ public class Inventory : MonoBehaviour
             
             rightHandFree = true;
             hasHammer = false;
+            ToolDropedSoundEvent.Post(gameObject);
         }
 
         return true;
@@ -304,6 +312,7 @@ public class Inventory : MonoBehaviour
                 if (rightHandFree == true)
                 {
                     HammerIsPicked(true);
+                    ToolPikedSoundEvent.Post(gameObject);
                 }
                 else
                 {
@@ -314,6 +323,7 @@ public class Inventory : MonoBehaviour
                 if (leftHandFree == true)
                 {
                     ThongsIsPicked(true);
+                    ToolPikedSoundEvent.Post(gameObject);
                 }
                 else
                 {
