@@ -8,6 +8,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private s_GameEvent hotkey;
 
     [Header("Sound Events")]
     public AK.Wwise.Event DoneSoundEvent;
@@ -199,7 +200,9 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 playerInput.actions.FindAction("DropItems").Disable();
                 playerInput.actions.FindAction("Use").Disable();
                 playerInput.actions.FindAction("Build").Disable();
+                hotkey.Raise("enchant");
                 return true;
+
             }
             hint.Raise("Hey, bring the weapon you want to enchant");
         }
@@ -251,7 +254,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     playerInput.actions.FindAction("DropItems").Enable();
                     playerInput.actions.FindAction("Use").Enable();
                     playerInput.actions.FindAction("Build").Enable();
-
+                    hotkey.Raise("inHands");
                     break;
 
                 case "DrawMagicRune":

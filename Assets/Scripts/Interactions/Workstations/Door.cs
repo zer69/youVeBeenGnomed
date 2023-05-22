@@ -15,7 +15,7 @@ public class Door : MonoBehaviour, IInteractable
 
     [Header("Sound Events")]
     public AK.Wwise.Event DoorOpenSoundEvent;
-    private bool inForgery = true;
+    private bool inForgery = false;
 
     public string InteractionPrompt => _prompt;
 

@@ -13,6 +13,7 @@ public class Teleport : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameEvent TeleportUsed;
     [SerializeField] private Transform detectionZone;
+    [SerializeField] private s_GameEvent hotkey;
 
 
 
@@ -55,6 +56,7 @@ public class Teleport : MonoBehaviour, IInteractable
         cam2.gameObject.SetActive(true);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
+        hotkey.Raise("menu");
         return true;
     }
 

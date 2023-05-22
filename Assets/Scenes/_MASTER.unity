@@ -1214,6 +1214,12 @@ PrefabInstance:
       objectReference: {fileID: 190261521}
     - target: {fileID: 8536807407767956847, guid: 5d95965580db3c940a736f320c2bcdef,
         type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
+    - target: {fileID: 8536807407767956847, guid: 5d95965580db3c940a736f320c2bcdef,
+        type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
@@ -2388,6 +2394,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1147844228}
+        m_TargetAssemblyTypeName: Hotkeys, Assembly-CSharp
+        m_MethodName: ChangeHotkeyState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &113203721
@@ -3941,12 +3959,12 @@ MonoBehaviour:
   weaponPicked: {fileID: 11400000, guid: 7712d7ada83a6e94285a93ab79aaf0b1, type: 2}
   crosshairResized: {fileID: 11400000, guid: 75c0f87e902580e4e9648d2cc8d4717c, type: 2}
   pickObject: {fileID: 11400000, guid: 2785be93ad231ec43b0c58412fbea136, type: 2}
+  hotkey: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912, type: 2}
   pickableObject: {fileID: 0}
   ToolDropedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6efd00551aa75b34e89b6982d3d8ea89,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &190261525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4590,7 +4608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 28.799988}
+  m_AnchoredPosition: {x: 0, y: 81.79999}
   m_SizeDelta: {x: 343.9, y: 57.6}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &220696748
@@ -8816,6 +8834,12 @@ PrefabInstance:
       objectReference: {fileID: 190261521}
     - target: {fileID: 7354971872729700850, guid: 33b4376fd5be9e4489800e1c2b9a632a,
         type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
+    - target: {fileID: 7354971872729700850, guid: 33b4376fd5be9e4489800e1c2b9a632a,
+        type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
@@ -9338,6 +9362,12 @@ PrefabInstance:
       propertyPath: cam2
       value: 
       objectReference: {fileID: 1950435673}
+    - target: {fileID: 8038245580662014965, guid: 35eb9d523bbbc7846908fd1043c77c9c,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 8038245580662014965, guid: 35eb9d523bbbc7846908fd1043c77c9c,
         type: 3}
       propertyPath: tongsRB
@@ -10998,6 +11028,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pile of ingots (iron)
       objectReference: {fileID: 0}
+    - target: {fileID: 1013927077995799281, guid: 5cd2a306bc8825b4cb222c4ca0287354,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 1013927077995799286, guid: 5cd2a306bc8825b4cb222c4ca0287354,
         type: 3}
       propertyPath: m_RootOrder
@@ -13989,6 +14025,12 @@ PrefabInstance:
       objectReference: {fileID: 190261521}
     - target: {fileID: 2607641262655996882, guid: f822e29712a24074384a704a0ef811a7,
         type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
+    - target: {fileID: 2607641262655996882, guid: f822e29712a24074384a704a0ef811a7,
+        type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1955815456}
@@ -14314,12 +14356,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 674214587}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: GameStateManager, Assembly-CSharp
+        m_MethodName: SpendMoney
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -14695,6 +14737,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1256614491}
     m_Modifications:
+    - target: {fileID: 7924170127692343977, guid: 71b580c2b4d90ed45977bb65c2a4341e,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 7924170127692343982, guid: 71b580c2b4d90ed45977bb65c2a4341e,
         type: 3}
       propertyPath: m_RootOrder
@@ -19757,6 +19805,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1256614491}
     m_Modifications:
+    - target: {fileID: 3766448688388196835, guid: f645b93d452c1c2429e3e05a56a36917,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 3930027307982290223, guid: f645b93d452c1c2429e3e05a56a36917,
         type: 3}
       propertyPath: Event
@@ -20302,8 +20356,7 @@ MonoBehaviour:
   PutBatterySoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: bbe242f20d2d3b84dae782ae3bfa97dc,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   targetAngle: {x: 0, y: 360, z: 0}
 --- !u!23 &922726378
 MeshRenderer:
@@ -21895,6 +21948,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1256614491}
     m_Modifications:
+    - target: {fileID: 4975916734453725730, guid: c4c8f3e07aa4474469d4844cbbd5590e,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 5358673479587016846, guid: c4c8f3e07aa4474469d4844cbbd5590e,
         type: 3}
       propertyPath: m_RootOrder
@@ -21981,7 +22040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1006610524
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23017,7 +23076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -844, y: 195}
+  m_AnchoredPosition: {x: -844, y: 17}
   m_SizeDelta: {x: 180, y: 57.6}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1073129421
@@ -24292,6 +24351,7 @@ GameObject:
   - component: {fileID: 1147844225}
   - component: {fileID: 1147844227}
   - component: {fileID: 1147844228}
+  - component: {fileID: 1147844229}
   m_Layer: 5
   m_Name: Hotkeys
   m_TagString: Untagged
@@ -24353,6 +24413,34 @@ MonoBehaviour:
   runes: {fileID: 978446326}
   rotate: {fileID: 1920304052}
   build: {fileID: 1230661483}
+--- !u!114 &1147844229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147844224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9624cfc1c440f5c4fac3b935e1f4c78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1147844228}
+        m_TargetAssemblyTypeName: Hotkeys, Assembly-CSharp
+        m_MethodName: ChangeHotkeyState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1148068093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25767,6 +25855,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1147844228}
+        m_TargetAssemblyTypeName: Hotkeys, Assembly-CSharp
+        m_MethodName: ChangeHotkeyState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1222957659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27178,6 +27278,7 @@ MonoBehaviour:
   setCamera: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955, type: 2}
   resetAnvil: {fileID: 0}
   crosshair: {fileID: 103888637}
+  hotkey: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912, type: 2}
   common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
   uncommon: {fileID: 2100000, guid: cee1708ae30e72f4eb710d4b97bc456e, type: 2}
   rare: {fileID: 2100000, guid: 574f94878dbc0e649b44562acfc7ba10, type: 2}
@@ -27186,23 +27287,19 @@ MonoBehaviour:
   DoneSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: ed511d6cece93e84f81debe7888d9900,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   PartlyDoneSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: b31a3def3d38b2e438a5cb9e443630e4,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   HammerSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 8c0a22f4e99637d458d4c6bb1efaaaba,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   WeaponPutDownSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 36b850facff7c5b40bb4ff4a2f391be8,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!65 &1254662365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29053,6 +29150,12 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 190261521}
+    - target: {fileID: 1826568482332733866, guid: db6db787c464eac4c9c9ccbd37a1028a,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 1826568482332733866, guid: db6db787c464eac4c9c9ccbd37a1028a,
         type: 3}
       propertyPath: speedHoriz
@@ -31184,6 +31287,7 @@ GameObject:
   - component: {fileID: 1440113708}
   - component: {fileID: 1440113710}
   - component: {fileID: 1440113709}
+  - component: {fileID: 1440113711}
   m_Layer: 5
   m_Name: HintManager
   m_TagString: Untagged
@@ -31253,6 +31357,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingTime: 1.6
+--- !u!114 &1440113711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440113707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9624cfc1c440f5c4fac3b935e1f4c78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 78cb23a7186c2454eb721009e4d0fe07, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1440113710}
+        m_TargetAssemblyTypeName: HintManager, Assembly-CSharp
+        m_MethodName: RaiseHintWithPriority
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1441819670
 GameObject:
   m_ObjectHideFlags: 0
@@ -32518,6 +32650,12 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5087244973077762961, guid: f3906ad50094b39488cdd93c1f296487,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 5087244973077762961, guid: f3906ad50094b39488cdd93c1f296487,
         type: 3}
       propertyPath: rightHand
@@ -34770,6 +34908,12 @@ PrefabInstance:
       objectReference: {fileID: 1349183428}
     - target: {fileID: 6402204289243018709, guid: 694a13021fef4ae448d8e92273c7f572,
         type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
+    - target: {fileID: 6402204289243018709, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
       propertyPath: tongsRB
       value: 
       objectReference: {fileID: 1142157953}
@@ -34859,7 +35003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 86.79999}
+  m_AnchoredPosition: {x: 0, y: 26.799988}
   m_SizeDelta: {x: 343.9, y: 57.6}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1587182380
@@ -36485,6 +36629,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4073032897737154507, guid: 3f13ff664e4c7aa46b1bff861f76f269,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f13ff664e4c7aa46b1bff861f76f269, type: 3}
 --- !u!4 &1647957227 stripped
@@ -38758,6 +38908,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pile of ingots (silver)
       objectReference: {fileID: 0}
+    - target: {fileID: 7739657234074157498, guid: 2e5d18c390efe544c90d5b1cf4a0c68f,
+        type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
     - target: {fileID: 7739657234074157501, guid: 2e5d18c390efe544c90d5b1cf4a0c68f,
         type: 3}
       propertyPath: m_RootOrder
@@ -43506,6 +43662,12 @@ PrefabInstance:
       objectReference: {fileID: 830636717}
     - target: {fileID: 6327103114136474915, guid: a46d55589d3a4e74c875fc5f0d92556a,
         type: 3}
+      propertyPath: hotkey
+      value: 
+      objectReference: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912,
+        type: 2}
+    - target: {fileID: 6327103114136474915, guid: a46d55589d3a4e74c875fc5f0d92556a,
+        type: 3}
       propertyPath: tongsRB
       value: 
       objectReference: {fileID: 1142157953}
@@ -44507,13 +44669,11 @@ MonoBehaviour:
   FootstepsSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6e154341a4cdd9a409a570eb15d3a66e,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   FootstepsSpopSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 4b67b27f811d47f49845f18e8dc0605d,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &1955815458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44586,13 +44746,11 @@ MonoBehaviour:
   BatteryPikedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: f2097e1a015a0a64ca06818cde9ee4a8,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
   BatteryDropedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: df4ab8b06edd9ea4ca557638c1859533,
-      type: 2}
+    WwiseObjectReference: {fileID: 0}
 --- !u!114 &1955815460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45514,6 +45672,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1147844228}
+        m_TargetAssemblyTypeName: Hotkeys, Assembly-CSharp
+        m_MethodName: ChangeHotkeyState
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1972458228
@@ -53798,7 +53968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772773073788236590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13, y: -0.85, z: -9}
+  m_LocalPosition: {x: -15, y: -0.85, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
