@@ -8,11 +8,15 @@ using UnityEngine.InputSystem;
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private Transform menu;
     public VolumeProfile globalVolume;
     private DepthOfField dof;
 
     private void Start()
     {
+        globalVolume.TryGet(out dof);
+        dof.active = true;
+
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.DeactivateInput();
         Cursor.lockState = CursorLockMode.None;
@@ -27,7 +31,7 @@ public class MainMenuManager : MonoBehaviour
     {
         globalVolume.TryGet(out dof);
         dof.active = false;
-        gameObject.SetActive(false);
+        menu.gameObject.SetActive(false);
         playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         playerInput.ActivateInput();
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,7 +42,7 @@ public class MainMenuManager : MonoBehaviour
     {
         globalVolume.TryGet(out dof);
         dof.active = false;
-        gameObject.SetActive(false);
+        menu.gameObject.SetActive(false);
         playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         playerInput.ActivateInput();
         Cursor.lockState = CursorLockMode.Locked;

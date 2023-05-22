@@ -212,7 +212,7 @@ public class OrderReciever : MonoBehaviour
 
     public void RecieveOrder(Ingot order)
     {
-        if (order == null)
+        if ((order == null) || (order.status < Ingot.CompletionStatus.Completed))
         {
             progressStat[0] = 0;
             progressStat[1] = 0;

@@ -25,9 +25,9 @@ public class CrosshairResizer : MonoBehaviour
     private void ResizeCrosshair()
     {
         if (crosshairState)
-            crosshair.sizeDelta = new Vector2(16, 16);
+            crosshair.sizeDelta = new Vector2(20, 20);
         else
-            crosshair.sizeDelta = new Vector2(4, 4);
+            crosshair.sizeDelta = new Vector2(8, 8);
     }
     public void SetState(bool state)
     {
