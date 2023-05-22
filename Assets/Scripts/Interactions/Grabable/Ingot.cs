@@ -84,7 +84,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] public WeaponType weaponType;
 
 
-    [SerializeField] public Rarity rarity;
+    [SerializeField] public OreQuality quality;
     [SerializeField] public OreType oreType;
     
 
@@ -96,8 +96,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Ignot Properties")]
-    [Header("Quality")]
-    [SerializeField] private float quality;
+    
 
     [Header("Temperature")]
     [SerializeField] private float MeltingPoint;
@@ -428,14 +427,14 @@ public class Ingot : MonoBehaviour
         }
     }
 
-    public ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> getData()
+    public ValueTuple<CompletionStatus, WeaponType, OreQuality, OreType> getData()
     {
-        return (status, weaponType, rarity, oreType);
+        return (status, weaponType, quality, oreType);
     }
 
-    public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
+    public void setData(ValueTuple<CompletionStatus, WeaponType, OreQuality, OreType> data)
     {
-        (status, weaponType, rarity, oreType) = data;
+        (status, weaponType, quality, oreType) = data;
     }
 
     void InfoUpdate()
