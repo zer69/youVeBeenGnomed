@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Barrel : MonoBehaviour, IInteractable
 {
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent setCamera;
     [SerializeField] private string _prompt;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
@@ -48,16 +49,19 @@ public class Barrel : MonoBehaviour, IInteractable
         {
             //Debug.Log("Interact ok");
             tongsRB.transform.rotation = Quaternion.identity;
+            //tongsRB.transform.rotation = Quaternion.AngleAxis(0, Vector3.right);
+            tongsRB.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
             tongsRB.transform.position = weaponStartingPosition.position;
             tongsRB.transform.SetParent(weaponStartingPosition);
 
-            tongsRB.transform.Rotate(180, 0, 0);
+            tongsRB.transform.Rotate(180, 30, 0);
 
             tongs = tongsRB.transform;
 
             cam.gameObject.SetActive(false);
 
             cam2.gameObject.SetActive(true);
+            setCamera.Raise(cam2.gameObject);
             playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             playerInput.transform.localRotation = Quaternion.identity;
 
@@ -84,6 +88,7 @@ public class Barrel : MonoBehaviour, IInteractable
 
                     cam.gameObject.SetActive(true);
                     cam2.gameObject.SetActive(false);
+                    setCamera.Raise(cam.gameObject);
                     playerInput.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                     
                     tongsRB.transform.rotation = Quaternion.identity;

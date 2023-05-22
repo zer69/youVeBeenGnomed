@@ -125,52 +125,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &4468552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4962973479963509262, guid: c4c8f3e07aa4474469d4844cbbd5590e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1003763454}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4468555 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4975916734453725730, guid: c4c8f3e07aa4474469d4844cbbd5590e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1003763454}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4468552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183b18b0fe526fb4ca327ab0135f6d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4468556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4468552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: b3951ccd58555814b8437206a2e058f4, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4468555}
-        m_TargetAssemblyTypeName: PileOfBatteries, Assembly-CSharp
-        m_MethodName: ChangePileSize
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &14996841
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,8 +387,10 @@ MonoBehaviour:
   playerInput: {fileID: 1955815456}
   blackScreen: {fileID: 2101528204}
   sleepText: {fileID: 1840251225}
+  currentDay: {fileID: 674214587}
   fadeSpeed: 1
-  switchDay: {fileID: 11400000, guid: 098416bc86371674688d1535e2c93213, type: 2}
+  switchDay: {fileID: 11400000, guid: c291ca28bee47f845afc6706248791be, type: 2}
+  hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
 --- !u!65 &25938959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9107,6 +9063,12 @@ PrefabInstance:
       propertyPath: thongsRB
       value: 
       objectReference: {fileID: 1142157953}
+    - target: {fileID: 8038245580662014965, guid: 35eb9d523bbbc7846908fd1043c77c9c,
+        type: 3}
+      propertyPath: setCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955,
+        type: 2}
     - target: {fileID: 8038245580662014965, guid: 35eb9d523bbbc7846908fd1043c77c9c,
         type: 3}
       propertyPath: playerInput
@@ -20766,6 +20728,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 2885111818355382840, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2941118560955749163, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
@@ -20799,7 +20766,7 @@ PrefabInstance:
     - target: {fileID: 3884415882375207037, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3957320652400105621, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -20809,7 +20776,7 @@ PrefabInstance:
     - target: {fileID: 3985000755938981404, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4419104265261523709, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -20829,7 +20796,7 @@ PrefabInstance:
     - target: {fileID: 4767646276960033985, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4827807935260565688, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -20974,7 +20941,7 @@ PrefabInstance:
     - target: {fileID: 7288905592659542922, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8450852832836843581, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -20989,7 +20956,7 @@ PrefabInstance:
     - target: {fileID: 8928266092597853481, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9097725265826762032, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -21653,6 +21620,7 @@ GameObject:
   - component: {fileID: 1013155656}
   - component: {fileID: 1013155657}
   - component: {fileID: 1013155658}
+  - component: {fileID: 1013155659}
   m_Layer: 0
   m_Name: ShopOrderManager
   m_TagString: Untagged
@@ -21714,6 +21682,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Event: {fileID: 11400000, guid: 098416bc86371674688d1535e2c93213, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1013155657}
+        m_TargetAssemblyTypeName: ShopOrderManager, Assembly-CSharp
+        m_MethodName: NewDay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1013155659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013155655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c291ca28bee47f845afc6706248791be, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -26003,6 +25999,7 @@ MonoBehaviour:
     type: 3}
   playerInput: {fileID: 1955815456}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
+  setCamera: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955, type: 2}
   resetAnvil: {fileID: 11400000, guid: f0477d0e67bea794197b7ea884ab14c4, type: 2}
   crosshair: {fileID: 103888637}
   common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
@@ -26730,10 +26727,10 @@ RectTransform:
   m_Father: {fileID: 1147070937}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -90, y: 35}
-  m_SizeDelta: {x: 160, y: 45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 852, y: -401}
+  m_SizeDelta: {x: -1760, y: -1035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1292833572
 MonoBehaviour:
@@ -29300,7 +29297,7 @@ PrefabInstance:
     - target: {fileID: 3130592826275682801, guid: daafadf8dcd6c25418eba6a865748221,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.55
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 3130592826275682801, guid: daafadf8dcd6c25418eba6a865748221,
         type: 3}
@@ -30317,52 +30314,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452491900}
   m_CullTransparentMesh: 1
---- !u!1 &1459671367 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4136651000423098343, guid: 3f13ff664e4c7aa46b1bff861f76f269,
-    type: 3}
-  m_PrefabInstance: {fileID: 1647957226}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1459671370 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4073032897737154507, guid: 3f13ff664e4c7aa46b1bff861f76f269,
-    type: 3}
-  m_PrefabInstance: {fileID: 1647957226}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459671367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183b18b0fe526fb4ca327ab0135f6d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1459671371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459671367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: efd078f24738f0d4eb169d2691be6431, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1459671370}
-        m_TargetAssemblyTypeName: PileOfBatteries, Assembly-CSharp
-        m_MethodName: ChangePileSize
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1467155437
 GameObject:
   m_ObjectHideFlags: 0
@@ -33157,6 +33108,12 @@ PrefabInstance:
       propertyPath: thongsRB
       value: 
       objectReference: {fileID: 1142157953}
+    - target: {fileID: 6402204289243018709, guid: 694a13021fef4ae448d8e92273c7f572,
+        type: 3}
+      propertyPath: setCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955,
+        type: 2}
     - target: {fileID: 6402204289243018709, guid: 694a13021fef4ae448d8e92273c7f572,
         type: 3}
       propertyPath: playerInput
@@ -38352,10 +38309,10 @@ RectTransform:
   m_Father: {fileID: 2101528205}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 90.00001}
+  m_SizeDelta: {x: -1820, y: -1130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840251227
 MonoBehaviour:
@@ -40509,7 +40466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.024993896}
+  m_AnchoredPosition: {x: 0, y: 0.025024414}
   m_SizeDelta: {x: 0, y: -8.049998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910741011
@@ -41558,6 +41515,12 @@ PrefabInstance:
       propertyPath: thongsRB
       value: 
       objectReference: {fileID: 1142157953}
+    - target: {fileID: 6327103114136474915, guid: a46d55589d3a4e74c875fc5f0d92556a,
+        type: 3}
+      propertyPath: setCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955,
+        type: 2}
     - target: {fileID: 6327103114136474915, guid: a46d55589d3a4e74c875fc5f0d92556a,
         type: 3}
       propertyPath: playerInput
@@ -45928,10 +45891,10 @@ RectTransform:
   m_Father: {fileID: 1147070937}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 600}
+  m_SizeDelta: {x: 99.999985, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101528206
 MonoBehaviour:
@@ -45946,7 +45909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -52438,6 +52401,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1998960160}
     m_Modifications:
+    - target: {fileID: 1729368566808158006, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885111818355382840, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.001195
+      objectReference: {fileID: 0}
+    - target: {fileID: 2885111818355382840, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00034
+      objectReference: {fileID: 0}
     - target: {fileID: 4851849594848367713, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: m_Name
@@ -52532,7 +52510,7 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: status
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -52552,12 +52530,12 @@ PrefabInstance:
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: anvilState
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
       propertyPath: weaponType
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6365213482536727986, guid: ac5b07c47190dea41bb528c99c0e76e6,
         type: 3}
@@ -52603,6 +52581,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828119712423841889, guid: ac5b07c47190dea41bb528c99c0e76e6,
+        type: 3}
+      propertyPath: m_text
+      value: <sprite=2> 9999
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac5b07c47190dea41bb528c99c0e76e6, type: 3}

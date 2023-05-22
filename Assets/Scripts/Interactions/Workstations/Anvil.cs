@@ -59,6 +59,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private GameObject ingotPrefab;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent setCamera;
     [SerializeField] private GameEvent resetAnvil;
     [SerializeField] private Transform crosshair;
 
@@ -196,6 +197,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         camera.gameObject.SetActive(true);
         anvilCamera.gameObject.SetActive(false);
+        setCamera.Raise(camera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         //playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
@@ -439,6 +441,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
+        setCamera.Raise(anvilCamera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.None;
