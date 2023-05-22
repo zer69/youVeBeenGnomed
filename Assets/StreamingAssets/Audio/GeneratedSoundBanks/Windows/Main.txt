@@ -1,4 +1,5 @@
 Event	ID	Name			Wwise Object Path	Notes
+	80633010	Play_money			\Default Work Unit\ui\Play_money	
 	174977958	Play_enchantment_point_on			\Default Work Unit\Play_enchantment_point_on	
 	199250926	Stop_grindstone_spinning			\Default Work Unit\Stop_grindstone_spinning	
 	421640724	Play_grindstone_spinning			\Default Work Unit\Play_grindstone_spinning	
@@ -9,6 +10,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	901087640	Play_weapon_put			\Default Work Unit\Play_weapon_put	
 	978907031	Play_yawn			\Default Work Unit\Play_yawn	
 	1090783915	Play_Handbellows			\Default Work Unit\Play_Handbellows	
+	1149159311	Play_button_click			\Default Work Unit\ui\Play_button_click	
+	1204484095	Play_add_item			\Default Work Unit\ui\Play_add_item	
 	1501216439	Play_fireplace			\Default Work Unit\Play_fireplace	
 	1563703406	Play_enchantment_error			\Default Work Unit\Play_enchantment_error	
 	1660008929	Play_door_open			\Default Work Unit\Play_door_open	
@@ -38,6 +41,7 @@ Event	ID	Name			Wwise Object Path	Notes
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	8015653	yawn	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\yawn_62BC245A.wem		\Actor-Mixer Hierarchy\Default Work Unit\player\yawn		855796
 	89177527	throw_battery	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\throw_battery_41D8889B.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\throw_battery		134568
+	123514220	click_plus	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\click_plus_C4BD0CED.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\click_plus		80904
 	144478016	shavel_coal_throw	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\shavel_coal_80B72E13.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\shavel_coal_throw		271672
 	170957619	energy_receiver	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\magic_stone_on_0413B653.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\energy_receiver		188176
 	204064574	tool_pick_up	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\tool_pick_up_1A29D20D.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\tool_pick_up		108860
@@ -53,12 +57,14 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	595628094	grindstone_spinning	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\Ggrindstone_B1BA4CEF.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\grindstone_spinning		560112
 	662007610	magic_stone_off	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\magic_stone_on_B30778E6.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\magic_stone_off		162040
 	711637450	sand-cooling	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\sand-cooling_8B31DB40.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\barrels\sand-cooling		431728
+	729588487	click_button	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\click_button_925E7DC3.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\click_button		226164
 	763745347	Handbellows	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\Handbellows_5237C19E.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\Handbellows		202060
 	766115132	draw-sword	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\draw-sword_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\workbench\draw-sword		168288
 	772857151	grindstone_sharpen	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\Ggrindstone_15E95665.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\grindstone_sharpen		347308
 	797434284	jump	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\jump_E34DA3D3.wem		\Actor-Mixer Hierarchy\Default Work Unit\player\jump		138084
 	799131975	bang-wood-rattle	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\bang-wood-rattle_C71FE629.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\workbench\bang-wood-rattle		77666
 	799173073	hammer	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\hammer_863CCEE6.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\hammer		132748
+	816190309	money	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\money_9E744BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\money		224560
 	818966047	error	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\error_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\error		396384
 	852940909	weapon_put	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\weapon_put_1B66797B.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\workbench\weapon_put		149104
 	923105103	hot_metall_in_water	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\hot_metall_in_water_93071D8C.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\barrels\hot_metall_in_water		408104
