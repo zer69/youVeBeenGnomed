@@ -15,6 +15,8 @@ public class Barrel : MonoBehaviour, IInteractable
     [SerializeField] private Transform weaponStartingPosition;
     [SerializeField] private Rigidbody tongsRB;
 
+    [SerializeField] private s_GameEvent hotkey;
+
     private Transform tongs;
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
@@ -68,7 +70,9 @@ public class Barrel : MonoBehaviour, IInteractable
             playerInput.actions.FindAction("DropItems").Disable();
             canControlTongs = true;
             //Debug.Log("Barrel is used");
+            hotkey.Raise("esc");
             return true;
+           
         }
         //Debug.Log("No thongs and ingot");
         hint.Raise("Hey, man, where's your weapon?");
@@ -98,8 +102,8 @@ public class Barrel : MonoBehaviour, IInteractable
 
                     //thongs = null;
                     playerInput.actions.FindAction("DropItems").Enable();
+                    hotkey.Raise("inHands");
 
-                    
                     break;
 
                 case "MoveIntoBarrel":

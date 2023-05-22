@@ -62,6 +62,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private go_GameEvent setCamera;
     [SerializeField] private GameEvent resetAnvil;
     [SerializeField] private Transform crosshair;
+    [SerializeField] private s_GameEvent hotkey;
 
     [Header("To delete if useless")]
     [BackgroundColor(1.5f, 0f, 1.5f, 1f)]
@@ -225,7 +226,7 @@ public class Anvil : MonoBehaviour, IInteractable
         //WorkHandler();
         
         successfulHits = 0;
-
+        hotkey.Raise("inHands");
         //crosshair.gameObject.SetActive(false);
 
 
@@ -461,7 +462,7 @@ public class Anvil : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         //crosshair.gameObject.SetActive(false);
-
+        hotkey.Raise("menu");
         return true;
     }
 
