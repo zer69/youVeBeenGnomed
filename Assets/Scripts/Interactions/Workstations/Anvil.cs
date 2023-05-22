@@ -353,9 +353,21 @@ public class Anvil : MonoBehaviour, IInteractable
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
 
+        float threshhold = successfulClicks / results.Count;
+
         processedIngot.GetComponent<Ingot>().anvilState++;
         if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
             processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
+
+
+
+        if (successfulClicks >= threshhold)
+        {
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)++processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
+        }
+            
+        else
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)--processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
 
         Debug.Log(successfulClicks);
     }

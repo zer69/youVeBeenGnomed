@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class OrderReciever : MonoBehaviour
 {
+    [SerializeField] private GameStateManager gameStateManager;
+
     [SerializeField] private Transform orderCover;
 
     [SerializeField] private Transform orderContent;
@@ -30,6 +32,7 @@ public class OrderReciever : MonoBehaviour
     private TMP_Text materialName;
     private TMP_Text qualityValue;
     [SerializeField] private List<Sprite> materialSpriteList;
+    private Ingot.WeaponType weaponTypeStat;
     private Ingot.OreType materialTypeStat;
     private Ingot.OreQuality materialQualityStat;
 
@@ -96,7 +99,25 @@ public class OrderReciever : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        if (orderInTeleport != null)
+            CompareOrders();
+    }
 
+    private void CompareOrders()
+    {
+
+        if (weaponTypeStat != activeOrder.weaponType)
+            transform.GetComponent<Image>().color = Color.red;
+        else
+            transform.GetComponent<Image>().color = Color.white;
+
+        if ((materialTypeStat != activeOrder.oreType) || (materialQualityStat < activeOrder.oreQuality))
+            quality.GetComponent<Image>().enabled = true;
+        else
+            quality.GetComponent<Image>().enabled = false;
+    }
 
     public void ReadOrderStats(Order order)
     {
@@ -197,6 +218,7 @@ public class OrderReciever : MonoBehaviour
             progressStat[1] = 0;
             progressStat[2] = 0;
             sendOrderButton.interactable = false;
+            orderInTeleport = null;
         }
         else
         {
@@ -204,6 +226,13 @@ public class OrderReciever : MonoBehaviour
             progressStat[1] = order.sharpness;
             progressStat[2] = order.strength;
             sendOrderButton.interactable = true;
+
+            weaponTypeStat = order.weaponType;
+            materialTypeStat = order.oreType;
+            materialQualityStat = order.quality;
+
+            orderInTeleport = new Order(order);
+
         }
 
         if (progress[0] != null)
@@ -216,11 +245,16 @@ public class OrderReciever : MonoBehaviour
         if (transform.childCount > 0)
         {
             
-            ReadOrderStats(orderContent.GetChild(0).GetComponent<Order>());
+            ReadOrderStats(orderContent.GetChild(0).GetComponent<OrderMono>().order);
         }
             
         else
             orderCover.gameObject.SetActive(true);
+    }
+
+    public void SendOrder()
+    {
+        gameStateManager.DoneOrderCalculations(orderInTeleport, activeOrder);
     }
 
 }
