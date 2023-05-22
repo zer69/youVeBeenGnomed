@@ -12,6 +12,10 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
     [Header("Sound Events")]
     public AK.Wwise.Event DoneSoundEvent;
     public AK.Wwise.Event ResetSoundEvent;
+    public AK.Wwise.Event ErrorSoundEvent;
+    public AK.Wwise.Event MagicStoneOnSoundEvent;
+    public AK.Wwise.Event MagicStoneOffSoundEvent;
+    public AK.Wwise.Event PutWeaponSoundEvent;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
@@ -97,6 +101,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -113,6 +119,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -129,6 +137,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -145,6 +155,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -164,6 +176,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
         {
             if (inventory.hasIngot)
             {
+                PutWeaponSoundEvent.Post(gameObject);
                 Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
                 weaponRB.transform.rotation = Quaternion.identity;
@@ -181,6 +194,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                 canEnchante = true;
                 Debug.Log("Enchantment Table is used");
+                             
 
                 playerInput.actions.FindAction("DropItems").Disable();
                 playerInput.actions.FindAction("Use").Disable();
@@ -250,13 +264,14 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                         {
                             magicStone.setCanMove();
                             magicStone.stoneDown();
+                            MagicStoneOnSoundEvent.Post(gameObject);
                             //break;
                         }
                         else
                         {
                             magicStone.setBlockMove();
                             magicStone.stoneUp();
-
+                            MagicStoneOffSoundEvent.Post(gameObject);
                         }
                     }else if (!EnergyReceiver.hasBattery)
                     {

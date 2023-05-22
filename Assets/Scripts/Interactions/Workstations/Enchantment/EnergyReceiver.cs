@@ -28,6 +28,9 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
         private Inventory inventory;
 
         private float useDelay = 5f;
+
+        [Header("Sound Events")]
+        public AK.Wwise.Event PutBatterySoundEvent;
         public string InteractionPrompt => throw new NotImplementedException();
 
         public Vector3 targetAngle = new Vector3(0f, 360f, 0f);
@@ -102,7 +105,7 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
                 enchantmentQuality = (int) battery.GetComponent<EnergyStone>().energy;                
 
                 hasBattery = true;
-
+                PutBatterySoundEvent.Post(gameObject);
                 currentAngle = battery.transform.eulerAngles;
 
                 return true;

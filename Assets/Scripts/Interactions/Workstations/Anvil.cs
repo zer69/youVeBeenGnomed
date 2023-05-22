@@ -69,7 +69,12 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private Material rare;
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
-    
+
+    [Header("Sound Events")]
+    public AK.Wwise.Event DoneSoundEvent;
+    public AK.Wwise.Event PartlyDoneSoundEvent;
+    public AK.Wwise.Event HammerSoundEvent;
+    public AK.Wwise.Event WeaponPutDownSoundEvent;
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
@@ -191,6 +196,8 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         Debug.Log("Finish Work!");
 
+        DoneSoundEvent.Post(gameObject);
+
         hammer.gameObject.SetActive(true);
         anvilHammer.gameObject.SetActive(false);
 
@@ -290,6 +297,8 @@ public class Anvil : MonoBehaviour, IInteractable
 
             }
             mouseClickCounter++;
+
+            HammerSoundEvent.Post(gameObject);
         }
     }
 
@@ -352,6 +361,10 @@ public class Anvil : MonoBehaviour, IInteractable
         successfulHits += successfulClicks;
 
         processedIngot.GetComponent<Ingot>().anvilState++;
+        if (processedIngot.GetComponent<Ingot>().anvilState < Ingot.AnvilState.WellDone)
+        {
+            PartlyDoneSoundEvent.Post(gameObject);
+        }
         if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
             processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
 
@@ -417,10 +430,11 @@ public class Anvil : MonoBehaviour, IInteractable
         Debug.Log("Anvil is used");
         if (!InventoryToWork())
         {
-            hint.Raise("Something is missing from my hands");
+            hint.Raise("Something is missing in my hands");
             return false;
         }
-        
+        WeaponPutDownSoundEvent.Post(gameObject);
+
         createIngotOnAnvil();
         hammer.gameObject.SetActive(false);
         anvilHammer.gameObject.SetActive(true);
