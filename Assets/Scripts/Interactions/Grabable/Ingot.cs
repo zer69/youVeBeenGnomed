@@ -306,13 +306,17 @@ public class Ingot : MonoBehaviour
         switch (weaponType)
         {
             case WeaponType.Axe:
-                if (axePos.GetChild(axePos.childCount-1).gameObject.tag == "axe1")
+                if (axePos.childCount == 3)
                 {
-                    GetRootMaterial(axePos, axePos.childCount - 1);
-                    SetRootMaterial(axePos.GetChild(axePos.childCount - 1));
+                    if (axePos.GetChild(axePos.childCount - 1).gameObject.tag == "axe1")
+                    {
+                        GetRootMaterial(axePos, axePos.childCount - 1);
+                        SetRootMaterial(axePos.GetChild(axePos.childCount - 1));
+                    }
+                    else
+                        ResetMaterial(axePos.GetChild(axePos.childCount - 1));
                 }
-                else
-                    ResetMaterial(axePos.GetChild(axePos.childCount - 1));
+                
 
 
                 break;
@@ -358,7 +362,8 @@ public class Ingot : MonoBehaviour
             currentTemperature -= coolingRate;
             //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
-
+            if (status == CompletionStatus.Forged)
+                status = CompletionStatus.Heated;
             return true;
         }
 

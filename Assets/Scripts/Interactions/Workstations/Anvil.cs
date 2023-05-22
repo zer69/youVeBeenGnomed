@@ -425,8 +425,15 @@ public class Anvil : MonoBehaviour, IInteractable
         sectionResult = new List<bool>();
     }
 
-    private void createIngotOnAnvil()
+    private bool createIngotOnAnvil()
     {
+        processedIngot = FindChildByTag(thongs.Find("ThongsPosition"), "Ingot");
+        if (processedIngot.GetComponent<Ingot>().status < Ingot.CompletionStatus.Melted)
+            return false;
+        processedIngot.GetComponent<BoxCollider>().enabled = true;
+        processedIngot.GetComponent<MeshCollider>().enabled = false;
+
+        
 
         thongs.SetParent(anvilPositionObject);
         thongs.position = anvilPositionObject.position;
@@ -434,9 +441,11 @@ public class Anvil : MonoBehaviour, IInteractable
         thongs.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         thongs.gameObject.GetComponent<BoxCollider>().enabled = false;
 
-        processedIngot = FindChildByTag(thongs.Find("ThongsPosition"), "Ingot");
-        processedIngot.GetComponent<BoxCollider>().enabled = true;
-        processedIngot.GetComponent<MeshCollider>().enabled = false;
+        
+        return true;
+
+
+
 
     }
 
@@ -445,12 +454,16 @@ public class Anvil : MonoBehaviour, IInteractable
         Debug.Log("Anvil is used");
         if (!InventoryToWork())
         {
-            hint.Raise("Something is missing in my hands");
+            hint.Raise("Missing an instrument");
             return false;
         }
         WeaponPutDownSoundEvent.Post(gameObject);
-
-        createIngotOnAnvil();
+        if (!createIngotOnAnvil())
+        {
+            hint.Raise("Ingot not ready");
+            return false;
+        }
+        
         hammer.gameObject.SetActive(false);
         anvilHammer.gameObject.SetActive(true);
 
@@ -462,7 +475,7 @@ public class Anvil : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         //crosshair.gameObject.SetActive(false);
-        hotkey.Raise("menu");
+        hotkey.Raise("anvil");
         return true;
     }
 

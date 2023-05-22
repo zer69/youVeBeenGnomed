@@ -61,6 +61,7 @@ public class DockStation : MonoBehaviour, IInteractable
         else
         {
             Debug.Log("Need energy stone to charge glasses");
+            hint.Raise("No energy");
         }
 
         return true;
