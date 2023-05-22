@@ -3126,8 +3126,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Just interact with the bedroom door to end the day. At the beginning of
-    each day, the goods in the store are replenished, and you get a little closer
-    to receiving delivery.
+    each day, the goods in the store are replenished, orders are refreshed, and you
+    get a little closer to receiving delivery.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13295,8 +13295,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sometimes people ask you to create something more than just a sword or
     an axe. For such cases, you have an enchantment table. Insert the magic crystal
-    into the desired socket, then place the weapon directly on the table and draw
-    a symbol according to the desired enchantment. The larger the crystal, the stronger
+    into the right socket, then place the weapon directly on the table and draw a
+    symbol according to the desired enchantment. The larger the crystal, the stronger
     the enchantment.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14816,7 +14816,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: When you have received an order for making weapons, you are given three
     days to complete it. Every day the reward will be less and less. If you delay
-    your order, you will be subject to a reputation penalty.
+    your order, you will be subject to a reputation penalty. To send your order,
+    simply throw a completed weapon on a platform and use the menu to send it. Be
+    careful not to send your product to a wrong order!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16711,9 +16713,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: To replenish supplies, use the teleport located near the enchantment table.
-    You can order items for a smaller amount, but you have to wait a few days, or
-    you can make an urgent order, but for a lot of money. Also through the teleport
-    you receive new orders from customers.
+    You can order items for a cheaper price, but you have to wait a few days, or
+    you can make an urgent order, but for a lot of money. Also you recieve and send
+    orders through the teleport.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18281,7 +18283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &738764535
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26018,10 +26020,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Your life in the forge could be much harder if you didn't have special
-    points. They allow you to see various characteristics of your products such as
-    temperature or strength. But glasses need to be recharged from time to time.
-    Insert the magic crystal into the desired socket, then place the glasses directly
-    on the right part of the encantment table and glasses will recharged.
+    glasses. They allow you to see various characteristics of your products such
+    as temperature or strength. But glasses need to be recharged from time to time.
+    Insert the magic crystal into the left socket of enchantment table, then place
+    the glasses directly on the left part of the encantment table and glasses will
+    start recharging.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

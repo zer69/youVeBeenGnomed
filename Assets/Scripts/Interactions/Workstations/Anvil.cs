@@ -475,7 +475,7 @@ public class Anvil : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         //crosshair.gameObject.SetActive(false);
-        hotkey.Raise("menu");
+        hotkey.Raise("anvil");
         return true;
     }
 
