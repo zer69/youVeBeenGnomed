@@ -10,6 +10,7 @@ public class GameData
     public List<Order> orders;
     public int ordersDone;
     public int ordersExpired;
+    public List<int> amounts;
 
     public GameData()
     {
@@ -21,5 +22,6 @@ public class GameData
         day = 1;
 
         orders = new List<Order>();
+        amounts = new List<int>();
     }
 }

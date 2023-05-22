@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class StorageAmounts : MonoBehaviour
+public class StorageAmounts : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<Transform> storages;
-    [SerializeField] private List<int> amounts;
+    [SerializeField] public List<int> amounts;
 
     private void Update()
     {
@@ -47,5 +47,14 @@ public class StorageAmounts : MonoBehaviour
         }
     }
     
+    public void LoadData(GameData data)
+    {
+        this.amounts = data.amounts;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.amounts = this.amounts;
+    }
 
 }
