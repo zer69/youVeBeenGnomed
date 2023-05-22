@@ -1108,8 +1108,8 @@ GameObject:
   - component: {fileID: 51773643}
   - component: {fileID: 51773646}
   - component: {fileID: 51773645}
-  - component: {fileID: 51773644}
   - component: {fileID: 51773647}
+  - component: {fileID: 51773644}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -1268,6 +1268,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51773642}
   m_CullTransparentMesh: 1
+--- !u!114 &51773647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51773642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 792d5b6897728904fa71a10f44faf8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: ecf4c1ad9df04a84eafdf569bcd42608,
+      type: 2}
 --- !u!1 &53172408
 GameObject:
   m_ObjectHideFlags: 0
