@@ -175,6 +175,11 @@ public class Ingot : MonoBehaviour
     bool readyRaised = true;
     bool weaponMaterialSet = false;
 
+    private ParticleSystem enchantmentParticle; 
+
+    [SerializeField] private List<Color> enchantColors;
+    
+
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
        
@@ -196,6 +201,10 @@ public class Ingot : MonoBehaviour
         bladePos = transform.Find("BladePos");
         spearPos = transform.Find("SpearPos");
         daggerPos = transform.Find("DaggerPos");
+        enchantmentParticle = transform.Find("glow").GetComponent<ParticleSystem>();
+        
+
+        enchantmentParticle.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -205,7 +214,48 @@ public class Ingot : MonoBehaviour
             UpdateGraphics();
         
         InfoUpdate();
+        ParticleUpdate();
        
+    }
+
+    private void ParticleUpdate()
+    {
+        if (enchantment == Enchantment.None)
+        {
+            return;
+        }
+        enchantmentParticle.gameObject.SetActive(true);
+        int pickedColor = 0;
+        switch (enchantment)
+        {
+            case Enchantment.Air:
+                pickedColor = 0;
+                break;
+            case Enchantment.Dark:
+                pickedColor = 1;
+                break;
+            case Enchantment.Earth:
+                pickedColor = 2;
+                break;
+            case Enchantment.Fire:
+                pickedColor = 3;
+                break;
+            case Enchantment.Light:
+                pickedColor = 4;
+                break;
+            case Enchantment.Lightning:
+                pickedColor = 5;
+                break;
+            case Enchantment.Poison:
+                pickedColor = 6;
+                break;
+            case Enchantment.Water:
+                pickedColor = 7;
+                break;
+        }
+        enchantmentParticle.startColor = enchantColors[pickedColor];
+        enchantmentParticle.startColor = new Color(enchantmentParticle.startColor.r, enchantmentParticle.startColor.g, enchantmentParticle.startColor.b, 1f);
+        
     }
 
     private void UpdateMat()
