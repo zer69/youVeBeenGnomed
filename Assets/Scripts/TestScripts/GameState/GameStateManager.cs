@@ -25,6 +25,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
     [SerializeField] private OrderPool orderPool;
+    [SerializeField] private s_GameEvent hint;
     // Start is called before the first frame update
 
     public TMP_Text rep;
@@ -79,8 +80,25 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         return orders;
     }
 
+    public void GenerateOrdersOnStart(bool newGame)
+    {
+        Debug.Log("Generate On Start");
+        if (newGame)
+        {
+            List<Order> generateOrders = GenerateOrders(reputationLevel, Random.Range(1, 4));
+
+            foreach (Order order in generateOrders)
+            {
+                orders.Add(order);
+            }
+
+            orderPool.orderList = orders;
+        }
+    }
+
     public void DayProcessing(bool nextDay)
     {
+        Debug.Log("NEXT DAY");
         if (nextDay){
             day += 1;
             for (int i = 0; i < orders.Count; i++)
@@ -165,6 +183,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         this.day = data.day;
         this.ordersDone = data.ordersDone;
         this.ordersExpired = data.ordersExpired;
+        
     }
 
     public void SaveData(ref GameData data)
