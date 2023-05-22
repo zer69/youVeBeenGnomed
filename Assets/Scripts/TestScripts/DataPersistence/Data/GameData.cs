@@ -24,7 +24,7 @@ public class GameData
         day = 1;
 
         orders = new List<Order>();
-        amounts = new List<int>();
+        amounts = new List<int>() {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         ordersOnHold = new List<List<int>>();
         deliveryDay = new List<int>();
     }
