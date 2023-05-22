@@ -1923,7 +1923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 30
   price: 0
   maxQuantity: 0
@@ -2276,7 +2276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 0
@@ -17899,7 +17899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 150
   price: 0
   maxQuantity: 3
@@ -19577,7 +19577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 150
   price: 0
   maxQuantity: 0
@@ -21567,7 +21567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 30
   price: 0
   maxQuantity: 3
@@ -21907,7 +21907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 3
@@ -23195,7 +23195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 20
   price: 0
   maxQuantity: 3
@@ -23831,7 +23831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 90
   price: 0
   maxQuantity: 0
@@ -23861,7 +23861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 20
   price: 0
   maxQuantity: 0
@@ -27276,7 +27276,7 @@ MonoBehaviour:
   playerInput: {fileID: 1955815456}
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
   setCamera: {fileID: 11400000, guid: 3f081d5d4bb34be439754468f74bb955, type: 2}
-  resetAnvil: {fileID: 11400000, guid: f0477d0e67bea794197b7ea884ab14c4, type: 2}
+  resetAnvil: {fileID: 0}
   crosshair: {fileID: 103888637}
   hotkey: {fileID: 11400000, guid: 922074e73b49b3b428e3fc131fb56912, type: 2}
   common: {fileID: 2100000, guid: 476bcc2745335cd4ab1337fe1835e524, type: 2}
@@ -28519,7 +28519,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1312726202
 MonoBehaviour:
@@ -30035,7 +30035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 100
   price: 0
   maxQuantity: 0
@@ -31059,80 +31059,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daafadf8dcd6c25418eba6a865748221, type: 3}
---- !u!1 &1432117067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1432117069}
-  - component: {fileID: 1432117068}
-  - component: {fileID: 1432117070}
-  m_Layer: 0
-  m_Name: Money
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1432117068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432117067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33259edbc51a02a4e96104ce0c3d859f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 1
---- !u!4 &1432117069
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432117067}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1432117070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432117067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 786c93506999d984e894628c8ad8a8a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 768fc380c0dd6844ca8cbb61124c5459, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1432117068}
-        m_TargetAssemblyTypeName: Money, Assembly-CSharp
-        m_MethodName: SpendMoney
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1433302985
 GameObject:
   m_ObjectHideFlags: 0
@@ -35651,7 +35577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 3
@@ -35938,7 +35864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 40
   price: 0
   maxQuantity: 3
@@ -38055,7 +37981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 16
   price: 0
   maxQuantity: 3
@@ -38080,155 +38006,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1700240066}
         m_TargetAssemblyTypeName: ItemPrice, Assembly-CSharp
         m_MethodName: ChangeQuantity
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!1 &1703052736
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1703052738}
-  - component: {fileID: 1703052737}
-  - component: {fileID: 1703052740}
-  - component: {fileID: 1703052739}
-  - component: {fileID: 1703052741}
-  m_Layer: 0
-  m_Name: NextDayTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1703052737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703052736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5855cc8dbf510c44a57488f11633f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextDay: {fileID: 11400000, guid: c291ca28bee47f845afc6706248791be, type: 2}
-  orderDone: {fileID: 11400000, guid: 25a606394eddb0447b1484b15dd45aa9, type: 2}
-  saveButton: {fileID: 11400000, guid: 2312f8e312c97824680e00f532e21465, type: 2}
-  loadButton: {fileID: 11400000, guid: 127817db3cf63694f954fda0ee0fa45f, type: 2}
-  i: 1
-  order:
-    weaponType: 0
-    oreType: 0
-    oreQuality: 0
-    enchantment: 0
-    requiredStrength: 0
-    requiredSharpness: 0
-    requiredFragility: 0
-    enchantmentLevel: 1
-    orderComplexity: 1
-    price: 2000
-    reputation: 10
-    daysToExpire: 2
---- !u!4 &1703052738
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703052736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1703052739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703052736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 960e053c26c6a7f40a5db4d30ff83b08, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703052737}
-        m_TargetAssemblyTypeName: NextDayTest, Assembly-CSharp
-        m_MethodName: LevelUp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1703052740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703052736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d2a456d907d8d4f95c36218a661f7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 61ef5a4157fc06f4b874de30f94fb909, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703052737}
-        m_TargetAssemblyTypeName: NextDayTest, Assembly-CSharp
-        m_MethodName: LevelDown
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1703052741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703052736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 103061d1e0705a44fbfd3d57b2aad8b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 82833c2158eb7034b80caeb8f00eff88, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703052737}
-        m_TargetAssemblyTypeName: NextDayTest, Assembly-CSharp
-        m_MethodName: ListUpdate
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -41051,7 +40828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 0
@@ -41439,7 +41216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 3
@@ -41980,7 +41757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 90
   price: 0
   maxQuantity: 3
@@ -45509,7 +45286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 200
   price: 0
   maxQuantity: 3
@@ -47085,7 +46862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 200
   price: 0
   maxQuantity: 0
@@ -47918,7 +47695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 100
   price: 0
   maxQuantity: 3
@@ -48534,7 +48311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 60
   price: 0
   maxQuantity: 0
@@ -48707,7 +48484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 40
   price: 0
   maxQuantity: 0
@@ -49195,7 +48972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a69da439baba84e9304a0c3de85535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reputation: {fileID: 0}
+  reputationLevel: {fileID: 0}
   basePrice: 16
   price: 0
   maxQuantity: 0
