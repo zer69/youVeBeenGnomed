@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopOrderManager : MonoBehaviour
+public class ShopOrderManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private List<i_GameEvent> itemEvents;
 
-    [SerializeField]private List<List<int>> ordersOnHold;
+    [SerializeField] public List<List<int>> ordersOnHold;
 
     public List<int> deliveryDay;
 
@@ -60,5 +60,17 @@ public class ShopOrderManager : MonoBehaviour
     public void NewDay()
     {
         CheckForDelivery();
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.ordersOnHold = data.ordersOnHold;
+        this.deliveryDay = data.deliveryDay;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.ordersOnHold = this.ordersOnHold;
+        data.deliveryDay = this.deliveryDay;
     }
 }
