@@ -81,6 +81,7 @@ public class CameraClicker : MonoBehaviour
     private void PickInteraction()
     {
         pickObject.Raise(pickableObject.gameObject);
+        weaponPicked.Raise(pickableObject.GetComponent<Collider>());
         pickableObject = null;
     }
 
