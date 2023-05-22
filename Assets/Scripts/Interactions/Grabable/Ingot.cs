@@ -159,6 +159,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] private go_GameEvent sendIngot;
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private col_GameEvent weaponLanded;
+    [SerializeField] private col_GameEvent weaponPicked;
 
     [SerializeField] private TextMeshPro temperatureText;
     [SerializeField] private TextMeshPro sharpnessText;
@@ -381,6 +382,12 @@ public class Ingot : MonoBehaviour
     {
         if (other.gameObject.tag == "TeleportPlatform")
             weaponLanded.Raise(this.GetComponent<BoxCollider>());
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "TeleportPlatform")
+            weaponPicked.Raise(this.GetComponent<BoxCollider>());
     }
 
     public void setEnchantment(int enchantmentId, int quality)

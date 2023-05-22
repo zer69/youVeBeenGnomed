@@ -37,7 +37,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-        StartCoroutine(TestOrders(3f));
+        //StartCoroutine(TestOrders(3f));
     }
 
     // Update is called once per frame
