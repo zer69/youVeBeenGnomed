@@ -37,7 +37,8 @@ public class Furnance : MonoBehaviour, IInteractable
     [SerializeField] private GameObject ingot;
     private GameObject thongs;
     private Inventory inventory;
-
+    [Header("Sound Events")]
+    public AK.Wwise.Event ThrowCoalPikedSoundEvent;
     public enum FurnaceState
     {
         NoFuel,
@@ -165,6 +166,7 @@ public class Furnance : MonoBehaviour, IInteractable
             Debug.Log("Fuel Is Filled");
             hint.Raise("Fuel is filled. Now you can start a fire in the furnace");
             state = FurnaceState.HasFuel;
+            ThrowCoalPikedSoundEvent.Post(gameObject);
         }
         else
         {

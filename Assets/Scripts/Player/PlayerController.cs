@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     private bool jumping = false;
     InputAction jumpAction;
     // Initializing variables on awake
+    [Header("Sound Events")]
+    public AK.Wwise.Event JumpSoundEvent;
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -58,6 +60,7 @@ public class PlayerController : MonoBehaviour
             case "Jump":
                 if (context.phase == InputActionPhase.Started)
                 {
+                    JumpSoundEvent.Post(gameObject);
                     jumping = true;
                 } else if (context.phase == InputActionPhase.Canceled)
                 {
