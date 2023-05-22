@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
 	<RootPaths>
-		<ProjectRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed</ProjectRoot>
-		<SourceFilesRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed/.cache/Windows</SourceFilesRoot>
+		<ProjectRoot>../../../../../WwiseProject/YouveBeenGnomed</ProjectRoot>
+		<SourceFilesRoot>../../../../../WwiseProject/YouveBeenGnomed/.cache/Windows</SourceFilesRoot>
 		<SoundBanksRoot>.</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>../../../../../../../Documents/WwiseProjects/Youve been gnomed/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>../../../../../WwiseProject/YouveBeenGnomed/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<SoundBanks>
@@ -22,17 +22,53 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{66C2E9D6-2F27-D2AD-86BB-C705D8418678}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{B652A90B-CBB7-1CC5-2B51-311E1AA537EE}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="8015653" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>yawn.wav</ShortName>
+					<CachePath>SFX/yawn_62BC245A.wem</CachePath>
+				</File>
+				<File Id="89177527" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>throw_battery.wav</ShortName>
+					<CachePath>SFX/throw_battery_41D8889B.wem</CachePath>
+				</File>
+				<File Id="123514220" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>click_plus.wav</ShortName>
+					<CachePath>SFX/click_plus_C4BD0CED.wem</CachePath>
+				</File>
+				<File Id="144478016" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>shavel_coal.wav</ShortName>
+					<CachePath>SFX/shavel_coal_80B72E13.wem</CachePath>
+				</File>
+				<File Id="170957619" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>magic_stone_on.wav</ShortName>
+					<CachePath>SFX/magic_stone_on_0413B653.wem</CachePath>
+				</File>
+				<File Id="204064574" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>tool_pick_up.wav</ShortName>
+					<CachePath>SFX/tool_pick_up_1A29D20D.wem</CachePath>
+				</File>
 				<File Id="259445909" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>door-3-close.wav</ShortName>
 					<CachePath>SFX/door-3-close_10C4C929.wem</CachePath>
 				</File>
+				<File Id="316607722" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>knife-scrape-and-hit.wav</ShortName>
+					<CachePath>SFX/knife-scrape-and-hit_BDDFE9AF.wem</CachePath>
+				</File>
+				<File Id="331309920" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>ingot_weapon.wav</ShortName>
+					<CachePath>SFX/ingot_weapon_C6EA10DB.wem</CachePath>
+				</File>
 				<File Id="345645255" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>magic-strike.wav</ShortName>
 					<CachePath>SFX/magic-strike_652348C8.wem</CachePath>
+				</File>
+				<File Id="363028766" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>pick_up_battery.wav</ShortName>
+					<CachePath>SFX/pick_up_battery_D858F654.wem</CachePath>
 				</File>
 				<File Id="427840010" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>knife-scrape-and-hit.wav</ShortName>
@@ -48,25 +84,111 @@
 				</File>
 				<File Id="520683815" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>concrete-footsteps-6752.wav</ShortName>
-					<CachePath>SFX/concrete-footsteps-6752_5E383A11.wem</CachePath>
+					<CachePath>SFX/concrete-footsteps-6752_9FF1EE2F.wem</CachePath>
+				</File>
+				<File Id="595628094" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Ggrindstone.wav</ShortName>
+					<CachePath>SFX/Ggrindstone_B1BA4CEF.wem</CachePath>
+				</File>
+				<File Id="662007610" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>magic_stone_on.wav</ShortName>
+					<CachePath>SFX/magic_stone_on_B30778E6.wem</CachePath>
+				</File>
+				<File Id="711637450" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>sand-cooling.wav</ShortName>
+					<CachePath>SFX/sand-cooling_8B31DB40.wem</CachePath>
+				</File>
+				<File Id="729588487" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>click_button.wav</ShortName>
+					<CachePath>SFX/click_button_925E7DC3.wem</CachePath>
+				</File>
+				<File Id="763745347" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Handbellows.wav</ShortName>
+					<CachePath>SFX/Handbellows_5237C19E.wem</CachePath>
+				</File>
+				<File Id="766115132" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>draw-sword.wav</ShortName>
+					<CachePath>SFX/draw-sword_10C4C929.wem</CachePath>
+				</File>
+				<File Id="772857151" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Ggrindstone.wav</ShortName>
+					<CachePath>SFX/Ggrindstone_15E95665.wem</CachePath>
+				</File>
+				<File Id="797434284" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>jump.wav</ShortName>
+					<CachePath>SFX/jump_E34DA3D3.wem</CachePath>
 				</File>
 				<File Id="799131975" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>bang-wood-rattle.wav</ShortName>
 					<CachePath>SFX/bang-wood-rattle_C71FE629.wem</CachePath>
 				</File>
+				<File Id="799173073" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>hammer.wav</ShortName>
+					<CachePath>SFX/hammer_863CCEE6.wem</CachePath>
+				</File>
+				<File Id="816190309" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>money.wav</ShortName>
+					<CachePath>SFX/money_9E744BFF.wem</CachePath>
+				</File>
 				<File Id="818966047" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>error.wav</ShortName>
 					<CachePath>SFX/error_10C4C929.wem</CachePath>
 				</File>
-				<File Id="903990436" Language="SFX" Streaming="false" Location="Memory">
-					<ShortName>hot-metal-in-water.wav</ShortName>
-					<CachePath>SFX/hot-metal-in-water_21FA162C.wem</CachePath>
+				<File Id="852940909" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>weapon_put.wav</ShortName>
+					<CachePath>SFX/weapon_put_1B66797B.wem</CachePath>
+				</File>
+				<File Id="923105103" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>hot_metall_in_water.wav</ShortName>
+					<CachePath>SFX/hot_metall_in_water_93071D8C.wem</CachePath>
+				</File>
+				<File Id="931812862" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>shavel_coal.wav</ShortName>
+					<CachePath>SFX/shavel_coal_4AC99D6B.wem</CachePath>
+				</File>
+				<File Id="985902922" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>tool_put_down.wav</ShortName>
+					<CachePath>SFX/tool_put_down_300DB5A1.wem</CachePath>
+				</File>
+				<File Id="1008480027" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>magic_stone_on.wav</ShortName>
+					<CachePath>SFX/magic_stone_on_ECE245E9.wem</CachePath>
 				</File>
 			</Media>
 			<Events>
-				<Event Id="3467531863" Name="Play_cooling" DurationType="OneShot" DurationMin="2.2973228" DurationMax="2.2973228">
+				<Event Id="1204484095" Name="Play_add_item" DurationType="OneShot" DurationMin="0.4374105" DurationMax="0.4374105">
 					<MediaRefs>
-						<MediaRef Id="903990436"/>
+						<MediaRef Id="123514220"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="473040767" Name="Play_battery_drop" DurationType="OneShot" DurationMin="1.3058782" DurationMax="1.3058782">
+					<MediaRefs>
+						<MediaRef Id="89177527"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2239353525" Name="Play_battery_pick_up" DurationType="OneShot" DurationMin="0.48194635" DurationMax="0.48194635">
+					<MediaRefs>
+						<MediaRef Id="363028766"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1149159311" Name="Play_button_click" DurationType="OneShot" DurationMin="1.2815574" DurationMax="1.2815574">
+					<MediaRefs>
+						<MediaRef Id="729588487"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3467531863" Name="Play_cooling" DurationType="OneShot" DurationMin="2.312976" DurationMax="2.312976">
+					<MediaRefs>
+						<MediaRef Id="923105103"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3601140128" Name="Play_cooling_sand" DurationType="OneShot" DurationMin="2.2480745" DurationMax="2.2480745">
+					<MediaRefs>
+						<MediaRef Id="711637450"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="4276256426" Name="Play_done_ingot" DurationType="OneShot" DurationMin="2.024178" DurationMax="2.024178">
+					<MediaRefs>
+						<MediaRef Id="766115132"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="1660008929" Name="Play_door_open" DurationType="OneShot" DurationMin="1.6683542" DurationMax="1.6683542">
@@ -79,6 +201,11 @@
 						<MediaRef Id="345645255"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="1563703406" Name="Play_enchantment_error" DurationType="OneShot" DurationMin="2.2465305" DurationMax="2.2465305">
+					<MediaRefs>
+						<MediaRef Id="818966047"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="174977958" Name="Play_enchantment_point_on" DurationType="OneShot" DurationMin="0.781851" DurationMax="0.781851">
 					<MediaRefs>
 						<MediaRef Id="505975120"/>
@@ -89,14 +216,99 @@
 						<MediaRef Id="818966047"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="3936802914" Name="Play_energy_receiver" DurationType="OneShot" DurationMin="1.21771" DurationMax="1.21771">
+					<MediaRefs>
+						<MediaRef Id="170957619"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="1501216439" Name="Play_fireplace" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="474252998"/>
 					</MediaRefs>
 				</Event>
-				<Event Id="3854155799" Name="Play_footsteps" DurationType="OneShot" DurationMin="8.955324" DurationMax="8.955324">
+				<Event Id="3854155799" Name="Play_footsteps" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="520683815"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2241962811" Name="Play_grindstone_sharpen" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="772857151"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="421640724" Name="Play_grindstone_spinning" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="595628094"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1747681752" Name="Play_hammer" DurationType="OneShot" DurationMin="0.7519946" DurationMax="0.7519946">
+					<MediaRefs>
+						<MediaRef Id="799173073"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="1090783915" Name="Play_Handbellows" DurationType="OneShot" DurationMin="1.4095848" DurationMax="1.4095848">
+					<MediaRefs>
+						<MediaRef Id="763745347"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3689126666" Name="Play_jump" DurationType="OneShot" DurationMin="0.7822537" DurationMax="0.7822537">
+					<MediaRefs>
+						<MediaRef Id="797434284"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3912742755" Name="Play_magic_stone_off" DurationType="OneShot" DurationMin="1.0606649" DurationMax="1.0606649">
+					<MediaRefs>
+						<MediaRef Id="662007610"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2439324687" Name="Play_magic_stone_on" DurationType="OneShot" DurationMin="0.97185105" DurationMax="0.97185105">
+					<MediaRefs>
+						<MediaRef Id="1008480027"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="80633010" Name="Play_money" DurationType="OneShot" DurationMin="1.1690948" DurationMax="1.1690948">
+					<MediaRefs>
+						<MediaRef Id="816190309"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="824709767" Name="Play_partly_done_ingot" DurationType="OneShot" DurationMin="1.8233731" DurationMax="1.8233731">
+					<MediaRefs>
+						<MediaRef Id="331309920"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2497047037" Name="Play_shavel_coal" DurationType="OneShot" DurationMin="1.4898797" DurationMax="1.4898797">
+					<MediaRefs>
+						<MediaRef Id="931812862"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="596233392" Name="Play_shavel_coal_throw" DurationType="OneShot" DurationMin="1.5395424" DurationMax="1.5395424">
+					<MediaRefs>
+						<MediaRef Id="144478016"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2375437839" Name="Play_small_fireplase" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="474252998"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2199549048" Name="Play_tool_pick_up" DurationType="OneShot" DurationMin="0.6165559" DurationMax="0.6165559">
+					<MediaRefs>
+						<MediaRef Id="204064574"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3541896813" Name="Play_tool_put_down" DurationType="OneShot" DurationMin="1.2453858" DurationMax="1.2453858">
+					<MediaRefs>
+						<MediaRef Id="985902922"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2579913805" Name="Play_weapon_down" DurationType="OneShot" DurationMin="1.7957826" DurationMax="1.7957826">
+					<MediaRefs>
+						<MediaRef Id="316607722"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="901087640" Name="Play_weapon_put" DurationType="OneShot" DurationMin="0.84471256" DurationMax="0.84471256">
+					<MediaRefs>
+						<MediaRef Id="852940909"/>
 					</MediaRefs>
 				</Event>
 				<Event Id="3325582906" Name="Play_weapon_up" DurationType="OneShot" DurationMin="0.69270855" DurationMax="0.69270855">
@@ -109,8 +321,17 @@
 						<MediaRef Id="799131975"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="978907031" Name="Play_yawn" DurationType="OneShot" DurationMin="3.9401584" DurationMax="3.9401584">
+					<MediaRefs>
+						<MediaRef Id="8015653"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2196147837" Name="Stop_fireplase" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="2963349357" Name="Stop_footsteps" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="3084467945" Name="Stop_grindstone_sharpen" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="199250926" Name="Stop_grindstone_spinning" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{22A0DCDD-6F37-2BEC-EE42-26727003956B}</FileHash>
+	<FileHash>{D5D6213E-BC9F-E4F1-65AC-B090B95C41B4}</FileHash>
 </SoundBanksInfo>
