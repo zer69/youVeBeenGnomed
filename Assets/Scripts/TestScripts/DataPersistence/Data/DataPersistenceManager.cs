@@ -57,6 +57,7 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+
     }
 
     public void LoadGame()

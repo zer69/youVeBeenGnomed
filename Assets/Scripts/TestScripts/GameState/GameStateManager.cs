@@ -25,6 +25,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
     [SerializeField] private OrderPool orderPool;
+    [SerializeField] private s_GameEvent hint;
     // Start is called before the first frame update
 
     public TMP_Text rep;
@@ -165,6 +166,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         this.day = data.day;
         this.ordersDone = data.ordersDone;
         this.ordersExpired = data.ordersExpired;
+        
     }
 
     public void SaveData(ref GameData data)
