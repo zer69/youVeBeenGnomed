@@ -13,6 +13,8 @@ public class TeleportPlatform : MonoBehaviour
     {
         if (!colliderList.Contains(weapon.gameObject) && weapon.gameObject.tag == "Ingot")
         {
+            if (weapon.transform.parent != null)
+                return;
             colliderList.Add(weapon.gameObject);
             Debug.Log("Added " + gameObject.name);
             Debug.Log("GameObjects in list: " + colliderList.Count);

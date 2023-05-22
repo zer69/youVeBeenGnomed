@@ -39,6 +39,8 @@ public class Furnance : MonoBehaviour, IInteractable
     private Inventory inventory;
     [Header("Sound Events")]
     public AK.Wwise.Event ThrowCoalPikedSoundEvent;
+    public AK.Wwise.Event PlayFireSoundEvent;
+    public AK.Wwise.Event StopFireSoundEvent;
     public enum FurnaceState
     {
         NoFuel,
@@ -77,6 +79,8 @@ public class Furnance : MonoBehaviour, IInteractable
         Debug.Log("Fire Is Kindled");
         hint.Raise("Fire is kindled. Now you can put ingot in the furnace");
 
+        PlayFireSoundEvent.Post(gameObject);
+
         while (furnaceTemperature > minFireTemperature)
         {
             yield return new WaitForSeconds(1);
@@ -89,6 +93,7 @@ public class Furnance : MonoBehaviour, IInteractable
         fireIsKindled = false;
         fuelIsFilled = false;
         state = FurnaceState.NoFuel;
+        StopFireSoundEvent.Post(gameObject);
         Debug.Log("Fire went out");
         hint.Raise("Fire went out");
     }

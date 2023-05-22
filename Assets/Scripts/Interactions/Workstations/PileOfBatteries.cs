@@ -20,9 +20,14 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
     [SerializeField] private go_GameEvent pickObject;
 
+    [SerializeField] private GameObject crystals;
+    [SerializeField] private s_GameEvent hotkey;
+
     private GameObject newBattery;
 
     public string InteractionPrompt => _prompt;
+
+    private bool picked = false;
 
     public bool Interact(Interactor interactor)
     {
@@ -31,10 +36,14 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
         if (inventory.rightHandFree == true)
         {
             GiveBattery();
+            hotkey.Raise("inHands");
+            picked = false;
         }
         else
         {
-            hint.Raise("Your right hand is busy");
+            if (picked)
+                hint.Raise("Your right hand is busy");
+            picked = true;
         }
 
         return true;
@@ -65,12 +74,12 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
         if (batteriesInPile == 0)
         {
-            gameObject.SetActive(false);
+            crystals.SetActive(false);
             GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
-            gameObject.SetActive(true);
+            crystals.SetActive(true);
             GetComponent<BoxCollider>().enabled = true;
         }
     }

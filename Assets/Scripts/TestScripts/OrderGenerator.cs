@@ -20,6 +20,9 @@ class OrderGenerator
         order.oreType = genOreType(playerLvl);
         order.oreQuality = genOreQuality(playerLvl, order.oreType);
 
+        order.reputation = genReputation(playerLvl);
+        order.price = genPrice(playerLvl);
+
         int[] states = { 1, 2, 3, 4 };
         for (int i = states.Length - 1; i >= 1; i--)
         {
@@ -348,6 +351,26 @@ class OrderGenerator
                 break;
         }
         return (Ingot.OreQuality)oreQuality;
+    }
+
+    public int genReputation(int playerLvl)
+    {
+        int baseReputation = 10;
+        float[] multipliersList = new float[7] { 1, 1.2f, 1.5f, 1.9f, 2.4f, 3, 3.7f };
+        int range = 4;
+
+        float reputation = Random.Range(baseReputation * multipliersList[playerLvl - 1] - range, baseReputation * multipliersList[playerLvl - 1] + range);
+        return Mathf.RoundToInt(reputation);
+    }
+
+    public int genPrice(int playerLvl)
+    {
+        int basePrice = 250;
+        float[] multipliersList = new float[7] { 1, 1.2f, 1.5f, 1.9f, 2.4f, 3, 3.7f };
+        int range = 40;
+
+        float price = Random.Range(basePrice * multipliersList[playerLvl - 1] - range, basePrice * multipliersList[playerLvl - 1] + range);
+        return Mathf.RoundToInt(price);
     }
 }
 

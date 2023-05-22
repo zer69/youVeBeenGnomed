@@ -8,6 +8,7 @@ public class Workbench : MonoBehaviour, IInteractable
     
     [SerializeField] private string _prompt;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private s_GameEvent hotkey;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
@@ -30,6 +31,8 @@ public class Workbench : MonoBehaviour, IInteractable
 
     [Header("Sound Events")]
     public AK.Wwise.Event DoneSoundEvent;
+    public AK.Wwise.Event WeaponPutSoundEvent;
+
     public string InteractionPrompt => _prompt;
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,7 @@ public class Workbench : MonoBehaviour, IInteractable
 
             if (ingot.status == Ingot.CompletionStatus.Sharpened)
             {
+                WeaponPutSoundEvent.Post(gameObject);
                 Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
                 weaponRB.transform.rotation = Quaternion.identity;
@@ -91,7 +95,7 @@ public class Workbench : MonoBehaviour, IInteractable
                 Debug.Log("woekbanch is used");
 
                 playerInput.actions.FindAction("DropItems").Disable();
-
+                hotkey.Raise("build");
                 return true;
             }
             hint.Raise("Hey, blade not ready");
@@ -119,7 +123,7 @@ public class Workbench : MonoBehaviour, IInteractable
                     cam2.gameObject.SetActive(false);
 
                     playerInput.actions.FindAction("DropItems").Enable();
-
+                    hotkey.Raise("inHands");
                     break;
 
                 case "Build":

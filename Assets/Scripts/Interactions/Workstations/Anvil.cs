@@ -59,8 +59,10 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private GameObject ingotPrefab;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent setCamera;
     [SerializeField] private GameEvent resetAnvil;
     [SerializeField] private Transform crosshair;
+    [SerializeField] private s_GameEvent hotkey;
 
     [Header("To delete if useless")]
     [BackgroundColor(1.5f, 0f, 1.5f, 1f)]
@@ -69,7 +71,12 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private Material rare;
     [SerializeField] private Material supremacy;
     [SerializeField] private Material legendary;
-    
+
+    [Header("Sound Events")]
+    public AK.Wwise.Event DoneSoundEvent;
+    public AK.Wwise.Event PartlyDoneSoundEvent;
+    public AK.Wwise.Event HammerSoundEvent;
+    public AK.Wwise.Event WeaponPutDownSoundEvent;
     public string InteractionPrompt => _prompt;
 
     // Start is called before the first frame update
@@ -191,11 +198,14 @@ public class Anvil : MonoBehaviour, IInteractable
     {
         Debug.Log("Finish Work!");
 
+        DoneSoundEvent.Post(gameObject);
+
         hammer.gameObject.SetActive(true);
         anvilHammer.gameObject.SetActive(false);
 
         camera.gameObject.SetActive(true);
         anvilCamera.gameObject.SetActive(false);
+        setCamera.Raise(camera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         //playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
@@ -216,7 +226,7 @@ public class Anvil : MonoBehaviour, IInteractable
         //WorkHandler();
         
         successfulHits = 0;
-
+        hotkey.Raise("inHands");
         //crosshair.gameObject.SetActive(false);
 
 
@@ -290,6 +300,8 @@ public class Anvil : MonoBehaviour, IInteractable
 
             }
             mouseClickCounter++;
+
+            HammerSoundEvent.Post(gameObject);
         }
     }
 
@@ -351,9 +363,25 @@ public class Anvil : MonoBehaviour, IInteractable
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
 
+        float threshhold = successfulClicks / results.Count;
+
         processedIngot.GetComponent<Ingot>().anvilState++;
+        if (processedIngot.GetComponent<Ingot>().anvilState < Ingot.AnvilState.WellDone)
+        {
+            PartlyDoneSoundEvent.Post(gameObject);
+        }
         if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
             processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
+
+
+
+        if (successfulClicks >= threshhold)
+        {
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)++processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
+        }
+            
+        else
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)--processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
 
         Debug.Log(successfulClicks);
     }
@@ -417,22 +445,24 @@ public class Anvil : MonoBehaviour, IInteractable
         Debug.Log("Anvil is used");
         if (!InventoryToWork())
         {
-            hint.Raise("Something is missing from my hands");
+            hint.Raise("Something is missing in my hands");
             return false;
         }
-        
+        WeaponPutDownSoundEvent.Post(gameObject);
+
         createIngotOnAnvil();
         hammer.gameObject.SetActive(false);
         anvilHammer.gameObject.SetActive(true);
 
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
+        setCamera.Raise(anvilCamera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.None;
         anvilMode = true;
         //crosshair.gameObject.SetActive(false);
-
+        hotkey.Raise("menu");
         return true;
     }
 

@@ -8,10 +8,15 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private string _prompt;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private s_GameEvent hotkey;
 
     [Header("Sound Events")]
     public AK.Wwise.Event DoneSoundEvent;
     public AK.Wwise.Event ResetSoundEvent;
+    public AK.Wwise.Event ErrorSoundEvent;
+    public AK.Wwise.Event MagicStoneOnSoundEvent;
+    public AK.Wwise.Event MagicStoneOffSoundEvent;
+    public AK.Wwise.Event PutWeaponSoundEvent;
 
     [BackgroundColor(1.5f, 0f, 0f, 1f)]
     [SerializeField] private Camera cam;
@@ -97,6 +102,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -113,6 +120,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -129,6 +138,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -145,6 +156,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                 {
                     Debug.Log("enchantment failed");
                     resetPattern();
+                    ErrorSoundEvent.Post(gameObject);
+                    EnergyReceiver.destroyBattery();
                 }
                 EnergyReceiver.destroyBattery();
                 break;
@@ -164,6 +177,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
         {
             if (inventory.hasIngot)
             {
+                PutWeaponSoundEvent.Post(gameObject);
                 Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
                 weaponRB.transform.rotation = Quaternion.identity;
@@ -181,11 +195,14 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                 canEnchante = true;
                 Debug.Log("Enchantment Table is used");
+                             
 
                 playerInput.actions.FindAction("DropItems").Disable();
                 playerInput.actions.FindAction("Use").Disable();
                 playerInput.actions.FindAction("Build").Disable();
+                hotkey.Raise("enchant");
                 return true;
+
             }
             hint.Raise("Hey, bring the weapon you want to enchant");
         }
@@ -237,7 +254,7 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                     playerInput.actions.FindAction("DropItems").Enable();
                     playerInput.actions.FindAction("Use").Enable();
                     playerInput.actions.FindAction("Build").Enable();
-
+                    hotkey.Raise("inHands");
                     break;
 
                 case "DrawMagicRune":
@@ -250,13 +267,14 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
                         {
                             magicStone.setCanMove();
                             magicStone.stoneDown();
+                            MagicStoneOnSoundEvent.Post(gameObject);
                             //break;
                         }
                         else
                         {
                             magicStone.setBlockMove();
                             magicStone.stoneUp();
-
+                            MagicStoneOffSoundEvent.Post(gameObject);
                         }
                     }else if (!EnergyReceiver.hasBattery)
                     {

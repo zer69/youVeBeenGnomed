@@ -31,9 +31,13 @@ public class Inventory : MonoBehaviour
 
     [Header("Sound Events")]
     public AK.Wwise.Event IngotPikedSoundEvent;
-    public AK.Wwise.Event ToolPikedSoundEvent;
     public AK.Wwise.Event IngotDropedSoundEvent;
+
+    public AK.Wwise.Event ToolPikedSoundEvent;
     public AK.Wwise.Event ToolDropedSoundEvent;
+
+    public AK.Wwise.Event BatteryPikedSoundEvent;
+    public AK.Wwise.Event BatteryDropedSoundEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -165,6 +169,7 @@ public class Inventory : MonoBehaviour
             coal = null;
             rightHandFree = true;
             hasCoal = false;
+            
         }
 
         return true;
@@ -185,7 +190,7 @@ public class Inventory : MonoBehaviour
 
             rightHandFree = false;
             hasBattery = true;
-
+            BatteryPikedSoundEvent.Post(gameObject);
             Debug.Log("Battery Picked");
         }
 
@@ -197,6 +202,7 @@ public class Inventory : MonoBehaviour
             battery = null;
             rightHandFree = true;
             hasBattery = false;
+            BatteryDropedSoundEvent.Post(gameObject);
         }
 
         return true;
@@ -362,6 +368,10 @@ public class Inventory : MonoBehaviour
             foreach (Transform grandchild in child.transform)
             {
                 grandchild.gameObject.layer = inHandsLayer;
+                foreach (Transform greatgrandchild in grandchild.transform)
+                {
+                    greatgrandchild.gameObject.layer = inHandsLayer;
+                }
             }
         }
     }
@@ -375,6 +385,10 @@ public class Inventory : MonoBehaviour
             foreach (Transform grandchild in child.transform)
             {
                 grandchild.gameObject.layer = pickableLayer;
+                foreach (Transform greatgrandchild in grandchild.transform)
+                {
+                    greatgrandchild.gameObject.layer = pickableLayer;
+                }
             }
         }
     }

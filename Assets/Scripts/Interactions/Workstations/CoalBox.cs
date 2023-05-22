@@ -20,6 +20,11 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     [SerializeField] private go_GameEvent pickObject;
 
+    [SerializeField] private GameObject coalPile;
+
+    [SerializeField] private s_GameEvent hotkey;
+    private bool picked = false;
+
     [Header("Sound Events")]
     public AK.Wwise.Event GaveCoalSoundEvent;
 
@@ -36,10 +41,14 @@ public class CoalBox : MonoBehaviour, IInteractable
         {
             GiveCoal();
             GaveCoalSoundEvent.Post(gameObject);
+            picked = false;
+            hotkey.Raise("inHands");
         }
         else
         {
+            if (picked)
             hint.Raise("Your right hand is busy");
+            picked = true;
         }
 
         return true;
@@ -58,12 +67,12 @@ public class CoalBox : MonoBehaviour, IInteractable
 
         if (coalInPile == 0)
         {
-            gameObject.SetActive(false);
+            coalPile.SetActive(false);
             GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
-            gameObject.SetActive(true);
+            coalPile.SetActive(true);
             GetComponent<BoxCollider>().enabled = true;
         }
     }

@@ -46,4 +46,12 @@ public class HintManager : MonoBehaviour
         hintText.gameObject.SetActive(true);
         StartCoroutine(HintFadeout());
     }
+    public void RaiseHintWithPriority(string prompt)
+    {
+        canShowHints = false;
+
+        hintText.text = prompt;
+        hintText.gameObject.SetActive(true);
+        StartCoroutine(HintFadeout());
+    }
 }

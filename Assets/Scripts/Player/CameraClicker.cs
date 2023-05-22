@@ -24,8 +24,10 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private col_GameEvent weaponPicked;
     [SerializeField] private b_GameEvent crosshairResized;
     [SerializeField] private go_GameEvent pickObject;
+    [SerializeField] private s_GameEvent hotkey;
 
     [SerializeField] private Transform pickableObject;
+    
     private LayerMask pickableMask;
     private LayerMask interactiveMask;
 
@@ -37,7 +39,8 @@ public class CameraClicker : MonoBehaviour
     private int pickableLayer;
     private int toolLayer;
 
-
+    [Header("Sound Events")]
+    public AK.Wwise.Event ToolDropedSoundEvent;
 
 
     // Start is called before the first frame update
@@ -81,6 +84,8 @@ public class CameraClicker : MonoBehaviour
     private void PickInteraction()
     {
         pickObject.Raise(pickableObject.gameObject);
+        hotkey.Raise("inHands");
+        weaponPicked.Raise(pickableObject.GetComponent<Collider>());
         pickableObject = null;
     }
 
@@ -121,19 +126,24 @@ public class CameraClicker : MonoBehaviour
     private void DropHands()
     {
         Quaternion cameraRotation = this.transform.rotation;
-        
+
         foreach (Transform child in playerTransform)
         {
-                
-                child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                child.GetComponent<Rigidbody>().AddForce(cameraRotation* Vector3.forward * dropPower);
-                playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
-                playerInput.GetComponent<Inventory>().IngotIsPicked(false);
-                playerInput.GetComponent<Inventory>().CoalIsPicked(false);
-                playerInput.GetComponent<Inventory>().BatteryIsPicked(false);
-                playerInput.GetComponent<Inventory>().HammerIsPicked(false);
+
+            child.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            child.GetComponent<Rigidbody>().AddForce(cameraRotation * Vector3.forward * dropPower);
+            playerInput.GetComponent<Inventory>().ThongsIsPicked(false);
+            playerInput.GetComponent<Inventory>().IngotIsPicked(false);
+            if (playerInput.GetComponent<Inventory>().hasCoal)
+            {
+                ToolDropedSoundEvent.Post(gameObject);
+            }
+            playerInput.GetComponent<Inventory>().CoalIsPicked(false);
+            playerInput.GetComponent<Inventory>().BatteryIsPicked(false);
+            playerInput.GetComponent<Inventory>().HammerIsPicked(false);
         }
         playerTransform.DetachChildren();
+        hotkey.Raise("main");
     }
 
     private void ResizeCrossHair()

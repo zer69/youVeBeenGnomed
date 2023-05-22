@@ -16,4 +16,24 @@ public class InfoSwitch : MonoBehaviour
         transform.GetChild(state).gameObject.SetActive(true);
     }
     
+
+    public void RefreshStockOnOrder()
+    {
+        foreach (Transform itemInfo in transform)
+        {
+            itemInfo.GetComponent<ItemPrice>().dayQuantity =
+            itemInfo.GetComponent<ItemPrice>().currentQuantity;
+        }
+    }
+
+    public void RefreshStock()
+    {
+        foreach (Transform itemInfo in transform)
+        {
+            
+            itemInfo.GetComponent<ItemPrice>().currentQuantity =
+                itemInfo.GetComponent<ItemPrice>().dayQuantity =
+                itemInfo.GetComponent<ItemPrice>().maxQuantity;
+        }
+    }
 }

@@ -13,6 +13,7 @@ public class s_GameEvent : ScriptableObject
         for (int i = listeners.Count - 1; i >= 0; i--)
             listeners[i].OnEventRaised(obj);
     }
+
     
 
     public void RegisterListener(s_GameEventListener listener)
