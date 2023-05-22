@@ -30,6 +30,8 @@ public class Workbench : MonoBehaviour, IInteractable
 
     [Header("Sound Events")]
     public AK.Wwise.Event DoneSoundEvent;
+    public AK.Wwise.Event WeaponPutSoundEvent;
+
     public string InteractionPrompt => _prompt;
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class Workbench : MonoBehaviour, IInteractable
 
             if (ingot.status == Ingot.CompletionStatus.Sharpened)
             {
+                WeaponPutSoundEvent.Post(gameObject);
                 Rigidbody weaponRB = playerTransform.GetComponentInChildren<Rigidbody>();
 
                 weaponRB.transform.rotation = Quaternion.identity;
