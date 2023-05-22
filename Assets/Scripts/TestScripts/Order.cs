@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using TMPro;
 
 [System.Serializable]                         
-public class Order : MonoBehaviour
+public class Order
 {
     //public int id = 0;
     //public string itemName = "New Item";
@@ -22,6 +24,8 @@ public class Order : MonoBehaviour
     public int daysToExpire = 2;
     // public int[] hitsPerSection = { 4, 3, 6 };
     //public int reputationLevelRequired = 1;
+
+    
 
     public override string ToString()
     {
@@ -51,23 +55,7 @@ public class Order : MonoBehaviour
         return value;
     }
 
-    private void Start()
-    {
-        SetupButtonPresses();
-    }
+    
 
-    private void SetupButtonPresses()
-    {
-        GameObject orderReciever = GameObject.Find("OrderInfo");
-        GameObject detectionZone = GameObject.Find("DetectionZone");
-        transform.GetComponent<Button>().onClick.AddListener(delegate
-        {
-            orderReciever.GetComponent<OrderReciever>().ReadOrderStats(transform.GetComponent<Order>());
-        });
-        transform.GetComponent<Button>().onClick.AddListener(delegate
-        {
-            detectionZone.GetComponent<TeleportPlatform>().PreSend();
-        });
-
-    }
+    
 }

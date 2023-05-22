@@ -176,7 +176,7 @@ class OrderGenerator
     {
         int[] sharpnessP = { 50, 55, 60, 65, 70, 80, 90 };
         int deviation = 6;
-        int sharpness = generateWithDeviation(sharpnessP[playerLvl], deviation);
+        int sharpness = generateWithDeviation(sharpnessP[playerLvl - 1], deviation);
 
         return sharpness;
     }
@@ -185,7 +185,7 @@ class OrderGenerator
     {
         int[] strengthP = { 30, 40, 50, 60, 65, 70, 80 };
         int deviation = 6;
-        int strength = generateWithDeviation(strengthP[playerLvl], deviation);
+        int strength = generateWithDeviation(strengthP[playerLvl - 1], deviation);
 
         return strength;
     }
@@ -194,7 +194,7 @@ class OrderGenerator
     {
         int[] fragilityP = { 90, 80, 70, 75, 60, 65, 50 };
         int deviation = 6;
-        int fragility = generateWithDeviation(fragilityP[playerLvl], deviation);
+        int fragility = generateWithDeviation(fragilityP[playerLvl - 1], deviation);
 
         return fragility;
     }

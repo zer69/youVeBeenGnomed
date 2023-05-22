@@ -12,7 +12,8 @@ public class Liquid : MonoBehaviour
     [SerializeField] private float FragilityRate;
 
     [SerializeField] private Barrel barrel;
-
+    [Header("Sound Events")]
+    public AK.Wwise.Event CoolingSoundEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class Liquid : MonoBehaviour
         {
             Ingot ignot = other.gameObject.transform.GetComponent<Ingot>();
             ignot.setSpecificCoolingRate(CoolingRate);
+            CoolingSoundEvent.Post(gameObject);
         }
     }
 
