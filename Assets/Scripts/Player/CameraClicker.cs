@@ -24,8 +24,10 @@ public class CameraClicker : MonoBehaviour
     [SerializeField] private col_GameEvent weaponPicked;
     [SerializeField] private b_GameEvent crosshairResized;
     [SerializeField] private go_GameEvent pickObject;
+    [SerializeField] private s_GameEvent hotkey;
 
     [SerializeField] private Transform pickableObject;
+    
     private LayerMask pickableMask;
     private LayerMask interactiveMask;
 
@@ -82,6 +84,7 @@ public class CameraClicker : MonoBehaviour
     private void PickInteraction()
     {
         pickObject.Raise(pickableObject.gameObject);
+        hotkey.Raise("inHands");
         weaponPicked.Raise(pickableObject.GetComponent<Collider>());
         pickableObject = null;
     }
@@ -140,6 +143,7 @@ public class CameraClicker : MonoBehaviour
             playerInput.GetComponent<Inventory>().HammerIsPicked(false);
         }
         playerTransform.DetachChildren();
+        hotkey.Raise("main");
     }
 
     private void ResizeCrossHair()

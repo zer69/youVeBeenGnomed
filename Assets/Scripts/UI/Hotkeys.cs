@@ -13,6 +13,11 @@ public class Hotkeys : MonoBehaviour
     public Transform rotate;
     public Transform build;
 
+    private void Start()
+    {
+        ChangeHotkeyState("menu");
+    }
+
     public void ChangeHotkeyState(string state)
     {
         interact.gameObject.SetActive(false);
@@ -27,23 +32,34 @@ public class Hotkeys : MonoBehaviour
         {
             case "main":
                 interact.gameObject.SetActive(true);
-                drop.gameObject.SetActive(false);
                 help.gameObject.SetActive(true);
-                exit.gameObject.SetActive(false);
                 glasses.gameObject.SetActive(true);
-                runes.gameObject.SetActive(false);
-                rotate.gameObject.SetActive(false);
-                build.gameObject.SetActive(false);
                 break;
             case "menu":
                 break;
+            case "esc":
+                exit.gameObject.SetActive(true);
+                break;
             case "inHands":
+                interact.gameObject.SetActive(true);
+                help.gameObject.SetActive(true);
+                glasses.gameObject.SetActive(true);
+                drop.gameObject.SetActive(true);
                 break;
             case "whetstone":
+                exit.gameObject.SetActive(true);
+                rotate.gameObject.SetActive(true);
+                glasses.gameObject.SetActive(true);
                 break;
             case "build":
+                build.gameObject.SetActive(true);
+                glasses.gameObject.SetActive(true);
+                exit.gameObject.SetActive(true);
                 break;
-            case "Enchant":
+            case "enchant":
+                runes.gameObject.SetActive(true);
+                glasses.gameObject.SetActive(true);
+                exit.gameObject.SetActive(true);
                 break;
         }
     }

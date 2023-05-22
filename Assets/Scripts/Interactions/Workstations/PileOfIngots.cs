@@ -27,9 +27,11 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     [SerializeField] private t_GameEvent typeChoice;
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private go_GameEvent pickObject;
+    [SerializeField] private s_GameEvent hotkey;
 
     private GameObject thongs;
     private GameObject newIngot;
+    private bool picked = false;
 
     public string InteractionPrompt => _prompt;
 
@@ -45,10 +47,14 @@ public class PileOfIngots : MonoBehaviour, IInteractable
         if ((inventory.hasIngot == false && inventory.rightHandFree) || (inventory.hasIngotInThongs == false && inventory.hasThongs == true))
         {
             GiveIngot();
+            hotkey.Raise("inHands");
+            picked = false;
         }
         else
         {
-            hint.Raise("Your hands are busy");
+            if(picked)  
+                hint.Raise("Your hands are busy");
+            picked = true;
         }   
 
         return true;

@@ -18,7 +18,7 @@ public class SwitchDay : MonoBehaviour, IInteractable
     [SerializeField] private b_GameEvent switchDay;
     [SerializeField] private s_GameEvent hint;
 
-    [SerializeField] private GameEvent switchDay;
+    //[SerializeField] private GameEvent switchDay;
     [Header("Sound Events")]
     public AK.Wwise.Event YawnSoundEvent;
     private float fadeAmount;
