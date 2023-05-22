@@ -37,7 +37,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
 
     void Start()
     {
-        StartCoroutine(TestOrders(3f));
+        //StartCoroutine(TestOrders(3f));
     }
 
     // Update is called once per frame
@@ -125,7 +125,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     }
 
     // Function for calculating effects of order player has finished
-    private void DoneOrderCalculations(Order result, Order order)
+    public void DoneOrderCalculations(Order result, Order order)
     {
         money += order.price;
         reputation += order.reputation;

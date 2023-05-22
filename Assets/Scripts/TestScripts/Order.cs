@@ -25,7 +25,21 @@ public class Order
     // public int[] hitsPerSection = { 4, 3, 6 };
     //public int reputationLevelRequired = 1;
 
-    
+    public Order()
+    {
+
+    }
+
+    public Order(Ingot ingot)
+    {
+        weaponType = ingot.weaponType;
+        oreType = ingot.oreType;
+        oreQuality = ingot.quality;
+        enchantment = ingot.enchantment;
+        requiredFragility = (int)ingot.fragility;
+        requiredSharpness = (int)ingot.sharpness;
+        requiredFragility = (int)ingot.fragility;
+    }
 
     public override string ToString()
     {

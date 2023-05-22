@@ -84,7 +84,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] public WeaponType weaponType;
 
 
-    [SerializeField] public Rarity rarity;
+    [SerializeField] public OreQuality quality;
     [SerializeField] public OreType oreType;
     
 
@@ -96,8 +96,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(0f, 1.5f, 0f, 1f)]
     [Header("Ignot Properties")]
-    [Header("Quality")]
-    [SerializeField] private float quality;
+    
 
     [Header("Temperature")]
     [SerializeField] private float MeltingPoint;
@@ -127,7 +126,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] bool isEnchanted;
-    [SerializeField] private Enchantment enchantment;
+    [SerializeField] public Enchantment enchantment;
     [SerializeField] private int enchantmentQuality;
     public int EnchantmentQuality
     {
@@ -159,6 +158,7 @@ public class Ingot : MonoBehaviour
     [SerializeField] private go_GameEvent sendIngot;
     [SerializeField] private s_GameEvent hint;
     [SerializeField] private col_GameEvent weaponLanded;
+    [SerializeField] private col_GameEvent weaponPicked;
 
     [SerializeField] private TextMeshPro temperatureText;
     [SerializeField] private TextMeshPro sharpnessText;
@@ -174,6 +174,11 @@ public class Ingot : MonoBehaviour
 
     bool readyRaised = true;
     bool weaponMaterialSet = false;
+
+    private ParticleSystem enchantmentParticle; 
+
+    [SerializeField] private List<Color> enchantColors;
+    
 
     private float price; // calculated based on rarity, type, quality, strength, fragility, sharpness and enchantment
     private void Start()
@@ -196,6 +201,10 @@ public class Ingot : MonoBehaviour
         bladePos = transform.Find("BladePos");
         spearPos = transform.Find("SpearPos");
         daggerPos = transform.Find("DaggerPos");
+        enchantmentParticle = transform.Find("glow").GetComponent<ParticleSystem>();
+        
+
+        enchantmentParticle.gameObject.SetActive(false);
     }
     private void Update()
     {
@@ -205,7 +214,48 @@ public class Ingot : MonoBehaviour
             UpdateGraphics();
         
         InfoUpdate();
+        ParticleUpdate();
        
+    }
+
+    private void ParticleUpdate()
+    {
+        if (enchantment == Enchantment.None)
+        {
+            return;
+        }
+        enchantmentParticle.gameObject.SetActive(true);
+        int pickedColor = 0;
+        switch (enchantment)
+        {
+            case Enchantment.Air:
+                pickedColor = 0;
+                break;
+            case Enchantment.Dark:
+                pickedColor = 1;
+                break;
+            case Enchantment.Earth:
+                pickedColor = 2;
+                break;
+            case Enchantment.Fire:
+                pickedColor = 3;
+                break;
+            case Enchantment.Light:
+                pickedColor = 4;
+                break;
+            case Enchantment.Lightning:
+                pickedColor = 5;
+                break;
+            case Enchantment.Poison:
+                pickedColor = 6;
+                break;
+            case Enchantment.Water:
+                pickedColor = 7;
+                break;
+        }
+        enchantmentParticle.startColor = enchantColors[pickedColor];
+        enchantmentParticle.startColor = new Color(enchantmentParticle.startColor.r, enchantmentParticle.startColor.g, enchantmentParticle.startColor.b, 1f);
+        
     }
 
     private void UpdateMat()
@@ -383,6 +433,12 @@ public class Ingot : MonoBehaviour
             weaponLanded.Raise(this.GetComponent<BoxCollider>());
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "TeleportPlatform")
+            weaponPicked.Raise(this.GetComponent<BoxCollider>());
+    }
+
     public void setEnchantment(int enchantmentId, int quality)
     {        
         isEnchanted = true;
@@ -421,23 +477,23 @@ public class Ingot : MonoBehaviour
         }
     }
 
-    public ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> getData()
+    public ValueTuple<CompletionStatus, WeaponType, OreQuality, OreType> getData()
     {
-        return (status, weaponType, rarity, oreType);
+        return (status, weaponType, quality, oreType);
     }
 
-    public void setData(ValueTuple<CompletionStatus, WeaponType, Rarity, OreType> data)
+    public void setData(ValueTuple<CompletionStatus, WeaponType, OreQuality, OreType> data)
     {
-        (status, weaponType, rarity, oreType) = data;
+        (status, weaponType, quality, oreType) = data;
     }
 
     void InfoUpdate()
     {
-        /*temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
-        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
-        fragilityText.text = "<sprite=1> " + fragility.ToString("F2");
-        strengthText.text = "<sprite=4> " + strength.ToString("F2");
-        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");*/
+        temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F");
+        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F");
+        fragilityText.text = "<sprite=1> " + fragility.ToString("F");
+        strengthText.text = "<sprite=4> " + strength.ToString("F");
+        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F");
     }
 
     public void SwitchGlassesLayer(int layer)

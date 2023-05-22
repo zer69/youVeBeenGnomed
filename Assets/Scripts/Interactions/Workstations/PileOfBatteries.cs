@@ -20,6 +20,8 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
     [SerializeField] private go_GameEvent pickObject;
 
+    [SerializeField] private GameObject crystals;
+
     private GameObject newBattery;
 
     public string InteractionPrompt => _prompt;
@@ -65,12 +67,12 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
         if (batteriesInPile == 0)
         {
-            gameObject.SetActive(false);
+            crystals.SetActive(false);
             GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
-            gameObject.SetActive(true);
+            crystals.SetActive(true);
             GetComponent<BoxCollider>().enabled = true;
         }
     }

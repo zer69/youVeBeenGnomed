@@ -368,6 +368,10 @@ public class Inventory : MonoBehaviour
             foreach (Transform grandchild in child.transform)
             {
                 grandchild.gameObject.layer = inHandsLayer;
+                foreach (Transform greatgrandchild in grandchild.transform)
+                {
+                    greatgrandchild.gameObject.layer = inHandsLayer;
+                }
             }
         }
     }
@@ -381,6 +385,10 @@ public class Inventory : MonoBehaviour
             foreach (Transform grandchild in child.transform)
             {
                 grandchild.gameObject.layer = pickableLayer;
+                foreach (Transform greatgrandchild in grandchild.transform)
+                {
+                    greatgrandchild.gameObject.layer = pickableLayer;
+                }
             }
         }
     }

@@ -20,6 +20,8 @@ public class CoalBox : MonoBehaviour, IInteractable
 
     [SerializeField] private go_GameEvent pickObject;
 
+    [SerializeField] private GameObject coalPile;
+
     [Header("Sound Events")]
     public AK.Wwise.Event GaveCoalSoundEvent;
 
@@ -58,12 +60,12 @@ public class CoalBox : MonoBehaviour, IInteractable
 
         if (coalInPile == 0)
         {
-            gameObject.SetActive(false);
+            coalPile.SetActive(false);
             GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
-            gameObject.SetActive(true);
+            coalPile.SetActive(true);
             GetComponent<BoxCollider>().enabled = true;
         }
     }

@@ -91,7 +91,7 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
             {              
 
                 battery = inventory.battery;
-                SwitchToPickableLayer(battery.transform);
+                SwitchToDefaultLayer(battery.transform);
 
                 inventory.hasBattery = false;
                 inventory.battery = null;
@@ -163,15 +163,15 @@ namespace Assets.Scripts.Interactions.Workstations.Enchantment
             }
         }
 
-        void SwitchToPickableLayer(Transform objectInHand)
+        void SwitchToDefaultLayer(Transform objectInHand)
         {
-            objectInHand.gameObject.layer = pickableLayer;
+            objectInHand.gameObject.layer = 0;
             foreach (Transform child in objectInHand)
             {
-                child.gameObject.layer = pickableLayer;
+                child.gameObject.layer = 0;
                 foreach (Transform grandchild in child.transform)
                 {
-                    grandchild.gameObject.layer = pickableLayer;
+                    grandchild.gameObject.layer = 0;
                 }
             }
         }

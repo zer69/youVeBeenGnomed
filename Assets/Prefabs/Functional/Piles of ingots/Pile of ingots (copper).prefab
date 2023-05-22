@@ -1256,7 +1256,6 @@ GameObject:
   - component: {fileID: 1645366357884599613}
   - component: {fileID: 3544742705894918647}
   - component: {fileID: 3544742705894918642}
-  - component: {fileID: 3544742705894918641}
   - component: {fileID: 3544742705894918640}
   - component: {fileID: 4743447934431847067}
   m_Layer: 0
@@ -1350,51 +1349,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0014513414, y: 0.002769663, z: 0.0009999997}
   m_Center: {x: 0.000007852518, y: -0.000020491823, z: 0.00049999997}
---- !u!114 &3544742705894918641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3040361607363930146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  anvilState: 0
-  weaponType: 0
-  rarity: 0
-  oreType: 0
-  airTemperature: 24
-  airCoolingRate: 0.09
-  quality: 0.2
-  MeltingPoint: 1000
-  coolingRate: 0
-  currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
-  strength: 0.5
-  minStrengthValue: 0
-  maxStrengthValue: 100
-  fragility: 0.5
-  minFragilityValue: 0
-  maxFragilityValue: 100
-  sharpness: 0
-  isEnchanted: 0
-  enchantment: 0
-  enchantmentQuality: 0
-  state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
-  state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  GlowMaterial: {fileID: 0}
-  sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
-  hint: {fileID: 0}
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  temperatureText: {fileID: 0}
-  sharpnessText: {fileID: 0}
-  fragilityText: {fileID: 0}
-  strengthText: {fileID: 0}
-  enchantmentText: {fileID: 0}
 --- !u!54 &3544742705894918640
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2005,7 +1959,6 @@ GameObject:
   - component: {fileID: 8897296239224476425}
   - component: {fileID: 6673627128177895363}
   - component: {fileID: 6673627128177895366}
-  - component: {fileID: 6673627128177895365}
   - component: {fileID: 6673627128177895364}
   - component: {fileID: 3204334180480371887}
   m_Layer: 0
@@ -2099,51 +2052,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0014513414, y: 0.002769663, z: 0.0009999997}
   m_Center: {x: 0.000007852518, y: -0.000020491823, z: 0.00049999997}
---- !u!114 &6673627128177895365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160422533309892118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  anvilState: 0
-  weaponType: 0
-  rarity: 0
-  oreType: 0
-  airTemperature: 24
-  airCoolingRate: 0.09
-  quality: 0.2
-  MeltingPoint: 1000
-  coolingRate: 0
-  currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
-  strength: 0.5
-  minStrengthValue: 0
-  maxStrengthValue: 100
-  fragility: 0.5
-  minFragilityValue: 0
-  maxFragilityValue: 100
-  sharpness: 0
-  isEnchanted: 0
-  enchantment: 0
-  enchantmentQuality: 0
-  state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
-  state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  GlowMaterial: {fileID: 0}
-  sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
-  hint: {fileID: 0}
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  temperatureText: {fileID: 0}
-  sharpnessText: {fileID: 0}
-  fragilityText: {fileID: 0}
-  strengthText: {fileID: 0}
-  enchantmentText: {fileID: 0}
 --- !u!54 &6673627128177895364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2744,7 +2652,6 @@ GameObject:
   - component: {fileID: 6731549131531795626}
   - component: {fileID: 8831474262697724000}
   - component: {fileID: 8831474262697724005}
-  - component: {fileID: 8831474262697724006}
   - component: {fileID: 8831474262697724007}
   - component: {fileID: 750653607162061580}
   m_Layer: 0
@@ -2838,51 +2745,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0014513414, y: 0.002769663, z: 0.0009999997}
   m_Center: {x: 0.000007852518, y: -0.000020491823, z: 0.00049999997}
---- !u!114 &8831474262697724006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7029924940727314869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  anvilState: 0
-  weaponType: 0
-  rarity: 0
-  oreType: 0
-  airTemperature: 24
-  airCoolingRate: 0.09
-  quality: 0.2
-  MeltingPoint: 1000
-  coolingRate: 0
-  currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
-  strength: 0.5
-  minStrengthValue: 0
-  maxStrengthValue: 100
-  fragility: 0.5
-  minFragilityValue: 0
-  maxFragilityValue: 100
-  sharpness: 0
-  isEnchanted: 0
-  enchantment: 0
-  enchantmentQuality: 0
-  state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
-  state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  GlowMaterial: {fileID: 0}
-  sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
-  hint: {fileID: 0}
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  temperatureText: {fileID: 0}
-  sharpnessText: {fileID: 0}
-  fragilityText: {fileID: 0}
-  strengthText: {fileID: 0}
-  enchantmentText: {fileID: 0}
 --- !u!54 &8831474262697724007
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3498,7 +3360,6 @@ GameObject:
   - component: {fileID: 5148587026547133628}
   - component: {fileID: 6960176707065493622}
   - component: {fileID: 6960176707065493619}
-  - component: {fileID: 6960176707065493616}
   - component: {fileID: 6960176707065493617}
   - component: {fileID: 1185268728100475674}
   m_Layer: 0
@@ -3592,51 +3453,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0014513414, y: 0.002769663, z: 0.0009999997}
   m_Center: {x: 0.000007852518, y: -0.000020491823, z: 0.00049999997}
---- !u!114 &6960176707065493616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8905727141509437859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  anvilState: 0
-  weaponType: 0
-  rarity: 0
-  oreType: 0
-  airTemperature: 24
-  airCoolingRate: 0.09
-  quality: 0.2
-  MeltingPoint: 1000
-  coolingRate: 0
-  currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
-  strength: 0.5
-  minStrengthValue: 0
-  maxStrengthValue: 100
-  fragility: 0.5
-  minFragilityValue: 0
-  maxFragilityValue: 100
-  sharpness: 0
-  isEnchanted: 0
-  enchantment: 0
-  enchantmentQuality: 0
-  state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
-  state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  GlowMaterial: {fileID: 0}
-  sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
-  hint: {fileID: 0}
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  temperatureText: {fileID: 0}
-  sharpnessText: {fileID: 0}
-  fragilityText: {fileID: 0}
-  strengthText: {fileID: 0}
-  enchantmentText: {fileID: 0}
 --- !u!54 &6960176707065493617
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3679,7 +3495,6 @@ GameObject:
   - component: {fileID: 4652975276937399052}
   - component: {fileID: 7455224389896224710}
   - component: {fileID: 7455224389896224707}
-  - component: {fileID: 7455224389896224704}
   - component: {fileID: 7455224389896224705}
   - component: {fileID: 1698753587566302378}
   m_Layer: 0
@@ -3773,51 +3588,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0014513414, y: 0.002769663, z: 0.0009999997}
   m_Center: {x: 0.000007852518, y: -0.000020491823, z: 0.00049999997}
---- !u!114 &7455224389896224704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8968561752538619411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 567e9cd8e661dc14bbd0471d9864c67d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  anvilState: 0
-  weaponType: 0
-  rarity: 0
-  oreType: 0
-  airTemperature: 24
-  airCoolingRate: 0.09
-  quality: 0.2
-  MeltingPoint: 1000
-  coolingRate: 0
-  currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
-  strength: 0.5
-  minStrengthValue: 0
-  maxStrengthValue: 100
-  fragility: 0.5
-  minFragilityValue: 0
-  maxFragilityValue: 100
-  sharpness: 0
-  isEnchanted: 0
-  enchantment: 0
-  enchantmentQuality: 0
-  state1: {fileID: 3179386619049853176, guid: aec60d0c7519c344ca8effa2f98afba4, type: 3}
-  state2: {fileID: 3152417401798680999, guid: f8a03f1c8d3a26343a4a073bffaaca51, type: 3}
-  GlowMaterial: {fileID: 0}
-  sendIngot: {fileID: 11400000, guid: 9213f648d45ff004e9b636218abe6ff8, type: 2}
-  hint: {fileID: 0}
-  weaponLanded: {fileID: 11400000, guid: 24081995152147e4c97571a1e1b4034f, type: 2}
-  temperatureText: {fileID: 0}
-  sharpnessText: {fileID: 0}
-  fragilityText: {fileID: 0}
-  strengthText: {fileID: 0}
-  enchantmentText: {fileID: 0}
 --- !u!54 &7455224389896224705
 Rigidbody:
   m_ObjectHideFlags: 0

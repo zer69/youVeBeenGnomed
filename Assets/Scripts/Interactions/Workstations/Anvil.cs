@@ -59,6 +59,7 @@ public class Anvil : MonoBehaviour, IInteractable
     [SerializeField] private GameObject ingotPrefab;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private s_GameEvent hint;
+    [SerializeField] private go_GameEvent setCamera;
     [SerializeField] private GameEvent resetAnvil;
     [SerializeField] private Transform crosshair;
 
@@ -203,6 +204,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         camera.gameObject.SetActive(true);
         anvilCamera.gameObject.SetActive(false);
+        setCamera.Raise(camera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         //playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
@@ -360,6 +362,8 @@ public class Anvil : MonoBehaviour, IInteractable
         int successfulClicks = results.Count(x => x == true);
         successfulHits += successfulClicks;
 
+        float threshhold = successfulClicks / results.Count;
+
         processedIngot.GetComponent<Ingot>().anvilState++;
         if (processedIngot.GetComponent<Ingot>().anvilState < Ingot.AnvilState.WellDone)
         {
@@ -367,6 +371,16 @@ public class Anvil : MonoBehaviour, IInteractable
         }
         if (processedIngot.GetComponent<Ingot>().anvilState == Ingot.AnvilState.WellDone)
             processedIngot.GetComponent<Ingot>().status = Ingot.CompletionStatus.Forged;
+
+
+
+        if (successfulClicks >= threshhold)
+        {
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)++processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
+        }
+            
+        else
+            processedIngot.GetComponent<Ingot>().quality = (Ingot.OreQuality)Mathf.Clamp((int)--processedIngot.GetComponent<Ingot>().quality, (int)Ingot.OreQuality.Poor, (int)Ingot.OreQuality.Legendary);
 
         Debug.Log(successfulClicks);
     }
@@ -441,6 +455,7 @@ public class Anvil : MonoBehaviour, IInteractable
 
         camera.gameObject.SetActive(false);
         anvilCamera.gameObject.SetActive(true);
+        setCamera.Raise(anvilCamera.gameObject);
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.None;

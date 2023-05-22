@@ -12,7 +12,11 @@ public class SwitchDay : MonoBehaviour, IInteractable
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject blackScreen;
     [SerializeField] private GameObject sleepText;
+    [SerializeField] private GameStateManager currentDay;
     [SerializeField] private float fadeSpeed = 1f;
+
+    [SerializeField] private b_GameEvent switchDay;
+    [SerializeField] private s_GameEvent hint;
 
     [SerializeField] private GameEvent switchDay;
     [Header("Sound Events")]
@@ -31,7 +35,7 @@ public class SwitchDay : MonoBehaviour, IInteractable
     void StartNewDay()
     {
         StartCoroutine(Sleeping());
-        switchDay.Raise();
+        switchDay.Raise(true);
     }
 
     IEnumerator Sleeping()
@@ -64,6 +68,7 @@ public class SwitchDay : MonoBehaviour, IInteractable
             yield return new WaitForEndOfFrame();
         }
 
+        hint.Raise("Day " + currentDay.day);
         blackScreen.SetActive(false);
     }
 }
