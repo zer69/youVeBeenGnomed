@@ -79,8 +79,25 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         return orders;
     }
 
+    public void GenerateOrdersOnStart(bool newGame)
+    {
+        Debug.Log("Generate On Start");
+        if (newGame)
+        {
+            List<Order> generateOrders = GenerateOrders(reputationLevel, Random.Range(1, 4));
+
+            foreach (Order order in generateOrders)
+            {
+                orders.Add(order);
+            }
+
+            orderPool.orderList = orders;
+        }
+    }
+
     public void DayProcessing(bool nextDay)
     {
+        Debug.Log("NEXT DAY");
         if (nextDay){
             day += 1;
             for (int i = 0; i < orders.Count; i++)
