@@ -75,7 +75,7 @@ public class Barrel : MonoBehaviour, IInteractable
            
         }
         //Debug.Log("No thongs and ingot");
-        hint.Raise("Hey, man, where's your weapon?");
+        hint.Raise("Hey, man, where's your blade?");
         return false;
     }
 

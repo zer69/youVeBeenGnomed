@@ -358,7 +358,8 @@ public class Ingot : MonoBehaviour
             currentTemperature -= coolingRate;
             //temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2") + " *C";
             //Debug.Log("currentTemperature: " + currentTemperature);
-
+            if (status == CompletionStatus.Forged)
+                status = CompletionStatus.Heated;
             return true;
         }
 
