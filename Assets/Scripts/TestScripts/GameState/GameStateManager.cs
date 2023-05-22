@@ -125,7 +125,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     }
 
     // Function for calculating effects of order player has finished
-    private void DoneOrderCalculations(Order result, Order order)
+    public void DoneOrderCalculations(Order result, Order order)
     {
         money += order.price;
         reputation += order.reputation;

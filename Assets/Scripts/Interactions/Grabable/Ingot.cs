@@ -126,7 +126,7 @@ public class Ingot : MonoBehaviour
 
     [BackgroundColor(1.5f, 1.5f, 0f, 1f)]
     [SerializeField] bool isEnchanted;
-    [SerializeField] private Enchantment enchantment;
+    [SerializeField] public Enchantment enchantment;
     [SerializeField] private int enchantmentQuality;
     public int EnchantmentQuality
     {
