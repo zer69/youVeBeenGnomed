@@ -26206,6 +26206,10 @@ MonoBehaviour:
   gameStateManager: {fileID: 0}
   orderCover: {fileID: 0}
   orderContent: {fileID: 680622725}
+  TeleportSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   weaponSpriteList:
   - {fileID: 21300000, guid: 916592c6ab9066040a0a9d6694fb0edb, type: 3}
   - {fileID: 21300000, guid: d83c6ae99b43bfd4a995cb9e13d4737b, type: 3}
@@ -33883,6 +33887,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bbe242f20d2d3b84dae782ae3bfa97dc,
         type: 2}
+    - target: {fileID: 4918875908219229009, guid: db6db787c464eac4c9c9ccbd37a1028a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918875908219229009, guid: db6db787c464eac4c9c9ccbd37a1028a,
+        type: 3}
+      propertyPath: isStaticObject
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7800286680088121311, guid: db6db787c464eac4c9c9ccbd37a1028a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -51126,11 +51140,13 @@ MonoBehaviour:
   FootstepsSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 6e154341a4cdd9a409a570eb15d3a66e,
+      type: 2}
   FootstepsSpopSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 4b67b27f811d47f49845f18e8dc0605d,
+      type: 2}
 --- !u!114 &1955815458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51203,11 +51219,13 @@ MonoBehaviour:
   BatteryPikedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: f2097e1a015a0a64ca06818cde9ee4a8,
+      type: 2}
   BatteryDropedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: df4ab8b06edd9ea4ca557638c1859533,
+      type: 2}
 --- !u!114 &1955815460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53155,6 +53173,11 @@ MonoBehaviour:
   gameStateManager: {fileID: 674214587}
   orderCover: {fileID: 1006610524}
   orderContent: {fileID: 680622725}
+  TeleportSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 3abb677a7a10eb8499cbac0fafc3ed1d,
+      type: 2}
   weaponSpriteList:
   - {fileID: 21300000, guid: 916592c6ab9066040a0a9d6694fb0edb, type: 3}
   - {fileID: 21300000, guid: d83c6ae99b43bfd4a995cb9e13d4737b, type: 3}

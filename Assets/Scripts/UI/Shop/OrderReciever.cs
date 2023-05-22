@@ -13,6 +13,9 @@ public class OrderReciever : MonoBehaviour
 
     [SerializeField] private Transform orderContent;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event TeleportSoundEvent;
+
     private Order activeOrder;
     private Order orderInTeleport; // send with ingot to manager
 
@@ -255,6 +258,7 @@ public class OrderReciever : MonoBehaviour
     public void SendOrder()
     {
         gameStateManager.DoneOrderCalculations(orderInTeleport, activeOrder);
+        TeleportSoundEvent.Post(gameObject);
     }
 
 }
