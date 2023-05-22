@@ -59,7 +59,6 @@ public class ShopOrderManager : MonoBehaviour
 
     public void NewDay()
     {
-        //currentDay += 1;
         CheckForDelivery();
     }
 }

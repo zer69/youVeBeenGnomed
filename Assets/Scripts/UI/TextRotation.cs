@@ -21,5 +21,6 @@ public class TextRotation : MonoBehaviour
     public void SetCamera(GameObject camera)
     {
         currentCam = camera;
+        Debug.Log(currentCam);
     }
 }

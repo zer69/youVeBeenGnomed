@@ -433,11 +433,11 @@ public class Ingot : MonoBehaviour
 
     void InfoUpdate()
     {
-        /*temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F2");
-        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F2");
-        fragilityText.text = "<sprite=1> " + fragility.ToString("F2");
-        strengthText.text = "<sprite=4> " + strength.ToString("F2");
-        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F2");*/
+        temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F");
+        sharpnessText.text = "<sprite=0> " + sharpness.ToString("F");
+        fragilityText.text = "<sprite=1> " + fragility.ToString("F");
+        strengthText.text = "<sprite=4> " + strength.ToString("F");
+        enchantmentText.text = "<sprite=2> " + enchantment.ToString("F");
     }
 
     public void SwitchGlassesLayer(int layer)
