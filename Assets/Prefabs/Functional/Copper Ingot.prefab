@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: -4033505713782740866}
   - component: {fileID: -3582959539470149536}
   - component: {fileID: 368462891689397641}
+  - component: {fileID: 7337025582334918751}
   m_Layer: 10
   m_Name: Copper Ingot
   m_TagString: Ingot
@@ -945,7 +946,7 @@ MonoBehaviour:
   MeltingPoint: 400
   coolingRate: 0
   currentTemperature: 0
-  targetGlow: {x: 0, y: 0, z: 0}
+  targetGlow: {x: 3.33, y: 0.39, z: 0.26}
   strength: 25
   minStrengthValue: 0
   maxStrengthValue: 100
@@ -1131,6 +1132,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Ingot, Assembly-CSharp
         m_MethodName: SwitchGlassesLayer
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7337025582334918751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4851849594848367713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9339b9285779d8f469bd30ebddc4d0b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4d951cddc86df474eb0b63203df681c6, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6365213482536727986}
+        m_TargetAssemblyTypeName: Ingot, Assembly-CSharp
+        m_MethodName: SetWeaponMaterial
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

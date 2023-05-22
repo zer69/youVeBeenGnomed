@@ -89,14 +89,19 @@ public class Whetstone : MonoBehaviour, IInteractable
         Rigidbody ingotRB = playerTransform.GetComponentInChildren<Rigidbody>();
         if (ingotRB == null)
         {
-            hint.Raise("Cannot sharpen your nails, sorry");
+            hint.Raise("No sharpy for nails");
             //Debug.Log("No ingot detected");
+            return false;
+        }
+        if (ingotRB.gameObject.tag == "Thongs" || ingotRB.gameObject.tag == "Hammer")
+        {
+            hint.Raise("No instrument needed");
             return false;
         }
 
         if (!((ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Sharpened) || (ingotRB.GetComponent<Ingot>().status == Ingot.CompletionStatus.Cooled)))
         {
-            hint.Raise("Cannot sharpen an ingot in such condition");
+            hint.Raise("Weapon not ready to sharpen");
             return false;
         }
 
@@ -208,7 +213,7 @@ public class Whetstone : MonoBehaviour, IInteractable
             if (ingot.gameObject.GetComponent<Ingot>().sharpness > 100f)
             {
                 increasing = false;
-                hint.Raise("100% sharpened, get off until it's dull again");
+                hint.Raise("It's razor sharp, pull out!");
             }    
                 
             if (increasing)
@@ -230,7 +235,7 @@ public class Whetstone : MonoBehaviour, IInteractable
 
     private float ChangeSharpness(float ingotFragility)
     {
-        return sharpeningSpeed * ingotFragility * 0.5f * 0.25f;
+        return sharpeningSpeed * ingotFragility * 0.5f * 0.25f * Time.deltaTime;
     }
 
     private void OnCollisionStay(Collision collision)

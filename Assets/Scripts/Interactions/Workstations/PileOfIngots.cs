@@ -64,6 +64,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     {
         newIngot = Instantiate(ingot);
         pickObject.Raise(newIngot);
+        typeChoice.Raise(newIngot.transform);
         newIngot.transform.Find("Ingot temperature (TMP)").gameObject.SetActive(glassesActivated);
         ChangePileSize(-1);
     }
