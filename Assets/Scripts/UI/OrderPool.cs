@@ -25,7 +25,16 @@ public class OrderPool : MonoBehaviour
     public void SetOrderList(List<Order> newOrderList)
     {
         orderList = newOrderList;
-        
+
+    }
+
+    public void UpdateChildren()
+    {
+        foreach(Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        SetChildren();
     }
 
     private void SetChildren()

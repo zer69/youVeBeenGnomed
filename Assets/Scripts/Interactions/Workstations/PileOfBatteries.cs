@@ -35,6 +35,13 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
 
         if (inventory.rightHandFree == true)
         {
+            if (batteriesInPile == 0)
+            {
+                ChangePileSize(0);
+                return false;
+            }
+                
+            
             GiveBattery();
             hotkey.Raise("inHands");
             picked = false;
@@ -49,16 +56,21 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
         return true;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (batteriesInPile == 0)
+        {
+            crystals.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            crystals.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
+        }
     }
 
     void GiveBattery()
@@ -72,15 +84,6 @@ public class PileOfBatteries : MonoBehaviour, IInteractable
     {
         batteriesInPile += pileSize;
 
-        if (batteriesInPile == 0)
-        {
-            crystals.SetActive(false);
-            GetComponent<BoxCollider>().enabled = false;
-        }
-        else
-        {
-            crystals.SetActive(true);
-            GetComponent<BoxCollider>().enabled = true;
-        }
+        
     }
 }

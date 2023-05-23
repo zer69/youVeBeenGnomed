@@ -54,6 +54,20 @@ public class CoalBox : MonoBehaviour, IInteractable
         return true;
     }
 
+    private void Update()
+    {
+        if (coalInPile == 0)
+        {
+            coalPile.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            coalPile.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+
     void GiveCoal()
     {
         newCoal = Instantiate(coal);
@@ -65,15 +79,6 @@ public class CoalBox : MonoBehaviour, IInteractable
     {
         coalInPile += pileSize;
 
-        if (coalInPile == 0)
-        {
-            coalPile.SetActive(false);
-            GetComponent<BoxCollider>().enabled = false;
-        }
-        else
-        {
-            coalPile.SetActive(true);
-            GetComponent<BoxCollider>().enabled = true;
-        }
+        
     }
 }
