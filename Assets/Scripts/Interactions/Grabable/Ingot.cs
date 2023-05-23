@@ -494,7 +494,7 @@ public class Ingot : MonoBehaviour
 
     void InfoUpdate()
     {
-        temperatureText.text = "<sprite=2> " + currentTemperature.ToString("F");
+        temperatureText.text = "<sprite=0> " + currentTemperature.ToString("F");
         sharpnessText.text = "<sprite=0> " + sharpness.ToString("F");
         fragilityText.text = "<sprite=1> " + fragility.ToString("F");
         strengthText.text = "<sprite=4> " + strength.ToString("F");
