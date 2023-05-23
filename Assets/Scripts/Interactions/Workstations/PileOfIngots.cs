@@ -40,6 +40,20 @@ public class PileOfIngots : MonoBehaviour, IInteractable
         thongs = GameObject.Find("Thongs");
     }
 
+    private void Update()
+    {
+        if (ingotsInPile == 0)
+        {
+            ingots.SetActive(false);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            ingots.SetActive(true);
+            GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+
     public bool Interact(Interactor interactor)
     {
         var inventory = interactor.GetComponent<Inventory>();
@@ -73,16 +87,7 @@ public class PileOfIngots : MonoBehaviour, IInteractable
     {
         ingotsInPile += pileSize;
 
-        if(ingotsInPile == 0)
-        {
-            ingots.SetActive(false);
-            GetComponent<BoxCollider>().enabled = false;
-        }
-        else
-        {
-            ingots.SetActive(true);
-            GetComponent<BoxCollider>().enabled = true;
-        }
+        
     }
 
     public void GlassesStatus(bool active)

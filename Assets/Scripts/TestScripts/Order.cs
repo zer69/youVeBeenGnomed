@@ -15,7 +15,7 @@ public class Order
     public Ingot.Enchantment enchantment = Ingot.Enchantment.None;
     public int requiredStrength = 0;
     public int requiredSharpness = 0;
-    public int requiredFragility = 0;
+    public int requiredFragility = 100;
     public int enchantmentLevel = 1;
     public int orderComplexity = 1;
     // public string description = "On time or beheaded";

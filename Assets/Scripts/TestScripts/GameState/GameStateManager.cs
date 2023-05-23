@@ -132,6 +132,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         Order order = orders[i];
         DoneOrderCalculations(result, order);
         orders.RemoveAt(i);
+        
         ordersListUpdate.Raise(orders);
     }
 
@@ -145,8 +146,52 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Function for calculating effects of order player has finished
     public void DoneOrderCalculations(Order result, Order order)
     {
-        money += order.price;
-        reputation += order.reputation;
+        float rewardCoefficient = 1f;
+
+        if (result.weaponType != order.weaponType)
+            rewardCoefficient *= 0.5f;
+
+        if (result.oreType != order.oreType)
+            rewardCoefficient *= 0.5f;
+
+        if (result.oreQuality > order.oreQuality)
+            rewardCoefficient *= 1.2f;
+        if (result.oreQuality < order.oreQuality)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredStrength > order.requiredStrength)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredStrength < order.requiredStrength)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredSharpness > order.requiredSharpness)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredSharpness < order.requiredSharpness)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredFragility < order.requiredFragility)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredFragility < order.requiredFragility)
+            rewardCoefficient *= 0.9f;
+
+        if (result.enchantment != order.enchantment)
+        {
+            if (order.enchantment == Ingot.Enchantment.None)
+                rewardCoefficient *= 1.1f;
+            else
+                rewardCoefficient *= 0.8f;
+        }
+        else
+            rewardCoefficient *= 1.2f;
+            
+        
+        
+        
+
+
+
+        money += (int)((float)order.price * rewardCoefficient);
+        reputation += (int)((float)order.reputation * rewardCoefficient);
         CheckReputationLevel();
     }
 
