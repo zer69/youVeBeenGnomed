@@ -440,13 +440,33 @@ public class Anvil : MonoBehaviour, IInteractable
         thongs.rotation = anvilPositionObject.rotation;
         thongs.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         thongs.gameObject.GetComponent<BoxCollider>().enabled = false;
+        GenerateRoundsAndSections(processedIngot.GetComponent<Ingot>().oreType);
 
-        
+
         return true;
 
 
 
 
+    }
+
+    private void GenerateRoundsAndSections(Ingot.OreType oreType)
+    {
+        switch(oreType)
+        {
+            case Ingot.OreType.Copper:
+                numberOfRounds = 3;
+                numberOfSectionsInRound = new int[3] { 4, 3, 6 };
+                break;
+            case Ingot.OreType.Iron:
+                numberOfRounds = 4;
+                numberOfSectionsInRound = new int[4] { 4, 3, 6, 5 };
+                break;
+            case Ingot.OreType.Silver:
+                numberOfRounds = 4;
+                numberOfSectionsInRound = new int[4] { 6, 4, 7, 3 };
+                break;
+        }
     }
 
     public bool Interact(Interactor interactor)
@@ -476,6 +496,8 @@ public class Anvil : MonoBehaviour, IInteractable
         anvilMode = true;
         //crosshair.gameObject.SetActive(false);
         hotkey.Raise("anvil");
+        
+
         return true;
     }
 
