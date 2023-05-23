@@ -16,6 +16,7 @@ public class OrderPool : MonoBehaviour
         SetHeight();
         SetChildren();
         UpdateOrders();
+        
     }
 
     private void SetHeight()

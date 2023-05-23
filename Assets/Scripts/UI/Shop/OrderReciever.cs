@@ -263,9 +263,10 @@ public class OrderReciever : MonoBehaviour
     {
         
         
-        gameStateManager.DoneOrderCalculations(orderInTeleport, activeOrder);
+        gameStateManager.OrderProcessing(orderInTeleport, orderIndex);
         Destroy(orderToDestroy.gameObject);
         TeleportSoundEvent.Post(gameObject);
+        orderContent.GetComponent<OrderPool>().UpdateChildren();
     }
 
 }

@@ -459,12 +459,12 @@ public class Anvil : MonoBehaviour, IInteractable
                 numberOfSectionsInRound = new int[3] { 4, 3, 6 };
                 break;
             case Ingot.OreType.Iron:
-                numberOfRounds = 4;
-                numberOfSectionsInRound = new int[4] { 4, 3, 6, 5 };
+                numberOfRounds = 3;
+                numberOfSectionsInRound = new int[3] { 4, 3, 6 };
                 break;
             case Ingot.OreType.Silver:
-                numberOfRounds = 4;
-                numberOfSectionsInRound = new int[4] { 6, 4, 7, 3 };
+                numberOfRounds = 3;
+                numberOfSectionsInRound = new int[3] { 6, 4, 7 };
                 break;
         }
     }

@@ -46,6 +46,13 @@ public class TeleportPlatform : MonoBehaviour
         if (colliderList.Count == 0)
             orderReciever.RecieveOrder(null);
         else
-            orderReciever.RecieveOrder(colliderList[0].GetComponent<Ingot>());
+        {
+            if (colliderList[0].gameObject != null)
+                orderReciever.RecieveOrder(colliderList[0].GetComponent<Ingot>());
+            else
+                colliderList.RemoveAt(0);
+        }
+            
+        
     }
 }
