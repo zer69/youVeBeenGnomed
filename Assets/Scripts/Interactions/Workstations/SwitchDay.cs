@@ -70,5 +70,6 @@ public class SwitchDay : MonoBehaviour, IInteractable
 
         hint.Raise("Day " + currentDay.day);
         blackScreen.SetActive(false);
+        yield return null;
     }
 }

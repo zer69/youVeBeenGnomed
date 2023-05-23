@@ -23,7 +23,9 @@ public class Glasses : MonoBehaviour
     [SerializeField] private int maxEnergy;
     [SerializeField] private float dischargingSpeed = 1f;
 
-    
+    [Header("Sound Events")]
+    public AK.Wwise.Event PutOnSoundEvent;
+
 
     private int currentEnergy;
     private int glassesLayer = 1;
@@ -54,6 +56,7 @@ public class Glasses : MonoBehaviour
                 {
                     glassesOn = !glassesOn;
                     ActivateGlasses(glassesOn);
+                    PutOnSoundEvent.Post(gameObject);
                 }
 
                 break;
@@ -123,6 +126,7 @@ public class Glasses : MonoBehaviour
         {
             currentEnergy += energyIncrement;
             changeEnergy.Raise(currentEnergy);
+
         }
         else
         {

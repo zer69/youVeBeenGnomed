@@ -22,7 +22,7 @@ public class OrderMono : MonoBehaviour
         GameObject detectionZone = GameObject.Find("DetectionZone");
         transform.GetComponent<Button>().onClick.AddListener(delegate
         {
-            orderReciever.GetComponent<OrderReciever>().ReadOrderStats(order);
+            orderReciever.GetComponent<OrderReciever>().ReadOrderStats(order, transform.GetSiblingIndex());
         });
         transform.GetComponent<Button>().onClick.AddListener(delegate
         {

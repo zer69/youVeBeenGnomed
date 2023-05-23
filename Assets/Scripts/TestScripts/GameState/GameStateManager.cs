@@ -25,6 +25,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Game event to declare current list of available orders has changed
     [SerializeField] private o_GameEvent ordersListUpdate;
     [SerializeField] private OrderPool orderPool;
+    [SerializeField] private s_GameEvent hint;
     // Start is called before the first frame update
 
     public TMP_Text rep;
@@ -79,8 +80,25 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         return orders;
     }
 
+    public void GenerateOrdersOnStart(bool newGame)
+    {
+        Debug.Log("Generate On Start");
+        if (newGame)
+        {
+            List<Order> generateOrders = GenerateOrders(reputationLevel, Random.Range(1, 4));
+
+            foreach (Order order in generateOrders)
+            {
+                orders.Add(order);
+            }
+
+            orderPool.orderList = orders;
+        }
+    }
+
     public void DayProcessing(bool nextDay)
     {
+        Debug.Log("NEXT DAY");
         if (nextDay){
             day += 1;
             for (int i = 0; i < orders.Count; i++)
@@ -114,6 +132,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         Order order = orders[i];
         DoneOrderCalculations(result, order);
         orders.RemoveAt(i);
+        
         ordersListUpdate.Raise(orders);
     }
 
@@ -127,8 +146,52 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Function for calculating effects of order player has finished
     public void DoneOrderCalculations(Order result, Order order)
     {
-        money += order.price;
-        reputation += order.reputation;
+        float rewardCoefficient = 1f;
+
+        if (result.weaponType != order.weaponType)
+            rewardCoefficient *= 0.5f;
+
+        if (result.oreType != order.oreType)
+            rewardCoefficient *= 0.5f;
+
+        if (result.oreQuality > order.oreQuality)
+            rewardCoefficient *= 1.2f;
+        if (result.oreQuality < order.oreQuality)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredStrength > order.requiredStrength)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredStrength < order.requiredStrength)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredSharpness > order.requiredSharpness)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredSharpness < order.requiredSharpness)
+            rewardCoefficient *= 0.9f;
+
+        if (result.requiredFragility < order.requiredFragility)
+            rewardCoefficient *= 1.2f;
+        if (result.requiredFragility < order.requiredFragility)
+            rewardCoefficient *= 0.9f;
+
+        if (result.enchantment != order.enchantment)
+        {
+            if (order.enchantment == Ingot.Enchantment.None)
+                rewardCoefficient *= 1.1f;
+            else
+                rewardCoefficient *= 0.8f;
+        }
+        else
+            rewardCoefficient *= 1.2f;
+            
+        
+        
+        
+
+
+
+        money += (int)((float)order.price * rewardCoefficient);
+        reputation += (int)((float)order.reputation * rewardCoefficient);
         CheckReputationLevel();
     }
 
@@ -165,6 +228,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         this.day = data.day;
         this.ordersDone = data.ordersDone;
         this.ordersExpired = data.ordersExpired;
+        
     }
 
     public void SaveData(ref GameData data)

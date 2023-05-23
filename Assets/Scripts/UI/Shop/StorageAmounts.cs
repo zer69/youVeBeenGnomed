@@ -10,9 +10,9 @@ public class StorageAmounts : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        /*ReadAmounts();
-        if (transform.gameObject.tag == "Finish")
-            SetStorageAmounts();*/
+        ReadAmounts();
+        if (transform.gameObject.tag != "Finish")
+            SetStorageAmounts();
     }
 
     private void ReadAmounts()

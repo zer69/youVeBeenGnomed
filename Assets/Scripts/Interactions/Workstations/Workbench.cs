@@ -127,8 +127,13 @@ public class Workbench : MonoBehaviour, IInteractable
                     break;
 
                 case "Build":
-                   if (ingot.status != Ingot.CompletionStatus.Completed) {
-
+                   if (ingot.status != Ingot.CompletionStatus.Completed) 
+                   {
+                        if (!CheckForParts(ingot.weaponType))
+                        {
+                            hint.Raise("Not enough parts");
+                            return;
+                        }
                         DoneSoundEvent.Post(gameObject);
 
                         ingot.setComponentsActive(true);
@@ -138,6 +143,23 @@ public class Workbench : MonoBehaviour, IInteractable
                     break;
             }
         }
+    }
+
+    private bool CheckForParts(Ingot.WeaponType type)
+    {
+
+        switch (type)
+        {
+            case Ingot.WeaponType.Axe:
+                return axeHandle > 0 ? true : false;
+            case Ingot.WeaponType.Dagger:
+                return (swordGuard > 0 && swordHilt > 0) ? true : false;
+            case Ingot.WeaponType.Spear:
+                return spearHandle > 0 ? true : false;
+            case Ingot.WeaponType.Sword:
+                return (swordGuard > 0 && swordHilt > 0) ? true : false;
+        }
+        return false;
     }
 
     public void ChangeAmounOfSwordGuard(int amount)

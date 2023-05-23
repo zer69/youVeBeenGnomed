@@ -13,6 +13,9 @@ public class OrderReciever : MonoBehaviour
 
     [SerializeField] private Transform orderContent;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event TeleportSoundEvent;
+
     private Order activeOrder;
     private Order orderInTeleport; // send with ingot to manager
 
@@ -57,6 +60,9 @@ public class OrderReciever : MonoBehaviour
     private Transform enchantment;
     private TMP_Text enchantmentName;
     private Ingot.Enchantment enchantmentStat;
+
+    public int orderIndex;
+    private Ingot orderToDestroy;
 
     [SerializeField]private List<RectTransform> progress = new List<RectTransform>();
     [SerializeField]private List<float> progressStat;
@@ -119,11 +125,11 @@ public class OrderReciever : MonoBehaviour
             quality.GetComponent<Image>().enabled = false;
     }
 
-    public void ReadOrderStats(Order order)
+    public void ReadOrderStats(Order order, int index)
     {
         orderCover.gameObject.SetActive(false);
         activeOrder = order;
-        
+        orderIndex = index;
         SetImage();
         SetName();
 
@@ -232,6 +238,7 @@ public class OrderReciever : MonoBehaviour
             materialQualityStat = order.quality;
 
             orderInTeleport = new Order(order);
+            orderToDestroy = order;
 
         }
 
@@ -245,7 +252,7 @@ public class OrderReciever : MonoBehaviour
         if (transform.childCount > 0)
         {
             
-            ReadOrderStats(orderContent.GetChild(0).GetComponent<OrderMono>().order);
+            ReadOrderStats(orderContent.GetChild(0).GetComponent<OrderMono>().order, 0);
         }
             
         else
@@ -254,7 +261,11 @@ public class OrderReciever : MonoBehaviour
 
     public void SendOrder()
     {
+        
+        
         gameStateManager.DoneOrderCalculations(orderInTeleport, activeOrder);
+        Destroy(orderToDestroy.gameObject);
+        TeleportSoundEvent.Post(gameObject);
     }
 
 }

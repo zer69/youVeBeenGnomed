@@ -30,12 +30,20 @@ public class DockStation : MonoBehaviour, IInteractable
     [SerializeField] private bool isGlassesCharging = false;
     [SerializeField] private bool glassesPutOn = false;
 
+    [Header("Sound Events")]
+    public AK.Wwise.Event ChargingPlaySoundEvent;
+    public AK.Wwise.Event ChargingStopSoundEvent;
+    public AK.Wwise.Event PutUpGlassesSoundEvent;
+    public AK.Wwise.Event PutDownGlassesSoundEvent;
     public bool Interact(Interactor interactor)
     {
         if (energyReceiver.hasBattery)
         {
+            
             if (currentEnergy == 0)
                 RechargeDockStation();
+
+            PutDownGlassesSoundEvent.Post(gameObject);
             //currentEnergy = EnergyReceiver.battery.GetComponent<EnergyStone>.;
             //Destroy(inventory.battery);
             //inventory.BatteryIsPicked(false);
@@ -47,6 +55,8 @@ public class DockStation : MonoBehaviour, IInteractable
             //isGlassesCharging = !isGlassesCharging;
             glasses.gameObject.SetActive(glassesPutOn);
             chargeGlasses(glassesPutOn);
+
+
         }
 
         else if (!energyReceiver.hasBattery && glassesPutOn)
@@ -56,6 +66,7 @@ public class DockStation : MonoBehaviour, IInteractable
             //isGlassesCharging = !isGlassesCharging;
             glasses.gameObject.SetActive(glassesPutOn);
             chargeGlasses(glassesPutOn);
+            PutUpGlassesSoundEvent.Post(gameObject);
         }
 
         else
@@ -91,6 +102,8 @@ public class DockStation : MonoBehaviour, IInteractable
     {
         isGlassesCharging = true;// !isGlassesCharging;
 
+        ChargingPlaySoundEvent.Post(gameObject);
+
         increasedEnergy.Raise(0);
 
         while (currentEnergy > 0 && isGlassesCharging == true)
@@ -105,6 +118,7 @@ public class DockStation : MonoBehaviour, IInteractable
         }
 
         isGlassesCharging = false;
+        ChargingStopSoundEvent.Post(gameObject);
         Debug.Log("Charging is over");
         hint.Raise("Charging is over");
 

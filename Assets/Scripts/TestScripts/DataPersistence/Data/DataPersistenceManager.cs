@@ -7,6 +7,8 @@ public class DataPersistenceManager : MonoBehaviour
 {
     [Header("File Storage Config")]
 
+    [SerializeField] private b_GameEvent newGame;
+
     [SerializeField] private string fileName;
 
     [SerializeField] private bool useEncryption;
@@ -51,27 +53,36 @@ public class DataPersistenceManager : MonoBehaviour
             {
                 dataPersistenceObj.LoadData(gameData);
             }
+            newGame.Raise(true);
         }
     }
 
     public void NewGame()
     {
         this.gameData = new GameData();
+        
     }
 
     public void LoadGame()
     {
+        bool isNew = false;
         this.gameData = dataHandler.Load();
 
         if (this.gameData == null)
         {
             Debug.Log("No data to load");
             NewGame();
+            isNew = true;
         }
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.LoadData(gameData);
+        }
+        
+        if (isNew)
+        {
+            newGame.Raise(true);
         }
     }
 
