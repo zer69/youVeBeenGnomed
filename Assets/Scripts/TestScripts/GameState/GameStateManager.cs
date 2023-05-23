@@ -26,7 +26,8 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     [SerializeField] private o_GameEvent ordersListUpdate;
     [SerializeField] private OrderPool orderPool;
     [SerializeField] private s_GameEvent hint;
-    // Start is called before the first frame update
+    // Info script reference to refresh stocks every dat
+    [SerializeField] private InfoSwitch info;
 
     public TMP_Text rep;
 
@@ -101,6 +102,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
         Debug.Log("NEXT DAY");
         if (nextDay){
             day += 1;
+            info.RefreshStock();
             for (int i = 0; i < orders.Count; i++)
             {
                 orders[i].daysToExpire--;
