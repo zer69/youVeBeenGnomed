@@ -17,7 +17,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     public int ordersExpired;
     public List<Order> orders = new List<Order>();
     // Some values for basic calculations
-    [SerializeField] private int fineMultiplier;
+    [SerializeField] private float fineMultiplier;
     [SerializeField] private int[] levelValues;
     // Game events to declare change of player's reputation level
     [SerializeField] private b_GameEvent reputationLevelUp;
@@ -33,7 +33,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
 
     void Awake()
     {
-        fineMultiplier = 2;
+        fineMultiplier = 0.5f;
         levelValues = new int[] {80, 200, 360, 560, 800, 1080};
     }
 
@@ -141,7 +141,7 @@ public class GameStateManager : MonoBehaviour, IDataPersistence
     // Function for calculating effects of expired order
     private void ExpiredOrderCalculations(Order order)
     {
-        reputation -= order.reputation * fineMultiplier;
+        reputation -= (int)(order.reputation * fineMultiplier);
         CheckReputationLevel();
     }
 

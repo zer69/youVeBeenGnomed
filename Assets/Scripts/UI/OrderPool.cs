@@ -15,6 +15,7 @@ public class OrderPool : MonoBehaviour
     {
         SetHeight();
         SetChildren();
+        UpdateOrders();
     }
 
     private void SetHeight()
@@ -47,6 +48,14 @@ public class OrderPool : MonoBehaviour
             tmpOrder.transform.localPosition = new Vector3(0f, -(indent * childCounttmp), 0f);
             tmpOrder.GetComponent<OrderMono>().order = orderList[tmpOrder.transform.GetSiblingIndex()];
             tmpOrder.GetComponent<OrderMono>().GetOrderInfo(orderList[tmpOrder.transform.GetSiblingIndex()]);
+        }
+    }
+
+    private void UpdateOrders()
+    {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<OrderMono>().GetOrderInfo(orderList[child.GetSiblingIndex()]);
         }
     }
 

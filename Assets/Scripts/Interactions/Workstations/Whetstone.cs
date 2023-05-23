@@ -117,6 +117,10 @@ public class Whetstone : MonoBehaviour, IInteractable
         playerInput.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         playerInput.transform.localRotation = Quaternion.identity;
         playerInput.actions.FindAction("DropItems").Disable();
+        playerInput.actions.FindAction("RotateWhetStone").Enable();
+        playerInput.actions.FindAction("DrawMagicRune").Disable();
+        playerInput.actions.FindAction("ResetDrawingRune").Disable();
+        playerInput.actions.FindAction("Build").Disable();
         this.GetComponent<CapsuleCollider>().enabled = false;
         canControlIngot = true;
 
@@ -147,6 +151,10 @@ public class Whetstone : MonoBehaviour, IInteractable
                     ingotRB.GetComponent<BoxCollider>().enabled = false;
                     ingot = null;
                     playerInput.actions.FindAction("DropItems").Enable();
+                    playerInput.actions.FindAction("RotateWhetStone").Disable();
+                    playerInput.actions.FindAction("DrawMagicRune").Enable();
+                    playerInput.actions.FindAction("ResetDrawingRune").Enable();
+                    playerInput.actions.FindAction("Build").Enable();
                     hotkey.Raise("inHands");
                 }
                 

@@ -95,6 +95,10 @@ public class Workbench : MonoBehaviour, IInteractable
                 Debug.Log("woekbanch is used");
 
                 playerInput.actions.FindAction("DropItems").Disable();
+                playerInput.actions.FindAction("Build").Enable();
+                playerInput.actions.FindAction("RotateWhetStone").Disable();
+                playerInput.actions.FindAction("DrawMagicRune").Disable();
+                playerInput.actions.FindAction("ResetDrawingRune").Disable();
                 hotkey.Raise("build");
                 return true;
             }
@@ -123,6 +127,10 @@ public class Workbench : MonoBehaviour, IInteractable
                     cam2.gameObject.SetActive(false);
 
                     playerInput.actions.FindAction("DropItems").Enable();
+                    playerInput.actions.FindAction("Build").Disable();
+                    playerInput.actions.FindAction("RotateWhetStone").Enable();
+                    playerInput.actions.FindAction("DrawMagicRune").Enable();
+                    playerInput.actions.FindAction("ResetDrawingRune").Enable();
                     hotkey.Raise("inHands");
                     break;
 

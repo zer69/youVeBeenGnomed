@@ -199,7 +199,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                 playerInput.actions.FindAction("DropItems").Disable();
                 playerInput.actions.FindAction("Use").Disable();
-                playerInput.actions.FindAction("Build").Disable();
+                playerInput.actions.FindAction("DrawMagicRune").Enable();
+                playerInput.actions.FindAction("ResetDrawingRune").Enable();
                 hotkey.Raise("enchant");
                 return true;
 
@@ -253,7 +254,8 @@ public class EnchantmentTable : MonoBehaviour, IInteractable
 
                     playerInput.actions.FindAction("DropItems").Enable();
                     playerInput.actions.FindAction("Use").Enable();
-                    playerInput.actions.FindAction("Build").Enable();
+                    playerInput.actions.FindAction("DrawMagicRune").Disable();
+                    playerInput.actions.FindAction("ResetDrawingRune").Disable();
                     hotkey.Raise("inHands");
                     break;
 

@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         jumpAction = playerInput.actions.FindAction("Jump");
 
+        playerInput.actions.FindAction("RotateWhetStone").Disable();
+        playerInput.actions.FindAction("DrawMagicRune").Disable();
+        playerInput.actions.FindAction("ResetDrawingRune").Disable();
+        playerInput.actions.FindAction("Build").Disable();
+
     }
     // Gain inputs
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
