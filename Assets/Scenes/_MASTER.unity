@@ -36138,6 +36138,30 @@ PrefabInstance:
       propertyPath: energyReceiver
       value: 
       objectReference: {fileID: 922726377}
+    - target: {fileID: 3130592826275682800, guid: daafadf8dcd6c25418eba6a865748221,
+        type: 3}
+      propertyPath: ChargingPlaySoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a47f4e9f82bd554b9045dd7bc211ad6,
+        type: 2}
+    - target: {fileID: 3130592826275682800, guid: daafadf8dcd6c25418eba6a865748221,
+        type: 3}
+      propertyPath: ChargingStopSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 4efdca794019f46438d547666a4cc9d8,
+        type: 2}
+    - target: {fileID: 3130592826275682800, guid: daafadf8dcd6c25418eba6a865748221,
+        type: 3}
+      propertyPath: PutUpGlassesSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 8fb7fce54ee1d2c49bab7cddcb8ffa1d,
+        type: 2}
+    - target: {fileID: 3130592826275682800, guid: daafadf8dcd6c25418eba6a865748221,
+        type: 3}
+      propertyPath: PutDownGlassesSoundEvent.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: ae3feb2ed13c3b74b81121a5f93aadc4,
+        type: 2}
     - target: {fileID: 3130592826275682801, guid: daafadf8dcd6c25418eba6a865748221,
         type: 3}
       propertyPath: m_RootOrder
@@ -52016,6 +52040,11 @@ MonoBehaviour:
   hint: {fileID: 11400000, guid: a62db8692f7434e4ba567f0a169a3f2f, type: 2}
   maxEnergy: 100
   dischargingSpeed: 1
+  PutOnSoundEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 66ed6f387e22d844e9036c9c18aabf9c,
+      type: 2}
 --- !u!114 &1955815461
 MonoBehaviour:
   m_ObjectHideFlags: 0

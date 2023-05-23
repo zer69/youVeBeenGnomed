@@ -22,10 +22,14 @@
 				<Bus Id="3803692087" Name="Master Audio Bus"/>
 			</Busses>
 		</SoundBank>
-		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{BAF32F3C-C15A-D438-0225-A6580AAAD46A}">
+		<SoundBank Id="3161908922" Type="User" Language="SFX" Hash="{8A7DC1A2-B6C3-3D73-35E7-E69E32BD644F}">
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<Media>
+				<File Id="674422" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>glasses_put_on.wav</ShortName>
+					<CachePath>SFX/glasses_put_on_0233451F.wem</CachePath>
+				</File>
 				<File Id="8015653" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>yawn.wav</ShortName>
 					<CachePath>SFX/yawn_62BC245A.wem</CachePath>
@@ -78,6 +82,10 @@
 					<ShortName>lit-fireplace.wav</ShortName>
 					<CachePath>SFX/lit-fireplace_5365E9B0.wem</CachePath>
 				</File>
+				<File Id="476747412" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>glasses_put_down.wav</ShortName>
+					<CachePath>SFX/glasses_put_down_6F10F9D0.wem</CachePath>
+				</File>
 				<File Id="505975120" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>a-sudden-appearance.wav</ShortName>
 					<CachePath>SFX/a-sudden-appearance_13A476D6.wem</CachePath>
@@ -93,6 +101,10 @@
 				<File Id="595628094" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>Ggrindstone.wav</ShortName>
 					<CachePath>SFX/Ggrindstone_B1BA4CEF.wem</CachePath>
+				</File>
+				<File Id="634603602" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>glasses_energy.wav</ShortName>
+					<CachePath>SFX/glasses_energy_10C4C929.wem</CachePath>
 				</File>
 				<File Id="662007610" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>magic_stone_on.wav</ShortName>
@@ -129,6 +141,10 @@
 				<File Id="799173073" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>hammer.wav</ShortName>
 					<CachePath>SFX/hammer_863CCEE6.wem</CachePath>
+				</File>
+				<File Id="807888640" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>glasses_put_down.wav</ShortName>
+					<CachePath>SFX/glasses_put_down_6DF7F2A3.wem</CachePath>
 				</File>
 				<File Id="816190309" Language="SFX" Streaming="false" Location="Memory">
 					<ShortName>money.wav</ShortName>
@@ -239,6 +255,26 @@
 						<MediaRef Id="520683815"/>
 					</MediaRefs>
 				</Event>
+				<Event Id="477910113" Name="Play_glasses_energy" DurationType="OneShot" DurationMin="43.577915" DurationMax="43.577915">
+					<MediaRefs>
+						<MediaRef Id="634603602"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="896254227" Name="Play_glasses_put_down" DurationType="OneShot" DurationMin="0.3803471" DurationMax="0.3803471">
+					<MediaRefs>
+						<MediaRef Id="807888640"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3729610188" Name="Play_glasses_put_on" DurationType="OneShot" DurationMin="1.9995669" DurationMax="1.9995669">
+					<MediaRefs>
+						<MediaRef Id="674422"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="3561833876" Name="Play_glasses_put_up" DurationType="OneShot" DurationMin="0.3185455" DurationMax="0.3185455">
+					<MediaRefs>
+						<MediaRef Id="476747412"/>
+					</MediaRefs>
+				</Event>
 				<Event Id="2241962811" Name="Play_grindstone_sharpen" DurationType="Infinite">
 					<MediaRefs>
 						<MediaRef Id="772857151"/>
@@ -346,10 +382,11 @@
 				</Event>
 				<Event Id="2196147837" Name="Stop_fireplase" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="2963349357" Name="Stop_footsteps" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
+				<Event Id="1685222271" Name="Stop_glasses_energy" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="3084467945" Name="Stop_grindstone_sharpen" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 				<Event Id="199250926" Name="Stop_grindstone_spinning" DurationType="OneShot" DurationMin="0" DurationMax="0"/>
 			</Events>
 		</SoundBank>
 	</SoundBanks>
-	<FileHash>{5990AE07-E806-CA13-1350-99F0D06362CD}</FileHash>
+	<FileHash>{1344A055-45D3-3B8E-B884-4706886FEBC8}</FileHash>
 </SoundBanksInfo>
