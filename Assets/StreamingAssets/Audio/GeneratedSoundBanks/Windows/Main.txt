@@ -4,9 +4,11 @@ Event	ID	Name			Wwise Object Path	Notes
 	199250926	Stop_grindstone_spinning			\Default Work Unit\Stop_grindstone_spinning	
 	421640724	Play_grindstone_spinning			\Default Work Unit\Play_grindstone_spinning	
 	473040767	Play_battery_drop			\Default Work Unit\Play_battery_drop	
+	477910113	Play_glasses_energy			\Default Work Unit\Play_glasses_energy	
 	596233392	Play_shavel_coal_throw			\Default Work Unit\Play_shavel_coal_throw	
 	598364336	Play_workbench_done			\Default Work Unit\Play_workbench_done	
 	824709767	Play_partly_done_ingot			\Default Work Unit\Play_partly_done_ingot	
+	896254227	Play_glasses_put_down			\Default Work Unit\Play_glasses_put_down	
 	901087640	Play_weapon_put			\Default Work Unit\Play_weapon_put	
 	978907031	Play_yawn			\Default Work Unit\Play_yawn	
 	1090783915	Play_Handbellows			\Default Work Unit\Play_Handbellows	
@@ -15,6 +17,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	1501216439	Play_fireplace			\Default Work Unit\Play_fireplace	
 	1563703406	Play_enchantment_error			\Default Work Unit\Play_enchantment_error	
 	1660008929	Play_door_open			\Default Work Unit\Play_door_open	
+	1685222271	Stop_glasses_energy			\Default Work Unit\Stop_glasses_energy	
 	1747681752	Play_hammer			\Default Work Unit\Play_hammer	
 	2189013097	Play_enchantment_reset			\Default Work Unit\Play_enchantment_reset	
 	2196147837	Stop_fireplase			\Default Work Unit\Stop_fireplase	
@@ -24,6 +27,7 @@ Event	ID	Name			Wwise Object Path	Notes
 	2375437839	Play_small_fireplase			\Default Work Unit\Play_small_fireplase	
 	2439324687	Play_magic_stone_on			\Default Work Unit\Play_magic_stone_on	
 	2497047037	Play_shavel_coal			\Default Work Unit\Play_shavel_coal	
+	2544667956	Play_space_sound			\Default Work Unit\Play_space_sound	
 	2579913805	Play_weapon_down			\Default Work Unit\Play_weapon_down	
 	2963349357	Stop_footsteps			\Default Work Unit\Stop_footsteps	
 	3084467945	Stop_grindstone_sharpen			\Default Work Unit\Stop_grindstone_sharpen	
@@ -31,14 +35,18 @@ Event	ID	Name			Wwise Object Path	Notes
 	3386453524	Play_enchantment_done			\Default Work Unit\Play_enchantment_done	
 	3467531863	Play_cooling			\Default Work Unit\Play_cooling	
 	3541896813	Play_tool_put_down			\Default Work Unit\Play_tool_put_down	
+	3561833876	Play_glasses_put_up			\Default Work Unit\Play_glasses_put_up	
 	3601140128	Play_cooling_sand			\Default Work Unit\Play_cooling_sand	
 	3689126666	Play_jump			\Default Work Unit\Play_jump	
+	3729610188	Play_glasses_put_on			\Default Work Unit\Play_glasses_put_on	
+	3785065891	Play_teleport			\Default Work Unit\Play_teleport	
 	3854155799	Play_footsteps			\Default Work Unit\Play_footsteps	
 	3912742755	Play_magic_stone_off			\Default Work Unit\Play_magic_stone_off	
 	3936802914	Play_energy_receiver			\Default Work Unit\Play_energy_receiver	
 	4276256426	Play_done_ingot			\Default Work Unit\Play_done_ingot	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	674422	glasses_put_on	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\glasses_put_on_0233451F.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\glasses_put_on		352820
 	8015653	yawn	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\yawn_62BC245A.wem		\Actor-Mixer Hierarchy\Default Work Unit\player\yawn		855796
 	89177527	throw_battery	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\throw_battery_41D8889B.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\throw_battery		134568
 	123514220	click_plus	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\click_plus_C4BD0CED.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\click_plus		80904
@@ -52,9 +60,12 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	363028766	pick_up_battery	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\pick_up_battery_D858F654.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\pick_up_battery		69952
 	427840010	knife-scrape-and-hit	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\knife-scrape-and-hit_F6A7F953.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\knife-scrape-and-hit		66596
 	474252998	lit-fireplace	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\lit-fireplace_5365E9B0.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\lit-fireplace		10251720
+	476747412	glasses_put_up	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\glasses_put_down_6F10F9D0.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\glasses_put_up		50156
 	505975120	a-sudden-appearance	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\a-sudden-appearance_13A476D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\a-sudden-appearance		138016
 	520683815	footsteps	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\concrete-footsteps-6752_9FF1EE2F.wem		\Actor-Mixer Hierarchy\Default Work Unit\player\footsteps		2127324
+	535777664	teleport	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\teleport_337EE89A.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\teleport		1074236
 	595628094	grindstone_spinning	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\Ggrindstone_B1BA4CEF.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\grindstone_spinning		560112
+	634603602	glasses_energy	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\glasses_energy_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\glasses_energy		7687240
 	662007610	magic_stone_off	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\magic_stone_on_B30778E6.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\magic_stone_off		162040
 	711637450	sand-cooling	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\sand-cooling_8B31DB40.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\barrels\sand-cooling		431728
 	729588487	click_button	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\click_button_925E7DC3.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\click_button		226164
@@ -64,11 +75,13 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	797434284	jump	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\jump_E34DA3D3.wem		\Actor-Mixer Hierarchy\Default Work Unit\player\jump		138084
 	799131975	bang-wood-rattle	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\bang-wood-rattle_C71FE629.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\workbench\bang-wood-rattle		77666
 	799173073	hammer	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\hammer_863CCEE6.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\hammer		132748
+	807888640	glasses_put_down	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\glasses_put_down_6DF7F2A3.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\glasses_put_down		67188
 	816190309	money	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\money_9E744BFF.wem		\Actor-Mixer Hierarchy\Default Work Unit\ui\money		224560
 	818966047	error	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\error_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\error		396384
 	852940909	weapon_put	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\weapon_put_1B66797B.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\workbench\weapon_put		149104
 	923105103	hot_metall_in_water	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\hot_metall_in_water_93071D8C.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\barrels\hot_metall_in_water		408104
 	931812862	shavel_coal	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\shavel_coal_4AC99D6B.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\shavel_coal		262908
 	985902922	tool_put_down	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\tool_put_down_300DB5A1.wem		\Actor-Mixer Hierarchy\Default Work Unit\tools\tool_put_down		166864
+	995039266	space_sound	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\space_sound_E758125A.wem		\Actor-Mixer Hierarchy\Default Work Unit\space_sound		21230128
 	1008480027	magic_stone_on	C:\Users\user\Lesta\youVeBeenGnomed\WwiseProject\YouveBeenGnomed\.cache\Windows\SFX\magic_stone_on_ECE245E9.wem		\Actor-Mixer Hierarchy\Default Work Unit\workstations\enchantment\magic_stone_on		171532
 

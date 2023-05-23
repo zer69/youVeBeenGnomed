@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 53614605eed07e4baebf9ad7b47145ec
     GuidInternal: 
-    m_lastTime: -8585169362949017802
+    m_lastTime: -8585172723082233282
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 53540c53a4d09c4e9c36a0aaaf9896c7
     GuidInternal: 
-    m_lastTime: -8585169362951221906
+    m_lastTime: -8585172723084223269
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 4d93928de1659d498d0375c5f62ce36d
     GuidInternal: 
-    m_lastTime: -8585168114741227129
+    m_lastTime: -8585168105581136330
     List:
     - name: Main
       guid: 15bb75778136da40b9b8149d703d00f9
@@ -94,7 +94,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: d18e46c8a7326447a493fcf804817246
     GuidInternal: 
-    m_lastTime: -8585168114746408431
+    m_lastTime: -8585168105582076311
     List:
     - name: Play_add_item
       guid: fa5cb4cdd9771645b2553b518ecc724c
@@ -564,6 +564,40 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Play_space_sound
+      guid: 57d45ec77e8c5b448a39542146f15eee
+      id: 2544667956
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: d18e46c8a7326447a493fcf804817246
+      - ElementName: Play_space_sound
+        ObjectType: 3
+        guid: 57d45ec77e8c5b448a39542146f15eee
+      Path: Events\Default Work Unit\Play_space_sound
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_teleport
+      guid: bc5011b78f356243b06200992ebcc807
+      id: 3785065891
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: d18e46c8a7326447a493fcf804817246
+      - ElementName: Play_teleport
+        ObjectType: 3
+        guid: bc5011b78f356243b06200992ebcc807
+      Path: Events\Default Work Unit\Play_teleport
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Play_tool_pick_up
       guid: 68278f793b46f34bb5136abecfb69a5b
       id: 2199549048
@@ -780,7 +814,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 40d5f6eee686be4daf2e25732a980bf5
     GuidInternal: 
-    m_lastTime: -8585169362951231882
+    m_lastTime: -8585172723084993110
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -794,7 +828,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: 209b0778da32cf488b5d24902e24ef6f
     GuidInternal: 
-    m_lastTime: -8585169362949027769
+    m_lastTime: -8585172723084613272
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -808,7 +842,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: cf030da21434f6439862488099702f2d
     GuidInternal: 
-    m_lastTime: -8585169362949027769
+    m_lastTime: -8585172723084023271
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -822,11 +856,11 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 1103bee3f2ec2047bb0aeb9c5cd1527a
     GuidInternal: 
-    m_lastTime: -8585169362949027769
+    m_lastTime: -8585172723081463289
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedWaapiItemIds: 0500000006000000070000003f00000040000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 1
+  currentDataSource: 0
   CurrentPluginConfig: 
