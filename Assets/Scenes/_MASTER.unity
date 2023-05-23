@@ -532,7 +532,8 @@ MonoBehaviour:
   YawnSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 75cedb7be06230a4e9d6ed157896c285,
+      type: 2}
 --- !u!65 &25938959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5346,7 +5347,8 @@ MonoBehaviour:
   ToolDropedSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: 6efd00551aa75b34e89b6982d3d8ea89,
+      type: 2}
 --- !u!114 &190261525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24139,7 +24141,8 @@ MonoBehaviour:
   PutBatterySoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 0}
+    WwiseObjectReference: {fileID: 11400000, guid: bbe242f20d2d3b84dae782ae3bfa97dc,
+      type: 2}
   targetAngle: {x: 0, y: 360, z: 0}
 --- !u!23 &922726378
 MeshRenderer:
@@ -34966,6 +34969,12 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.4278
       objectReference: {fileID: 0}
+    - target: {fileID: 8249846463313758195, guid: db6db787c464eac4c9c9ccbd37a1028a,
+        type: 3}
+      propertyPath: data.WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f6a8db3674b3d747ae9c98aeae35027,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db6db787c464eac4c9c9ccbd37a1028a, type: 3}
 --- !u!1 &1350527500
@@ -36936,13 +36945,13 @@ PrefabInstance:
         type: 3}
       propertyPath: PutUpGlassesSoundEvent.WwiseObjectReference
       value: 
-      objectReference: {fileID: 11400000, guid: 8fb7fce54ee1d2c49bab7cddcb8ffa1d,
+      objectReference: {fileID: 11400000, guid: 6da9384316f982b46bbdcecc28eb1c3e,
         type: 2}
     - target: {fileID: 3130592826275682800, guid: daafadf8dcd6c25418eba6a865748221,
         type: 3}
       propertyPath: PutDownGlassesSoundEvent.WwiseObjectReference
       value: 
-      objectReference: {fileID: 11400000, guid: ae3feb2ed13c3b74b81121a5f93aadc4,
+      objectReference: {fileID: 11400000, guid: 5a4b20a263c9e2a43ad34341cac3605c,
         type: 2}
     - target: {fileID: 3130592826275682801, guid: daafadf8dcd6c25418eba6a865748221,
         type: 3}
@@ -55119,8 +55128,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1142157950}
   - {fileID: 6641446115407231092}
+  - {fileID: 1142157950}
   - {fileID: 758312963}
   - {fileID: 404233157}
   m_Father: {fileID: 0}
@@ -55318,7 +55327,7 @@ MonoBehaviour:
   TeleportSoundEvent:
     idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3abb677a7a10eb8499cbac0fafc3ed1d,
+    WwiseObjectReference: {fileID: 11400000, guid: 7dc309c26a23429409ec257fd68791f5,
       type: 2}
   weaponSpriteList:
   - {fileID: 21300000, guid: 916592c6ab9066040a0a9d6694fb0edb, type: 3}
@@ -63580,7 +63589,7 @@ Transform:
   m_Children:
   - {fileID: 8098996755278380326}
   m_Father: {fileID: 1998960160}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6641446115407231093
 BoxCollider:
